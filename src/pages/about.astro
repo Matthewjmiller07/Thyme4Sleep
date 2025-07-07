@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'About Me - Georgia Miller';
+const pageDescription = 'Learn about Georgia Miller, your Mary Poppins of sleep, and how she can help your family get the rest you deserve.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-6">About Me</h1>
+      <p class="text-xl text-center max-w-3xl mx-auto text-gray-600">Your Mary Poppins of sleep, bringing calm to your family's sleep routines.</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/3">
+          <img 
+            src="/images/1725307614043.jpeg" 
+            alt="Georgia Miller" 
+            class="rounded-full w-64 h-64 object-cover mx-auto md:mx-0 shadow-lg"
+          />
+        </div>
+        <div class="md:w-2/3">
+          <h2 class="text-3xl font-bold mb-6">Hi, I'm Georgia</h2>
+          <div class="prose max-w-none text-gray-700 space-y-4">
+            <p>British by birth, based in Chicago, and here to bring a spoonful of calm to your family's sleep routines.</p>
+            
+            <p>As a certified Pediatric Sleep Coach through the Institute of Pediatric Sleep, I specialize in helping babies and children — from newborns right through to school-age — get the rest they need to thrive. Whether your child is neurotypical, neurodivergent, or has special educational needs, I'm here to offer compassionate, personalized support to guide them toward independent, restorative sleep.</p>
+            
+            <p>My approach blends evidence-based methods with an understanding that every child is unique. I'll work alongside you to create a sleep plan that supports your parenting style, your child's age and temperament, as well as your family's needs — always rooted in empathy and connection.</p>
+            
+            <p>As a mom of two littles (and whom I sleep trained myself!), I know that sleep is not a luxury — it's a necessity for healthy development, emotional regulation, and family harmony. If you're navigating sleepless nights, short naps, or bedtime battles, you don't have to go it alone.</p>
+            
+            <p>Let's tuck those worries in and help your child (and you!) get the sleep you both deserve.</p>
+          </div>
+          
+          <div class="mt-8">
+            <a href="/contact" class="btn btn-primary">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">My Credentials</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Certified Sleep Coach</h3>
+          <p class="text-gray-600">Certified by the Institute of Pediatric Sleep with specialized training in infant and child sleep.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Evidence-Based Methods</h3>
+          <p class="text-gray-600">Using scientifically-proven techniques tailored to your family's unique needs.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Compassionate Support</h3>
+          <p class="text-gray-600">Providing judgment-free guidance with empathy and understanding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-20 bg-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Family's Sleep?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Book your free 15-minute discovery call to learn how we can help your family get the rest you deserve.</p>
+      <a href="/contact" class="btn bg-white text-accent hover:bg-gray-100 inline-block">Book Your Free Call</a>
+    </div>
+  </section>
+</Layout>

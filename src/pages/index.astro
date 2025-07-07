@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-emerald-50 to-teal-50 py-20">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Restful Nights,<br>Happy Days</h1>
+        <p class="text-xl text-gray-600 mb-8">Pediatric sleep coaching that helps your little one (and you!) get the rest you deserve.</p>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="/contact" class="btn btn-primary text-center">Book a Free Consultation</a>
+          <a href="/pricing" class="btn bg-white text-accent border-2 border-accent hover:bg-gray-50 text-center">View Packages</a>
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <img src="/images/pexels-laura-garcia-1667452-3617844.jpg" alt="Peaceful sleeping baby" class="rounded-lg shadow-xl w-full max-w-lg mx-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">How It Works</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+          <h3 class="text-xl font-bold mb-3">Initial Consultation</h3>
+          <p class="text-gray-600">We'll discuss your child's sleep challenges and create a personalized plan.</p>
+        </div>
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+          <h3 class="text-xl font-bold mb-3">Personalized Plan</h3>
+          <p class="text-gray-600">Receive a customized sleep plan tailored to your child's needs and your parenting style.</p>
+        </div>
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+          <h3 class="text-xl font-bold mb-3">Ongoing Support</h3>
+          <p class="text-gray-600">Get the guidance and support you need as you implement the sleep plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Preview -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">What Parents Are Saying</h2>
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+          <p class="text-gray-700 italic mb-4">"You helped me get my life back and I couldn't recommend her enough! My baby still wasn't sleeping through the night at 5 months. With your guidance and support we finally managed to get her through the night within a week of sleep training her."</p>
+          <p class="font-bold">- Eli</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+          <p class="text-gray-700 italic mb-4">"You coached me through the basics of good sleep habits before my baby was born which was a huge help as I spent the first week after he was born in hospital with him and from our first day we were set on a good path."</p>
+          <p class="font-bold">- Anna</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/testimonials" class="text-accent font-medium hover:underline">Read more testimonials →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready for Better Sleep?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Book your free 15-minute discovery call to learn how we can help your family get the rest you deserve.</p>
+      <a href="/contact" class="btn bg-white text-accent hover:bg-gray-100 inline-block">Book Your Free Call</a>
+    </div>
+  </section>
+</Layout>

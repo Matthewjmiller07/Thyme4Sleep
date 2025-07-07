@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Success Stories - Thyme4Sleep';
+const pageDescription = 'Read what parents are saying about their experience with Thyme4Sleep pediatric sleep coaching.';
+
+const testimonials = [
+  {
+    id: 1,
+    name: 'Eli',
+    rating: 5,
+    content: 'You helped me get my life back and I couldn\'t recommend her enough! My baby still wasn\'t sleeping through the night at 5 months. With your guidance and support we finally managed to get her through the night within a week of sleep training her. You were so easy to work with, really listened to our concerns and created a sleep training plan perfectly tailored to our baby who had been struggling with reflux. It was a pleasure working with you!',
+    date: 'June 2025'
+  },
+  {
+    id: 2,
+    name: 'Anna',
+    rating: 5,
+    content: 'You coached me through the basics of good sleep habits before my baby was born which was a huge help as I spent the first week after he was born in hospital with him and from our first day we were set on a good path. Even though my baby was a month premature with your guidance he starting sleeping through at 12 weeks. Her support, clear and precise guidance and no judgment advice helped me and my baby sleep though and have the best start to our life together.',
+    date: 'July 2025'
+  }
+];
+
+const renderStars = (rating) => {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Success Stories</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Hear from families who have transformed their sleep with Thyme4Sleep</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-8">
+        {testimonials.map((testimonial) => (
+          <div key={testimonial.id} class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div class="text-yellow-400 text-2xl mb-4">{renderStars(testimonial.rating)}</div>
+            <p class="text-gray-700 italic mb-6">"{testimonial.content}"</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-accent bg-opacity-20 text-accent rounded-full flex items-center justify-center text-xl font-bold mr-4">
+                {testimonial.name.charAt(0)}
+              </div>
+              <div>
+                <p class="font-bold">{testimonial.name}</p>
+                <p class="text-sm text-gray-500">{testimonial.date}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Sleep Journey?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Join the many families who have found restful nights with Thyme4Sleep.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/contact" class="btn bg-white text-accent hover:bg-gray-100">Book a Consultation</a>
+        <a href="/pricing" class="btn border-2 border-white text-white hover:bg-white hover:bg-opacity-10">View Packages</a>
+      </div>
+    </div>
+  </section>
+</Layout>

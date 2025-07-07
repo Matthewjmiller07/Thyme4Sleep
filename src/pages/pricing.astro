@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Pricing & Packages - Thyme4Sleep';
+const pageDescription = 'Explore our sleep coaching packages and find the perfect fit for your family\'s needs.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Sleep Coaching Packages</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Invest in your family's well-being with our personalized sleep solutions</p>
+    </div>
+  </section>
+
+  <!-- Pricing Table -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Our Signature Packages</h2>
+        
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th scope="col" class="px-6 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <!-- Package 1 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Thyme for a Start</td>
+                <td class="px-6 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>60-minute virtual consult</li>
+                    <li>Customized sleep plan</li>
+                    <li>2-week follow-up support</li>
+                    <li>Email/text during business hours</li>
+                    <li>Sleep environment assessment</li>
+                  </ul>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">$695</td>
+              </tr>
+              
+              <!-- Package 2 -->
+              <tr class="bg-gray-50 hover:bg-gray-100">
+                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Optimal Thyme</td>
+                <td class="px-6 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>Comprehensive 60-minute consult</li>
+                    <li>Detailed personalized plan</li>
+                    <li>3-week continuous support</li>
+                    <li>4 follow-up calls (30 min)</li>
+                    <li>Priority email/text support</li>
+                    <li>Sleep log analysis</li>
+                  </ul>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">$1,295</td>
+              </tr>
+              
+              <!-- Package 3 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Specialized Sleep Support</td>
+                <td class="px-6 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>Tailored consultation for unique needs</li>
+                    <li>Adaptive strategies & personalized plan</li>
+                    <li>Extended 4-week continuous support</li>
+                    <li>6 follow-up calls (30 min)</li>
+                    <li>24/7 emergency support</li>
+                    <li>Sensory & developmental considerations</li>
+                    <li>School/daycare coordination</li>
+                  </ul>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">$1,950</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Add-ons -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+          <h3 class="text-2xl font-bold text-center mb-8">Enhance Your Experience</h3>
+          <div class="max-w-2xl mx-auto">
+            <div class="flex justify-between items-center py-3 border-b">
+              <span class="font-medium">60-Minute Additional Consult</span>
+              <span class="font-medium">$99</span>
+            </div>
+            <div class="flex justify-between items-center py-3 border-b">
+              <span class="font-medium">Multi-Child Package (2+ children)</span>
+              <span class="font-medium">$300</span>
+            </div>
+            <div class="flex justify-between items-center py-3">
+              <span class="font-medium">Weekend/Holiday Consultation</span>
+              <span class="font-medium">$250</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center bg-white rounded-lg shadow-lg p-8">
+          <h3 class="text-2xl font-bold mb-4">Payment Plans Available</h3>
+          <p class="text-gray-600 mb-6">We offer flexible payment options to make sleep coaching accessible for every family. Contact us to discuss a plan that works for you.</p>
+          <a href="/contact" class="btn btn-primary inline-block">Inquire About Payment Plans</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+      
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">What age groups do you work with?</h3>
+          <p class="text-gray-600">I work with families of newborns through school-aged children. Each age group has unique sleep needs, and I tailor my approach accordingly.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">How soon can we expect to see results?</h3>
+          <p class="text-gray-600">Most families see significant improvement within the first week of implementing their customized sleep plan, with more consistent results in 2-3 weeks. The exact timeline depends on your child's age, temperament, and the consistency of plan implementation.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">What if my child has special needs?</h3>
+          <p class="text-gray-600">I have extensive experience working with children who have special needs, including those who are neurodivergent or have medical conditions. The Specialized Sleep Support package is designed to address these unique situations.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">Do you offer any guarantees?</h3>
+          <p class="text-gray-600">While I can't guarantee specific results (as they depend on many factors including consistency of implementation), I can guarantee that I'll provide you with evidence-based strategies and support to help your family achieve better sleep.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-20 bg-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Book your free 15-minute discovery call to discuss which package is right for your family.</p>
+      <a href="/contact" class="btn bg-white text-accent hover:bg-gray-100 inline-block">Book Your Free Call</a>
+    </div>
+  </section>
+</Layout>
