@@ -18,7 +18,7 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
     <div class="container mx-auto px-4">
       <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
         <!-- Intake form: captures all required details per specifications -->
-        <form name="intake" method="POST" netlify class="space-y-6">
+        <form name="intake" method="POST" netlify action="/success" class="space-y-6">
           <input type="hidden" name="form-name" value="intake" />
 
           <!-- Basic details -->
@@ -240,7 +240,7 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
           <!-- Terms & conditions -->
           <div class="flex items-start">
             <input required type="checkbox" name="agree" id="agree" class="h-4 w-4 text-accent mt-1" />
-            <label for="agree" class="ml-2 text-sm text-gray-700">I have read and agree to the <a href="Thyme4Sleep_T_C.pdf" target="_blank" class="text-accent underline">terms and conditions</a>.</label>
+            <label for="agree" class="ml-2 text-sm text-gray-700">I have read and agree to the <a href="/Thyme4Sleep_T_C.pdf" target="_blank" class="text-accent underline">terms and conditions</a>.</label>
           </div>
 
           <button type="submit" class="btn btn-primary w-full md:w-auto">Submit</button>
