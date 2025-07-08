@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{fontspec} % Correct package for Montserrat with XeLaTeX
+\usepackage{tabularx}
+\usepackage{ragged2e} % For \RaggedRight
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{graphicx} % For images
+\usepackage{enumitem} % For custom list formatting
+\usepackage{multicol} % For two-column layout
+
+% Set page margins
+\geometry{top=0.6in, bottom=0.6in, left=0.8in, right=0.8in} % Further reduced margins
+
+% --- Global Settings for Alignment and Indent ---
+\RaggedRight % Align all text to the left, no justification
+\setlength{\parindent}{0pt} % Remove paragraph indentation
+
+% --- Custom Colors & Section Title Command ---
+\definecolor{accentcolor}{HTML}{2E8B57} % The accent color
+
+\newcommand{\sectiontitle}[1]{%
+{\color{accentcolor}\normalsize\bfseries #1}% % Section title font size
+\vspace{0.15em} % Reduced space after the title
+}
+
+% Path to images
+\graphicspath{{/Applications/Apps/Thyme4Sleep/public/images/}}
+
+% --- Document Start ---
+\begin{document}
+
+% Apply Montserrat font to the entire document using fontspec
+\setmainfont{Montserrat}[
+    UprightFont=*-Regular,
+    ItalicFont=*-Italic,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic,
+    Extension=.otf,
+    % Path = /usr/local/texlive/2025/texmf-dist/fonts/opentype/public/montserrat/ % Uncomment if font not found
+]
+\onehalfspacing % Apply one and a half line spacing globally
+
+% --- Header ---
+\begin{center}
+{\Huge\bfseries\color{accentcolor} Thyme for Sleep}\\[2pt] % Reduced space
+{\normalsize Sleep Consulting Menu} % Subtitle font size
+\end{center}
+
+\vspace{0.4em} % Reduced space after header
+\hrule
+\vspace{0.4em} % Reduced space after rule
+
+% --- About Me Section ---
+\sectiontitle{About Me}
+
+\begin{center} % Center the image
+    \includegraphics[width=0.22\textwidth]{1725307614043.jpeg} % Slightly smaller image
+\end{center}
+\vspace{0.2em} % Space after image
+
+\normalsize % Keep this size for name/title
+\textbf{Georgia Miller} \\
+Certified Pediatric Sleep Consultant \\
+\vspace{0.05cm} % Reduced space
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,itemsep=0pt] % Tightened list spacing
+    \item Certified by the Institute of Pediatric Sleep
+    \item Specializes in newborns to school-age children
+    \item Experience with neurodivergent children
+    \item Mother of two
+\end{itemize}
+
+\vspace{0.2em} % Space after list
+\textbf{My Approach:} I blend evidence-based methods with an understanding that every child is unique. I'll work alongside you to create a sleep plan that supports your parenting style, your child's age and temperament, and your family's needs — always rooted in empathy and connection.
+
+\vspace{0.05em} % Space after approach
+\textbf{Background:}
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,itemsep=0pt] % Tightened list spacing
+    \item British by birth, based in Chicago
+    \item Certified Pediatric Sleep Coach through the Institute of Pediatric Sleep
+    \item Specializes in helping babies and children from newborns to school-age
+    \item Experience with neurotypical, neurodivergent, and special educational needs children
+\end{itemize}
+
+\vspace{0.8em} % Increased space before testimonials section
+\hrule % Separator line
+
+% --- Testimonials ---
+\vspace{0.15em} % Reduced space after the title
+\sectiontitle{What Families Are Saying}
+\singlespacing % Temporarily switch to single spacing for quotes to save space
+
+\begin{multicols}{2} % Start two-column layout for testimonials
+    \begin{quote}
+        \textit{\footnotesize ``You helped me get my life back and I couldn't recommend her enough! My baby still wasn't sleeping through the night at 5 months. With your guidance and support we finally managed to get her through the night within a week of sleep training her. You were so easy to work with, really listened to our concerns and created a sleep training plan perfectly tailored to our baby who had been struggling with reflux. It was a pleasure working with you!''} \\[0.05cm] % Reduced space
+        \textbf{\footnotesize — Eli}, June 2025
+    \end{quote}
+
+    \columnbreak % Force a column break to balance testimonials
+
+    \begin{quote}
+        \textit{\footnotesize ``You coached me through the basics of good sleep habits before my baby was born which was a huge help as I spent the first week after he was born in hospital with him and from our first day we were set on a good path. Even though my baby was a month premature with your guidance he starting sleeping through at 12 weeks. Her support, clear and precise guidance and no judgment advice helped me and my baby sleep though and have the best start to our life together.''} \\[0.05cm] % Reduced space
+        \textbf{\footnotesize — Anna}, July 2025
+    \end{quote}
+\end{multicols} % End two-column layout
+\onehalfspacing % Revert to one and a half spacing
+
+\vspace{0.5em} % Space before contact info
+\hrule % Separator line before contact info
+
+% --- Contact Info at the Bottom ---
+\begin{center}
+    \vspace{0.3em} % Space after rule
+    {\normalsize \textbf{Contact Me}} \\
+    \vspace{0.1cm} % Space after title
+    \begin{tabular}{@{}ll@{}} % @{} removes column padding
+        Phone: & (847) 863-3883 \\
+        Email: & georgia@thyme4sleep.com \\
+        Website: & Coming Soon! \\
+    \end{tabular}
+    \vspace{0.3em} % Space after table
+\end{center}
+
+\end{document}
