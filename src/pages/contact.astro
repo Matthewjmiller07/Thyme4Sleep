@@ -248,4 +248,68 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
       </div>
     </div>
   </section>
+  
+  <style>
+    /* Date input styling */
+    input[type="date"] {
+      color: #1a202c; /* gray-900 */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: white;
+      min-height: 42px; /* Match other input heights */
+      padding: 0.5rem 1rem; /* Match other input padding */
+      border: 1px solid #e2e8f0; /* Match other input borders */
+      border-radius: 0.375rem; /* Match other input border radius */
+      width: 100%;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    
+    /* Remove default iOS styling */
+    @supports (-webkit-touch-callout: none) {
+      input[type="date"] {
+        -webkit-appearance: none;
+        -webkit-border-radius: 0.375rem;
+      }
+    }
+    
+    /* Focus state */
+    input[type="date"]:focus {
+      outline: none;
+      border-color: #0d9488; /* teal-600 */
+      box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.5);
+    }
+    
+    /* For Webkit browsers like Chrome/Safari */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.5);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* For Firefox */
+    input[type="date"]::-moz-calendar-picker-indicator {
+      filter: invert(0.5);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Ensure consistent appearance on mobile */
+    @media (max-width: 640px) {
+      input[type="date"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: white;
+        min-height: 48px; /* Slightly larger for touch targets */
+      }
+    }
+  </style>
 </Layout>
