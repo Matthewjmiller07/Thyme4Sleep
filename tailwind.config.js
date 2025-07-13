@@ -4,9 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'accent': '#2E8B57',
+        accent: '#F1D4AE', // brand-peach used as primary accent
+        brandCream: '#F3EAE3',
+        brandPeach: '#F1D4AE',
+        brandTaupe: '#B29F8F',
+        brandMink:  '#897E77',
+        brandChar:  '#3F3B38',
+        brandSage:  '#8F958C',
+        brandMint:  '#BCC8B9',
       },
       fontFamily: {
+        logo: ['"Arima Koshi"', 'cursive'],
+        body: ['"Cormorant Garamond"', 'serif'],
         sans: ['Montserrat', 'sans-serif'],
       },
     },
