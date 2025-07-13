@@ -18,6 +18,8 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <!-- Calendly Embed Script -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="bg-brandCream shadow-md">
@@ -25,12 +27,16 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
         <a href="/" class="flex items-center">
           <img src="/images/logos/Thyme4Sleep%20logo%202.png" alt="Thyme4Sleep logo" class="h-10 w-auto" />
         </a>
-        <nav class="hidden md:flex space-x-8">
-          <a href="/" class="hover:text-accent transition-colors">Home</a>
-          <a href="/about" class="hover:text-accent transition-colors">About</a>
-          <a href="/testimonials" class="hover:text-accent transition-colors">Testimonials</a>
-          <a href="/pricing" class="hover:text-accent transition-colors">Pricing</a>
-          <a href="/contact" class="btn btn-primary">Book a Consultation</a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="hover:text-brandMink transition-colors">Home</a>
+          <a href="/about" class="hover:text-brandMink transition-colors">About</a>
+          <a href="/testimonials" class="hover:text-brandMink transition-colors">Testimonials</a>
+          <a href="/pricing" class="hover:text-brandMink transition-colors">Pricing</a>
+          <a href="#" 
+             class="bg-brandChar text-white hover:bg-brandMink px-6 py-2 rounded-md transition-colors font-medium"
+             onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/cv24-pmt-pqq/15-minute-free-consultation'}); return false;">
+            Book Free Call
+          </a>
         </nav>
         <button class="md:hidden" id="mobile-menu-button">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
