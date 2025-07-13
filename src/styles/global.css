@@ -10,11 +10,47 @@
   }
   
   body {
-    @apply bg-white text-brandChar font-body;
+    @apply bg-brandCream text-brandChar font-body font-light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-logo text-accent;
+    @apply font-body font-light text-brandChar;
+    line-height: 1.2;
+  }
+  
+  /* Ensure all text colors use brandChar for better contrast */
+  p, li {
+    @apply text-brandChar/90;
+  }
+  
+  /* Style regular links */
+  a:not(.btn):not([class*="text-"]) {
+    @apply text-brandChar/90;
+  }
+  
+  /* Links */
+  a {
+    @apply transition-colors duration-200;
+  }
+  
+  a:not(.btn):hover {
+    @apply text-brandTaupe;
+  }
+  
+  /* Buttons */
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-brandPeach text-white hover:bg-brandTaupe hover:text-white;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-brandChar text-brandChar hover:bg-brandChar hover:text-white;
   }
   
   h1 {
@@ -29,11 +65,5 @@
     @apply text-2xl md:text-3xl;
   }
   
-  .btn {
-    @apply inline-block px-6 py-3 rounded-lg font-medium transition-colors duration-200;
-  }
-  
-  .btn-primary {
-    @apply bg-accent text-white hover:bg-emerald-700;
-  }
+  /* Remove duplicate button styles */
 }

@@ -20,38 +20,52 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
     <title>{title}</title>
     <!-- Calendly links will open in a new tab -->
   </head>
-  <body class="min-h-screen flex flex-col">
-    <header class="bg-brandCream shadow-md">
-      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" class="flex items-center">
-          <img src="/images/logos/Thyme4Sleep%20logo%202.png" alt="Thyme4Sleep logo" class="h-10 w-auto" />
-        </a>
-        <nav class="hidden md:flex items-center space-x-8">
-          <a href="/" class="hover:text-brandMink transition-colors">Home</a>
-          <a href="/about" class="hover:text-brandMink transition-colors">About</a>
-          <a href="/testimonials" class="hover:text-brandMink transition-colors">Testimonials</a>
-          <a href="/pricing" class="hover:text-brandMink transition-colors">Pricing</a>
+  <body class="min-h-screen flex flex-col bg-white">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="/" class="flex items-center">
+            <img src="/images/logos/Thyme4Sleep logo 1.png" alt="Thyme4Sleep" class="h-24 w-auto" />
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center space-x-10">
+            <a href="/" class="text-brandChar hover:text-brandMink transition-colors font-medium">Home</a>
+            <a href="/about" class="text-brandChar hover:text-brandMink transition-colors font-medium">About</a>
+            <a href="/testimonials" class="text-brandChar hover:text-brandMink transition-colors font-medium">Testimonials</a>
+            <a href="/pricing" class="text-brandChar hover:text-brandMink transition-colors font-medium">Pricing</a>
+            <a href="https://calendly.com/d/cv24-pmt-pqq/15-minute-free-consultation"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="bg-brandChar text-white hover:bg-brandMink px-6 py-2.5 rounded-full transition-colors font-medium">
+              Book Free Call
+            </a>
+          </nav>
+
+          <!-- Mobile menu button -->
+          <button class="md:hidden p-2" id="mobile-menu-button" aria-label="Menu">
+            <svg class="w-6 h-6 text-brandChar" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden bg-white border-t border-gray-100" id="mobile-menu">
+        <div class="px-6 py-4 space-y-4">
+          <a href="/" class="block py-2 text-brandChar hover:text-brandMink transition-colors font-medium">Home</a>
+          <a href="/about" class="block py-2 text-brandChar hover:text-brandMink transition-colors font-medium">About</a>
+          <a href="/testimonials" class="block py-2 text-brandChar hover:text-brandMink transition-colors font-medium">Testimonials</a>
+          <a href="/pricing" class="block py-2 text-brandChar hover:text-brandMink transition-colors font-medium">Pricing</a>
           <a href="https://calendly.com/d/cv24-pmt-pqq/15-minute-free-consultation"
              target="_blank"
              rel="noopener noreferrer"
-             class="bg-brandChar text-white hover:bg-brandMink px-6 py-2 rounded-md transition-colors font-medium">
+             class="block w-full text-center bg-brandChar text-white hover:bg-brandMink px-6 py-2.5 rounded-full transition-colors font-medium mt-4">
             Book Free Call
           </a>
-        </nav>
-        <button class="md:hidden" id="mobile-menu-button">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      <!-- Mobile menu, show/hide based on menu state -->
-      <div class="md:hidden hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100">Home</a>
-          <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100">About</a>
-          <a href="/testimonials" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100">Testimonials</a>
-          <a href="/pricing" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100">Pricing</a>
-          <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium bg-accent text-white text-center">Book a Consultation</a>
         </div>
       </div>
     </header>
