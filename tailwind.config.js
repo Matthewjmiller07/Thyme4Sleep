@@ -15,7 +15,7 @@ export default {
       },
       fontFamily: {
         logo: ['"Arima Koshi"', 'cursive'],
-        body: ['"Cormorant Garamond"', 'serif'],
+        body: ['"Cormorant Garamond"', 'serif'], // Light variant of Cormorant Garamond
         sans: ['Montserrat', 'sans-serif'],
       },
     },
