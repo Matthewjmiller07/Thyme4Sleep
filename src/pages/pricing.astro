@@ -15,93 +15,275 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
   </section>
 
   <!-- Pricing Table -->
-  <section class="py-20">
+  <section class="py-8 md:py-16 bg-brandCream">
     <div class="container mx-auto px-4">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-12">Our Signature Packages</h2>
-<p class="text-center italic text-gray-700 max-w-3xl mx-auto mb-8">My methods truly work, and my clients see improvements within <strong>3–5 days</strong> of implementing their customized sleep plans. I guarantee that your family will see results within <strong>14 days</strong>, or I will work with you at no extra cost until you achieve your desired outcome.</p>
-        
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                <th scope="col" class="px-6 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <!-- Package 1 -->
-              <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                  <div>Basic</div>
-                  <div class="text-sm text-gray-500 mt-1">Single: $549 | Multiples: $749</div>
-                </td>
-                <td class="px-6 py-4">
-                  <ul class="list-disc pl-5 space-y-1">
-                    <li>60-minute virtual consult</li>
-                    <li>Customized sleep plan</li>
-                    <li>2-week follow-up support</li>
-                    <li>Email/text during business hours</li>
-                    <li>Sleep environment assessment</li>
-                  </ul>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">
-                  <div class="text-brandChar">$549</div>
-                  <div class="text-brandMink">$749 for multiples</div>
-                </td>
-              </tr>
-              
-              <!-- Package 2 -->
-              <tr class="bg-gray-50 hover:bg-gray-100">
-                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                  <div>Premium</div>
-                  <div class="text-sm text-gray-500 mt-1">Single: $849 | Multiples: $949</div>
-                </td>
-                <td class="px-6 py-4">
-                  <ul class="list-disc pl-5 space-y-1">
-                    <li>Comprehensive 60-minute consult</li>
-                    <li>Detailed personalized plan</li>
-                    <li>3-week continuous support</li>
-                    <li>4 follow-up calls (30 min)</li>
-                    <li>Priority email/text support</li>
-                    <li>Sleep log analysis</li>
-                  </ul>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">
-                  <div class="text-brandChar">$849</div>
-                  <div class="text-brandMink">$949 for multiples</div>
-                </td>
-              </tr>
-              
-              <!-- Package 3 -->
-              <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                  <div>Special</div>
-                  <div class="text-sm text-gray-500 mt-1">Single: $1,449 | Multiples: $1,649</div>
-                </td>
-                <td class="px-6 py-4">
-                  <ul class="list-disc pl-5 space-y-1">
-                    <li>Tailored consultation for unique needs, including neurodivergency and special ed</li>
-                    <li>Adaptive strategies & personalized plan</li>
-                    <li>Extended 4-week continuous support</li>
-                    <li>Sensory & developmental considerations</li>
-                    <li>Flexible scheduling & communication</li>
-                    <li>24/7 emergency support</li>
-                    <li>School/daycare coordination</li>
-                  </ul>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right font-medium">
-                  <div class="text-brandChar">$1,449</div>
-                  <div class="text-brandMink">$1,649 for multiples</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-3 md:mb-4">Sleep Packages</h2>
+        <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-2">
+          Choose the package that's right for your family. Every plan includes a personalized approach to help your child sleep better.
+        </p>
+        <p class="text-base md:text-lg text-gray-600 mt-3 md:mt-4 px-2">
+          ❤️ 14-day satisfaction guarantee - If you don't see improvement, I'll work with you until you do.
+        </p>
+      </div>
+
+      <!-- Mobile cards -->
+      <div class="space-y-6 md:hidden">
+        <!-- Basic Package -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="p-5 border-b border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900">Basic</h3>
+            <div class="text-brandMink">Single: $549 | Multiples: $749</div>
+          </div>
+          <div class="p-5">
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>60-minute virtual consult</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Customized sleep plan</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>2-week follow-up support</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Email/text during business hours</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Sleep environment assessment</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-gray-100 text-right">
+              <div class="text-2xl font-bold text-brandChar">Single: $549</div>
+              <div class="text-sm text-brandMink">Multiple: $749</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Package -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="p-5 border-b border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900">Premium</h3>
+            <div class="text-brandMink">Single: $849 | Multiples: $949</div>
+          </div>
+          <div class="p-5">
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Comprehensive 60-minute consult</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Detailed personalized plan</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>3-week continuous support</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>4 follow-up calls (30 min)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Priority email/text support</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Sleep log analysis</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-gray-100 text-right">
+              <div class="text-2xl font-bold text-brandChar">Single: $849</div>
+              <div class="text-sm text-brandMink">Multiple: $949</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special Package -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="p-5 border-b border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900">Special</h3>
+            <div class="text-brandMink">Single: $1,449 | Multiples: $1,649</div>
+          </div>
+          <div class="p-5">
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Tailored consultation for unique needs, including neurodivergency and special ed</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Adaptive strategies & personalized plan</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Extended 4-week continuous support</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Sensory & developmental considerations</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>Flexible scheduling & communication</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>24/7 emergency support</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brandMint mr-2">✓</span>
+                <span>School/daycare coordination</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-gray-100 text-right">
+              <div class="text-2xl font-bold text-brandChar">Single: $1,449</div>
+              <div class="text-sm text-brandMink">Multiple: $1,649</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Table -->
+      <div class="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Package</th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">What's Included</th>
+              <th scope="col" class="px-6 py-4 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Investment</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Basic Package -->
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="font-medium text-gray-900">Basic</div>
+              </td>
+              <td class="px-6 py-4">
+                <ul class="space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>60-minute virtual consult</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Customized sleep plan</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>2-week follow-up support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Email/text during business hours</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Sleep environment assessment</span>
+                  </li>
+                </ul>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right">
+                <div class="text-2xl font-bold text-brandChar">Single: $549</div>
+                <div class="text-sm text-brandMink">Multiple: $749</div>
+              </td>
+            </tr>
+
+            <!-- Premium Package -->
+            <tr class="bg-gray-50 hover:bg-gray-100">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="font-medium text-gray-900">Premium</div>
+              </td>
+              <td class="px-6 py-4">
+                <ul class="space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Comprehensive 60-minute consult</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Detailed personalized plan</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>3-week continuous support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>4 follow-up calls (30 min)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Priority email/text support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Sleep log analysis</span>
+                  </li>
+                </ul>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right">
+                <div class="text-2xl font-bold text-brandChar">Single: $849</div>
+                <div class="text-sm text-brandMink">Multiple: $949</div>
+              </td>
+            </tr>
+
+            <!-- Special Package -->
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="font-medium text-gray-900">Special</div>
+              </td>
+              <td class="px-6 py-4">
+                <ul class="space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Tailored consultation for unique needs, including neurodivergency and special ed</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Adaptive strategies & personalized plan</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Extended 4-week continuous support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Sensory & developmental considerations</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>Flexible scheduling & communication</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>24/7 emergency support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-brandMint mr-2">✓</span>
+                    <span>School/daycare coordination</span>
+                  </li>
+                </ul>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right">
+                <div class="text-2xl font-bold text-brandChar">Single: $1,449</div>
+                <div class="text-sm text-brandMink">Multiple: $1,649</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
         </div>
         
         <!-- Add-ons -->
-        <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-16 mb-12">
           <h3 class="text-2xl font-bold text-center mb-8">Enhance Your Experience</h3>
           <div class="max-w-2xl mx-auto">
             <div class="flex justify-between items-center py-3 border-b">
@@ -163,7 +345,13 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
       <p class="text-xl mb-8 max-w-2xl mx-auto">Book your free 15-minute discovery call to discuss which package is right for your family.</p>
-      <a href="/contact" class="btn bg-white text-accent hover:bg-gray-100 inline-block">Book Your Free Call</a>
+      <a 
+        href="#" 
+        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/cv24-pmt-pqq/15-minute-free-consultation'}); return false;"
+        class="bg-white text-accent hover:bg-gray-100 inline-block px-8 py-3 rounded-md font-medium text-lg transition-colors"
+      >
+        Book Your Free 15-Minute Call
+      </a>
     </div>
   </section>
 </Layout>
