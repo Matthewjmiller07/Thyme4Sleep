@@ -7,15 +7,16 @@ import Layout from '../layouts/Layout.astro';
   <section class="bg-gradient-to-r from-emerald-50 to-teal-50 py-20">
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
       <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Restful Nights,<br>Happy Days</h1>
-        <p class="text-xl text-gray-600 mb-8">Pediatric sleep coaching that helps your little one (and you!) get the rest you deserve.</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Hi, I’m Georgia — your Mary Poppins of sleep!</h1>
+        <p class="text-xl text-gray-600 mb-6">British by birth, based in Chicago, and here to bring a spoonful of calm to your family’s bedtime routine.</p>
+        <p class="text-gray-700 mb-8">As a certified Pediatric Sleep Coach through the <a href="https://instituteofpediatricsleep.com" target="_blank" class="text-accent underline">Institute of Pediatric Sleep</a>, I specialize in helping babies and children — from newborns right through to school-age — get the rest they need to thrive.</p>
         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-          <a href="/contact" class="btn btn-primary text-center">Book a Free Consultation</a>
+          <a href="https://calendly.com/thyme4sleep/free-discovery-call" class="btn btn-primary text-center" target="_blank" rel="noopener">Schedule Your Free 15-Minute Call</a>
           <a href="/pricing" class="btn bg-white text-accent border-2 border-accent hover:bg-gray-50 text-center">View Packages</a>
         </div>
       </div>
       <div class="md:w-1/2">
-        <img src="/images/pexels-laura-garcia-1667452-3617844.jpg" alt="Peaceful sleeping baby" class="rounded-lg shadow-xl w-full max-w-lg mx-auto">
+        <img src="/images/1725307614043.jpeg" alt="Georgia with clients" class="rounded-lg shadow-xl w-full max-w-lg mx-auto">
       </div>
     </div>
   </section>
@@ -25,20 +26,41 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">How It Works</h2>
       <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
         <div class="text-center p-6 bg-gray-50 rounded-lg">
           <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-          <h3 class="text-xl font-bold mb-3">Initial Consultation</h3>
-          <p class="text-gray-600">We'll discuss your child's sleep challenges and create a personalized plan.</p>
+          <h3 class="text-xl font-bold mb-3">Free Discovery Call</h3>
+          <p class="text-gray-600">Chat with me to uncover your child’s sleep challenges and see if we’re a good fit.</p>
         </div>
+        <!-- Step 2 -->
         <div class="text-center p-6 bg-gray-50 rounded-lg">
           <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-          <h3 class="text-xl font-bold mb-3">Personalized Plan</h3>
-          <p class="text-gray-600">Receive a customized sleep plan tailored to your child's needs and your parenting style.</p>
+          <h3 class="text-xl font-bold mb-3">Choose Your Package</h3>
+          <p class="text-gray-600">Select a support level that matches your family’s needs and budget.</p>
         </div>
+        <!-- Step 3 -->
         <div class="text-center p-6 bg-gray-50 rounded-lg">
           <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-          <h3 class="text-xl font-bold mb-3">Ongoing Support</h3>
-          <p class="text-gray-600">Get the guidance and support you need as you implement the sleep plan.</p>
+          <h3 class="text-xl font-bold mb-3">Consultation</h3>
+          <p class="text-gray-600">Meet virtually or in-person to deep-dive into habits, routines & goals.</p>
+        </div>
+        <!-- Step 4 -->
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+          <h3 class="text-xl font-bold mb-3">Custom Sleep Plan</h3>
+          <p class="text-gray-600">Receive a tailored, evidence-based roadmap for restful nights.</p>
+        </div>
+        <!-- Step 5 -->
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">5</div>
+          <h3 class="text-xl font-bold mb-3">Weeks of Support</h3>
+          <p class="text-gray-600">I’m by your side to troubleshoot and cheer you on as you implement.</p>
+        </div>
+        <!-- Step 6 -->
+        <div class="text-center p-6 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">6</div>
+          <h3 class="text-xl font-bold mb-3">More Sleep All Round!</h3>
+          <p class="text-gray-600">Enjoy rejuvenated days and peaceful nights for the whole family.</p>
         </div>
       </div>
     </div>
@@ -63,6 +85,13 @@ import Layout from '../layouts/Layout.astro';
       <div class="text-center mt-10">
         <a href="/testimonials" class="text-accent font-medium hover:underline">Read more testimonials →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Satisfaction Guarantee -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 text-center max-w-4xl">
+      <p class="text-lg italic text-gray-700">My methods truly work, and my clients see improvements within <strong>3-5 days</strong> of implementing their customized sleep plans. I guarantee that your family will see results within <strong>14 days</strong>, or I will work with you at no extra cost until you achieve your desired outcome.</p>
     </div>
   </section>
 
