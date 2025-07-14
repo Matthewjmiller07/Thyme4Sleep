@@ -1,0 +1,112 @@
+---
+// InfoPopup.astro
+// A reusable popup component for highlighting important information
+
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const { isOpen, onClose } = Astro.props;
+---
+
+<div class:list={[
+  'fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300',
+  isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+]}>
+  {/* Backdrop */}
+  <div 
+    class="absolute inset-0 bg-black/40 backdrop-blur-sm"
+    on:click={onClose}
+  ></div>
+  
+  {/* Popup Content */}
+  <div class="relative bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all duration-300 overflow-hidden">
+    {/* Close Button */}
+    <button 
+      class="absolute top-4 right-4 text-gray-400 hover:text-brandMink transition-colors"
+      on:click={onClose}
+      aria-label="Close"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    {/* Content */}
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-brandPeach/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brandPeach" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-light text-brandChar mb-2">We've Got You Covered</h3>
+        <div class="h-1 w-12 bg-accent mx-auto mb-6"></div>
+      </div>
+      
+      <div class="space-y-4">
+        {/* Satisfaction Guarantee */}
+        <div class="flex items-start space-x-3">
+          <div class="flex-shrink-0 mt-1">
+            <div class="w-8 h-8 rounded-full bg-brandPeach/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brandPeach" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-medium text-brandChar">14-Day Satisfaction Guarantee</h4>
+            <p class="text-sm text-gray-600">Results within 14 days or I keep working with you free of charge.</p>
+          </div>
+        </div>
+        
+        {/* Referral Program */}
+        <div class="flex items-start space-x-3">
+          <div class="flex-shrink-0 mt-1">
+            <div class="w-8 h-8 rounded-full bg-brandPeach/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brandPeach" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-medium text-brandChar">$50 Referral Bonus</h4>
+            <p class="text-sm text-gray-600">Refer a friend and you both receive $50 off your next service!</p>
+          </div>
+        </div>
+      </div>
+      
+      <button 
+        on:click={onClose}
+        class="w-full mt-6 py-3 px-6 bg-brandPeach hover:bg-brandTaupe text-white font-medium rounded-full transition-colors duration-300"
+      >
+        Got it, thanks!
+      </button>
+    </div>
+    
+    {/* Decorative Elements */}
+    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-brandPeach/5 rounded-full"></div>
+    <div class="absolute -top-10 -left-10 w-20 h-20 bg-brandPeach/5 rounded-full"></div>
+  </div>
+</div>
+
+<style>
+  .popup-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .popup-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 200ms, transform 200ms;
+  }
+  .popup-exit {
+    opacity: 1;
+  }
+  .popup-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 200ms, transform 200ms;
+  }
+</style>
