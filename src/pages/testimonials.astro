@@ -7,14 +7,16 @@ const pageDescription = 'Read what parents are saying about their experience wit
 const testimonials = [
   {
     id: 1,
-    name: 'Jonny',
+    name: 'Jonny A.',
+    description: 'dad of 3, worked with his 6-month old',
     rating: 5,
     content: `Georgia was honestly amazing. She took so much time to really listen and explain things and gave us practical advice. She was patient and always there when we had questions. Knowing she has kids meant she has real experience not just theories. Everything she suggested felt doable, and most importantly, it worked. She also helped us when we traveled from London to New York as we adjusted to the time zone. We're so grateful for her support and wouldn't hesitate to recommend her to anyone.`,
     date: 'July 2025'
   },
   {
     id: 2,
-    name: 'Sarah',
+    name: 'Sarah A.',
+    description: 'mum of 1, worked with her 19 month-old',
     rating: 5,
     content: `We had an amazing experience working with Georgia Miller! From the very beginning, she was incredibly easy to work with—friendly, approachable, and always understanding of our concerns as parents. Georgia took the time to listen to us, patiently explained different sleep training methods, and helped us choose an approach that we felt comfortable with.
 
@@ -25,14 +27,16 @@ We're so grateful for Georgia's help and would highly recommend her to any paren
   },
   {
     id: 3,
-    name: 'Eli',
+    name: 'Eli V. W.',
+    description: 'mum of 1, worked with her 5 month-old',
     rating: 5,
     content: 'You helped me get my life back and I couldn\'t recommend her enough! My baby still wasn\'t sleeping through the night at 5 months. With your guidance and support we finally managed to get her through the night within a week of sleep training her. You were so easy to work with, really listened to our concerns and created a sleep training plan perfectly tailored to our baby who had been struggling with reflux. It was a pleasure working with you!',
     date: 'June 2025'
   },
   {
     id: 4,
-    name: 'Anna',
+    name: 'Anna N.',
+    description: 'mum of 1, worked with her newborn',
     rating: 5,
     content: 'You coached me through the basics of good sleep habits before my baby was born which was a huge help as I spent the first week after he was born in hospital with him and from our first day we were set on a good path. Even though my baby was a month premature with your guidance he starting sleeping through at 12 weeks. Her support, clear and precise guidance and no judgment advice helped me and my baby sleep though and have the best start to our life together.',
     date: 'July 2025'
@@ -67,7 +71,8 @@ const renderStars = (rating) => {
               </div>
               <div>
                 <p class="font-bold">{testimonial.name}</p>
-                <p class="text-sm text-gray-500">{testimonial.date}</p>
+                <p class="text-sm text-gray-500">{testimonial.description}</p>
+                <p class="text-xs text-gray-400">{testimonial.date}</p>
               </div>
             </div>
           </div>
