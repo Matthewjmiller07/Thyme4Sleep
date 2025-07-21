@@ -6,7 +6,7 @@ export default {
       colors: {
         // Primary brand colors
         brandCream: '#F3EAE3',
-        brandPeach: '#F1D4AE',
+        brandPeach: '#F1D4AE', // Updated from #F1D4AE to #8F958C
         brandTaupe: '#B29F8F',
         brandMink: '#897E77',
         brandChar: '#3F3B38',
@@ -14,7 +14,7 @@ export default {
         brandMint: '#BCC8B9',
         
         // Semantic color assignments
-        accent: '#F1D4AE', // brandPeach as primary accent
+        accent: '#F1D4AE', // Updated to match new brandPeach color
         
         // Utility colors (using brand colors)
         white: '#FFFFFF',
