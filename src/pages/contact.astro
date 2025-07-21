@@ -8,17 +8,37 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
   <!-- Hero -->
   <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50 text-center">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Book Your Consultation</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Complete the intake form and I’ll get back to you with a customised sleep plan.</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Book Your Consultation</h1>
+      <p class="text-xl text-black max-w-3xl mx-auto">Complete the intake form and I’ll get back to you with a customised sleep plan.</p>
     </div>
   </section>
+
+  <!-- Booking CTA -->
+  <div class="bg-brandPeach/10 py-8">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Ready to get started?</h2>
+      <p class="text-lg text-black mb-6">Book your 60-minute consultation now</p>
+      <a 
+        href="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller-2" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 text-lg font-medium text-white hover:text-white bg-brandPeach hover:bg-brandPeach/90 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+      >
+        Book 60-Minute Consult
+        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
 
   <!-- Intake Form -->
   <section class="py-20">
     <div class="container mx-auto px-4">
       <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
         <!-- Intake form: captures all required details per specifications -->
-        <form name="intake" method="POST" netlify action="/success" class="space-y-6">
+        <form name="intake" method="POST" netlify action="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller-2" class="space-y-6">
           <input type="hidden" name="form-name" value="intake" />
 
           <!-- Basic details -->
