@@ -10,24 +10,24 @@
   }
   
   body {
-    @apply bg-brandCream text-brandChar font-body font-light;
+    @apply bg-brandCream text-gray-900 font-body font-light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-body font-light text-brandChar;
+    @apply font-body font-light text-gray-900;
     line-height: 1.2;
   }
   
-  /* Ensure all text colors use brandChar for better contrast */
+  /* Ensure all text colors have good contrast */
   p, li {
-    @apply text-brandChar/90;
+    @apply text-gray-900;
   }
   
   /* Style regular links */
   a:not(.btn):not([class*="text-"]) {
-    @apply text-brandChar/90;
+    @apply text-gray-800 underline underline-offset-4 decoration-1;
   }
   
   /* Links */
@@ -36,7 +36,7 @@
   }
   
   a:not(.btn):hover {
-    @apply text-brandTaupe;
+    @apply text-brandChar;
   }
   
   /* Buttons */
