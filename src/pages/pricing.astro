@@ -78,17 +78,23 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
     />
   </div>
   <div class="p-6">
-    <h3 class="text-2xl font-light text-brandChar mb-2">Starter</h3>
-    <div class="text-brandMink text-lg mb-6">
-      <div class="flex items-center gap-2">
-        <span class="block">Single Child: $249</span>
-        <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
-      </div>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="block">Multiple: $449</span>
-        <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
-      </div>
-    </div>
+    <h3 class="text-2xl font-light text-brandChar mb-4">Starter</h3>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="border-r border-gray-200 pr-4">
+                <div class="text-sm text-brandMink mb-1">Single Child</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$249</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
+              </div>
+              <div class="pl-4">
+                <div class="text-sm text-brandMink mb-1">Multiple</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$449</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
+              </div>
+            </div>
     <div class="h-px bg-gray-200 my-6"></div>
     <ul class="space-y-4 mb-8">
       <li class="flex items-start">
@@ -132,15 +138,21 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
             />
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-light text-brandChar mb-2">Standard</h3>
-            <div class="text-brandMink text-lg mb-6">
-              <div class="flex items-center gap-2">
-                <span class="block">Single Child: $549</span>
-                <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+            <h3 class="text-2xl font-light text-brandChar mb-4">Standard</h3>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="border-r border-gray-200 pr-4">
+                <div class="text-sm text-brandMink mb-1">Single Child</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$549</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
               </div>
-              <div class="flex items-center gap-2 mt-1">
-                <span class="block">Multiple: $749</span>
-                <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              <div class="pl-4">
+                <div class="text-sm text-brandMink mb-1">Multiple</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$749</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
               </div>
             </div>
             <div class="h-px bg-gray-200 my-6"></div>
@@ -198,15 +210,21 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
             />
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-light text-brandChar">Special Educational Needs (SEN) & Neurodivergency</h3>
-            <div class="text-brandMink text-lg mb-6">
-              <div class="flex items-center gap-2">
-                <span class="block">Single Child: $1,449</span>
-                <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+            <h3 class="text-2xl font-light text-brandChar mb-4">Special Educational Needs (SEN) & Neurodivergency</h3>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="border-r border-gray-200 pr-4">
+                <div class="text-sm text-brandMink mb-1">Single Child</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$1,449</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
               </div>
-              <div class="flex items-center gap-2 mt-1">
-                <span class="block">Multiple: $1,649</span>
-                <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              <div class="pl-4">
+                <div class="text-sm text-brandMink mb-1">Multiple</div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-bold text-brandChar">$1,649</span>
+                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
+                </div>
               </div>
             </div>
             <div class="h-px bg-gray-200 my-6"></div>
@@ -265,11 +283,18 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
       <!-- Desktop Table -->
       <div class="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">
+          <colgroup>
+            <col class="w-1/4">
+            <col class="w-2/4">
+            <col class="w-1/8">
+            <col class="w-1/8">
+          </colgroup>
           <thead class="bg-gray-50">
             <tr>
               <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Package</th>
               <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">What's Included</th>
-              <th scope="col" class="px-6 py-4 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Investment</th>
+              <th scope="col" class="px-4 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Single Child</th>
+              <th scope="col" class="px-4 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Multiple</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -308,18 +333,27 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
       </li>
     </ul>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right">
-    <div class="flex items-center gap-2 justify-end">
-      <div class="text-2xl font-bold text-brandChar mb-2">Single Child: $249</div>
-      <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+  <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+    <div class="flex flex-col items-center h-full">
+      <div class="flex-grow flex flex-col justify-center">
+        <div class="text-2xl font-bold text-brandChar">$249</div>
+        <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+      </div>
+      <a href="https://thyme4sleep.neetocal.com/starter-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+        Get Started
+      </a>
     </div>
-    <div class="flex items-center gap-2 mt-1 mb-4 justify-end">
-      <div class="text-sm text-brandMink">Multiple: $449</div>
-      <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+  </td>
+  <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+    <div class="flex flex-col items-center h-full">
+      <div class="flex-grow flex flex-col justify-center">
+        <div class="text-2xl font-bold text-brandChar">$449</div>
+        <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+      </div>
+      <a href="https://thyme4sleep.neetocal.com/starter-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+        Get Started
+      </a>
     </div>
-    <a href="https://thyme4sleep.neetocal.com/starter-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="inline-block w-full bg-brandPeach hover:bg-brandTaupe text-brandDarkGreen hover:text-brandDarkGreen text-center py-3 px-6 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
-      Get Started
-    </a>
   </td>
 </tr>            <!-- Basic Package -->
             <tr class="hover:bg-gray-50">
@@ -360,18 +394,27 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   </li>
                 </ul>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right">
-                <div class="flex items-center gap-2">
-                  <div class="text-2xl font-bold text-brandChar mb-2">Single Child: $549</div>
-                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+                <div class="flex flex-col items-center h-full">
+                  <div class="flex-grow flex flex-col justify-center">
+                    <div class="text-2xl font-bold text-brandChar">$549</div>
+                    <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+                    <a href="https://thyme4sleep.neetocal.com/standard-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                      Get Started
+                    </a>
+                  </div>
                 </div>
-                <div class="flex items-center gap-2 mt-1 mb-4">
-                  <div class="text-sm text-brandMink">Multiple: $749</div>
-                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              </td>
+              <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+                <div class="flex flex-col items-center h-full">
+                  <div class="flex-grow flex flex-col justify-center">
+                    <div class="text-2xl font-bold text-brandChar">$749</div>
+                    <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+                    <a href="https://thyme4sleep.neetocal.com/standard-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                      Get Started
+                    </a>
+                  </div>
                 </div>
-                <a href="https://thyme4sleep.neetocal.com/standard-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="inline-block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
-                  Get Started
-                </a>
               </td>
             </tr>
 
@@ -418,18 +461,27 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   </li>
                 </ul>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right">
-                <div class="flex items-center gap-2">
-                  <div class="text-2xl font-bold text-brandChar">Single Child: $1,449</div>
-                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+                <div class="flex flex-col items-center h-full">
+                  <div class="flex-grow flex flex-col justify-center">
+                    <div class="text-2xl font-bold text-brandChar">$1,449</div>
+                    <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+                  </div>
+                  <a href="https://thyme4sleep.neetocal.com/sen-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                    Get Started
+                  </a>
                 </div>
-                <div class="flex items-center gap-2 mt-1 mb-4">
-                  <div class="text-sm text-brandMink">Multiple: $1,649</div>
-                  <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promotional Price</span>
+              </td>
+              <td class="px-4 py-4 whitespace-nowrap text-center align-top">
+                <div class="flex flex-col items-center h-full">
+                  <div class="flex-grow flex flex-col justify-center">
+                    <div class="text-2xl font-bold text-brandChar">$1,649</div>
+                    <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
+                  </div>
+                  <a href="https://thyme4sleep.neetocal.com/sen-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="mt-4 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                    Get Started
+                  </a>
                 </div>
-                <a href="https://thyme4sleep.neetocal.com/standard-15-minute-call-with-georgia" target="_blank" rel="noopener noreferrer" class="inline-block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md">
-                  Get Started
-                </a>
               </td>
             </tr>
           </tbody>
