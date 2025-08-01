@@ -5,285 +5,37 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <!-- Hero -->
-  <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50 text-center">
+  <!-- Form Header -->
+  <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Fill Out the Intake Form</h1>
-    </div>
-  </section>
-
-  <!-- Booking CTA -->
-  <div class="bg-brandPeach/10 py-12">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-2xl font-bold mb-4 text-black">Ready to get started?</h2>
-      <p class="text-lg text-black mb-6">Fill out our intake form to begin your personalized sleep coaching journey</p>
-      <a 
-        href="#intake-form" 
-        class="inline-flex items-center px-6 py-3 text-base font-bold text-brandSage hover:text-brandSage bg-brandPeach hover:bg-brandPeach/90 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
-      >
-        Fill Out Intake Form
-        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-      </a>
-      <p class="text-sm text-gray-600 mt-4">
-        Already filled out the form? 
+      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center text-black">Sleep Coaching Intake Form</h1>
+      <p class="text-center text-gray-600 mt-2">
+        Already filled this out? 
         <a 
           href="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller-2" 
           target="_blank"
           rel="noopener noreferrer"
-          class="text-brandSage font-bold hover:underline"
+          class="text-brandSage font-semibold hover:underline"
         >
-          Book your 60-minute consultation now
+          Book your 60-minute consultation
         </a>
       </p>
     </div>
-  </div>
+  </section>
 
-  <!-- Intake Form -->
-  <section id="intake-form" class="py-20">
+  <section id="intake-form" class="py-12">
     <div class="container mx-auto px-4">
       <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
-        <!-- Intake form: captures all required details per specifications -->
-        <form 
-          name="intake" 
-          method="POST" 
-          data-netlify="true"
-          action="/thank-you"
-          class="space-y-6"
-          netlify-honeypot="bot-field"
-        >
-          <input type="hidden" name="form-name" value="intake" />
-          <p class="hidden">
-            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-          </p>
-
-          <!-- Basic details -->
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Your full name *
-                <input required name="fullName" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Baby’s name *
-                <input required name="babyName" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Baby’s age *
-                <input required name="babyAge" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Baby’s DOB *
-                <input required name="babyDob" type="date" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
+        <div class="typeform-widget" data-tf-live="01K1HPFKZDEASNRV2TX4WFN9HY" style="width: 100%; height: 70vh;"></div>
+        <script is:inline src="//embed.typeform.com/next/embed.js"></script>
+        
+        <!-- Terms and conditions -->
+        <div class="border-t border-gray-200 pt-6 mt-8">
+          <div class="text-sm text-gray-600">
+            <p class="mb-4">By submitting this form, you agree to our <a href="/terms" target="_blank" class="text-brandSage hover:underline">Terms of Service</a> and <a href="/privacy" target="_blank" class="text-brandSage hover:underline">Privacy Policy</a>.</p>
+            <p>You may receive email communications from Thyme4Sleep. You can unsubscribe at any time.</p>
           </div>
-
-          <!-- Sleep schedule textarea -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Current daytime sleep schedule
-              <textarea name="daytimeSchedule" rows="3" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" placeholder="Example: Wake 7 am, Nap #1 10–11 am, Nap #2 2–3 pm, Bedtime 7 pm" />
-            </label>
-          </div>
-
-          <!-- Pacifier question -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">Does your baby use a pacifier to sleep?</legend>
-            <div class="space-y-2">
-              <label class="flex items-center">
-                <input type="radio" name="pacifier" value="reinsert" class="h-4 w-4 text-accent" />
-                <span class="ml-2 text-sm">Yes, and I often have to reinsert it</span>
-              </label>
-              <label class="flex items-center">
-                <input type="radio" name="pacifier" value="notProp" class="h-4 w-4 text-accent" />
-                <span class="ml-2 text-sm">Yes, but it’s not a prop</span>
-              </label>
-              <label class="flex items-center">
-                <input type="radio" name="pacifier" value="no" class="h-4 w-4 text-accent" />
-                <span class="ml-2 text-sm">No</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <!-- Feeding & Lifestyle Details -->
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">What email address did you use for payment?*
-                <input required name="paymentEmail" type="email" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">What email address will you use for the consultation?*
-                <input required name="consultEmail" type="email" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Today's date
-                <input name="formDate" type="date" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">How many hours does your baby sleep in 24 hrs?*
-                <input required name="hoursPer24" type="text" placeholder="e.g. 11.5–13" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">What does your baby's bedtime routine look like? (Leave blank if none)
-              <textarea name="bedtimeRoutine" rows="3" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" placeholder="Example: Bath, pajamas, book, bottle, rock to sleep" />
-            </label>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">What type of sleep outfit does your baby sleep in?
-              <input name="sleepOutfit" type="text" placeholder="e.g. Footed pajamas + Halo swaddle" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Describe your baby's sleeping arrangement
-              <textarea name="sleepArrangement" rows="3" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" placeholder="e.g. Baby sleeps in own crib in separate room" />
-            </label>
-          </div>
-
-          <!-- Sleep props -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">Does your baby use any sleep props?* (select all that apply)</legend>
-            <div class="space-y-2">
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="nursing" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Nursing to sleep</span></label>
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="bottle" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Bottle to sleep</span></label>
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="rocking" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Rocking to sleep</span></label>
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="movement" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Bouncing / swaying / movement</span></label>
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="none" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">None</span></label>
-              <label class="flex items-center"><input type="checkbox" name="sleepProps" value="other" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Other</span></label>
-            </div>
-          </fieldset>
-
-          <!-- Nutrition -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">How is your baby currently getting nutrition?* (select all that apply)</legend>
-            <div class="space-y-2">
-              <label class="flex items-center"><input type="checkbox" name="nutrition" value="breastfeeding" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Breastfeeding</span></label>
-              <label class="flex items-center"><input type="checkbox" name="nutrition" value="formula" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Formula</span></label>
-              <label class="flex items-center"><input type="checkbox" name="nutrition" value="solids" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Solids</span></label>
-              <label class="flex items-center"><input type="checkbox" name="nutrition" value="other" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Other</span></label>
-            </div>
-            <div class="mt-2">
-              <textarea name="nutritionNotes" rows="2" placeholder="Notes" class="w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </div>
-          </fieldset>
-
-          <!-- Night feedings -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">Does your baby receive any nighttime feedings?*</legend>
-            <div class="space-y-2">
-              <label class="flex items-center"><input required type="radio" name="nightFeeding" value="yes" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Yes</span></label>
-              <label class="flex items-center"><input required type="radio" name="nightFeeding" value="no" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">No</span></label>
-            </div>
-          </fieldset>
-
-          <!-- Personality -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">Which personality type best describes your baby? (select all that apply)</legend>
-            <div class="space-y-2">
-              <label class="flex items-center"><input type="checkbox" name="personality" value="quiet" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Quiet / mellow</span></label>
-              <label class="flex items-center"><input type="checkbox" name="personality" value="cranky" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Cranky / fussy</span></label>
-              <label class="flex items-center"><input type="checkbox" name="personality" value="clingy" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Clingy / anxious</span></label>
-              <label class="flex items-center"><input type="checkbox" name="personality" value="strong" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Strong-willed / stubborn</span></label>
-              <label class="flex items-center"><input type="checkbox" name="personality" value="happy" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Happy / playful</span></label>
-              <label class="flex items-center"><input type="checkbox" name="personality" value="other" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Other</span></label>
-            </div>
-          </fieldset>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Have you tried any other methods or programs?
-              <textarea name="methodsTried" rows="3" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <!-- Milestones -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">What developmental milestones has your baby accomplished?*</legend>
-            <div class="grid md:grid-cols-2 gap-2">
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="none" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">None yet</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="headUp" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Holding head up</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="rollSide" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Rolling onto side</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="rollBellyBack" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Rolling belly ➜ back</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="rollBackBelly" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Rolling back ➜ belly</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="sitUpCantDown" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Sitting, can't lay down</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="sitDown" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Sitting & can lay down</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="crawling" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Crawling</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="standCantSit" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Standing, can't sit</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="standSit" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Standing & can sit</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="walking" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Walking</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="all" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">All of the above</span></label>
-              <label class="flex items-center"><input type="checkbox" name="milestones" value="other" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Other</span></label>
-            </div>
-          </fieldset>
-
-          <!-- Cry tolerance -->
-          <fieldset>
-            <legend class="text-sm font-medium text-gray-700 mb-2">Which statement best describes how you feel about crying?*</legend>
-            <div class="space-y-2">
-              <label class="flex items-center"><input required type="radio" name="cryTolerance" value="dontMind" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">I don't mind hearing crying</span></label>
-              <label class="flex items-center"><input required type="radio" name="cryTolerance" value="some" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">I don't mind hearing some crying</span></label>
-              <label class="flex items-center"><input required type="radio" name="cryTolerance" value="none" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">I cannot hear any crying at all</span></label>
-              <label class="flex items-center"><input type="radio" name="cryTolerance" value="other" class="h-4 w-4 text-accent" /><span class="ml-2 text-sm">Other</span></label>
-            </div>
-          </fieldset>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Please provide additional information or questions
-              <textarea name="troubleshootInfo" rows="4" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">How did you hear about Thyme4Sleep?*
-              <input required name="hearAbout" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Did a friend refer you? If yes, enter their name
-              <input name="referralName" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Desired consultation start date (leave blank for earliest)
-              <input name="startDate" type="date" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <!-- Signature -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Signature* (type your full name)
-              <input required name="signature" type="text" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <!-- Additional notes -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Anything else I should know?
-              <textarea name="additionalInfo" rows="4" class="mt-1 w-full border-gray-300 rounded-md px-4 py-2 focus:ring-accent focus:border-accent" />
-            </label>
-          </div>
-
-          <!-- Terms & conditions -->
-          <div class="flex items-start">
-            <input required type="checkbox" name="agree" id="agree" class="h-4 w-4 text-accent mt-1" />
-            <label for="agree" class="ml-2 text-sm text-gray-700">I have read and agree to the <a href="/Thyme4Sleep_T_C.pdf" target="_blank" class="text-brandSage font-bold underline hover:text-brandSage/90">terms and conditions</a>.</label>
-          </div>
-
-          <button type="submit" class="w-full md:w-auto bg-brandPeach hover:bg-brandPeach/90 text-brandSage hover:text-brandSage font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   </section>
