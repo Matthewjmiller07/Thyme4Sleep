@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
               <div class="relative group w-full sm:w-auto" x-data="{ showTooltip: false }" 
                    @mouseenter="showTooltip = true" @mouseleave="showTooltip = false"
                    @touchstart="$event.stopPropagation(); showTooltip = !showTooltip" @click.away="showTooltip = false">
-                <a href="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller"
+                <a href="https://thyme4sleep.neetocal.com/free-15-minute-assessment-call"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-brandChar hover:bg-brandMink hover:text-white rounded-full transition-colors duration-300 w-full sm:w-auto"
@@ -68,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="inline-block text-sm font-bold text-brandSage bg-brandPeach px-4 py-1.5 rounded-full mb-3 shadow-sm">TESTIMONIALS</span>
-        <h2 class="text-4xl md:text-5xl font-light text-brandChar mb-6">What Parents <span class="font-medium">Are Saying</span></h2>
+        <h2 class="text-4xl md:text-5xl font-light text-brandChar mb-6">Stories From <span class="font-medium">Parents</span></h2>
         <div class="h-1 w-24 bg-accent mx-auto mb-8"></div>
         <p class="text-lg text-gray-600">Hear from families who've transformed their sleep routines</p>
       </div>
@@ -216,97 +216,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="py-24 bg-gray-50">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="inline-block text-sm font-bold text-brandSage bg-brandPeach px-4 py-1.5 rounded-full mb-3 shadow-sm">TESTIMONIALS</span>
-        <h2 class="text-4xl md:text-5xl font-light text-brandChar mb-6">What Parents <span class="font-medium">Are Saying</span></h2>
-        <div class="h-1 w-24 bg-accent mx-auto mb-8"></div>
-        <p class="text-lg text-gray-600">Hear from families who've transformed their sleep routines</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Testimonial 1 - Jonny -->
-        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden">
-          <div class="absolute -top-6 -right-6 w-24 h-24 bg-accent/5 rounded-full"></div>
-          <div class="relative z-10">
-            <div class="text-yellow-400 text-2xl mb-6">
-              ★★★★★
-            </div>
-            <blockquote class="text-lg text-gray-700 italic mb-8 leading-relaxed">
-              "Georgia was honestly amazing. She took so much time to really listen and explain things and gave us practical advice. She was patient and always there when we had questions. Knowing she has kids meant she has real experience not just theories. Everything she suggested felt doable, and most importantly, it worked. She also helped us when we traveled from London to New York as we adjusted to the time zone."
-            </blockquote>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-brandMint/20 flex items-center justify-center text-brandChar text-xl font-medium flex-shrink-0 mr-4">
-                J
-              </div>
-              <div>
-                <div class="font-medium text-brandChar">Jonny A.</div>
-                <div class="text-gray-500 text-sm">dad of 3, worked with his 6-month old</div>
-                <div class="text-gray-400 text-xs">July 2025</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Testimonial 2 - Sarah -->
-        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden">
-          <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-brandPeach/10 rounded-full"></div>
-          <div class="relative z-10">
-            <div class="text-yellow-400 text-2xl mb-6">
-              ★★★★★
-            </div>
-            <blockquote class="text-lg text-gray-700 italic mb-8 leading-relaxed">
-              "We had an amazing experience working with Georgia! She was incredibly easy to work with—friendly, approachable, and always understanding of our concerns. What really stood out was her genuine empathy and the way she supported us every step of the way. Thanks to her guidance, our baby is now putting herself to sleep and sleeping through the night—something we didn't think was possible just a few weeks ago!"
-            </blockquote>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-brandPeach/20 flex items-center justify-center text-brandChar text-xl font-medium flex-shrink-0 mr-4">
-                S
-              </div>
-              <div>
-                <div class="font-medium text-brandChar">Sarah A.</div>
-                <div class="text-gray-500 text-sm">mum of 1, worked with her 19 month-old</div>
-                <div class="text-gray-400 text-xs">July 2025</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Full-width testimonial -->
-        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden md:col-span-2">
-          <div class="absolute -top-6 -left-6 w-24 h-24 bg-brandMint/10 rounded-full"></div>
-          <div class="relative z-10">
-            <div class="text-yellow-400 text-2xl mb-6">
-              ★★★★★
-            </div>
-            <blockquote class="text-lg text-gray-700 italic mb-8 leading-relaxed max-w-4xl mx-auto">
-              "You helped me get my life back and I couldn't recommend her enough! My baby still wasn't sleeping through the night at 5 months. With your guidance and support we finally managed to get her through the night within a week of sleep training her. You were so easy to work with, really listened to our concerns and created a sleep training plan perfectly tailored to our baby who had been struggling with reflux."
-            </blockquote>
-            <div class="flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-brandChar text-xl font-medium flex-shrink-0 mr-4">
-                E
-              </div>
-              <div>
-                <div class="font-medium text-brandChar">Eli V. W.</div>
-                <div class="text-gray-500 text-sm">mum of 1, worked with her 5 month-old</div>
-                <div class="text-gray-400 text-xs">June 2025</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="text-center mt-16">
-        <a href="/testimonials" class="inline-flex items-center px-8 py-4 text-lg font-medium text-brandChar hover:text-accent transition-colors duration-300">
-          Read More Success Stories
-          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Satisfaction Guarantee -->
   <section class="py-16 bg-white">
@@ -330,7 +240,7 @@ import Layout from '../layouts/Layout.astro';
         
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <a 
-            href="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller"
+            href="https://thyme4sleep.neetocal.com/free-15-minute-assessment-call"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-brandChar hover:bg-brandMink hover:text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
