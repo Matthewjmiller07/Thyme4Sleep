@@ -22,6 +22,11 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
     <title>{title}</title>
     </head>
   <body class="min-h-screen flex flex-col bg-white">
+    <!-- Skip to main content link - Enhanced for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-6 focus:py-3 focus:font-bold focus:underline focus:rounded focus:shadow-lg focus:ring-2 focus:ring-brandSage focus:ring-offset-2 focus:outline-none focus:border-transparent transition-all duration-200 text-lg">
+      Skip to main content
+    </a>
+    
     <!-- International Clients Banner -->
     <div class="bg-brandSage text-center py-2 px-4" style="color: white !important;">
       <p class="text-xl font-medium" style="color: white !important;">
@@ -101,7 +106,7 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <a href="/" class="flex items-center mr-8">
-            <img src="/images/logos/T4S ROUND LOGO.png" alt="Thyme4Sleep" class="h-48 w-auto" />
+            <img src="/images/logos/latestlogo.png" alt="Thyme4Sleep" class="h-48 w-auto" />
           </a>
 
           <nav class="hidden md:flex items-center space-x-10">
@@ -133,7 +138,7 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
       </div>
     </header>
 
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow" tabindex="-1">
       <slot />
     </main>
 

@@ -6,9 +6,9 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
 
 <Layout title={pageTitle} description={pageDescription}>
   <!-- Form Header -->
-  <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50">
+  <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50" aria-labelledby="form-header">
     <div class="container mx-auto px-4">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center text-black">Sleep Coaching Intake Form</h1>
+      <h1 id="form-header" class="text-3xl md:text-4xl font-bold mb-2 text-center text-black">Sleep Coaching Intake Form</h1>
       <p class="text-center text-gray-600 mt-2">
         Already filled this out? 
         <a 
@@ -16,23 +16,27 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
           target="_blank"
           rel="noopener noreferrer"
           class="text-brandSage font-semibold hover:underline"
+          aria-label="Book your 60-minute consultation (opens in new tab)"
         >
           Book your 60-minute consultation
+          <span class="sr-only">(opens in new tab)</span>
         </a>
       </p>
     </div>
   </section>
 
-  <section id="intake-form" class="py-12">
+  <section id="intake-form" class="py-12" aria-labelledby="form-title">
     <div class="container mx-auto px-4">
+      <h2 id="form-title" class="sr-only">Contact Information Form</h2>
       <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
         <div class="typeform-widget" data-tf-live="01K1HPFKZDEASNRV2TX4WFN9HY" style="width: 100%; height: 70vh;"></div>
         <script is:inline src="//embed.typeform.com/next/embed.js"></script>
         
         <!-- Terms and conditions -->
-        <div class="border-t border-gray-200 pt-8 mt-16">
+        <div class="border-t border-gray-200 pt-8 mt-16" role="region" aria-label="Terms and conditions">
+          <h3 class="sr-only">Terms and Conditions</h3>
           <div class="text-sm text-gray-600">
-            <p class="mb-4">By submitting this form, you agree to our <a href="https://www.overleaf.com/download/project/6869f779592b672caa1b5e3d/build/198658d5737-9e34f4fccb7e9a4f/output/output.pdf?compileGroup=standard&clsiserverid=clsi-reg-n2d-b-f-0s6c&enable_pdf_caching=true&popupDownload=true" target="_blank" class="text-brandSage hover:underline">Terms of Service</a>.</p>
+            <p class="mb-4">By submitting this form, you agree to our <a href="https://www.overleaf.com/download/project/6869f779592b672caa1b5e3d/build/198658d5737-9e34f4fccb7e9a4f/output/output.pdf?compileGroup=standard&clsiserverid=clsi-reg-n2d-b-f-0s6c&enable_pdf_caching=true&popupDownload=true" target="_blank" rel="noopener noreferrer" class="text-brandSage hover:underline" aria-label="Terms of Service (opens in new tab)">Terms of Service<span class="sr-only"> (opens in new tab)</span></a>.</p>
             <p>You may receive email communications from Thyme4Sleep. You can unsubscribe at any time.</p>
           </div>
         </div>
