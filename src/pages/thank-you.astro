@@ -1,8 +1,83 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+export const prerender = false;
+
+const url = Astro.url;
+const pkgRaw = url.searchParams.get('pkg') || '';
+const pkg = String(pkgRaw).trim().toLowerCase();
+
+// Normalize package type from pkg id
+const isStarter = pkg.startsWith('starter');
+const isStandard = pkg.startsWith('standard');
+const isSpecialized = pkg.startsWith('specialized') || pkg.startsWith('sen');
+const isTroubleshooting = pkg.startsWith('troubleshooting');
+const isWeekend = pkg.startsWith('weekend');
+
+type PackageView = {
+  title: string;
+  intro: string;
+  showBooking: boolean;
+  bookingHref?: string;
+  bookingLabel?: string;
+  showIntake: boolean;
+};
+
+let view: PackageView;
+if (isStarter) {
+  view = {
+    title: 'Thank You! Your Starter Package Is Confirmed',
+    intro: 'Thanks for your purchase. The next step is to complete the intake form so we can get started right away.',
+    showBooking: false,
+    showIntake: true,
+  };
+} else if (isStandard) {
+  view = {
+    title: 'Thank You! Your Standard Package Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/standard-call-with-georgia',
+    bookingLabel: 'Book Your 60-Minute Standard Call',
+    showIntake: true,
+  };
+} else if (isSpecialized) {
+  view = {
+    title: 'Thank You! Your SEN Package Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/sen-call-with-georgia',
+    bookingLabel: 'Book Your 60-Minute SEN Call',
+    showIntake: true,
+  };
+} else if (isTroubleshooting) {
+  view = {
+    title: 'Thank You! Your Troubleshooting Call Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/free-info-about-troubleshooting-call',
+    bookingLabel: 'Book Your 60-Minute Troubleshooting Call',
+    showIntake: true,
+  };
+} else if (isWeekend) {
+  view = {
+    title: 'Thank You! Your Weekend/Holiday Consult Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/weekend-or-holiday-consult',
+    bookingLabel: 'Book Your Weekend/Holiday Consult',
+    showIntake: true,
+  };
+} else {
+  view = {
+    title: 'Thank You! Your Purchase Is Confirmed',
+    intro: 'Please complete the intake form. If your package includes a 60-minute call, you\'ll see a booking link below.',
+    showBooking: false,
+    showIntake: true,
+  };
+}
+
 const pageTitle = 'Thank You - Thyme4Sleep';
-const pageDescription = 'Thank you for contacting Thyme4Sleep. We\'ll be in touch soon!';
+const pageDescription = 'Thank you for your purchase. Next steps and links are below.';
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -18,36 +93,39 @@ const pageDescription = 'Thank you for contacting Thyme4Sleep. We\'ll be in touc
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 class="text-4xl md:text-5xl font-light text-brandChar mb-6">Thank You for Your Interest!</h1>
+        <h1 class="text-4xl md:text-5xl font-light text-brandChar mb-6">{view.title}</h1>
         <div class="h-1 w-24 bg-accent mx-auto mb-8"></div>
         <div class="prose prose-lg max-w-none text-gray-700 mb-10">
-          <p class="text-xl mb-6">Your submission has been received. I appreciate you reaching out and will respond as soon as possible.</p>
-          <p class="text-xl mb-6">In the meantime, you can book your 60-minute consultation below.</p>
-          <a 
-            href="https://thyme4sleep.neetocal.com/meeting-with-georgia-miller-2" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center px-8 py-3 text-lg font-medium text-white hover:text-white bg-brandPeach hover:bg-brandPeach/90 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            Book 60-Minute Consult
-            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </a>
+          <p class="text-xl mb-6">{view.intro}</p>
+          {view.showBooking && (
+            <a 
+              href={view.bookingHref!}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-8 py-3 text-lg font-bold text-brandSage hover:text-brandSage bg-brandPeach hover:bg-brandPeach/90 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              {view.bookingLabel}
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </a>
+          )}
         </div>
-        
-        <div class="mt-10">
-          <a 
-            href="/" 
-            class="inline-flex items-center px-8 py-4 text-lg font-medium text-white hover:text-white bg-brandChar hover:bg-brandMink rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            Back to Home
-            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-            </svg>
-          </a>
-        </div>
+
+        {view.showIntake && (
+          <div class="mt-6">
+            <a 
+              href="/contact" 
+              class="inline-flex items-center px-8 py-3 text-lg font-medium text-brandSage hover:text-brandSage bg-brandMint/20 hover:bg-brandMint/30 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
+            >
+              Fill Out Intake Form
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   </section>
