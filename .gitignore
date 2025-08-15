@@ -4,3 +4,8 @@ dist
 
 # Local Netlify folder
 .netlify
+
+# Env files
+.env
+.env.*
+!.env.example
