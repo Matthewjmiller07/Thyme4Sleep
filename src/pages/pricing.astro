@@ -67,6 +67,13 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$249</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a
+                  href="#"
+                  data-package="starter-1"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                >
+                  Get Started – Single
+                </a>
               </div>
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
@@ -74,6 +81,13 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$449</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a
+                  href="#"
+                  data-package="starter-2"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                >
+                  Get Started – Multiple
+                </a>
               </div>
             </div>
     <div class="h-px bg-gray-200 my-6"></div>
@@ -103,10 +117,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
         <span>Guidance for both daytime naps and night wakings</span>
       </li>
     </ul>
-    <div class="grid grid-cols-2 gap-3">
-      <a href="#" data-package="starter-1" class="js-checkout w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 block shadow-sm hover:-translate-y-0.5 hover:shadow-md">Promo</a>
-      <a href="#" data-package="starter-2" class="js-checkout w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 block shadow-sm hover:-translate-y-0.5 hover:shadow-md">Promo</a>
-    </div>
+    <div class="mt-6"></div>
   </div>
 </div>
         <!-- Basic Package -->
@@ -119,7 +130,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               loading="lazy"
             />
           </div>
-          <div class="p-6">
+          <div class="p-6" data-addon-scope="standard">
             <h2 class="text-2xl font-light text-brandChar mb-4">Standard</h2>
             <div class="grid grid-cols-2 gap-4 mb-6">
               <div class="border-r border-gray-200 pr-4">
@@ -128,6 +139,13 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$549</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a
+                  href="#"
+                  data-package="standard-1"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                >
+                  Get Started – Single
+                </a>
               </div>
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
@@ -135,6 +153,13 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$749</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a
+                  href="#"
+                  data-package="standard-2"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                >
+                  Get Started – Multiple
+                </a>
               </div>
             </div>
             <div class="h-px bg-gray-200 my-6"></div>
@@ -170,22 +195,18 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 <span>Sleep environment assessment</span>
               </li>
             </ul>
-            <div class="grid grid-cols-2 gap-3">
-              <a 
-                href="#"
-                data-package="standard-1"
-                class="js-checkout block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md"
-              >
-                Promo
-              </a>
-              <a 
-                href="#"
-                data-package="standard-2"
-                class="js-checkout block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md"
-              >
-                Promo
-              </a>
+            <div class="bg-brandCream/60 border border-brandCream/90 rounded-2xl p-4 mb-6">
+              <label for="standard-addon-card" class="text-sm font-semibold text-brandChar tracking-wide uppercase">Optional Week(s) Add-On</label>
+              <p class="text-xs text-brandMink mt-1 mb-3">Extend your Standard package with extra Mon–Fri check-ins.</p>
+              <select id="standard-addon-card" data-addon-group="standard" class="js-addon-select w-full border border-brandCream rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
+                <option value="">No additional support</option>
+                <option value="support-1w">1 Week Additional Support — $100</option>
+                <option value="support-2w">2 Weeks Additional Support — $200</option>
+                <option value="support-3w">3 Weeks Additional Support — $300</option>
+                <option value="support-4w">4 Weeks Additional Support — $400</option>
+              </select>
             </div>
+            <div class="mt-6"></div>
           </div>
         </div>
 
@@ -199,7 +220,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               loading="lazy"
             />
           </div>
-          <div class="p-6">
+          <div class="p-6" data-addon-scope="sen">
             <h3 class="text-2xl font-light text-brandChar mb-4">Special Educational Needs (SEN) & Neurodivergency</h3>
             <div class="grid grid-cols-2 gap-4 mb-6">
               <div class="border-r border-gray-200 pr-4">
@@ -208,6 +229,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$1,229</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a 
+                  href="#"
+                  data-package="specialized-1"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                  aria-label="Book SEN Package (1 child)"
+                >
+                  Get Started – Single
+                </a>
               </div>
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
@@ -215,6 +244,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <span class="text-xl font-bold text-brandChar">$1,429</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
+                <a 
+                  href="#"
+                  data-package="specialized-2"
+                  class="js-checkout mt-3 block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-2 px-3 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm"
+                  aria-label="Book SEN Package (2 children)"
+                >
+                  Get Started – Multiple
+                </a>
               </div>
             </div>
             <div class="h-px bg-gray-200 my-6"></div>
@@ -256,24 +293,18 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 <span>School/daycare coordination</span>
               </li>
             </ul>
-            <div class="grid grid-cols-2 gap-3 mt-8">
-              <a 
-                href="#"
-                data-package="specialized-1"
-                class="js-checkout block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md"
-                aria-label="Book SEN Package (1 child)"
-              >
-                Promo
-              </a>
-              <a 
-                href="#"
-                data-package="specialized-2"
-                class="js-checkout block w-full bg-brandPeach hover:bg-brandTaupe text-brandSage hover:text-brandSage text-center py-3 px-4 rounded-full font-bold transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-md"
-                aria-label="Book SEN Package (2 children)"
-              >
-                Promo
-              </a>
+            <div class="bg-brandCream/60 border border-brandCream/90 rounded-2xl p-4 mb-8">
+              <label for="sen-addon-card" class="text-sm font-semibold text-brandChar tracking-wide uppercase">Extended weekday support</label>
+              <p class="text-xs text-brandMink mt-1 mb-3">Ideal for families needing longer SEN-focused follow-up.</p>
+              <select id="sen-addon-card" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
+                <option value="">No additional support</option>
+                <option value="support-1w">1 Week Additional Support — $100</option>
+                <option value="support-2w">2 Weeks Additional Support — $200</option>
+                <option value="support-3w">3 Weeks Additional Support — $300</option>
+                <option value="support-4w">4 Weeks Additional Support — $400</option>
+              </select>
             </div>
+            <div class="mt-8"></div>
           </div>
         </div>
 
@@ -356,7 +387,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
     </div>
   </td>
 </tr>            <!-- Basic Package -->
-            <tr class="hover:bg-gray-50">
+            <tr class="hover:bg-gray-50" data-addon-scope="standard">
               <td class="px-6 py-4">
                 <div class="relative">
                   <div class="font-medium text-gray-900">Standard</div>
@@ -393,6 +424,17 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                     <span>Sleep environment assessment</span>
                   </li>
                 </ul>
+                <div class="mt-4 bg-brandCream/50 border border-brandCream/70 rounded-xl p-3">
+                  <label for="standard-addon-table" class="text-xs font-semibold text-brandChar uppercase tracking-wide">Optional Week(s) Add-On</label>
+                  <p class="text-[0.7rem] text-brandMink mb-2">Mon–Fri message support extension.</p>
+                  <select id="standard-addon-table" data-addon-group="standard" class="js-addon-select w-full border border-brandCream rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
+                    <option value="">No additional support</option>
+                    <option value="support-1w">1 Week Additional Support — $100</option>
+                    <option value="support-2w">2 Weeks Additional Support — $200</option>
+                    <option value="support-3w">3 Weeks Additional Support — $300</option>
+                    <option value="support-4w">4 Weeks Additional Support — $400</option>
+                  </select>
+                </div>
               </td>
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
@@ -460,6 +502,17 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                     <span>School/daycare coordination</span>
                   </li>
                 </ul>
+                <div class="mt-4 bg-brandCream/50 border border-brandCream/70 rounded-xl p-3">
+                  <label for="sen-addon-table" class="text-xs font-semibold text-brandChar uppercase tracking-wide">Extended weekday support</label>
+                  <p class="text-[0.7rem] text-brandMink mb-2">Extra SEN-focused check-ins.</p>
+                  <select id="sen-addon-table" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
+                    <option value="">No additional support</option>
+                    <option value="support-1w">1 Week Additional Support — $100</option>
+                    <option value="support-2w">2 Weeks Additional Support — $200</option>
+                    <option value="support-3w">3 Weeks Additional Support — $300</option>
+                    <option value="support-4w">4 Weeks Additional Support — $400</option>
+                  </select>
+                </div>
               </td>
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
@@ -673,15 +726,38 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
   <!-- Stripe Checkout Script -->
   <script is:inline>
     (function () {
-      function qs(id) { return document.getElementById(id); }
       function $(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
       const buttons = $('.js-checkout');
+      const addonSelects = $('.js-addon-select');
 
-      async function createCheckoutSession(packageId) {
+      const addonState = {};
+      const groupMap = addonSelects.reduce((acc, select) => {
+        const group = select.dataset.addonGroup;
+        if (!group) return acc;
+        if (!acc[group]) acc[group] = [];
+        acc[group].push(select);
+        addonState[group] = select.value || '';
+        return acc;
+      }, /** @type {Record<string, HTMLSelectElement[]>} */ ({}));
+
+      Object.entries(groupMap).forEach(([group, selects]) => {
+        selects.forEach((select) => {
+          select.addEventListener('change', () => {
+            addonState[group] = select.value;
+            selects.forEach((other) => {
+              if (other !== select) {
+                other.value = select.value;
+              }
+            });
+          });
+        });
+      });
+
+      async function createCheckoutSession(packageId, addOnId) {
         const res = await fetch('/api/create-checkout-session', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ packageId })
+          body: JSON.stringify({ packageId, addOnId: addOnId || undefined })
         });
         if (!res.ok) {
           const text = await res.text().catch(() => '');
@@ -690,14 +766,27 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
         return res.json();
       }
 
+      function resolveAddonForButton(btn) {
+        const scopeEl = btn.closest('[data-addon-scope]');
+        if (!scopeEl) return '';
+        const group = scopeEl.getAttribute('data-addon-scope');
+        if (!group) return '';
+        if (addonState[group] !== undefined) {
+          return addonState[group] || '';
+        }
+        const select = scopeEl.querySelector('[data-addon-group]');
+        return select ? select.value : '';
+      }
+
       buttons.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           e.preventDefault();
           const packageId = btn.getAttribute('data-package');
+          const addOnId = resolveAddonForButton(btn);
           btn.setAttribute('aria-busy', 'true');
           btn.classList.add('opacity-75', 'pointer-events-none');
           try {
-            const data = await createCheckoutSession(packageId);
+            const data = await createCheckoutSession(packageId, addOnId);
             if (data && data.url) {
               window.location.href = data.url;
             } else {

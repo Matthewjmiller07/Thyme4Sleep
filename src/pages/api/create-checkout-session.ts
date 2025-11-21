@@ -39,6 +39,13 @@ const PACKAGES: Record<string, { name: string; amountCents: number } > = {
   weekend: { name: 'Weekend/Holiday Consult', amountCents: 19900 },
 };
 
+const ADDONS: Record<string, { name: string; amountCents: number }> = {
+  'support-1w': { name: 'Additional Support (1 Week, Mon–Fri)', amountCents: 10000 },
+  'support-2w': { name: 'Additional Support (2 Weeks, Mon–Fri)', amountCents: 20000 },
+  'support-3w': { name: 'Additional Support (3 Weeks, Mon–Fri)', amountCents: 30000 },
+  'support-4w': { name: 'Additional Support (4 Weeks, Mon–Fri)', amountCents: 40000 },
+};
+
 // Simple health-check for local debugging (do not expose secrets)
 export const GET: APIRoute = async () => {
   try {
@@ -64,7 +71,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { packageId, promoCode } = body as { packageId?: string; promoCode?: string };
+    const { packageId, promoCode, addOnId } = body as { packageId?: string; promoCode?: string; addOnId?: string };
 
     if (!packageId || !PACKAGES[packageId]) {
       return new Response(JSON.stringify({ error: 'Invalid or missing packageId.' }), {
@@ -74,6 +81,27 @@ export const POST: APIRoute = async ({ request, url }) => {
     }
 
     const pkg = PACKAGES[packageId];
+    let addOn = null as null | { name: string; amountCents: number };
+
+    if (addOnId) {
+      if (!ADDONS[addOnId]) {
+        return new Response(JSON.stringify({ error: 'Invalid addOnId.' }), {
+          status: 400,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+
+      const isStandard = packageId.startsWith('standard');
+      const isSpecialized = packageId.startsWith('specialized') || packageId.startsWith('sen');
+      if (!(isStandard || isSpecialized)) {
+        return new Response(JSON.stringify({ error: 'Add-on not available for this package.' }), {
+          status: 400,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+
+      addOn = ADDONS[addOnId];
+    }
 
     // Determine post-payment redirect
     // Send all purchases to a unified thank-you page with the package id
@@ -90,25 +118,41 @@ export const POST: APIRoute = async ({ request, url }) => {
       discounts = [{ coupon: coupon.id }];
     }
 
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+      {
+        price_data: {
+          currency: 'usd',
+          unit_amount: pkg.amountCents,
+          product_data: { name: pkg.name },
+        },
+        quantity: 1,
+      },
+    ];
+
+    if (addOn) {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          unit_amount: addOn.amountCents,
+          product_data: { name: addOn.name },
+        },
+        quantity: 1,
+      });
+    }
+
+    const metadata: Record<string, string> = { packageId };
+    if (addOnId) {
+      metadata.addOnId = addOnId;
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       allow_promotion_codes: true, // enables code field on Stripe-hosted page for other codes you may set up in dashboard
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            unit_amount: pkg.amountCents,
-            product_data: { name: pkg.name },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       discounts,
       success_url: successUrl,
       cancel_url: cancelUrl,
-      metadata: {
-        packageId,
-      },
+      metadata,
     });
 
     return new Response(JSON.stringify({ url: session.url }), {
