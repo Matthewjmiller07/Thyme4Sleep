@@ -5,7 +5,12 @@ export const prerender = false;
 
 const url = Astro.url;
 const pkgRaw = url.searchParams.get('pkg') || '';
+const addonRaw = url.searchParams.get('addon') || '';
 const pkg = String(pkgRaw).trim().toLowerCase();
+const addon = String(addonRaw).trim().toLowerCase();
+
+// Check if this is an add-on-only purchase
+const isAddonOnly = addon && !pkg;
 
 // Normalize package type from pkg id
 const isStarter = pkg.startsWith('starter');
@@ -24,7 +29,14 @@ type PackageView = {
 };
 
 let view: PackageView;
-if (isStarter) {
+if (isAddonOnly) {
+  view = {
+    title: 'Thank you for your purchase!',
+    intro: 'Your additional text support with Georgia is now live',
+    showBooking: false,
+    showIntake: false,
+  };
+} else if (isStarter) {
   view = {
     title: 'Thank You! Your Starter Package Is Confirmed',
     intro: 'Thanks for your purchase. The next step is to complete the intake form so we can get started right away.',
@@ -142,7 +154,6 @@ const pageDescription = 'Thank you for your purchase. Next steps and links are b
           georgia@thyme4sleep.com
         </a>
       </p>
-  
-
-
+    </div>
+  </section>
 </Layout>

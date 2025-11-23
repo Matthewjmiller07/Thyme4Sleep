@@ -205,6 +205,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 <option value="support-3w">3 Weeks Additional Support — $300</option>
                 <option value="support-4w">4 Weeks Additional Support — $400</option>
               </select>
+              
+              <!-- Add-on only purchase option -->
+              <div class="mt-4 pt-4 border-t border-brandCream/70">
+                <p class="text-xs text-brandMink mb-2">Already have a Standard package?</p>
+                <a href="#" data-addon="support-1w" class="js-addon-only-checkout js-addon-dynamic-button block w-full bg-white/80 hover:bg-white text-brandChar hover:text-brandChar text-center py-2 px-3 rounded-full text-sm font-medium transition-all duration-300 border border-brandCream" data-addon-group="standard">
+                  Purchase 1 Week Add-On <strong>Only</strong> — $100
+                </a>
+              </div>
             </div>
             <div class="mt-6"></div>
           </div>
@@ -295,7 +303,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
             </ul>
             <div class="bg-brandCream/60 border border-brandCream/90 rounded-2xl p-4 mb-8">
               <label for="sen-addon-card" class="text-sm font-semibold text-brandChar tracking-wide uppercase">Optional Week(s) Add-On</label>
-              <p class="text-xs text-brandMink mt-1 mb-3">Ideal for families needing longer SEN-focused follow-up.</p>
+              <p class="text-xs text-brandMink mt-1 mb-3">Mon–Fri message support extension.</p>
               <select id="sen-addon-card" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
                 <option value="">No additional support</option>
                 <option value="support-1w">1 Week Additional Support — $100</option>
@@ -303,6 +311,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 <option value="support-3w">3 Weeks Additional Support — $300</option>
                 <option value="support-4w">4 Weeks Additional Support — $400</option>
               </select>
+              
+              <!-- Add-on only purchase option -->
+              <div class="mt-4 pt-4 border-t border-brandCream/70">
+                <p class="text-xs text-brandMink mb-2">Already have a SEN package?</p>
+                <a href="#" data-addon="support-1w" class="js-addon-only-checkout js-addon-dynamic-button block w-full bg-white/80 hover:bg-white text-brandChar hover:text-brandChar text-center py-2 px-3 rounded-full text-sm font-medium transition-all duration-300 border border-brandCream" data-addon-group="sen">
+                  Purchase 1 Week Add-On <strong>Only</strong> — $100
+                </a>
+              </div>
             </div>
             <div class="mt-8"></div>
           </div>
@@ -434,6 +450,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                     <option value="support-3w">3 Weeks Additional Support — $300</option>
                     <option value="support-4w">4 Weeks Additional Support — $400</option>
                   </select>
+                  
+                  <!-- Add-on only purchase option -->
+                  <div class="mt-3 pt-3 border-t border-brandCream/60">
+                    <p class="text-[0.65rem] text-brandMink mb-2">Already have a Standard package?</p>
+                    <a href="#" data-addon="support-1w" class="js-addon-only-checkout js-addon-dynamic-button block w-full bg-white/70 hover:bg-white text-brandChar hover:text-brandChar text-center py-1.5 px-2 rounded-lg text-xs font-medium transition-all duration-300 border border-brandCream" data-addon-group="standard">
+                      Purchase 1 Week Add-On <strong>Only</strong> — $100
+                    </a>
+                  </div>
                 </div>
               </td>
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
@@ -461,7 +485,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
             </tr>
 
             <!-- Special Package -->
-            <tr class="hover:bg-gray-50">
+            <tr class="hover:bg-gray-50" data-addon-scope="sen">
               <td class="px-6 py-4">
                 <div class="relative">
                   <div class="font-medium text-gray-900">Special Educational Needs (SEN) & Neurodivergency</div>
@@ -504,7 +528,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 </ul>
                 <div class="mt-4 bg-brandCream/50 border border-brandCream/70 rounded-xl p-3">
                   <label for="sen-addon-table" class="text-xs font-semibold text-brandChar uppercase tracking-wide">Optional Week(s) Add-On</label>
-                  <p class="text-[0.7rem] text-brandMink mb-2">Extra SEN-focused check-ins.</p>
+                  <p class="text-[0.7rem] text-brandMink mb-2">Mon–Fri message support extension.</p>
                   <select id="sen-addon-table" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60">
                     <option value="">No additional support</option>
                     <option value="support-1w">1 Week Additional Support — $100</option>
@@ -512,6 +536,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                     <option value="support-3w">3 Weeks Additional Support — $300</option>
                     <option value="support-4w">4 Weeks Additional Support — $400</option>
                   </select>
+                  
+                  <!-- Add-on only purchase option -->
+                  <div class="mt-3 pt-3 border-t border-brandCream/60">
+                    <p class="text-[0.65rem] text-brandMink mb-2">Already have a SEN package?</p>
+                    <a href="#" data-addon="support-1w" class="js-addon-only-checkout js-addon-dynamic-button block w-full bg-white/70 hover:bg-white text-brandChar hover:text-brandChar text-center py-1.5 px-2 rounded-lg text-xs font-medium transition-all duration-300 border border-brandCream" data-addon-group="sen">
+                      Purchase 1 Week Add-On <strong>Only</strong> — $100
+                    </a>
+                  </div>
                 </div>
               </td>
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
@@ -545,8 +577,11 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
         <!-- Add-ons -->
         <div class="mt-16 mb-12">
           <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-brandChar mb-6 text-center">Package Comparison</h2>
+            <h2 class="text-3xl font-bold text-brandChar mb-6 text-center">Additional Support Options</h2>
             <div class="h-1 w-16 bg-accent mx-auto"></div>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-6">
+              Extend your package with additional support or purchase standalone services.
+            </p>
           </div>
           
           <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -728,6 +763,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
     (function () {
       function $(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
       const buttons = $('.js-checkout');
+      const addonOnlyButtons = $('.js-addon-only-checkout');
       const addonSelects = $('.js-addon-select');
 
       const addonState = {};
@@ -740,17 +776,56 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
         return acc;
       }, /** @type {Record<string, HTMLSelectElement[]>} */ ({}));
 
+      // Function to update dynamic add-on buttons
+      function updateDynamicButtons(group, value) {
+        const buttons = document.querySelectorAll(`.js-addon-dynamic-button[data-addon-group="${group}"]`);
+        if (!buttons.length) return;
+        
+        let buttonText = 'Select weeks above';
+        let addonId = '';
+        
+        if (value) {
+          const option = document.querySelector(`option[value="${value}"]`);
+          if (option) {
+            const text = option.textContent;
+            const match = text.match(/(\d+) Weeks? Additional Support — \$(\d+)/);
+            if (match) {
+              const weeks = match[1];
+              const price = match[2];
+              buttonText = `Purchase ${weeks} Week${weeks > 1 ? 's' : ''} Add-On <strong>Only</strong> — $${price}`;
+              addonId = value;
+            }
+          }
+        }
+        
+        buttons.forEach(button => {
+          button.innerHTML = buttonText;
+          if (addonId) {
+            button.setAttribute('data-addon', addonId);
+          } else {
+            button.removeAttribute('data-addon');
+          }
+        });
+      }
+
       Object.entries(groupMap).forEach(([group, selects]) => {
         selects.forEach((select) => {
           select.addEventListener('change', () => {
+            console.log(`Addon changed for group ${group}:`, select.value);
             addonState[group] = select.value;
             selects.forEach((other) => {
               if (other !== select) {
                 other.value = select.value;
               }
             });
+            console.log('Updated addonState:', addonState);
+            // Update dynamic buttons for this group
+            updateDynamicButtons(group, select.value);
           });
         });
+        
+        // Initialize dynamic buttons
+        updateDynamicButtons(group, addonState[group]);
       });
 
       async function createCheckoutSession(packageId, addOnId) {
@@ -768,8 +843,12 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
 
       function resolveAddonForButton(btn) {
         const scopeEl = btn.closest('[data-addon-scope]');
-        if (!scopeEl) return '';
+        if (!scopeEl) {
+          console.log('No scope element found for button');
+          return '';
+        }
         const group = scopeEl.getAttribute('data-addon-scope');
+        console.log('Found group:', group, 'addonState:', addonState);
         if (!group) return '';
         if (addonState[group] !== undefined) {
           return addonState[group] || '';
@@ -783,10 +862,39 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
           e.preventDefault();
           const packageId = btn.getAttribute('data-package');
           const addOnId = resolveAddonForButton(btn);
+          console.log('Checkout clicked - packageId:', packageId, 'addOnId:', addOnId);
           btn.setAttribute('aria-busy', 'true');
           btn.classList.add('opacity-75', 'pointer-events-none');
           try {
             const data = await createCheckoutSession(packageId, addOnId);
+            if (data && data.url) {
+              window.location.href = data.url;
+            } else {
+              alert('Unexpected response from server.');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Sorry, we could not start checkout. Please try again or contact support.');
+          } finally {
+            btn.removeAttribute('aria-busy');
+            btn.classList.remove('opacity-75', 'pointer-events-none');
+          }
+        });
+      });
+
+      // Handle add-on-only purchases
+      addonOnlyButtons.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const addOnId = btn.getAttribute('data-addon');
+          if (!addOnId) {
+            alert('Please select the number of weeks you want to purchase above.');
+            return;
+          }
+          btn.setAttribute('aria-busy', 'true');
+          btn.classList.add('opacity-75', 'pointer-events-none');
+          try {
+            const data = await createCheckoutSession(null, addOnId);
             if (data && data.url) {
               window.location.href = data.url;
             } else {

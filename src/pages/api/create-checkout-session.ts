@@ -73,14 +73,17 @@ export const POST: APIRoute = async ({ request, url }) => {
     const body = await request.json().catch(() => ({}));
     const { packageId, promoCode, addOnId } = body as { packageId?: string; promoCode?: string; addOnId?: string };
 
-    if (!packageId || !PACKAGES[packageId]) {
+    // Allow add-on-only purchases for existing customers
+    const isAddOnOnly = !packageId && addOnId;
+    
+    if (!isAddOnOnly && (!packageId || !PACKAGES[packageId])) {
       return new Response(JSON.stringify({ error: 'Invalid or missing packageId.' }), {
         status: 400,
         headers: { 'content-type': 'application/json' },
       });
     }
 
-    const pkg = PACKAGES[packageId];
+    const pkg = packageId ? PACKAGES[packageId] : null;
     let addOn = null as null | { name: string; amountCents: number };
 
     if (addOnId) {
@@ -91,22 +94,27 @@ export const POST: APIRoute = async ({ request, url }) => {
         });
       }
 
-      const isStandard = packageId.startsWith('standard');
-      const isSpecialized = packageId.startsWith('specialized') || packageId.startsWith('sen');
-      if (!(isStandard || isSpecialized)) {
-        return new Response(JSON.stringify({ error: 'Add-on not available for this package.' }), {
-          status: 400,
-          headers: { 'content-type': 'application/json' },
-        });
+      // Only validate package compatibility if this isn't an add-on-only purchase
+      if (!isAddOnOnly && packageId) {
+        const isStandard = packageId.startsWith('standard');
+        const isSpecialized = packageId.startsWith('specialized') || packageId.startsWith('sen');
+        if (!(isStandard || isSpecialized)) {
+          return new Response(JSON.stringify({ error: 'Add-on not available for this package.' }), {
+            status: 400,
+            headers: { 'content-type': 'application/json' },
+          });
+        }
       }
 
       addOn = ADDONS[addOnId];
     }
 
     // Determine post-payment redirect
-    // Send all purchases to a unified thank-you page with the package id
+    // Send all purchases to a unified thank-you page with the package id or add-on info
     const origin = `${url.protocol}//${url.host}`; // respects current host
-    const successUrl = `${origin}/thank-you?pkg=${encodeURIComponent(packageId)}`;
+    const successUrl = isAddOnOnly 
+      ? `${origin}/thank-you?addon=${encodeURIComponent(addOnId || '')}`
+      : `${origin}/thank-you?pkg=${encodeURIComponent(packageId || '')}`;
     const cancelUrl = `${origin}/pricing`;
 
     // Handle promo codes
@@ -118,16 +126,19 @@ export const POST: APIRoute = async ({ request, url }) => {
       discounts = [{ coupon: coupon.id }];
     }
 
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
-      {
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+
+    // Add package line item if this isn't an add-on-only purchase
+    if (pkg) {
+      lineItems.push({
         price_data: {
           currency: 'usd',
           unit_amount: pkg.amountCents,
           product_data: { name: pkg.name },
         },
         quantity: 1,
-      },
-    ];
+      });
+    }
 
     if (addOn) {
       lineItems.push({
@@ -140,7 +151,10 @@ export const POST: APIRoute = async ({ request, url }) => {
       });
     }
 
-    const metadata: Record<string, string> = { packageId };
+    const metadata: Record<string, string> = {};
+    if (packageId) {
+      metadata.packageId = packageId;
+    }
     if (addOnId) {
       metadata.addOnId = addOnId;
     }
