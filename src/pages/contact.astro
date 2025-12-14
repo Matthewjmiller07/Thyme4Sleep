@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/quillforms-custom.css';
 const pageTitle = 'Book a Consultation - Thyme4Sleep';
 const pageDescription = 'Fill out our intake form to begin your personalised sleep-coaching journey with Georgia Miller.';
 ---
@@ -29,8 +30,7 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
     <div class="container mx-auto px-4">
       <h2 id="form-title" class="sr-only">Contact Information Form</h2>
       <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
-        <div class="typeform-widget" data-tf-live="01K1HPFKZDEASNRV2TX4WFN9HY" style="width: 100%; height: 70vh;"></div>
-        <script is:inline src="//embed.typeform.com/next/embed.js"></script>
+        <iframe src="https://98abb53060eb.quillforms.app/forms/intake-form/" width="100%" height="600" style="border:0;"></iframe>
         
         <!-- Terms and conditions -->
         <div class="border-t border-gray-200 pt-8 mt-16" role="region" aria-label="Terms and conditions">
