@@ -6,71 +6,84 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <!-- Suppress consent banner if cookies already accepted -->
+  <!-- Completely remove consent manager from contact page -->
   <script>
-    // Check if consent manager cookies exist and suppress banner if they do
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check for common consent manager cookies
-      const consentCookies = [
-        'cmpconsent',
-        'euconsent', 
-        'consentmanager',
-        'cmpconsent2',
-        'user_consent_preferences'
-      ];
-      
-      const hasConsent = consentCookies.some(name => 
-        document.cookie.includes(name + '=') || 
-        localStorage.getItem(name) || 
-        sessionStorage.getItem(name)
-      );
-      
-      if (hasConsent) {
-        // Hide consent banner if it appears
-        const hideConsentBanner = () => {
-          const consentSelectors = [
-            '#cmp-consent',
-            '.cmp-consent',
-            '[id*="consent"]',
-            '[class*="consent"]',
-            '#cmpwrapper',
-            '.cmp-popup',
-            '[data-cmp]',
-            '#cm-consent'
-          ];
-          
-          consentSelectors.forEach(selector => {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(el => {
-              if (el && el.style) {
-                el.style.display = 'none';
-                el.style.visibility = 'hidden';
-                el.style.opacity = '0';
-                el.style.pointerEvents = 'none';
-              }
-            });
+    // Remove consent manager entirely from contact page
+    (function() {
+      // Function to remove consent manager elements
+      function removeConsentManager() {
+        // Remove consent manager script if it exists
+        const consentScript = document.querySelector('script[src*="consentmanager"]');
+        if (consentScript) {
+          consentScript.remove();
+        }
+        
+        // Remove any consent banners/popups
+        const consentSelectors = [
+          '#cmp-consent',
+          '.cmp-consent',
+          '[id*="consent"]',
+          '[class*="consent"]',
+          '#cmpwrapper',
+          '.cmp-popup',
+          '[data-cmp]',
+          '#cm-consent',
+          '.consent-manager',
+          '#consent-manager',
+          '[data-consent]',
+          '.cookie-banner',
+          '#cookie-banner'
+        ];
+        
+        consentSelectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector);
+          elements.forEach(el => {
+            if (el) {
+              el.remove();
+            }
           });
-        };
-        
-        // Hide immediately if banner already exists
-        hideConsentBanner();
-        
-        // Hide again after a delay in case it loads later
-        setTimeout(hideConsentBanner, 100);
-        setTimeout(hideConsentBanner, 500);
-        setTimeout(hideConsentBanner, 1000);
-        
-        // Also hide when DOM changes (in case banner is added dynamically)
-        const observer = new MutationObserver(() => {
-          hideConsentBanner();
         });
         
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
+        // Remove consent manager from window object
+        if (window.__cmp) {
+          delete window.__cmp;
+        }
+        if (window.consentManager) {
+          delete window.consentManager;
+        }
       }
-    });
+      
+      // Run immediately
+      removeConsentManager();
+      
+      // Run again after DOM loads
+      document.addEventListener('DOMContentLoaded', removeConsentManager);
+      
+      // Run periodically to catch late-loading elements
+      setInterval(removeConsentManager, 100);
+      setTimeout(removeConsentManager, 500);
+      setTimeout(removeConsentManager, 1000);
+      setTimeout(removeConsentManager, 2000);
+      
+      // Override consent manager functions
+      const originalQuerySelector = document.querySelector;
+      const originalQuerySelectorAll = document.querySelectorAll;
+      
+      document.querySelector = function(selector) {
+        if (selector && selector.includes && selector.includes('consent')) {
+          return null;
+        }
+        return originalQuerySelector.call(this, selector);
+      };
+      
+      document.querySelectorAll = function(selector) {
+        if (selector && selector.includes && selector.includes('consent')) {
+          return [];
+        }
+        return originalQuerySelectorAll.call(this, selector);
+      };
+      
+    })();
   </script>
   <!-- Form Header -->
   <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50" aria-labelledby="form-header">
