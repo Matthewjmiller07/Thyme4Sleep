@@ -1,90 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import LayoutNoConsent from '../layouts/LayoutNoConsent.astro';
 import '../styles/quillforms-custom.css';
 const pageTitle = 'Book a Consultation - Thyme4Sleep';
 const pageDescription = 'Fill out our intake form to begin your personalised sleep-coaching journey with Georgia Miller.';
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <!-- Completely remove consent manager from contact page -->
-  <script>
-    // Remove consent manager entirely from contact page
-    (function() {
-      // Function to remove consent manager elements
-      function removeConsentManager() {
-        // Remove consent manager script if it exists
-        const consentScript = document.querySelector('script[src*="consentmanager"]');
-        if (consentScript) {
-          consentScript.remove();
-        }
-        
-        // Remove any consent banners/popups
-        const consentSelectors = [
-          '#cmp-consent',
-          '.cmp-consent',
-          '[id*="consent"]',
-          '[class*="consent"]',
-          '#cmpwrapper',
-          '.cmp-popup',
-          '[data-cmp]',
-          '#cm-consent',
-          '.consent-manager',
-          '#consent-manager',
-          '[data-consent]',
-          '.cookie-banner',
-          '#cookie-banner'
-        ];
-        
-        consentSelectors.forEach(selector => {
-          const elements = document.querySelectorAll(selector);
-          elements.forEach(el => {
-            if (el) {
-              el.remove();
-            }
-          });
-        });
-        
-        // Remove consent manager from window object
-        if (window.__cmp) {
-          delete window.__cmp;
-        }
-        if (window.consentManager) {
-          delete window.consentManager;
-        }
-      }
-      
-      // Run immediately
-      removeConsentManager();
-      
-      // Run again after DOM loads
-      document.addEventListener('DOMContentLoaded', removeConsentManager);
-      
-      // Run periodically to catch late-loading elements
-      setInterval(removeConsentManager, 100);
-      setTimeout(removeConsentManager, 500);
-      setTimeout(removeConsentManager, 1000);
-      setTimeout(removeConsentManager, 2000);
-      
-      // Override consent manager functions
-      const originalQuerySelector = document.querySelector;
-      const originalQuerySelectorAll = document.querySelectorAll;
-      
-      document.querySelector = function(selector) {
-        if (selector && selector.includes && selector.includes('consent')) {
-          return null;
-        }
-        return originalQuerySelector.call(this, selector);
-      };
-      
-      document.querySelectorAll = function(selector) {
-        if (selector && selector.includes && selector.includes('consent')) {
-          return [];
-        }
-        return originalQuerySelectorAll.call(this, selector);
-      };
-      
-    })();
-  </script>
+<LayoutNoConsent title={pageTitle} description={pageDescription}>
   <!-- Form Header -->
   <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50" aria-labelledby="form-header">
     <div class="container mx-auto px-4">
