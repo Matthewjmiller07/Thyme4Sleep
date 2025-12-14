@@ -6,6 +6,72 @@ const pageDescription = 'Fill out our intake form to begin your personalised sle
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
+  <!-- Suppress consent banner if cookies already accepted -->
+  <script>
+    // Check if consent manager cookies exist and suppress banner if they do
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check for common consent manager cookies
+      const consentCookies = [
+        'cmpconsent',
+        'euconsent', 
+        'consentmanager',
+        'cmpconsent2',
+        'user_consent_preferences'
+      ];
+      
+      const hasConsent = consentCookies.some(name => 
+        document.cookie.includes(name + '=') || 
+        localStorage.getItem(name) || 
+        sessionStorage.getItem(name)
+      );
+      
+      if (hasConsent) {
+        // Hide consent banner if it appears
+        const hideConsentBanner = () => {
+          const consentSelectors = [
+            '#cmp-consent',
+            '.cmp-consent',
+            '[id*="consent"]',
+            '[class*="consent"]',
+            '#cmpwrapper',
+            '.cmp-popup',
+            '[data-cmp]',
+            '#cm-consent'
+          ];
+          
+          consentSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+              if (el && el.style) {
+                el.style.display = 'none';
+                el.style.visibility = 'hidden';
+                el.style.opacity = '0';
+                el.style.pointerEvents = 'none';
+              }
+            });
+          });
+        };
+        
+        // Hide immediately if banner already exists
+        hideConsentBanner();
+        
+        // Hide again after a delay in case it loads later
+        setTimeout(hideConsentBanner, 100);
+        setTimeout(hideConsentBanner, 500);
+        setTimeout(hideConsentBanner, 1000);
+        
+        // Also hide when DOM changes (in case banner is added dynamically)
+        const observer = new MutationObserver(() => {
+          hideConsentBanner();
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+    });
+  </script>
   <!-- Form Header -->
   <section class="py-12 bg-gradient-to-r from-emerald-50 to-teal-50" aria-labelledby="form-header">
     <div class="container mx-auto px-4">
