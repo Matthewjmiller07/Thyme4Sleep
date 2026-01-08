@@ -9,4 +9,8 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [react()],
+  redirects: {
+    '/packages': '/pricing',
+    '/packages/': '/pricing',
+  },
 });
