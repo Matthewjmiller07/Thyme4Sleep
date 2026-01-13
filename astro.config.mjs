@@ -12,5 +12,7 @@ export default defineConfig({
   redirects: {
     '/packages': '/pricing',
     '/packages/': '/pricing',
+    '/packaging': '/pricing',
+    '/packaging/': '/pricing',
   },
 });
