@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima+Koshi:wght@300;400&family=Cormorant+Garamond:wght@300;400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-brandCream text-gray-900 font-body font-light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-body font-light text-gray-900;
+    line-height: 1.2;
+  }
+  
+  /* Ensure all text colors have good contrast */
+  p, li {
+    @apply text-gray-900;
+  }
+  
+  /* Style regular links */
+  a:not(.btn):not([class*="text-"]) {
+    @apply text-gray-800 underline underline-offset-4 decoration-1;
+  }
+  
+  /* Links */
+  a {
+    @apply transition-colors duration-200;
+  }
+  
+  a:not(.btn):hover {
+    @apply text-brandChar;
+  }
+  
+  /* Buttons */
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-brandPeach text-white hover:bg-brandTaupe hover:text-white;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-brandChar text-brandChar hover:bg-brandChar hover:text-white;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  /* Remove duplicate button styles */
+}

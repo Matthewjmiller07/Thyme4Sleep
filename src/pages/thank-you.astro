@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = false;
+
+const url = Astro.url;
+const pkgRaw = url.searchParams.get('pkg') || '';
+const addonRaw = url.searchParams.get('addon') || '';
+const pkg = String(pkgRaw).trim().toLowerCase();
+const addon = String(addonRaw).trim().toLowerCase();
+
+// Check if this is an add-on-only purchase
+const isAddonOnly = addon && !pkg;
+
+// Normalize package type from pkg id
+const isStarter = pkg.startsWith('starter');
+const isStandard = pkg.startsWith('standard');
+const isSpecialized = pkg.startsWith('specialized') || pkg.startsWith('sen');
+const isTroubleshooting = pkg.startsWith('troubleshooting');
+const isWeekend = pkg.startsWith('weekend');
+
+type PackageView = {
+  title: string;
+  intro: string;
+  showBooking: boolean;
+  bookingHref?: string;
+  bookingLabel?: string;
+  showIntake: boolean;
+};
+
+let view: PackageView;
+if (isAddonOnly) {
+  view = {
+    title: 'Thank you for your purchase!',
+    intro: 'Your additional text support with Georgia is now live',
+    showBooking: false,
+    showIntake: false,
+  };
+} else if (isStarter) {
+  view = {
+    title: 'Thank You! Your Starter Package Is Confirmed',
+    intro: 'Thanks for your purchase. The next step is to complete the intake form so we can get started right away.',
+    showBooking: false,
+    showIntake: true,
+  };
+} else if (isStandard) {
+  view = {
+    title: 'Thank You! Your Standard Package Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/standard-call-with-georgia',
+    bookingLabel: 'Book Your 60-Minute Standard Call',
+    showIntake: true,
+  };
+} else if (isSpecialized) {
+  view = {
+    title: 'Thank You! Your SEN Package Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/sen-call-with-georgia',
+    bookingLabel: 'Book Your 60-Minute SEN Call',
+    showIntake: true,
+  };
+} else if (isTroubleshooting) {
+  view = {
+    title: 'Thank You! Your Troubleshooting Call Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/60-minute-troubleshooting-call',
+    bookingLabel: 'Book Your 60-Minute Troubleshooting Call',
+    showIntake: true,
+  };
+} else if (isWeekend) {
+  view = {
+    title: 'Thank You! Your Weekend/Holiday Consult Is Confirmed',
+    intro: 'You\'re all set. Please book your 60-minute meeting and complete the intake form so we\'re fully prepared.',
+    showBooking: true,
+    bookingHref: 'https://thyme4sleep.neetocal.com/weekend-or-holiday-consult',
+    bookingLabel: 'Book Your Weekend/Holiday Consult',
+    showIntake: true,
+  };
+} else {
+  view = {
+    title: 'Thank You! Your Purchase Is Confirmed',
+    intro: 'Please complete the intake form. If your package includes a 60-minute call, you\'ll see a booking link below.',
+    showBooking: false,
+    showIntake: true,
+  };
+}
+
+const pageTitle = 'Thank You - Thyme4Sleep';
+const pageDescription = 'Thank you for your purchase. Next steps and links are below.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="relative py-24 bg-brandCream overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 opacity-5" style="background-image: url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29-22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233F3B38' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-24 h-24 bg-brandPeach/20 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-brandPeach" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-light text-brandChar mb-6">{view.title}</h1>
+        <div class="h-1 w-24 bg-accent mx-auto mb-8"></div>
+        <div class="prose prose-lg max-w-none text-gray-700 mb-10">
+          <p class="text-xl mb-6">{view.intro}</p>
+          {view.showBooking && (
+            <a 
+              href={view.bookingHref!}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-8 py-3 text-lg font-bold text-brandSage hover:text-brandSage bg-brandPeach hover:bg-brandPeach/90 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              {view.bookingLabel}
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </a>
+          )}
+        </div>
+
+        {view.showIntake && (
+          <div class="mt-6">
+            <a 
+              href="/intake-form" 
+              class="inline-flex items-center px-8 py-3 text-lg font-medium text-brandSage hover:text-brandSage bg-brandMint/20 hover:bg-brandMint/30 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
+            >
+              Fill Out Intake Form
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-brandCream">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-light text-brandChar mb-6">Have Questions?</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+        If you need immediate assistance, feel free to email us directly at 
+        <a href="mailto:georgia@thyme4sleep.com" class="text-brandMink hover:text-brandTaupe font-medium hover:underline">
+          georgia@thyme4sleep.com
+        </a>
+      </p>
+    </div>
+  </section>
+</Layout>

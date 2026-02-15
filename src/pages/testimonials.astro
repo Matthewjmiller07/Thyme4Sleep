@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Success Stories - Thyme4Sleep';
+const pageDescription = 'Read what parents are saying about their experience with Thyme4Sleep pediatric sleep coaching.';
+
+const testimonials = [
+  {
+    id: 7,
+    name: 'Hannah R.',
+    description: 'worked with her 20 month-old',
+    rating: 5,
+    content: `Georgia is amazing! She got my 20 month old who has NEVER slept through the night sleeping for 12 hours independently. She approaches her clients with patience and understanding and bases her entire program on your child's needs and temperament. I am so well rested and I can't recommend her enough!`,
+    date: 'December 2025'
+  },
+  {
+    id: 1,
+    name: 'Leora S.',
+    description: 'mum of 1, worked with her child',
+    rating: 5,
+    content: `Georgia took the time to speak to us, understand our child's sleep needs and tailor a programme to suit our style. Georgia gave us practical advice on how to reduce early wake ups and gave us the confidence to make changes that needed to happen. Thank you Georgia for all your help!`,
+    date: 'December 2025'
+  },
+  {
+    id: 2,
+    name: 'Lauren R.',
+    description: 'mum of 1, worked with her 5-week old',
+    rating: 5,
+    content: `We started working with Georgia when our daughter was just 5 weeks old. At the time, naps were basically non-existent, she needed rocking to sleep, and although she was young we wanted to get her into good night time sleeping habits. Georgia gave us such a clear and detailed plan, using methods we were comfortable with and the support along the way was amazing. Now she consistently does 12 hours at night, settles herself without being rocked and her daytime naps are more consistent too. Her communication was fantastic and she always made us feel heard, and no question ever felt too silly or too big. Couldn't recommend her enough!`,
+    date: 'October 2025'
+  },
+  {
+    id: 3,
+    name: 'Sarah A.',
+    description: 'mum of 1, worked with her 19 month-old',
+    rating: 5,
+    content: `We had an amazing experience working with Georgia! She was incredibly easy to work with—friendly, approachable, and always understanding of our concerns. What really stood out was her genuine empathy and the way she supported us every step of the way. Thanks to her guidance, our baby is now putting herself to sleep and sleeping through the night—something we didn't think was possible just a few months ago!`,
+    date: 'August 2025'
+  },
+  {
+    id: 4,
+    name: 'Anna N.',
+    description: 'mum of 1, worked with her newborn',
+    rating: 5,
+    content: `Thank you so much Georgia for your hours of help and advice. You coached me through the basics of good sleep habits before my baby was born which was a huge help as I spent the first week after he was born in hospital with him and from our first day we were set on a good path. Even though my baby was a month premature with your guidance he started sleeping through at 12 weeks which was my ultimate goals.
+
+Thanks you for the messages back and forth and detailed sleep plan so I knew weeks by week what to expect and how to help my baby with his sleep at each stage. Your support, clear and precise guidance and no judgment advice helped me and my baby sleep through and have the best start to our life together.`,
+    date: 'August 2025'
+  },
+  {
+    id: 5,
+    name: 'Jonny A.',
+    description: 'dad of 3, worked with his 6-month old',
+    rating: 5,
+    content: `Georgia was honestly amazing. She took so much time to really listen and explain things and gave us practical advice. She was patient and always there when we had questions. Knowing she has kids meant she has real experience not just theories. Everything she suggested felt doable, and most importantly, it worked. She also helped us when we traveled from London to New York as we adjusted to the time zone. We're so grateful for her support and wouldn't hesitate to recommend her to anyone.`,
+    date: 'August 2025'
+  },
+  {
+    id: 6,
+    name: 'Eli V. W.',
+    description: 'mum of 1, worked with her 5 month-old',
+    rating: 5,
+    content: 'Georgia helped me get my life back and I couldn\'t recommend her enough! My baby still wasn\'t sleeping through the night at 5 months. With Georgia\'s guidance and support we finally managed to get her through the night within a week of sleep training her. Georgia was so easy to work with, really listened to our concerns and created a sleep training plan perfectly tailored to our baby who had been struggling with reflux. It was a pleasure working with you!',
+    date: 'August 2025'
+  }
+];
+
+const renderStars = (rating) => {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-r from-emerald-50 to-teal-50">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Success Stories</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Hear from families who have transformed their sleep with Thyme4Sleep</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="py-20" aria-labelledby="testimonials-heading">
+    <div class="container mx-auto px-4">
+      <h2 id="testimonials-heading" class="sr-only">What Our Families Say</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {testimonials.map((testimonial) => (
+          <div key={testimonial.id} class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div class="text-yellow-400 text-2xl mb-4">{renderStars(testimonial.rating)}</div>
+            <p class="text-gray-700 italic mb-6">"{testimonial.content}"</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-accent bg-opacity-20 text-accent rounded-full flex items-center justify-center text-xl font-bold mr-4">
+                {testimonial.name.charAt(0)}
+              </div>
+              <div>
+                <p class="font-bold">{testimonial.name}</p>
+                <p class="text-sm text-gray-500">{testimonial.description}</p>
+                <p class="text-xs text-gray-400">{testimonial.date}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-brandChar text-white" aria-labelledby="cta-heading">
+    <div class="container mx-auto px-4 text-center">
+      <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Start Your Sleep Journey?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto text-white">Join the many families who have found restful nights with Thyme4Sleep.</p>
+      <div class="flex justify-center">
+        <a href="/pricing" class="btn border-2 border-white text-white hover:bg-white hover:text-brandChar font-medium">View Packages</a>
+      </div>
+    </div>
+  </section>
+</Layout>
