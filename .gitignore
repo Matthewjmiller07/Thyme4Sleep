@@ -9,3 +9,7 @@ dist
 .env
 .env.*
 !.env.example
+
+# Large media files (host separately)
+*.mp4
+*.mov

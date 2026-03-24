@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Reset to Rest – Your Guide & Video | Thyme4Sleep';
+const pageDescription = 'Access your Reset to Rest guide and video. Thank you for your purchase!';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <!-- Hero / Thank You Banner -->
+  <section class="relative py-20 bg-brandCream overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29-22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233F3B38' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-20 h-20 bg-brandPeach/30 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-brandTaupe" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-light text-brandChar mb-4">You're all set — and you've got this.</h1>
+        <div class="h-1 w-24 bg-accent mx-auto mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Thank you so much for trusting Thyme4Sleep. Your <em>Reset to Rest</em> guide and video are ready below — everything you need to start building better sleep, tonight.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content: Video + Guide -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+
+      <!-- Video -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <span class="inline-block bg-brandMint/30 text-brandSage text-sm font-medium tracking-widest uppercase px-4 py-1.5 rounded-full mb-3">Your Video</span>
+          <h2 class="text-3xl font-light text-brandChar">Reset to Rest — Watch First</h2>
+          <p class="text-gray-500 mt-2">Start here. Georgia walks you through everything step by step.</p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-xl bg-brandChar aspect-video">
+          <video
+            class="w-full h-full object-contain"
+            controls
+            preload="metadata"
+            poster=""
+          >
+            <source src="/reset-to-rest-video.mp4" type="video/mp4" />
+            <p class="text-white text-center p-8">Your browser doesn't support HTML5 video. <a href="/reset-to-rest-video.mp4" class="underline text-brandPeach">Download the video here.</a></p>
+          </video>
+        </div>
+      </div>
+
+      <!-- PDF Guide -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <span class="inline-block bg-brandPeach/30 text-brandTaupe text-sm font-medium tracking-widest uppercase px-4 py-1.5 rounded-full mb-3">Your Guide</span>
+          <h2 class="text-3xl font-light text-brandChar">Reset to Rest — PDF Guide</h2>
+          <p class="text-gray-500 mt-2">Your step-by-step reference to keep coming back to.</p>
+        </div>
+
+        <div class="bg-brandCream rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 shadow-sm border border-brandPeach/20">
+          <div class="flex-shrink-0 w-24 h-24 bg-brandPeach/20 rounded-2xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-brandTaupe" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <h3 class="text-2xl font-light text-brandChar mb-2">From Reset to Rest</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">Your complete guide to resetting your little one's sleep — covering schedules, sleep environment, settling strategies, and more. Save it, print it, and refer back whenever you need it.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+              <a
+                href="/reset-to-rest-guide.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 bg-brandPeach hover:bg-brandTaupe text-brandChar hover:text-white font-medium rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                View Guide
+              </a>
+              <a
+                href="/reset-to-rest-guide.pdf"
+                download
+                class="inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-brandMint/20 text-brandSage font-medium rounded-full border border-brandMint transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Upsell / Pricing CTA -->
+  <section class="py-20 bg-brandCream">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white rounded-3xl p-10 md:p-14 shadow-sm border border-brandPeach/20 text-center relative overflow-hidden">
+        <!-- Decorative blobs -->
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-brandPeach/10 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-brandMint/10 rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-brandSage/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brandSage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07l-.71.71M6.34 17.66l-.71.71m12.02 0l-.71-.71M6.34 6.34l-.71-.71M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">Ready for more tailored support?</h2>
+          <div class="h-1 w-16 bg-accent mx-auto mb-6"></div>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            This guide is your first step — but every family's sleep journey is unique. If you'd like a personalised sleep plan, one-on-one guidance, and ongoing support from Georgia, explore our full packages.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/pricing"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-brandSage hover:bg-brandMink text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              See Sleep Packages
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a
+              href="mailto:georgia@thyme4sleep.com"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-transparent hover:bg-brandPeach/20 text-brandTaupe border border-brandPeach rounded-full transition-all duration-300"
+            >
+              Ask Georgia a Question
+            </a>
+          </div>
+
+          <p class="text-sm text-gray-400 mt-8">Questions? Email <a href="mailto:georgia@thyme4sleep.com" class="text-brandMink hover:underline">georgia@thyme4sleep.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
