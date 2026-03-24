@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/LayoutNoConsent.astro';
 
 const pageTitle = 'Reset to Rest – Your Guide & Video | Thyme4Sleep';
 const pageDescription = 'Access your Reset to Rest guide and video. Thank you for your purchase!';
@@ -39,13 +39,14 @@ const pageDescription = 'Access your Reset to Rest guide and video. Thank you fo
           <p class="text-gray-500 mt-2">Start here. Georgia walks you through everything step by step.</p>
         </div>
 
-        <div class="rounded-2xl overflow-hidden shadow-xl aspect-video">
+        <div class="rounded-2xl overflow-hidden shadow-xl" style="position: relative; padding-bottom: 56.25%; height: 0;">
           <iframe
-            class="w-full h-full"
-            src="https://www.youtube.com/embed/QnoiCIgd3UM"
-            title="Reset to Rest with Georgia Miller"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            src="https://www.youtube.com/embed/QnoiCIgd3UM?si=w8utI4TvkjvjUlS4"
+            title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
           ></iframe>
         </div>
