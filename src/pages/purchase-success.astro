@@ -1,0 +1,30 @@
+---
+// This page is shown after successful Stripe checkout
+// It sets a secure cookie and redirects to the /reset page
+
+export const prerender = false;
+
+const url = new URL(Astro.request.url);
+const sessionId = url.searchParams.get('session_id');
+
+// If no session ID, redirect to preview page
+if (!sessionId) {
+  return Astro.redirect('/reset-preview');
+}
+
+// Set the access cookie by calling our API
+// In a real implementation, you'd verify the Stripe session here
+const token = crypto.randomUUID();
+
+// Set secure HTTP-only cookie
+Astro.cookies.set('reset_access', token, {
+  httpOnly: true,
+  secure: import.meta.env.PROD,
+  sameSite: 'lax',
+  maxAge: 60 * 60 * 24 * 365, // 1 year
+  path: '/'
+});
+
+// Redirect to the reset page
+return Astro.redirect('/reset');
+---

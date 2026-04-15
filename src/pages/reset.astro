@@ -1,17 +1,21 @@
 ---
 import Layout from '../layouts/LayoutNoConsent.astro';
 
+export const prerender = false;
+
 const pageTitle = 'Reset to Rest – Your Guide & Video | Thyme4Sleep';
 const pageDescription = 'Access your Reset to Rest guide and video. Thank you for your purchase!';
 
-// Check if user has purchased (from Stripe redirect)
-const url = new URL(Astro.request.url);
-const hasPurchased = url.searchParams.get('purchased') === 'true';
+// Check if user has valid access cookie
+const accessToken = Astro.cookies.get('reset_access')?.value;
 
-// If not purchased, redirect to preview/sales page
-if (!hasPurchased) {
+// If no valid access token, redirect to preview/sales page
+if (!accessToken) {
   return Astro.redirect('/reset-preview');
 }
+
+// In production, verify the token against your database
+// For now, we trust that the cookie was set by our purchase-success page
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -121,17 +125,17 @@ if (!hasPurchased) {
           <div class="inline-block bg-brandPeach/30 text-brandTaupe text-sm font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
             Free Bonus
           </div>
-          <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">Want a Quick Reference Checklist?</h2>
+          <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">Want a Quick Reference Guide?</h2>
           <div class="h-1 w-16 bg-accent mx-auto mb-6"></div>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Get our <strong>Essential Sleep Checklist</strong> — a free downloadable guide covering sleep environment essentials, bedtime routines, safety tips, and quick wins. Perfect to print and keep handy!
+            Get our <strong>Gentle Sleep Reset</strong> — a free downloadable guide to restore routine without cry-it-out. Perfect to print and keep handy!
           </p>
           
           <a
             href="/free-checklist"
             class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-brandMint hover:bg-brandSage text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
           >
-            Download Free Checklist
+            Download Free Guide
             <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>

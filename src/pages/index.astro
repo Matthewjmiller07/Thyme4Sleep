@@ -6,6 +6,92 @@ import Layout from '../layouts/Layout.astro';
   <!-- Alpine.js for tooltip functionality -->
   <script src="//unpkg.com/alpinejs" defer></script>
   
+  <script>
+    // Popup modal logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user has already seen the popup
+      const hasSeenPopup = localStorage.getItem('hasSeenLeadMagnetPopup');
+      
+      if (!hasSeenPopup) {
+        // Show popup after 10 seconds
+        setTimeout(() => {
+          const popup = document.getElementById('lead-magnet-popup');
+          if (popup) {
+            popup.classList.remove('hidden');
+          }
+        }, 10000);
+      }
+    });
+
+    function closePopup() {
+      const popup = document.getElementById('lead-magnet-popup');
+      if (popup) {
+        popup.classList.add('hidden');
+        localStorage.setItem('hasSeenLeadMagnetPopup', 'true');
+      }
+    }
+  </script>
+
+  <!-- Lead Magnet Popup Modal -->
+  <div id="lead-magnet-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onclick="if(event.target === this) closePopup()">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-8 md:p-10 shadow-2xl relative animate-fade-in" onclick="event.stopPropagation()">
+      <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="text-center">
+        <div class="w-16 h-16 bg-brandMint/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-brandSage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        
+        <h2 class="text-3xl font-light text-brandChar mb-3">
+          Get Your <span class="font-medium">Free Guide</span>
+        </h2>
+        <div class="h-1 w-16 bg-accent mx-auto mb-4"></div>
+        
+        <p class="text-lg text-gray-600 mb-2 font-medium">The Gentle Sleep Reset</p>
+        <p class="text-base text-gray-500 mb-6">Restore Routine Without Cry-It-Out</p>
+        
+        <ul class="text-left space-y-3 mb-8">
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-brandSage mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-600">Sleep environment essentials</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-brandSage mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-600">Gentle bedtime routines</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-brandSage mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-600">No cry-it-out methods</span>
+          </li>
+        </ul>
+
+        <a
+          href="/free-checklist"
+          class="inline-flex items-center justify-center w-full px-8 py-4 text-lg font-bold bg-brandSage hover:bg-brandMink text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+        >
+          Download Free Now
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        
+        <p class="text-xs text-gray-400 mt-4">100% Free • No credit card required</p>
+      </div>
+    </div>
+  </div>
+  
   <!-- Promotional Banner -->
   <div class="bg-gradient-to-r from-brandSage to-brandMink text-white py-3 px-6 relative overflow-hidden" x-data="{ show: true }" x-show="show">
     <div class="absolute inset-0 opacity-10" style="background-image: url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");"></div>
@@ -19,9 +105,9 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div>
             <p class="font-medium">
-              <span class="font-bold">FREE Download:</span> Get Your Essential Sleep Checklist
+              <span class="font-bold">FREE Download:</span> The Gentle Sleep Reset
             </p>
-            <p class="text-sm text-white/90 hidden sm:block">Everything you need for better sleep tonight — no credit card required</p>
+            <p class="text-sm text-white/90 hidden sm:block">Restore Routine Without Cry-It-Out — no credit card required</p>
           </div>
         </div>
         <div class="flex items-center gap-3">

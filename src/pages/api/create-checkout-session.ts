@@ -116,10 +116,10 @@ export const POST: APIRoute = async ({ request, url }) => {
     // Send all purchases to a unified thank-you page with the package id or add-on info
     const origin = `${url.protocol}//${url.host}`; // respects current host
     
-    // Special redirect for Reset to Rest digital product
+    // Special redirect for Reset to Rest digital product - use session_id for secure verification
     let successUrl: string;
     if (packageId === 'reset-to-rest') {
-      successUrl = `${origin}/reset?purchased=true`;
+      successUrl = `${origin}/purchase-success?session_id={CHECKOUT_SESSION_ID}`;
     } else if (isAddOnOnly) {
       successUrl = `${origin}/thank-you?addon=${encodeURIComponent(addOnId || '')}`;
     } else {

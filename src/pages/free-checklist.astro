@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/LayoutNoConsent.astro';
 
-const pageTitle = 'Free Essential Sleep Checklist | Thyme4Sleep';
-const pageDescription = 'Download your free Essential Sleep Checklist - everything you need to create the perfect sleep environment for your little one.';
+const pageTitle = 'The Gentle Sleep Reset - Free Guide | Thyme4Sleep';
+const pageDescription = 'Download your free Gentle Sleep Reset guide - restore routine without cry-it-out. Everything you need for better sleep tonight.';
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -64,11 +64,11 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
           Free Download
         </div>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-brandChar mb-6">
-          Your <span class="font-medium">Essential Sleep Checklist</span>
+          The <span class="font-medium">Gentle Sleep Reset</span>
         </h1>
         <div class="h-1 w-24 bg-accent mx-auto mb-6"></div>
         <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
-          Everything you need to create the perfect sleep environment for your little one. Download this free checklist and start improving sleep tonight.
+          Restore routine without cry-it-out. Download this free guide and start building better sleep habits tonight — gently and effectively.
         </p>
         
         <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
@@ -99,7 +99,7 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6 max-w-5xl">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">What's Inside Your Checklist</h2>
+        <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">What's Inside Your Guide</h2>
         <div class="h-1 w-16 bg-accent mx-auto"></div>
       </div>
 
@@ -157,15 +157,20 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <h2 class="text-3xl font-light text-brandChar mb-3">Get Your Free Checklist</h2>
+          <h2 class="text-3xl font-light text-brandChar mb-3">Get Your Free Guide</h2>
           <p class="text-gray-600">Enter your details below for instant access</p>
         </div>
 
         <form id="lead-form" class="space-y-6">
           <!-- Web3Forms Access Key -->
           <input type="hidden" name="access_key" value="446b9501-1418-4401-b080-b126515a1304">
-          <input type="hidden" name="subject" value="New Essential Checklist Download">
+          <input type="hidden" name="subject" value="New Gentle Sleep Reset Download">
           <input type="hidden" name="from_name" value="Thyme4Sleep Lead Magnet">
+          <input type="hidden" name="redirect" value="https://thyme4sleep.com/free-checklist#success">
+          
+          <!-- Custom email message to send to user -->
+          <input type="hidden" name="replyto" value="georgia@thyme4sleep.com">
+          <input type="hidden" name="email_template" value="Thank you for downloading The Gentle Sleep Reset! Your guide is attached to this email. You can also download it anytime at https://thyme4sleep.com/essential-checklist.pdf">
           
           <!-- Honeypot for spam protection -->
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
@@ -213,7 +218,7 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
             id="submit-btn"
             class="w-full px-8 py-4 text-lg font-bold bg-brandSage hover:bg-brandMink text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
           >
-            Get My Free Checklist
+            Get My Free Guide
           </button>
 
           <p class="text-xs text-center text-gray-500">
@@ -236,7 +241,7 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
         
         <h2 class="text-3xl font-light text-brandChar mb-4">Check Your Email!</h2>
         <p class="text-lg text-gray-600 mb-8">
-          Your Essential Sleep Checklist is on its way to your inbox. In the meantime, you can download it right now:
+          Your Gentle Sleep Reset guide is on its way to your inbox. In the meantime, you can download it right now:
         </p>
 
         <a
@@ -247,7 +252,7 @@ const pageDescription = 'Download your free Essential Sleep Checklist - everythi
           <svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          Download Your Checklist
+            Download Your Guide
         </a>
 
         <div class="border-t border-gray-200 pt-8 mt-8">
