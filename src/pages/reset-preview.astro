@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/LayoutNoConsent.astro';
+
+const pageTitle = 'Reset to Rest – Complete Sleep Guide & Video | Thyme4Sleep';
+const pageDescription = 'Get the complete Reset to Rest guide with video walkthrough for just $37. Everything you need to transform your little one\'s sleep tonight.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <script>
+    // Handle Stripe checkout
+    async function handlePurchase() {
+      const button = document.getElementById('purchase-btn') as HTMLButtonElement;
+      if (!button) return;
+      
+      button.disabled = true;
+      button.textContent = 'Processing...';
+      
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packageId: 'reset-to-rest' })
+        });
+        
+        const data = await response.json();
+        
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Failed to create checkout session');
+        }
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Something went wrong. Please try again or contact georgia@thyme4sleep.com');
+        button.disabled = false;
+        button.textContent = 'Get Instant Access - $37';
+      }
+    }
+    
+    // Attach event listener when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('purchase-btn');
+      if (btn) {
+        btn.addEventListener('click', handlePurchase);
+      }
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-gradient-to-br from-brandMint/20 to-brandCream overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-.895-3-2-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29-22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233F3B38' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-brandChar mb-6">
+          Reset to Rest: <span class="font-medium">Your Complete Sleep Guide</span>
+        </h1>
+        <div class="h-1 w-24 bg-accent mx-auto mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
+          Everything you need to transform your little one's sleep — tonight. A comprehensive video walkthrough with Georgia plus a detailed PDF guide you can reference anytime.
+        </p>
+        
+        <div class="flex items-center justify-center gap-6 text-sm text-gray-600 mb-8">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-brandSage mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Complete Video Guide
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-brandSage mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Downloadable PDF
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-brandSage mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Instant Access
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+      
+      <!-- Video Preview (Blurred) -->
+      <div class="mb-16 relative">
+        <div class="text-center mb-8">
+          <span class="inline-block bg-brandMint/30 text-brandSage text-sm font-medium tracking-widest uppercase px-4 py-1.5 rounded-full mb-3">Video Preview</span>
+          <h2 class="text-3xl font-light text-brandChar">Georgia Walks You Through Everything</h2>
+        </div>
+
+        <div class="relative rounded-2xl overflow-hidden shadow-xl">
+          <div class="relative" style="padding-bottom: 56.25%; height: 0;">
+            <div class="absolute inset-0 bg-gradient-to-br from-brandMint/30 to-brandPeach/30 backdrop-blur-xl flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-brandChar" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <p class="text-xl font-medium text-brandChar">Unlock Full Video Access</p>
+                <p class="text-gray-600 mt-2">Purchase to watch the complete guide</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF Preview (Blurred) -->
+      <div class="mb-16 relative">
+        <div class="text-center mb-8">
+          <span class="inline-block bg-brandPeach/30 text-brandTaupe text-sm font-medium tracking-widest uppercase px-4 py-1.5 rounded-full mb-3">PDF Guide Preview</span>
+          <h2 class="text-3xl font-light text-brandChar">Your Step-by-Step Reference</h2>
+        </div>
+
+        <div class="relative bg-brandCream rounded-2xl p-8 md:p-12 shadow-sm border border-brandPeach/20">
+          <div class="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
+            <div class="text-center">
+              <div class="w-20 h-20 bg-brandPeach/90 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <p class="text-xl font-medium text-brandChar">Unlock Complete PDF Guide</p>
+              <p class="text-gray-600 mt-2">Purchase to download and print</p>
+            </div>
+          </div>
+          
+          <div class="flex flex-col md:flex-row items-center gap-8 opacity-30">
+            <div class="flex-shrink-0 w-24 h-24 bg-brandPeach/20 rounded-2xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-brandTaupe" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-light text-brandChar mb-2">From Reset to Rest</h3>
+              <p class="text-gray-600 leading-relaxed">Complete guide covering schedules, sleep environment, settling strategies, and more...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Purchase CTA -->
+      <div class="bg-gradient-to-br from-brandSage to-brandMink rounded-3xl p-10 md:p-14 shadow-xl text-center text-white relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-white/10 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-white/10 rounded-full pointer-events-none"></div>
+        
+        <div class="relative z-10">
+          <h2 class="text-3xl md:text-4xl font-light mb-4">Get Instant Access Now</h2>
+          <div class="h-1 w-16 bg-brandPeach mx-auto mb-6"></div>
+          
+          <div class="mb-8">
+            <div class="text-5xl font-bold mb-2">$37</div>
+            <p class="text-white/90">One-time payment • Lifetime access</p>
+          </div>
+
+          <ul class="text-left max-w-md mx-auto mb-8 space-y-3">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-brandPeach mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Complete video walkthrough with Georgia</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-brandPeach mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Downloadable PDF guide you can print and reference</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-brandPeach mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Step-by-step sleep schedules and settling strategies</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-brandPeach mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Instant access — start tonight!</span>
+            </li>
+          </ul>
+
+          <button
+            id="purchase-btn"
+            class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold bg-brandPeach hover:bg-brandPeach/90 text-brandChar rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl"
+          >
+            Get Instant Access - $37
+            <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+
+          <p class="text-sm text-white/70 mt-6">Secure payment via Stripe • 100% satisfaction guaranteed</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Free Checklist CTA -->
+  <section class="py-20 bg-gradient-to-br from-brandMint/20 to-brandCream">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white rounded-3xl p-10 md:p-14 shadow-xl border border-brandMint/30 text-center relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-brandMint/10 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-brandPeach/10 rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="inline-block bg-brandPeach/30 text-brandTaupe text-sm font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+            Free Resource
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">Not Ready to Purchase Yet?</h2>
+          <div class="h-1 w-16 bg-accent mx-auto mb-6"></div>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Start with our <strong>free Essential Sleep Checklist</strong> — a downloadable guide covering sleep environment essentials, bedtime routines, safety tips, and quick wins. No credit card required!
+          </p>
+          
+          <a
+            href="/free-checklist"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-brandMint hover:bg-brandSage text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+          >
+            Get Free Checklist Instead
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </a>
+
+          <p class="text-sm text-gray-500 mt-6">100% Free • Just enter your email • Instant download</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upsell / Pricing CTA -->
+  <section class="py-20 bg-brandCream">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white rounded-3xl p-10 md:p-14 shadow-sm border border-brandPeach/20 text-center relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-brandPeach/10 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-brandSage/10 rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-brandSage/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brandSage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07l-.71.71M6.34 17.66l-.71.71m12.02 0l-.71-.71M6.34 6.34l-.71-.71M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">Need More Personalized Support?</h2>
+          <div class="h-1 w-16 bg-accent mx-auto mb-6"></div>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            This guide is a great starting point — but if you'd like a fully customized sleep plan with one-on-one support from Georgia, explore our consultation packages.
+          </p>
+          <a
+            href="/pricing"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-brandSage hover:bg-brandMink text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+          >
+            View Sleep Packages
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

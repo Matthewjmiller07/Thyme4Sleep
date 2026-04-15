@@ -37,6 +37,9 @@ const PACKAGES: Record<string, { name: string; amountCents: number } > = {
   // A la carte
   troubleshooting: { name: '60-Minute Troubleshooting Call', amountCents: 9900 },
   weekend: { name: 'Weekend/Holiday Consult', amountCents: 19900 },
+  
+  // Digital Products
+  'reset-to-rest': { name: 'Reset to Rest - Complete Guide & Video', amountCents: 3700 },
 };
 
 const ADDONS: Record<string, { name: string; amountCents: number }> = {
@@ -112,9 +115,17 @@ export const POST: APIRoute = async ({ request, url }) => {
     // Determine post-payment redirect
     // Send all purchases to a unified thank-you page with the package id or add-on info
     const origin = `${url.protocol}//${url.host}`; // respects current host
-    const successUrl = isAddOnOnly 
-      ? `${origin}/thank-you?addon=${encodeURIComponent(addOnId || '')}`
-      : `${origin}/thank-you?pkg=${encodeURIComponent(packageId || '')}`;
+    
+    // Special redirect for Reset to Rest digital product
+    let successUrl: string;
+    if (packageId === 'reset-to-rest') {
+      successUrl = `${origin}/reset?purchased=true`;
+    } else if (isAddOnOnly) {
+      successUrl = `${origin}/thank-you?addon=${encodeURIComponent(addOnId || '')}`;
+    } else {
+      successUrl = `${origin}/thank-you?pkg=${encodeURIComponent(packageId || '')}`;
+    }
+    
     const cancelUrl = `${origin}/pricing`;
 
     // Handle promo codes
