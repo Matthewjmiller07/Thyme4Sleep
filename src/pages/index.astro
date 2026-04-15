@@ -6,13 +6,24 @@ import Layout from '../layouts/Layout.astro';
   <!-- Alpine.js for tooltip functionality -->
   <script src="//unpkg.com/alpinejs" defer></script>
   
-  <script>
+  <script is:inline>
+    // Make closePopup globally accessible
+    window.closePopup = function() {
+      const popup = document.getElementById('lead-magnet-popup');
+      if (popup) {
+        popup.classList.add('hidden');
+        // Mark as dismissed so it won't show again
+        localStorage.setItem('dismissedLeadMagnetPopup', 'true');
+      }
+    };
+
     // Popup modal logic
     document.addEventListener('DOMContentLoaded', () => {
-      // Check if user has already seen the popup
-      const hasSeenPopup = localStorage.getItem('hasSeenLeadMagnetPopup');
+      // Check if user has dismissed the popup
+      const hasDismissedPopup = localStorage.getItem('dismissedLeadMagnetPopup');
       
-      if (!hasSeenPopup) {
+      // Show popup every visit unless user has explicitly dismissed it
+      if (!hasDismissedPopup) {
         // Show popup after 10 seconds
         setTimeout(() => {
           const popup = document.getElementById('lead-magnet-popup');
@@ -22,14 +33,6 @@ import Layout from '../layouts/Layout.astro';
         }, 10000);
       }
     });
-
-    function closePopup() {
-      const popup = document.getElementById('lead-magnet-popup');
-      if (popup) {
-        popup.classList.add('hidden');
-        localStorage.setItem('hasSeenLeadMagnetPopup', 'true');
-      }
-    }
   </script>
 
   <!-- Lead Magnet Popup Modal -->
