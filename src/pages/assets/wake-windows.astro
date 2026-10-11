@@ -4,17 +4,17 @@ import PrintBar from '../../components/assets/PrintBar.astro';
 import SheetHead from '../../components/assets/SheetHead.astro';
 import NextStep from '../../components/assets/NextStep.astro';
 import Leaf from '../../components/assets/Leaf.astro';
-import { AGE_BANDS, SAMPLE_DAYS } from '../../data/sleep';
+import { AGE_BANDS } from '../../data/sleep';
 export const prerender = true;
 ---
-<Layout title="Wake Window & Nap Cheat Sheet | Thyme4Sleep" description="A free, printable wake window and nap guide from newborn to 5 years — with sample daily rhythms and sleepy cues.">
+<Layout title="Wake Window & Nap Cheat Sheet | Thyme4Sleep" description="A free, printable wake window and nap guide from newborn to 5 years — with sleepy and overtired cues.">
   <section class="hero no-print">
     <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
       <div>
-        <span class="pill free">Free printable · 2 pages</span>
+        <span class="pill free">Free printable · 1 page</span>
         <h1 style="margin-top:18px;">The Wake Window <em class="script">&amp;</em> Nap Cheat Sheet</h1>
         <hr class="divider" style="margin-inline:auto;" />
-        <p class="lead" style="margin-inline:auto;">How long can my baby stay awake? How many naps? What time is bedtime? Everything on one fridge-ready page, newborn to five years — plus sample daily rhythms.</p>
+        <p class="lead" style="margin-inline:auto;">How long can my baby stay awake? How many naps? What time is bedtime? Everything on one fridge-ready page, newborn to five years.</p>
       </div>
     </div>
   </section>
@@ -57,27 +57,6 @@ export const prerender = true;
       <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>General guidance only — not medical advice.</span></div>
     </article>
 
-    <article class="sheet">
-      <SheetHead kicker="Thyme4Sleep · Cheat Sheet" title="Sample Daily Rhythms" sub="Real-life shapes of a day. Times are illustrative — shift the whole day earlier or later to suit your family." />
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px;">
-        {SAMPLE_DAYS.map((d) => (
-          <div class="card soft" style="padding:16px 18px;border-radius:16px;">
-            <h3 style="font-size:13pt;">{d.age}</h3>
-            <table>
-              <tbody>
-                {d.rows.map(([t, a]) => (<tr><td style="width:52px;padding:4px 6px;font-weight:600;color:var(--sage-deep);">{t}</td><td style="padding:4px 6px;">{a}</td></tr>))}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </div>
-      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
-        <div><h3 style="font-size:12pt;">Anchor the morning</h3><p>Same wake-up time (±30 min), every day — even after a rough night. Curtains open, daylight in.</p></div>
-        <div><h3 style="font-size:12pt;">Feed early, not to sleep</h3><p>Offer the bedtime milk near the start of the routine, with lights on, so sleep isn’t tied to sucking.</p></div>
-        <div><h3 style="font-size:12pt;">Down awake</h3><p>Calm and drowsy is fine — but let the last step into sleep be theirs. That’s the skill that connects night cycles.</p></div>
-      </div>
-      <div class="sheet-foot"><span>THYME4SLEEP.COM · Free sleep resources</span><span>© Thyme4Sleep LLC</span></div>
-    </article>
   </div>
 
   <NextStep variant="quiz" />

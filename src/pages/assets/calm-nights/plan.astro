@@ -4,7 +4,7 @@
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
 import { ACCESS_COOKIE, verifySession, isPreview } from '../../../lib/calmNights';
-import { AGE_BANDS, SAMPLE_DAYS, KEY_PHRASES } from '../../../data/sleep';
+import { KEY_PHRASES } from '../../../data/sleep';
 export const prerender = false;
 
 const preview = isPreview(Astro.url);
@@ -23,8 +23,6 @@ const toc = [
   ['cotside', 'Method A · Cotside Comforting'],
   ['checks', 'Method B · Quick Checks'],
   ['nights', 'Night wakings & early rising'],
-  ['naps', 'The nap plan'],
-  ['schedules', 'Schedules by age'],
   ['trouble', 'Troubleshooting'],
   ['workbook', 'Printable workbook'],
   ['next', 'What’s next'],
@@ -108,7 +106,7 @@ const cotside = [
           <li><strong>Read everything once</strong> — ideally with your partner or anyone else who does bedtime.</li>
           <li><strong>Choose one method</strong> (chapter 03) and commit to it for the full 14 nights.</li>
           <li><strong>Do the prep week</strong> (chapter 04). Families who skip it struggle more on night one.</li>
-          <li><strong>Track each night</strong> with the workbook (chapter 12). Progress hides on hard nights; the tracker shows it.</li>
+          <li><strong>Track each night</strong> with the workbook (chapter 10). Progress hides on hard nights; the tracker shows it.</li>
         </ul>
         <h3>Safety &amp; medical note</h3>
         <p>This plan is general education for healthy, typically developing children from around 6 months, and it isn’t medical advice. Please check with your pediatrician before you start — especially about night feeds, weight gain, reflux, allergies, snoring or anything that worries you. Pause the plan if your child becomes unwell, and always follow safe sleep guidance: alone, on their back, in a crib with nothing but a fitted sheet. (The free <a href="/assets/safe-sleep">Sleep Tight checklist</a> covers everything.)</p>
@@ -164,7 +162,7 @@ const cotside = [
         <div class="grid g2">
           <div><h3>The room</h3><ul class="ticks"><li><strong>Dark:</strong> blackout curtains or window film. Move any night light out to the hallway so melatonin isn’t suppressed.</li><li><strong>Calm:</strong> remove mobiles and stimulating décor from the crib area.</li><li><strong>Cool &amp; dressed right:</strong> season-appropriate PJs and a sleep sack.</li><li><strong>Sound:</strong> white noise is fine — steady, all night, not too loud.</li></ul></div>
           <div><h3>The feed</h3><ul class="ticks"><li>Move the bedtime milk to the <strong>start</strong> of the routine — lights on, ideally outside the bedroom.</li><li>Keep them awake and engaged for the whole feed.</li><li>Follow it with bath or books so the last thing before sleep isn’t sucking.</li><li>Ask your pediatrician about night feeds: which (if any) they want you to keep.</li></ul></div>
-          <div><h3>The day</h3><ul class="ticks"><li>Fix a morning wake-up time (within 30 minutes) and keep it, even after bad nights.</li><li>Check wake windows against chapter 10.</li><li>Lots of daylight, movement and floor play — and practise new motor skills like standing and sitting down.</li><li>Fill their cup: plenty of connected, phone-free time in the evening.</li></ul></div>
+          <div><h3>The day</h3><ul class="ticks"><li>Fix a morning wake-up time (within 30 minutes) and keep it, even after bad nights.</li><li>Keep nap times and wake windows consistent from day to day.</li><li>Lots of daylight, movement and floor play — and practise new motor skills like standing and sitting down.</li><li>Fill their cup: plenty of connected, phone-free time in the evening.</li></ul></div>
           <div><h3>The team</h3><ul class="ticks"><li>Choose your key phrase (below) — every adult uses the exact same words.</li><li>Decide who does which nights. Tag-teaming helps.</li><li>Agree now how you’ll handle a hard night, so you don’t debate it at 2am.</li><li>Tell your child what’s changing with a simple story (see social stories, chapter 05).</li></ul></div>
         </div>
         <div class="script-card">
@@ -185,7 +183,7 @@ const cotside = [
           ))}
         </div>
         <h3 style="margin-top:28px;">Time it well</h3>
-        <p>Overtired children fight sleep. For most babies and toddlers, lights out between 6:30 and 8:00pm works beautifully — check the age table in chapter 10. If bedtime has been creeping later, bring it earlier by 15 minutes every couple of nights.</p>
+        <p>Overtired children fight sleep. For most babies and toddlers, lights out between 6:30 and 8:00pm works beautifully. If bedtime has been creeping later, bring it earlier by 15 minutes every couple of nights.</p>
         <h3>Down awake</h3>
         <p>Lay your child down calm but awake — drowsy is fine, asleep is not. Falling asleep in the place they’ll wake up is what lets them reconnect sleep cycles alone at 2am instead of calling for the feed or the rocking that got them there.</p>
         <h3>Social stories (12 months +)</h3>
@@ -255,49 +253,8 @@ const cotside = [
       </section>
 
       <!-- 09 -->
-      <section class="chapter" id="naps">
-        <span class="num">Chapter 09</span>
-        <h2>The nap plan</h2>
-        <p>Naps are harder to learn than nights (sleep pressure is lower in the day), so start nap training alongside bedtime but expect it to lag a few days behind. Naps should <strong>mirror bedtime</strong>:</p>
-        <ul class="ticks"><li>A shorter version of the same routine, in the same order.</li><li>Dim the room (no need for total blackout), screens off, comfortable temperature.</li><li>Any feed early in the routine, not right before sleep.</li><li>Down awake, key phrase, then your chosen method.</li></ul>
-        <h3>The one-hour rule</h3>
-        <p>Your total nap-settling effort shouldn’t exceed an hour. That’s not an hour of crying — it’s the cap on the whole process:</p>
-        <div class="grid g2">
-          <div class="card soft"><h4>Attempt 1 (up to ~30 min)</h4><p class="small" style="margin:0;">Follow your method. If they’re clearly distressed or it isn’t working, trust your instinct: take them out, change the diaper, walk around, a quiet activity or a due feed.</p></div>
-          <div class="card soft"><h4>Attempt 2 (after a 20–30 min break)</h4><p class="small" style="margin:0;">Try again. Many children fall asleep on the second try because they really do need the rest.</p></div>
-        </div>
-        <p style="margin-top:16px;"><strong>Still awake after two attempts?</strong> Help them sleep by a different means than their old prop — a stroller walk, a lovey, stroking their face rather than the bottle — so they rest without reinforcing the old association. If you need a rescue more than a few days running, vary the method so it doesn’t become a new habit.</p>
-        <h3>Short naps</h3>
-        <p>A 30–45 minute nap is one sleep cycle. If they wake content, that’s okay. If they wake crying, wait 10 minutes before going in — they may resettle. Then check wake windows: short naps are very often a timing issue.</p>
-        <p>Daytime noise is fine — it gently lowers sensitivity to sound and gives you more flexibility.</p>
-      </section>
-
-      <!-- 10 -->
-      <section class="chapter" id="schedules">
-        <span class="num">Chapter 10</span>
-        <h2>Schedules by age</h2>
-        <p>Typical ranges — your child’s cues come first. Adjust in 15-minute steps and hold each change for three days.</p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Age</th><th>Wake window</th><th>Naps</th><th>Night</th><th>Bedtime</th></tr></thead>
-            <tbody>{AGE_BANDS.filter((b) => b.id !== '0-3m').map((b) => <tr><td><strong>{b.age}</strong></td><td>{b.wakeWindow}</td><td>{b.naps}</td><td>{b.night}</td><td>{b.bedtime}</td></tr>)}</tbody>
-          </table>
-        </div>
-        <div class="grid g2" style="margin-top:24px;">
-          {SAMPLE_DAYS.map((d) => (
-            <div class="card soft" style="padding:20px;">
-              <h4>{d.age}</h4>
-              <table><tbody>{d.rows.map(([t, a]) => <tr><td style="width:60px;padding:5px 6px;font-weight:600;color:var(--sage-deep);">{t}</td><td style="padding:5px 6px;">{a}</td></tr>)}</tbody></table>
-            </div>
-          ))}
-        </div>
-        <h3 style="margin-top:24px;">Tiredness cues to watch for</h3>
-        <p>Rubbing eyes, yawning, slight fussiness, staring off, losing interest in play. Aim to start the routine as these first appear — before crying. Make sure days include enough activity, fresh air and food that your child is genuinely, pleasantly tired by bedtime.</p>
-      </section>
-
-      <!-- 11 -->
       <section class="chapter" id="trouble">
-        <span class="num">Chapter 11</span>
+        <span class="num">Chapter 09</span>
         <h2>Troubleshooting</h2>
         {[
           ['“Night 3 got worse!”', 'Very common, and usually a good sign: your child is testing whether the new rules are real. Hold steady for two more nights. Families who change course here start again from zero.'],
@@ -308,7 +265,7 @@ const cotside = [
           ['Travel & time zones', 'Bring the routine, the sleep sack, the white noise and the key phrase. Shift to local time straight away using daylight and mealtimes. Expect a few unsettled nights, then return to your method.'],
           ['The toddler negotiator', 'Use the bedtime chart and Bedtime Pass cards. Offer choices before bed (“blue PJs or stars?”), not after. Once in bed: key phrase, same response, no new debates.'],
           ['We disagree as parents', 'Agree the method and the hard-night plan before you start. If one parent finds it harder, they take a different role (bath and books) while the other leads settling. Unity matters more than which method you picked.'],
-          ['Nothing is changing after 7 nights', 'Check the basics: is the feed truly at the start? Is bedtime well-timed? Is everyone responding the same way? Are you following the method every time, including 3am? If all yes, it’s time for tailored support — see chapter 13.'],
+          ['Nothing is changing after 7 nights', 'Check the basics: is the feed truly at the start? Is bedtime well-timed? Is everyone responding the same way? Are you following the method every time, including 3am? If all yes, it’s time for tailored support — see chapter 11.'],
         ].map(([q, a]) => (
           <details class="card" style="margin-bottom:10px;border-radius:16px;" open>
             <summary style="cursor:pointer;font-family:var(--serif);font-size:1.3rem;">{q}</summary>
@@ -317,9 +274,9 @@ const cotside = [
         ))}
       </section>
 
-      <!-- 12 -->
+      <!-- 10 -->
       <section class="chapter" id="workbook">
-        <span class="num">Chapter 12</span>
+        <span class="num">Chapter 10</span>
         <h2>Printable workbook</h2>
         <p>Print this chapter (or the whole plan) and keep it by the bed. Any progress, however small, is a win.</p>
         <div class="card">
@@ -343,9 +300,9 @@ const cotside = [
         </div>
       </section>
 
-      <!-- 13 -->
+      <!-- 11 -->
       <section class="chapter" id="next">
-        <span class="num">Chapter 13</span>
+        <span class="num">Chapter 11</span>
         <h2>What’s next</h2>
         <p>Sleep training isn’t about perfection — it’s about consistency, intention and loving boundaries. There will be wobbles: a cold, a new tooth, a holiday. When they come, go back to chapter 04, steady the foundations, and pick your method back up. It returns faster every time.</p>
         <p>You are doing something truly wonderful for your child — and for yourselves. You’ve got this.</p>
