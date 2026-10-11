@@ -1,0 +1,12 @@
+---
+interface Props { kicker: string; title: string; sub?: string }
+const { kicker, title, sub } = Astro.props;
+---
+<div class="sheet-head">
+  <div>
+    <span class="eyebrow">{kicker}</span>
+    <h1 set:html={title} />
+    {sub && <p class="muted" style="font-size:11pt;margin:0;">{sub}</p>}
+  </div>
+  <img src="/assets/img/logo.png" alt="Thyme4Sleep" />
+</div>

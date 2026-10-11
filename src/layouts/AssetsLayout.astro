@@ -1,0 +1,64 @@
+---
+import '../styles/assets.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Hide the library top bar (used for chrome-free printables / product pages) */
+  bare?: boolean;
+}
+
+const { title, description = 'Gentle, evidence-informed sleep resources from Thyme4Sleep.', bare = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <!-- The asset library is deliberately unlinked and kept out of search results until launch -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://thyme4sleep.com/assets/social/og-card.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Arima+Koshi:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M2YDW7JL2"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6M2YDW7JL2');
+    </script>
+  </head>
+  <body class="t4s">
+    {!bare && (
+      <header class="a-top no-print">
+        <div class="wrap">
+          <a href="/assets" aria-label="Thyme4Sleep resource library"><img src="/assets/img/logo.png" alt="Thyme4Sleep" width="72" height="46" /></a>
+          <nav aria-label="Library">
+            <a href="/assets#free">Free</a>
+            <a href="/assets/calm-nights">Calm Nights</a>
+            <a href="/assets#studio" class="hide-sm">Studio</a>
+            <a href="/pricing" class="hide-sm">1:1 Support</a>
+          </nav>
+        </div>
+      </header>
+    )}
+    <main>
+      <slot />
+    </main>
+    {!bare && (
+      <footer class="a-foot no-print">
+        <div class="wrap">
+          <span>&copy; {new Date().getFullYear()} Thyme4Sleep LLC · Pediatric sleep coaching by Georgia Miller</span>
+          <span>General education only — not medical advice. <a href="mailto:georgia@thyme4sleep.com">georgia@thyme4sleep.com</a></span>
+        </div>
+      </footer>
+    )}
+  </body>
+</html>

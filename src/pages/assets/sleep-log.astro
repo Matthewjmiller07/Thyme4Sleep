@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import PrintBar from '../../components/assets/PrintBar.astro';
+import SheetHead from '../../components/assets/SheetHead.astro';
+import NextStep from '../../components/assets/NextStep.astro';
+export const prerender = true;
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const hours = ['6p', '7', '8', '9', '10', '11', '12a', '1', '2', '3', '4', '5', '6a', '7', '8', '9', '10', '11', '12p', '1', '2', '3', '4', '5'];
+---
+<Layout title="7-Day Sleep Log | Thyme4Sleep" description="The same printable 7-day sleep log Georgia uses with 1:1 clients — spot patterns in naps, wake-ups and bedtime.">
+  <section class="hero no-print">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill free">Free printable · 2 pages</span>
+        <h1 style="margin-top:18px;">The 7-Day Sleep Log</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">You can’t change what you can’t see. Track one week — shade sleep on the 24-hour grid, note wake-ups and what you did — and the pattern behind the chaos usually jumps off the page.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar pdf="/assets/downloads/thyme4sleep-7-day-sleep-log.pdf" />
+    <article class="sheet">
+      <SheetHead kicker="Thyme4Sleep · Tracker" title="7-Day Sleep Log" sub="Shade each block your child is asleep. Mark ✕ for a wake-up, F for a feed, ★ for a great moment." />
+      <table style="table-layout:fixed;">
+        <thead>
+          <tr><th style="width:44px;padding:4px;"></th>{hours.map((h) => <th style="padding:4px 0;text-align:center;font-size:6.5pt;letter-spacing:0;">{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {days.map((d) => (
+            <tr>
+              <td style="padding:0 4px;font-family:var(--serif);font-size:12pt;height:44px;">{d}</td>
+              {hours.map((_, i) => <td style={`padding:0;border:1px solid var(--line);${i === 12 ? 'border-left:2px solid var(--taupe);' : ''}${i < 12 ? 'background:#faf6f2;' : ''}`}></td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="small muted" style="margin:8px 0 14px;">Shaded columns = evening &amp; night (6pm–6am). Thick line = 6am.</p>
+      <h3>Weekly notes</h3>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:12px;">
+        {['Average bedtime / wake time', 'Longest stretch & when', 'Anything new this week? (teeth, travel, illness, leaps)'].map((t) => (
+          <div style="border:1px solid var(--line);border-radius:12px;padding:10px;height:120px;"><p class="small" style="font-weight:600;margin:0;">{t}</p></div>
+        ))}
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>Bring this to your consultation — it’s gold.</span></div>
+    </article>
+
+    <article class="sheet">
+      <SheetHead kicker="Thyme4Sleep · Tracker" title="Night-by-Night Notes" sub="One row per night. Keep it quick — consistency beats detail." />
+      <table>
+        <thead><tr><th style="width:56px;">Night</th><th>Routine start → lights out</th><th>Time to fall asleep</th><th>Wake-ups (time / how long / my response)</th><th>Morning wake</th><th style="width:60px;">Mood 1–5</th></tr></thead>
+        <tbody>
+          {days.map((d) => (<tr><td style="font-family:var(--serif);font-size:12pt;height:92px;">{d}</td><td></td><td></td><td></td><td></td><td></td></tr>))}
+        </tbody>
+      </table>
+      <div class="note peach" style="margin-top:12px;"><p><strong>How to read your week:</strong> wake-ups at the <em>same time</em> nightly often point to a habit loop; frequent wakes plus short naps point to timing; needing the exact same help every time points to a sleep association. Not sure? The free Sleep Snapshot quiz will tell you.</p></div>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>© Thyme4Sleep LLC</span></div>
+    </article>
+  </div>
+
+  <NextStep variant="quiz" />
+</Layout>

@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import PrintBar from '../../components/assets/PrintBar.astro';
+import SheetHead from '../../components/assets/SheetHead.astro';
+import NextStep from '../../components/assets/NextStep.astro';
+import Leaf from '../../components/assets/Leaf.astro';
+export const prerender = true;
+
+const groups = [
+  { title: 'The sleep space', items: [
+    'Firm, flat crib, bassinet or play yard that meets current safety standards',
+    'Fitted sheet only — no pillows, bumpers, quilts, toys or positioners',
+    'Mattress fits snugly: no more than two fingers between mattress and side',
+    'Check regularly for loose, missing or broken parts; use only manufacturer parts',
+    'Away from windows, blind cords and anything within reach',
+  ]},
+  { title: 'Every sleep, every time', items: [
+    'Back to sleep — for naps and nights, until 1 year',
+    'Room-share on a separate sleep surface; avoid bed-sharing',
+    'Offer a clean, dry pacifier at sleep times (once feeding is established)',
+    'Lower the mattress as soon as baby can push up on hands and knees',
+  ]},
+  { title: 'Temperature & air', items: [
+    'Dress for the room — a wearable blanket/sleep sack instead of loose blankets',
+    'No hats indoors for sleep; watch for sweating or flushed skin',
+    'Keep the home smoke- and vape-free, including clothes and car',
+  ]},
+  { title: 'Look after you, too', items: [
+    'Attend well-baby checks and ask your pediatrician anything',
+    'If crying feels overwhelming: lay baby down safely in the crib, step away, breathe',
+    'Shower, music, a cup of tea, or call someone — then return calmer',
+    'If nothing soothes your baby, contact your doctor',
+  ]},
+];
+---
+<Layout title="Safe Sleep Checklist + Phone Wallpaper | Thyme4Sleep" description="A free printable safe sleep checklist based on AAP and NIH Safe to Sleep guidance — plus a 'Sleep Tight' phone wallpaper.">
+  <section class="hero no-print">
+    <div class="wrap">
+      <div>
+        <span class="pill free">Free · Checklist + wallpaper</span>
+        <h1 style="margin-top:18px;">Sleep Tight: <em class="script">the safe sleep checklist</em></h1>
+        <hr class="divider" />
+        <p class="lead">Every Thyme4Sleep plan starts with safety. This one-page checklist distils the American Academy of Pediatrics (AAP) and NIH <em>Safe to Sleep</em> guidance into something you can tick through in two minutes — and the matching lock-screen wallpaper keeps it in your pocket for 3am.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-dark" href="/assets/downloads/thyme4sleep-safe-sleep-checklist.pdf" download>Download checklist (PDF)</a>
+          <a class="btn btn-ghost" href="/assets/social/sleep-tight-wallpaper.png" download>Get the phone wallpaper</a>
+        </div>
+      </div>
+      <div class="photo"><img src="/assets/img/empty-crib.webp" alt="A simple, empty wooden crib with a fitted sheet" loading="eager" /></div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar pdf="/assets/downloads/thyme4sleep-safe-sleep-checklist.pdf" />
+    <article class="sheet">
+      <SheetHead kicker="Thyme4Sleep · Sleep Tight" title="Safe Sleep Checklist" sub="Based on recommendations from the AAP and the NIH Safe to Sleep® campaign." />
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px 26px;">
+        {groups.map((g) => (
+          <div>
+            <h3 style="border-bottom:1.5px solid var(--peach);padding-bottom:4px;">{g.title}</h3>
+            <ul class="boxes">{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <div class="note" style="margin-top:6px;">
+        <p><strong>The ABCs:</strong> babies sleep safest <strong>A</strong>lone, on their <strong>B</strong>ack, in a <strong>C</strong>rib (or bassinet / play yard) — in your room for at least the first six months.</p>
+      </div>
+      <p class="small muted" style="font-size:8.5pt;">Support lines: 1-800-4-A-CHILD (24/7 parent support) · The Period of PURPLE Crying® — purplecrying.info · National Center on Shaken Baby Syndrome — dontshake.org · safetosleep.nichd.nih.gov · aap.org. Always follow your pediatrician’s advice for your child.</p>
+      <Leaf size={130} class="leaf" style="right:-24px;top:120px;opacity:.25;" />
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>Education only — not medical advice.</span></div>
+    </article>
+  </div>
+
+  <section class="band no-print">
+    <div class="wrap grid g2" style="align-items:center;">
+      <div>
+        <span class="eyebrow">For your lock screen</span>
+        <h2>The “Sleep Tight” wallpaper</h2>
+        <p class="muted">Calm colours, the ABCs of safe sleep, and a gentle reminder for the hard moments. Sized for modern phones — save it, then set it as your lock screen.</p>
+        <a class="btn btn-dark" href="/assets/social/sleep-tight-wallpaper.png" download>Download wallpaper</a>
+      </div>
+      <img src="/assets/social/sleep-tight-wallpaper.png" alt="Sleep Tight phone wallpaper preview" style="max-width:260px;margin:auto;border-radius:34px;box-shadow:var(--shadow);" loading="lazy" />
+    </div>
+  </section>
+
+  <NextStep variant="quiz" />
+</Layout>

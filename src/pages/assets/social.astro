@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import { CAROUSEL_REGRESSION, CAROUSEL_RESET, QUOTES, STORIES, CAPTIONS } from '../../data/social';
+export const prerender = true;
+
+const groups = [
+  { title: 'Carousel · Regression or habit?', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_REGRESSION.map((_, i) => `carousel-regression-${i + 1}`), w: 216 },
+  { title: 'Carousel · The 72-hour reset', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_RESET.map((_, i) => `carousel-reset-${i + 1}`), w: 216 },
+  { title: 'Quote cards', size: '1080 × 1080 · feed, Facebook, WhatsApp status', files: QUOTES.map((_, i) => `quote-${i + 1}`), w: 250 },
+  { title: 'Stories', size: '1080 × 1920 · Instagram / Facebook / WhatsApp', files: STORIES.map((_, i) => `story-${i + 1}`), w: 200 },
+  { title: 'Pinterest pins', size: '1000 × 1500 · Pinterest', files: ['pin-wake-windows', 'pin-calm-nights'], w: 230 },
+  { title: 'Wallpaper & link preview', size: '1170 × 2532 phone · 1200 × 630 Open Graph', files: ['sleep-tight-wallpaper', 'og-card'], w: 260 },
+];
+---
+<Layout title="Social Media Kit | Thyme4Sleep" description="Ready-to-post Thyme4Sleep social graphics and captions.">
+  <section class="hero">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill tool">Content studio</span>
+        <h1 style="margin-top:18px;">The Social Media Kit</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">22 ready-to-post graphics in the Thyme4Sleep palette, each one pointing back into the free → paid flywheel. Click any image to download the full-resolution PNG. Captions are at the bottom.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      {groups.map((g) => (
+        <div style="margin-bottom:56px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;">
+            <h3 style="margin:0;">{g.title}</h3><span class="small muted">{g.size}</span>
+          </div>
+          <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;">
+            {g.files.map((f) => (
+              <a href={`/assets/social/${f}.png`} download style="flex:none;">
+                <img src={`/assets/social/${f}.png`} alt={f.replace(/-/g, ' ')} loading="lazy" style={`width:${g.w}px;border-radius:10px;box-shadow:0 10px 30px -18px rgba(0,0,0,.5);`} />
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="narrow">
+      <div class="center"><span class="eyebrow">Copy &amp; paste</span><h2>Captions</h2><hr class="divider" /></div>
+      {CAPTIONS.map((c, i) => (
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;">
+            <span class="eyebrow" style="margin:0;">{c.for}</span>
+            <button class="btn btn-sm btn-ghost copy" type="button" data-target={`cap-${i}`}>Copy</button>
+          </div>
+          <p id={`cap-${i}`} style="white-space:pre-line;margin:0;font-size:.95rem;">{c.text}</p>
+        </div>
+      ))}
+      <div class="note" style="margin-top:24px;">
+        <p><strong>Posting rhythm that feeds the flywheel:</strong> 1 carousel (education), 1 quote card (connection) and 1 story (direct CTA) per week. Every post points to one door: the Sleep Snapshot quiz or the free Gentle Sleep Reset. Keep the quiz link in bio year-round.</p>
+      </div>
+      <p class="small muted center">Graphics are generated from <code>/assets/social/frames</code>. Edit <code>src/data/social.ts</code>, then run <code>scripts/assets/render.mjs</code> to re-export.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.querySelectorAll('.copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = document.getElementById(b.dataset.target).innerText;
+        navigator.clipboard.writeText(t).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); });
+      });
+    });
+  </script>
+</Layout>

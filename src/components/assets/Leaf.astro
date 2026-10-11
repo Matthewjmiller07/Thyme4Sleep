@@ -1,0 +1,11 @@
+---
+// Decorative motif echoing the Thyme4Sleep logo: a sage leaf with a soft peach moon.
+interface Props { size?: number; class?: string; style?: string }
+const { size = 160, class: cls = '', style = '' } = Astro.props;
+---
+<svg class={cls} style={style} width={size} height={size} viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="122" cy="70" r="44" fill="#F1D4AE" opacity=".75" />
+  <path d="M28 150 C 60 92, 118 84, 176 104 C 128 124, 82 150, 28 150 Z" fill="#8F958C" opacity=".85" />
+  <path d="M40 146 C 84 124, 128 112, 168 106" stroke="#F3EAE3" stroke-width="2" fill="none" stroke-linecap="round" />
+  <path d="M96 40 c -14 10, -16 34, 2 46 c 16 10, 40 2, 44 -16" stroke="#3F3B38" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55" />
+</svg>

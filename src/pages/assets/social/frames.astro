@@ -1,0 +1,146 @@
+---
+// Source frames for the social kit. Each .frame is exported at native size to
+// /public/assets/social/<data-name>.png by scripts/assets/render.mjs.
+import Layout from '../../../layouts/AssetsLayout.astro';
+import Leaf from '../../../components/assets/Leaf.astro';
+import { CAROUSEL_REGRESSION, CAROUSEL_RESET, QUOTES, STORIES } from '../../../data/social';
+export const prerender = true;
+
+const BG: Record<string, [string, string, string]> = {
+  char: ['#3F3B38', '#F3EAE3', '#F1D4AE'],
+  cream: ['#F3EAE3', '#3F3B38', '#897E77'],
+  sage: ['#8F958C', '#FBF7F3', '#F3EAE3'],
+  peach: ['#F1D4AE', '#3F3B38', '#6E7569'],
+};
+const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET]] as const;
+---
+<Layout title="Social frames | Thyme4Sleep" bare>
+  <style>
+    body.t4s { background: #d9d1ca; }
+    .frames { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; align-items: flex-start; }
+    .frame { position: relative; overflow: hidden; flex: none; font-family: var(--sans); color: var(--char); }
+    .frame .ph { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .frame .logo { position: absolute; height: 70px; }
+    .frame .handle { position: absolute; font-size: 22px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; }
+    .frame h2 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: -.015em; }
+    .frame em { font-family: var(--serif); font-style: italic; }
+    .frame .eb { font-size: 22px; letter-spacing: .24em; text-transform: uppercase; font-weight: 600; }
+    .frame .dots { position: absolute; bottom: 60px; left: 90px; display: flex; gap: 10px; }
+    .frame .dots span { width: 12px; height: 12px; border-radius: 50%; background: rgba(63,59,56,.2); }
+    .frame .dots span.on { background: var(--char); width: 34px; border-radius: 6px; }
+  </style>
+  <div class="frames">
+
+    <!-- Open Graph card -->
+    <div class="frame" data-name="og-card" style="width:1200px;height:630px;background:#F3EAE3;">
+      <div class="ph" style="left:auto;width:480px;background-image:url(/assets/img/mother-hold.webp);border-radius:240px 0 0 240px;"></div>
+      <div style="position:absolute;left:80px;top:90px;width:600px;">
+        <img src="/assets/img/logo.png" style="height:84px;margin-bottom:36px;" alt="" />
+        <h2 style="font-size:76px;line-height:1.02;">Gentle sleep,<br /><em style="color:#897E77;">for the whole family.</em></h2>
+        <p style="font-size:24px;color:#897E77;margin-top:26px;">Free guides · Calm Nights Method · 1:1 coaching</p>
+      </div>
+    </div>
+
+    <!-- Phone wallpaper -->
+    <div class="frame" data-name="sleep-tight-wallpaper" style="width:1170px;height:2532px;background:linear-gradient(180deg,#3F3B38 0%,#4b4541 55%,#6E7569 100%);color:#F3EAE3;">
+      <div style="position:absolute;top:980px;left:0;right:0;text-align:center;">
+        <svg width="260" height="260" viewBox="0 0 200 200" style="margin:0 auto 40px;display:block;"><circle cx="118" cy="78" r="48" fill="#F1D4AE" opacity=".9" /><path d="M28 150 C 60 92, 118 84, 176 104 C 128 124, 82 150, 28 150 Z" fill="#BCC8B9" opacity=".9" /></svg>
+        <h2 style="font-size:150px;color:#F3EAE3;line-height:1;">Sleep tight</h2>
+        <p style="font-size:42px;letter-spacing:.3em;text-transform:uppercase;color:#F1D4AE;margin:50px 0 70px;">Alone · Back · Crib</p>
+        <p style="font-family:var(--serif);font-style:italic;font-size:58px;color:#E3E9E1;line-height:1.35;margin:0 auto;max-width:860px;">If it all feels like too much,<br />lay them down safely,<br />step away, and breathe.</p>
+      </div>
+      <img src="/assets/img/logo-round.png" alt="" style="position:absolute;bottom:200px;left:50%;transform:translateX(-50%);width:170px;opacity:.85;border-radius:50%;" />
+    </div>
+
+    <!-- Carousels 1080x1350 -->
+    {carousels.map(([name, slides]) => slides.map((s, i) => (
+      <div class="frame" data-name={`carousel-${name}-${i + 1}`} style={`width:1080px;height:1350px;background:${s.kind === 'point' ? (i % 2 ? '#FBF7F3' : '#F3EAE3') : '#F3EAE3'};`}>
+        {s.kind === 'cover' && (<>
+          <div class="ph" style={`top:auto;height:720px;background-image:url(/assets/img/${s.img}.webp);border-radius:540px 540px 0 0;left:60px;right:60px;`}></div>
+          <div style="position:absolute;left:90px;right:90px;top:120px;">
+            <span class="eb" style="color:#6E7569;">{s.sub}</span>
+            <h2 style="font-size:118px;line-height:1;margin-top:28px;">{s.title}<br /><em style="color:#897E77;">{s.accent}</em></h2>
+          </div>
+          <div style="position:absolute;right:60px;top:60px;background:#3F3B38;color:#F3EAE3;font-size:22px;letter-spacing:.2em;padding:14px 26px;border-radius:99px;font-weight:600;">SWIPE →</div>
+        </>)}
+        {s.kind === 'point' && (<>
+          <div style="position:absolute;left:90px;top:120px;font-family:var(--serif);font-size:260px;line-height:1;color:#F1D4AE;">{s.n}</div>
+          <div style="position:absolute;left:90px;right:110px;top:470px;">
+            <h2 style="font-size:84px;line-height:1.05;">{s.title}</h2>
+            <div style="width:90px;height:4px;background:#8F958C;margin:44px 0;"></div>
+            <p style="font-size:38px;line-height:1.5;color:#5b5550;margin:0;">{s.body}</p>
+          </div>
+          <Leaf size={300} style="position:absolute;right:-40px;bottom:-30px;opacity:.5;" />
+        </>)}
+        {s.kind === 'cta' && (<>
+          <div class="ph" style={`background-image:url(/assets/img/${s.img}.webp);`}></div>
+          <div class="ph" style="background:linear-gradient(180deg,rgba(63,59,56,.15) 0%,rgba(63,59,56,.88) 62%);"></div>
+          <div style="position:absolute;left:90px;right:90px;bottom:170px;color:#F3EAE3;">
+            <h2 style="font-size:96px;line-height:1.02;color:#F3EAE3;">{s.title}</h2>
+            <p style="font-size:40px;margin:36px 0 0;color:#F1D4AE;">{s.body}</p>
+          </div>
+        </>)}
+        <img class="logo" src="/assets/img/logo.png" alt="" style={s.kind === 'cta' ? 'right:70px;top:60px;filter:brightness(0) invert(1);opacity:.9;' : s.kind === 'cover' ? 'left:90px;bottom:780px;display:none;' : 'right:80px;top:80px;'} />
+        <div class="dots">{slides.map((_, k) => <span class={k === i ? 'on' : ''} style={s.kind === 'cta' ? 'background:rgba(243,234,227,.4)' : ''}></span>)}</div>
+        <div class="handle" style={`right:90px;bottom:52px;color:${s.kind === 'cta' ? '#F3EAE3' : '#897E77'};`}>@thyme4sleep</div>
+      </div>
+    )))}
+
+    <!-- Quote cards 1080x1080 -->
+    {QUOTES.map((q, i) => {
+      const [bg, fg, acc] = BG[q.bg];
+      return (
+        <div class="frame" data-name={`quote-${i + 1}`} style={`width:1080px;height:1080px;background:${bg};color:${fg};`}>
+          <div style={`position:absolute;left:100px;top:90px;font-family:var(--serif);font-size:300px;line-height:1;color:${acc};opacity:.7;`}>“</div>
+          <div style="position:absolute;left:100px;right:100px;top:360px;">
+            <h2 style={`font-size:92px;line-height:1.08;color:${fg};`}>{q.q} <em style={`color:${acc};`}>{q.a}</em></h2>
+          </div>
+          <div class="handle" style={`left:100px;bottom:90px;color:${acc};`}>Georgia · Thyme4Sleep</div>
+          <Leaf size={220} style="position:absolute;right:40px;bottom:30px;opacity:.55;" />
+        </div>
+      );
+    })}
+
+    <!-- Stories 1080x1920 -->
+    {STORIES.map((s, i) => (
+      <div class="frame" data-name={`story-${i + 1}`} style="width:1080px;height:1920px;background:#F3EAE3;">
+        <div class="ph" style={`bottom:auto;height:1080px;background-image:url(/assets/img/${s.img}.webp);border-radius:0 0 540px 540px;`}></div>
+        <img src="/assets/img/logo-round.png" alt="" style="position:absolute;left:50%;top:960px;transform:translateX(-50%);width:220px;border-radius:50%;box-shadow:0 20px 50px -20px rgba(0,0,0,.4);" />
+        <div style="position:absolute;left:100px;right:100px;top:1240px;text-align:center;">
+          <span class="eb" style="color:#6E7569;">{s.eyebrow}</span>
+          <h2 style="font-size:104px;line-height:1.02;margin-top:26px;">{s.title}</h2>
+          <div style="display:inline-block;margin-top:56px;background:#3F3B38;color:#F3EAE3;font-size:34px;font-weight:600;padding:30px 60px;border-radius:99px;">{s.cta}</div>
+        </div>
+      </div>
+    ))}
+
+    <!-- Pinterest pins 1000x1500 -->
+    <div class="frame" data-name="pin-wake-windows" style="width:1000px;height:1500px;background:#FBF7F3;">
+      <div style="position:absolute;left:80px;right:80px;top:90px;text-align:center;">
+        <span class="eb" style="color:#6E7569;">Free printable</span>
+        <h2 style="font-size:104px;line-height:1;margin-top:20px;">Wake Windows <em style="color:#897E77;">by Age</em></h2>
+      </div>
+      <div style="position:absolute;left:80px;right:80px;top:400px;display:grid;gap:18px;">
+        {[['4–5 mo', '1.5 – 2.5 hr'], ['6–8 mo', '2 – 3 hr'], ['9–12 mo', '3 – 4 hr'], ['12–18 mo', '3.5 – 5.5 hr'], ['18 mo – 3 y', '5 – 6.5 hr']].map(([a, w], k) => (
+          <div style={`display:flex;justify-content:space-between;align-items:center;padding:28px 40px;border-radius:24px;background:${['#E3E9E1', '#F8E8D3', '#F3EAE3', '#E3E9E1', '#F8E8D3'][k]};`}>
+            <span style="font-family:var(--serif);font-size:52px;">{a}</span><span style="font-size:40px;font-weight:600;">{w}</span>
+          </div>
+        ))}
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:90px;text-align:center;">
+        <img src="/assets/img/logo.png" alt="" style="height:90px;margin:0 auto 16px;" />
+        <span class="eb" style="color:#897E77;">thyme4sleep.com</span>
+      </div>
+    </div>
+
+    <div class="frame" data-name="pin-calm-nights" style="width:1000px;height:1500px;background:#3F3B38;color:#F3EAE3;">
+      <div class="ph" style="bottom:auto;height:760px;background-image:url(/assets/img/twins.webp);"></div>
+      <div style="position:absolute;left:80px;right:80px;top:820px;">
+        <span class="eb" style="color:#BCC8B9;">The 14-night gentle sleep plan</span>
+        <h2 style="font-size:116px;line-height:.98;margin-top:22px;color:#F3EAE3;">The Calm Nights <em style="color:#F1D4AE;">Method</em></h2>
+        <p style="font-size:36px;color:#d9cfc6;margin-top:30px;">No cry-it-out · Two gentle methods · Naps, nights &amp; early rising</p>
+      </div>
+      <div class="handle" style="left:80px;bottom:80px;color:#F1D4AE;">thyme4sleep.com</div>
+    </div>
+  </div>
+</Layout>

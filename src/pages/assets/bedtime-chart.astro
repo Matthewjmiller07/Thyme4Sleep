@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import PrintBar from '../../components/assets/PrintBar.astro';
+import NextStep from '../../components/assets/NextStep.astro';
+export const prerender = true;
+
+// Simple line icons (stroke = currentColor) for each routine step
+const steps = [
+  { n: 1, label: 'Bath time', color: '#BCC8B9', icon: '<path d="M8 30h48v6a14 14 0 0 1-14 14H22A14 14 0 0 1 8 36z"/><path d="M14 30V14a6 6 0 0 1 12 0"/><circle cx="36" cy="20" r="2.5"/><circle cx="44" cy="14" r="2"/><circle cx="46" cy="23" r="1.6"/><path d="M18 50l-3 6M46 50l3 6"/>' },
+  { n: 2, label: 'Pyjamas on', color: '#F1D4AE', icon: '<path d="M22 8l-12 8 5 10 5-3v31h24V23l5 3 5-10-12-8"/><path d="M22 8a10 10 0 0 0 20 0"/><path d="M32 30v20"/>' },
+  { n: 3, label: 'Brush teeth', color: '#E3E9E1', icon: '<rect x="27" y="22" width="10" height="34" rx="4"/><path d="M27 22h10V10a5 5 0 0 0-10 0z"/><path d="M30 10v-4M34 10v-4M32 10V5"/><path d="M46 14c4 4 4 10 0 14"/>' },
+  { n: 4, label: 'Potty & wash', color: '#F3EAE3', icon: '<path d="M14 26h36v6a18 18 0 0 1-36 0z"/><path d="M20 26V12h24v14"/><path d="M24 50l-2 6h20l-2-6"/>' },
+  { n: 5, label: 'Two books', color: '#BCC8B9', icon: '<path d="M8 14c8-3 16-3 24 2 8-5 16-5 24-2v36c-8-3-16-3-24 2-8-5-16-5-24-2z"/><path d="M32 16v36"/>' },
+  { n: 6, label: 'Cuddle & song', color: '#F1D4AE', icon: '<path d="M32 54S10 40 10 24a11 11 0 0 1 22-4 11 11 0 0 1 22 4c0 16-22 30-22 30z"/><path d="M46 8v10a3 3 0 1 1-3-3"/>' },
+  { n: 7, label: 'Lights out, sleep tight', color: '#3F3B38', dark: true, icon: '<path d="M44 40A20 20 0 0 1 26 10a20 20 0 1 0 22 26 20 20 0 0 1-4 4z"/><path d="M48 12l2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/>' },
+];
+---
+<Layout title="Toddler Bedtime Routine Chart | Thyme4Sleep" description="A free, printable picture-based bedtime routine chart and bedtime pass cards for toddlers and preschoolers.">
+  <section class="hero no-print">
+    <div class="wrap">
+      <div>
+        <span class="pill free">Free printable · ages 18m – 5y</span>
+        <h1 style="margin-top:18px;">The Bedtime Routine Chart</h1>
+        <hr class="divider" />
+        <p class="lead">Toddlers resist what they can’t predict. A picture chart turns bedtime from a negotiation into a game they’re in charge of: <em>“What does the chart say comes next?”</em> Includes cut-out “Bedtime Pass” cards for the curtain-call kids.</p>
+        <a class="btn btn-dark" href="/assets/downloads/thyme4sleep-bedtime-routine-chart.pdf" download>Download the chart (PDF)</a>
+      </div>
+      <div class="photo"><img src="/assets/img/lamp-sleep.webp" alt="A toddler asleep in a cosy bedroom lit by a soft lamp" loading="eager" /></div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar pdf="/assets/downloads/thyme4sleep-bedtime-routine-chart.pdf" />
+    <article class="sheet" style="background:var(--paper);">
+      <div style="text-align:center;margin-bottom:14px;">
+        <img src="/assets/img/logo.png" alt="Thyme4Sleep" style="height:46px;margin:0 auto 6px;" />
+        <h1 style="font-size:40pt;margin:0;">My Bedtime Routine</h1>
+        <p style="font-family:var(--serif);font-size:16pt;color:var(--mink);margin:0;">Name: ______________________</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;">
+        {steps.map((s) => (
+          <div style={`display:flex;align-items:center;gap:16px;border-radius:22px;padding:26px 18px;background:${s.color};${s.dark ? 'grid-column:1 / -1;color:#F3EAE3;' : 'color:#3F3B38;'}`}>
+            <span style={`flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13pt;${s.dark ? 'background:#F1D4AE;color:#3F3B38;' : 'background:#fff;'}`}>{s.n}</span>
+            <svg width="84" height="84" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon} />
+            <span style={`font-family:var(--serif);font-size:20pt;line-height:1.05;flex:1;${s.dark ? 'color:#F3EAE3;' : ''}`}>{s.label}</span>
+            <span style={`flex:none;width:40px;height:40px;border-radius:50%;border:2.5px dashed ${s.dark ? '#F1D4AE' : '#897E77'};`}></span>
+          </div>
+        ))}
+      </div>
+      <p style="text-align:center;font-family:var(--serif);font-size:15pt;color:var(--mink);margin-top:16px;">Tick each circle with a sticker or a crayon. Same steps, same order, every night.</p>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>Tip: laminate it and use a dry-erase pen.</span></div>
+    </article>
+
+    <article class="sheet">
+      <div class="sheet-head">
+        <div>
+          <span class="eyebrow">Thyme4Sleep · Toddler tools</span>
+          <h1>Bedtime Pass Cards</h1>
+          <p class="muted" style="font-size:11pt;margin:0;">For the “one more drink / one more hug” crowd. Cut out, then hand one or two over at the end of the routine.</p>
+        </div>
+        <img src="/assets/img/logo.png" alt="Thyme4Sleep" />
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+        {[1, 2, 3, 4].map((i) => (
+          <div style="border:2px dashed var(--taupe);border-radius:20px;padding:20px;text-align:center;height:2.4in;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(160deg,#fff,#F3EAE3);">
+            <svg width="56" height="56" viewBox="0 0 64 64" style="margin:0 auto 6px;" fill="none" stroke="#8F958C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M44 40A20 20 0 0 1 26 10a20 20 0 1 0 22 26 20 20 0 0 1-4 4z" /><path d="M48 12l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" /></svg>
+            <div style="font-family:var(--serif);font-size:24pt;line-height:1;">Bedtime Pass</div>
+            <p style="margin:6px 0 0;font-size:10pt;">Good for <strong>one</strong> quick visit: a hug, a sip of water, or one question.</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;">
+        <div><h3>How to use the passes</h3><ul class="ticks"><li>Start with two passes; drop to one after a good week.</li><li>When a pass is used, hand it to you — calmly, no chat.</li><li>No passes left? Return them to bed with your key phrase, same words every time.</li></ul></div>
+        <div><h3>Morning reward</h3><p>Unused pass in the morning? Swap it for a small, non-food reward: a sticker, choosing breakfast, an extra story tonight. Celebrate the effort, not perfection.</p></div>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>© Thyme4Sleep LLC</span></div>
+    </article>
+  </div>
+
+  <NextStep variant="calm" />
+</Layout>

@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+export const prerender = true;
+
+// Five stages placed around a circle
+const stages = [
+  { t: 'Attract', s: 'Social kit · Pinterest · Google profile', c: '#BCC8B9' },
+  { t: 'Capture', s: 'Sleep Snapshot quiz · free printables', c: '#E3E9E1' },
+  { t: 'Nurture', s: '5-day email sequence', c: '#F3EAE3' },
+  { t: 'Convert', s: '$37 Reset · $97 Calm Nights · $117 bundle', c: '#F8E8D3' },
+  { t: 'Delight', s: '1:1 coaching · reviews · $100 referrals', c: '#F1D4AE' },
+];
+const R = 190, CX = 300, CY = 260;
+const pos = stages.map((_, i) => {
+  const a = -Math.PI / 2 + (i * 2 * Math.PI) / stages.length;
+  return { x: CX + R * Math.cos(a), y: CY + R * Math.sin(a) };
+});
+
+const checklist = [
+  ['Before launch', [
+    'Georgia reviews all copy for voice and clinical accuracy (wake windows, method steps, feed guidance)',
+    'Set ASSETS_PREVIEW_KEY in Netlify, then review the paid plan at /assets/calm-nights/plan?preview=…',
+    'Run one live $97 test purchase in Stripe, confirm access, then refund it',
+    'Connect quiz + Gentle Sleep Reset form leads to the email platform; load Sequences 1 and 2',
+    'Decide whether to show Calm Nights on /pricing and the homepage (it’s unlinked today)',
+  ]],
+  ['Launch week', [
+    'Swap the Instagram bio link to /assets/quiz',
+    'Post carousel “Regression or habit?” + story 1 (quiz) on day 1',
+    'Post quote card + story 3 (Calm Nights) mid-week; carousel “72-hour reset” at the weekend',
+    'Email the existing list: “I built the plan I wish every family had” → Calm Nights',
+    'Pin both Pinterest pins to a “Baby Sleep Tips” board',
+  ]],
+  ['Every month', [
+    'Check GA4 events: quiz_start → quiz_complete → generate_lead → begin_checkout',
+    'Ask every Calm Nights and 1:1 family for a one-line review (email 4 of Sequence 2)',
+    'Turn the best new review into a quote card',
+    'Remove the noindex tag on pages you want found in Google once they’re linked from the site',
+  ]],
+];
+---
+<Layout title="The Flywheel & Launch Plan | Thyme4Sleep" description="How the Thyme4Sleep free and paid assets work together.">
+  <section class="hero">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill tool">Strategy</span>
+        <h1 style="margin-top:18px;">The Thyme4Sleep Flywheel</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">Free content earns attention. Attention becomes trust. Trust becomes a $37 or $97 purchase. Results become reviews and referrals — which make the next round of free content work harder. Every asset in the library has one job in that loop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap grid g2" style="align-items:center;gap:40px;">
+      <svg viewBox="0 0 600 520" role="img" aria-label="Flywheel: Attract, Capture, Nurture, Convert, Delight, looping back to Attract" style="width:100%;max-width:560px;margin:auto;">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#897E77" /></marker></defs>
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#E6DAD0" stroke-width="2" stroke-dasharray="4 8" />
+        {pos.map((p, i) => {
+          const q = pos[(i + 1) % pos.length];
+          const mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2;
+          const k = 1.32; // push the curve outward
+          const cx = CX + (mx - CX) * k, cy = CY + (my - CY) * k;
+          return <path d={`M${p.x + (q.x - p.x) * .22} ${p.y + (q.y - p.y) * .22} Q${cx} ${cy} ${p.x + (q.x - p.x) * .78} ${p.y + (q.y - p.y) * .78}`} fill="none" stroke="#897E77" stroke-width="1.6" marker-end="url(#ah)" />;
+        })}
+        <circle cx={CX} cy={CY} r="74" fill="#3F3B38" />
+        <text x={CX} y={CY - 6} text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="26" fill="#F3EAE3">Calmer</text>
+        <text x={CX} y={CY + 22} text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="26" fill="#F1D4AE" font-style="italic">nights</text>
+        {stages.map((s, i) => (
+          <g>
+            <circle cx={pos[i].x} cy={pos[i].y} r="52" fill={s.c} stroke="#fff" stroke-width="4" />
+            <text x={pos[i].x} y={pos[i].y + 7} text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="23" fill="#3F3B38">{s.t}</text>
+          </g>
+        ))}
+      </svg>
+      <div>
+        {stages.map((s, i) => (
+          <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;">
+            <span style={`flex:none;width:38px;height:38px;border-radius:50%;background:${s.c};display:grid;place-items:center;font-weight:600;`}>{i + 1}</span>
+            <div><h3 style="font-size:1.4rem;margin:0;">{s.t}</h3><p class="small muted" style="margin:0;">{s.s}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">The value ladder</span><h2>Every rung leads to the next</h2><hr class="divider" /></div>
+      <div class="table-scroll card" style="padding:8px 20px;">
+        <table>
+          <thead><tr><th>Rung</th><th>Asset</th><th>Price</th><th>Job</th><th>Leads to</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Social kit, Pinterest pins</td><td>Free</td><td>Reach new parents</td><td>Quiz / free guide</td></tr>
+            <tr><td>2</td><td>Sleep Snapshot quiz</td><td>Free</td><td>Diagnose &amp; segment; capture email</td><td>Tailored offer by result</td></tr>
+            <tr><td>3</td><td>Gentle Sleep Reset, cheat sheet, safe sleep, sleep log, bedtime chart</td><td>Free</td><td>Quick win, trust, list growth</td><td>5-day email sequence</td></tr>
+            <tr><td>4</td><td>From Reset to Rest</td><td>$37</td><td>Turn a lead into a customer</td><td>Calm Nights (email 3, Seq. 2)</td></tr>
+            <tr><td>5</td><td>The Calm Nights Method (+ $117 bundle)</td><td>$97</td><td>Deliver a full result; raise average order</td><td>1:1 for complex cases</td></tr>
+            <tr><td>6</td><td>1:1 coaching</td><td>$249–$1,429</td><td>Premium, personalised outcome</td><td>Reviews, $100 referrals → rung 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid g3" style="margin-top:24px;">
+        <div class="card"><span class="eyebrow">Illustrative month</span><h3>500 new leads</h3><p class="small muted" style="margin:0;">from the quiz and free downloads</p></div>
+        <div class="card"><span class="eyebrow">If 4% · 2% · 0.5% convert</span><h3>$740 + $970 + $1,372</h3><p class="small muted" style="margin:0;">Reset to Rest · Calm Nights · one Standard package for every 200 leads</p></div>
+        <div class="card"><span class="eyebrow">≈ per month</span><h3>$3,080 in new revenue</h3><p class="small muted" style="margin:0;">Assumptions only — replace with your real GA4 and Stripe numbers after 30 days.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="narrow">
+      <div class="center"><span class="eyebrow">Launch checklist</span><h2>From unlinked to live</h2><hr class="divider" /></div>
+      {checklist.map(([h, items]) => (
+        <div class="card" style="margin-bottom:16px;">
+          <h3>{h}</h3>
+          <ul class="boxes" style="margin:0;">{(items as string[]).map((i) => <li>{i}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

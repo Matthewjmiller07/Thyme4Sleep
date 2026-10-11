@@ -1,0 +1,170 @@
+---
+import Layout from '../../../layouts/AssetsLayout.astro';
+import Leaf from '../../../components/assets/Leaf.astro';
+export const prerender = true;
+
+const inside = [
+  ['01', 'Start Here & Readiness Check', 'Is your child ready? The medical, sleep-pressure and family-readiness boxes to tick before night one — so you start from strength, not desperation.'],
+  ['02', 'The Method Chooser', 'Georgia’s two signature approaches — Cotside Comforting (gentle) and Quick Checks (gentle-intermediate) — matched to your child’s temperament and your comfort level.'],
+  ['03', 'Prep Week Playbook', 'Room setup, moving the feed, choosing your key phrase, lining up your support person. The quiet steps that make night one so much easier.'],
+  ['04', '14 Nights, Scripted', 'Exactly where to be, what to say and how long to wait — night by night — for bedtime, wake-ups and those 4:45am starts.'],
+  ['05', 'The Nap Plan', 'How naps mirror bedtime, the one-hour rule, the two-attempt rescue, and what to do when nap training wobbles.'],
+  ['06', 'Schedules by Age', 'Sample days from 6 months to 3 years with wake windows, feeds and bedtime — plus how to shift them.'],
+  ['07', 'Troubleshooting Library', 'Illness, teething, standing in the crib, vomiting, travel, the toddler negotiator, partner disagreement and the “night 3 wobble”.'],
+  ['08', 'Printable Workbook', 'A 14-night tracker, your bedtime script card and a fridge-ready summary — print it or save it to your phone.'],
+];
+
+const faqs = [
+  ['Is this cry-it-out?', 'No. Georgia doesn’t use or teach extinction (cry-it-out). Both methods keep you present and responsive — you comfort, you reassure, you come back. Some protest is normal when anything changes, and the plan shows you how to tell protest from distress and how to respond to each.'],
+  ['What age is it for?', 'Babies from 6 months to children around 4 years, who are healthy and growing well. Under 6 months, or with medical or developmental needs? Georgia’s 1:1 packages (including Specialised Sleep Support) are a better fit.'],
+  ['How fast will it work?', 'Most families see meaningful change within the first week and consolidated nights within about two weeks, when the plan is followed consistently. Every child is different — the tracker helps you see progress even on the hard nights.'],
+  ['How is this different from Reset to Rest?', '<em>Reset to Rest</em> ($37) is a gentle night-waking reduction protocol for families who have restored calm but still have wake-ups. <em>Calm Nights</em> is the complete plan: bedtime, nights, naps, schedules and troubleshooting — the closest thing to a 1:1 plan without the 1:1 price. The bundle gets you both.'],
+  ['What if I need more help?', 'You can upgrade to 1:1 coaching at any point — Georgia will already know exactly which method you’ve been using, so you won’t be starting from scratch.'],
+  ['How do I access it?', 'Instantly. After checkout you’re taken straight to your plan online. It’s saved to your browser for two years, and you can print or save the whole thing as a PDF.'],
+];
+---
+<Layout title="The Calm Nights Method — 14-Night Gentle Sleep Plan | Thyme4Sleep" description="The complete, gentle 14-night sleep plan Georgia builds for 1:1 clients — method chooser, night-by-night scripts, naps and troubleshooting. No cry-it-out.">
+  <section class="hero">
+    <Leaf size={300} class="leaf" style="left:-80px;bottom:-60px;opacity:.3;" />
+    <div class="wrap">
+      <div>
+        <span class="pill paid">The complete DIY plan · $97</span>
+        <h1 style="margin-top:18px;">The Calm Nights <em class="script">Method</em></h1>
+        <hr class="divider" />
+        <p class="lead">The same gentle, structured 14-night plan Georgia writes for her 1:1 families — her methods, her scripts, her troubleshooting — in a format you can open tonight and finish in two weeks.</p>
+        <ul class="ticks" style="margin:20px 0 28px;">
+          <li>No cry-it-out. You stay present, responsive and in charge.</li>
+          <li>Two proven methods, matched to your child’s temperament.</li>
+          <li>Bedtime, night wakings, early rising <em>and</em> naps.</li>
+        </ul>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <button class="btn btn-dark buy" data-pkg="calm-nights" type="button">Get instant access — $97</button>
+          <a class="btn btn-ghost" href="#bundle">Or bundle &amp; save</a>
+        </div>
+        <p class="small muted" style="margin-top:12px;">Secure checkout with Stripe · Instant access</p>
+      </div>
+      <div class="photo"><img src="/assets/img/mother-hold.webp" alt="A parent holding their sleepy child close" loading="eager" /></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="narrow center">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>You’re not doing it wrong. <em class="script">You just need a plan.</em></h2>
+      <hr class="divider" />
+      <p class="muted" style="font-size:1.1rem;">The feed that used to settle them now buys you forty minutes. You’re rocking for an hour, transferring like a bomb technician, and still up at 1am, 3am, 4:30am. You’ve read the forums, tried three methods in a week, and you and your partner are quietly disagreeing about all of it. Here’s the truth Georgia tells every family: <strong style="color:var(--char);">sleep improves with clarity and consistency, not effort.</strong> Calm Nights gives you the clarity. You bring the consistency.</p>
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">What’s inside</span><h2>Everything a 1:1 plan covers</h2><hr class="divider" /></div>
+      <div class="grid g4">
+        {inside.map(([n, t, d]) => (
+          <div class="card" style="border-radius:20px;">
+            <div style="font-family:var(--serif);font-size:2.4rem;color:var(--taupe);line-height:1;">{n}</div>
+            <h3 style="font-size:1.35rem;margin-top:10px;">{t}</h3>
+            <p class="small muted" style="margin:0;">{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap grid g2" style="align-items:center;gap:48px;">
+      <div>
+        <span class="eyebrow">Two methods, one philosophy</span>
+        <h2>Comfort is never removed. <em class="script">Confusion is.</em></h2>
+        <hr class="divider" />
+        <p class="muted">Every child is different. Some settle best with you right beside them; others get more worked up the longer you stay. The Method Chooser helps you pick the one that fits — then you commit to it for 14 nights.</p>
+      </div>
+      <div class="grid" style="gap:16px;">
+        <div class="card" style="border-left:6px solid var(--mint);">
+          <span class="pill free">Gentle</span>
+          <h3 style="margin-top:10px;">Cotside Comforting</h3>
+          <p class="small muted" style="margin:0;">You stay beside the crib, offering touch and voice, and move a little further away every few nights until you’re out the door. Ideal for sensitive or anxious little ones and parents who want to stay close.</p>
+        </div>
+        <div class="card" style="border-left:6px solid var(--peach);">
+          <span class="pill paid">Gentle–intermediate</span>
+          <h3 style="margin-top:10px;">Quick Checks</h3>
+          <p class="small muted" style="margin:0;">Key phrase, a calm pause, then brief, loving checks. Best for strong-willed or older babies and toddlers who find a parent in the room too stimulating — and often the faster route.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow" style="color:var(--mint);">From Georgia’s families</span><h2>Real sleep, real families</h2><hr class="divider" /></div>
+      <div class="grid g3">
+        {[
+          ['She got my 20 month old who has NEVER slept through the night sleeping for 12 hours independently.', 'Hannah R., mum of a 20-month-old'],
+          ['We noticed immediate changes even from the preparatory steps she recommended… and for the sleep we are finally getting, we will be forever grateful.', 'Sasha M., mum of a 14-month-old'],
+          ['Everything she suggested felt doable, and most importantly, it worked.', 'Jonny A., dad of 3'],
+        ].map(([q, n]) => (
+          <figure class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);margin:0;">
+            <blockquote style="margin:0;font-family:var(--serif);font-size:1.45rem;line-height:1.3;color:var(--cream);">“{q}”</blockquote>
+            <figcaption class="small" style="margin-top:14px;color:var(--peach);">{n}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="center small muted" style="margin-top:22px;">Testimonials are from Georgia’s 1:1 coaching clients.</p>
+    </div>
+  </section>
+
+  <section class="band" id="bundle">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Choose your plan</span><h2>Start tonight</h2><hr class="divider" /></div>
+      <div class="grid g2" style="max-width:900px;margin:auto;">
+        <div class="card lift" style="display:flex;flex-direction:column;">
+          <h3>Calm Nights Method</h3>
+          <div style="font-family:var(--serif);font-size:3.2rem;line-height:1;">$97</div>
+          <p class="small muted">One-time · instant access</p>
+          <ul class="ticks small" style="flex:1;">
+            <li>Readiness check &amp; Method Chooser</li><li>Prep week playbook</li><li>14 nights, fully scripted</li><li>Nap plan &amp; schedules by age</li><li>Troubleshooting library</li><li>Printable workbook &amp; tracker</li>
+          </ul>
+          <button class="btn btn-ghost buy" data-pkg="calm-nights" type="button">Get Calm Nights — $97</button>
+        </div>
+        <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
+          <span class="pill core" style="position:absolute;top:-13px;left:28px;">Best value</span>
+          <h3>The Complete Bundle</h3>
+          <div style="font-family:var(--serif);font-size:3.2rem;line-height:1;">$117 <span style="font-size:1.4rem;color:var(--mink);text-decoration:line-through;">$134</span></div>
+          <p class="small muted">One-time · instant access to both</p>
+          <ul class="ticks small" style="flex:1;">
+            <li>Everything in Calm Nights</li><li><strong>+ From Reset to Rest</strong> video &amp; workbook</li><li>Georgia’s gentle night-waking reduction protocol</li><li>Ideal if nights are the main battle</li>
+          </ul>
+          <button class="btn btn-dark buy" data-pkg="calm-nights-bundle" type="button">Get the bundle — $117</button>
+        </div>
+      </div>
+      <p class="center small muted" style="margin-top:20px;">Want a plan written just for your child? <a href="/pricing">1:1 coaching starts at $249</a>.</p>
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="narrow">
+      <div class="center"><span class="eyebrow">Questions</span><h2>Good to know</h2><hr class="divider" /></div>
+      {faqs.map(([q, a]) => (
+        <details class="card" style="margin-bottom:12px;border-radius:16px;">
+          <summary style="cursor:pointer;font-family:var(--serif);font-size:1.35rem;">{q}</summary>
+          <p class="muted" style="margin:12px 0 0;" set:html={a} />
+        </details>
+      ))}
+      <p class="small muted center" style="margin-top:20px;">Calm Nights is general education for healthy children and isn’t medical advice. Always check with your pediatrician before making changes to your child’s sleep or feeding.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.querySelectorAll('.buy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Opening secure checkout…';
+        if (window.gtag) gtag('event', 'begin_checkout', { item_id: btn.dataset.pkg });
+        fetch('/api/create-checkout-session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ packageId: btn.dataset.pkg }) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) { if (!d.url) throw new Error(d.error); window.location.href = d.url; })
+          .catch(function () { btn.disabled = false; btn.textContent = label; alert('Something went wrong. Please try again or email georgia@thyme4sleep.com'); });
+      });
+    });
+  </script>
+</Layout>

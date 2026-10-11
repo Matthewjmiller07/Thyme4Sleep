@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import Leaf from '../../components/assets/Leaf.astro';
+export const prerender = true;
+
+// Each answer adds points to one or more "sleep drivers".
+// d = disruption (needs a reset), a = association/habit, t = timing, c = complex (1:1)
+const questions = [
+  { q: 'How old is your little one?', a: [
+    ['Under 4 months', { c: 3 }], ['4–11 months', {}], ['12 months – 3 years', {}], ['3 years +', { c: 1 }],
+  ]},
+  { q: 'Which sounds most like your nights right now?', a: [
+    ['Sleep used to be fine — then everything fell apart', { d: 3 }],
+    ['Wakes at roughly the same times every night', { a: 2 }],
+    ['Wakes every 1–2 hours, all night', { a: 2, t: 1 }],
+    ['Bedtime is the battle — nights are okay-ish', { t: 2 }],
+  ]},
+  { q: 'Has anything changed in the last 4–6 weeks?', a: [
+    ['Illness, teething or a vaccine', { d: 3 }], ['Travel, time change, or moving house', { d: 3 }],
+    ['New skill — rolling, standing, walking, talking', { d: 2 }], ['Nothing big — this has been going on a while', { a: 2 }],
+  ]},
+  { q: 'How does your child usually fall asleep at bedtime?', a: [
+    ['Feeding or a bottle', { a: 3 }], ['Rocking, bouncing or being held', { a: 3 }],
+    ['With me lying or sitting beside them', { a: 2 }], ['In their own bed, mostly on their own', { t: 2, d: 1 }],
+  ]},
+  { q: 'And when they wake overnight, what gets them back to sleep?', a: [
+    ['The exact same thing, every single time', { a: 3 }], ['Whatever works — it changes nightly', { d: 2 }],
+    ['They often resettle alone, but take a long time', { t: 2 }], ['Only coming into our bed', { a: 2 }],
+  ]},
+  { q: 'What do naps look like?', a: [
+    ['Short — 30–45 minutes, then up', { t: 3 }], ['Only on me, in the car or stroller', { a: 2, t: 1 }],
+    ['All over the place — no rhythm', { t: 2, d: 1 }], ['Pretty solid, honestly', {}],
+  ]},
+  { q: 'Is there anything that makes sleep more complicated?', a: [
+    ['Reflux, allergies, or a medical concern I’m monitoring', { c: 3 }], ['Neurodivergence, additional needs or developmental delay', { c: 3 }],
+    ['Twins / multiples or room-sharing siblings', { c: 2 }], ['No — just a tired family', {}],
+  ]},
+  { q: 'How are you doing?', a: [
+    ['Running on fumes — I need a plan today', { a: 1 }], ['Tired but coping — I want to understand what’s going on', { t: 1 }],
+    ['Disagreeing with my partner about what to do', { c: 1 }], ['I’ve tried everything and nothing sticks', { c: 2 }],
+  ]},
+];
+---
+<Layout title="The Sleep Snapshot Quiz | Thyme4Sleep" description="A 2-minute quiz that reveals what's really driving your child's night wakings — and the gentle next step that fits your family.">
+  <section class="hero" style="min-height:calc(100vh - 67px);">
+    <Leaf size={260} class="leaf" style="right:-60px;top:20px;opacity:.35;" />
+    <div class="narrow" style="padding:clamp(40px,7vw,80px) 0;position:relative;">
+      <div id="intro" class="center">
+        <span class="pill free">Free · 8 questions · 2 minutes</span>
+        <h1 style="margin-top:18px;">The Sleep Snapshot</h1>
+        <hr class="divider" />
+        <p class="lead" style="margin-inline:auto;">Every wake-up has a reason. Answer eight quick questions and find out your child’s main <em>sleep driver</em> — plus the gentle next step Georgia would recommend if you were sitting across from her.</p>
+        <button class="btn btn-dark" id="start" type="button">Start the Snapshot →</button>
+        <p class="small muted" style="margin-top:14px;">No cry-it-out. No judgement. No email required to see your result.</p>
+      </div>
+
+      <form id="quiz" hidden onsubmit="return false;">
+        <div style="height:6px;background:#fff;border-radius:99px;overflow:hidden;margin-bottom:28px;"><div id="bar" style="height:100%;width:0;background:var(--sage);transition:width .35s ease;"></div></div>
+        {questions.map((item, i) => (
+          <fieldset class="q" data-i={i} hidden style="border:0;padding:0;margin:0;">
+            <legend class="eyebrow">Question {i + 1} of {questions.length}</legend>
+            <h2 style="font-size:clamp(1.7rem,4vw,2.4rem);">{item.q}</h2>
+            <div class="grid" style="gap:12px;margin-top:22px;">
+              {item.a.map(([label, pts]) => (
+                <button type="button" class="opt card" data-pts={JSON.stringify(pts)} style="text-align:left;cursor:pointer;font:inherit;padding:18px 22px;border-radius:16px;transition:all .2s;">{label}</button>
+              ))}
+            </div>
+            {i > 0 && <button type="button" class="back btn btn-sm" style="background:none;color:var(--mink);margin-top:14px;padding-left:0;">← Back</button>}
+          </fieldset>
+        ))}
+      </form>
+
+      <div id="result" hidden>
+        <div class="center">
+          <span class="eyebrow">Your Sleep Snapshot</span>
+          <h1 id="r-title" style="font-size:clamp(2.2rem,5vw,3.4rem);"></h1>
+          <hr class="divider" />
+        </div>
+        <div class="card lift" style="padding:clamp(24px,4vw,40px);">
+          <p id="r-body" style="font-size:1.08rem;"></p>
+          <h3 style="margin-top:8px;">What to do this week</h3>
+          <ul class="ticks" id="r-steps"></ul>
+          <div style="border-top:1px solid var(--line);margin-top:22px;padding-top:22px;">
+            <span class="pill" id="r-pill"></span>
+            <h3 id="r-offer" style="margin-top:12px;"></h3>
+            <p id="r-offer-body" class="muted"></p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a id="r-cta" class="btn btn-dark" href="#"></a>
+              <a id="r-alt" class="btn btn-ghost" href="#"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card soft" style="margin-top:22px;" id="capture">
+          <h3>Want this saved — plus the free Gentle Sleep Reset guide?</h3>
+          <p class="muted small">We’ll email your Snapshot and Georgia’s 72-hour reset guide. Occasional gentle sleep tips after that; unsubscribe any time.</p>
+          <form id="lead" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="hidden" name="access_key" value="446b9501-1418-4401-b080-b126515a1304" />
+            <input type="hidden" name="subject" value="New Sleep Snapshot quiz lead" />
+            <input type="hidden" name="from_name" value="Thyme4Sleep Sleep Snapshot" />
+            <input type="hidden" name="result" id="lead-result" value="" />
+            <input type="hidden" name="answers" id="lead-answers" value="" />
+            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+            <input name="name" placeholder="First name" required style="flex:1 1 160px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+            <input name="email" type="email" placeholder="Email address" required style="flex:2 1 220px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+            <button class="btn btn-peach" type="submit" id="lead-btn">Send it to me</button>
+          </form>
+          <p id="lead-ok" hidden style="margin:12px 0 0;color:var(--sage-deep);font-weight:600;">Done — check your inbox. You can also grab the guide now: <a href="/essential-checklist.pdf" target="_blank" rel="noopener">The Gentle Sleep Reset (PDF)</a>.</p>
+        </div>
+        <p class="center small muted" style="margin-top:20px;"><button type="button" id="restart" style="background:none;border:0;color:var(--mink);text-decoration:underline;cursor:pointer;font:inherit;">Retake the Snapshot</button> · General education only, not medical advice.</p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var RESULTS = {
+        d: {
+          title: 'The Disrupted Sleeper',
+          body: 'Your child’s sleep isn’t broken — it’s <strong>unsettled</strong>. Illness, travel or a developmental leap knocked the foundations, and the patterns that crept in to “get through it” are now lingering. The good news: this is the most fixable snapshot there is. What your child needs first is <em>stabilisation</em>, not a new method.',
+          steps: ['Anchor the morning: same wake-up time (±30 min) for the next 72 hours.', 'Pick one calm bedtime window and one consistent response to wake-ups — and hold it.', 'Make no new sleep changes until bedtime feels calmer (usually 3–5 nights).'],
+          pill: ['free', 'Free · Start here'], offer: 'The Gentle Sleep Reset', offerBody: 'Georgia’s free 72-hour stabilisation guide — exactly what this snapshot calls for. If calm returns but night wakings remain, <em>From Reset to Rest</em> ($37) is your next step.',
+          cta: ['Get the free reset guide', '/free-checklist'], alt: ['See Reset to Rest — $37', '/reset-preview'],
+        },
+        a: {
+          title: 'The Connected Sleeper',
+          body: 'Your child has learned to fall asleep <strong>with</strong> something — a feed, rocking, you beside them. That’s loving and completely normal. But every 45–90 minutes we all surface between sleep cycles, and when the way they fell asleep has disappeared, they call for it back. That’s the wake-up. The fix is gently changing <em>how</em> they fall asleep at bedtime — nights follow.',
+          steps: ['Move the bedtime feed to the start of the routine, lights on, outside the bedroom.', 'Choose a short “key phrase” and use it at every lay-down and every wake-up.', 'Put them down calm-but-awake and let the last minute of falling asleep be theirs.'],
+          pill: ['paid', '$97 · Recommended for you'], offer: 'The Calm Nights Method', offerBody: 'The complete 14-night plan Georgia builds for 1:1 clients: choose between her Cotside Comforting and Quick Checks methods, then follow night-by-night scripts, a nap plan and troubleshooting. Built for exactly this snapshot.',
+          cta: ['See the Calm Nights Method', '/assets/calm-nights'], alt: ['Start free with the reset guide', '/free-checklist'],
+        },
+        t: {
+          title: 'The Out-of-Rhythm Sleeper',
+          body: 'Your child’s body clock and sleep pressure are slightly out of step with their schedule. Too-short or too-long wake windows show up as bedtime battles, short naps and early mornings — and they make every other sleep problem louder. Small timing tweaks often make a big difference within a week.',
+          steps: ['Check today’s wake windows against the free cheat sheet for their age.', 'Keep the first wake window shortest and the pre-bedtime window longest.', 'Shift one thing at a time by 15 minutes and hold it for 3 days.'],
+          pill: ['free', 'Free · Start here'], offer: 'The Wake Window & Nap Cheat Sheet', offerBody: 'Age-by-age wake windows, nap counts, bedtimes and sample daily rhythms. If timing is fixed but they still need help falling asleep, the <em>Calm Nights Method</em> ($97) is the next step.',
+          cta: ['Get the free cheat sheet', '/assets/wake-windows'], alt: ['See Calm Nights — $97', '/assets/calm-nights'],
+        },
+        c: {
+          title: 'The Needs-a-Specialist Sleeper',
+          body: 'Some of what you shared — your child’s age, a medical or developmental factor, multiples, or the feeling that nothing sticks — means a generic plan is likely to frustrate you. You deserve a plan built around <strong>your</strong> child, with someone to troubleshoot alongside you. That’s exactly what Georgia’s 1:1 coaching is for.',
+          steps: ['Check in with your pediatrician about anything medical first.', 'Keep a simple 7-day sleep log so patterns are easy to spot together.', 'Hold one calm, consistent response to wake-ups while you get support.'],
+          pill: ['core', '1:1 · Personalised'], offer: 'Personalised sleep coaching with Georgia', offerBody: 'A custom sleep plan, consultation call and daily support while you put it into practice — including Specialised Sleep Support for children with additional needs. Every package comes with a 14-day results guarantee.',
+          cta: ['See 1:1 packages', '/pricing'], alt: ['Get the free sleep log', '/assets/sleep-log'],
+        },
+      };
+
+      var intro = document.getElementById('intro');
+      var quiz = document.getElementById('quiz');
+      var result = document.getElementById('result');
+      var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+      var bar = document.getElementById('bar');
+      var answers = [];
+      var current = 0;
+
+      function show(i) {
+        qs.forEach(function (q, k) { q.hidden = k !== i; });
+        bar.style.width = (i / qs.length * 100) + '%';
+        current = i;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function finish() {
+        var score = { d: 0, a: 0, t: 0, c: 0 };
+        answers.forEach(function (a) { for (var k in a.pts) score[k] += a.pts[k]; });
+        // Complex needs win once they clearly register; otherwise highest driver wins.
+        var key = score.c >= 3 ? 'c' : ['a', 'd', 't'].sort(function (x, y) { return score[y] - score[x]; })[0];
+        var r = RESULTS[key];
+        document.getElementById('r-title').innerHTML = r.title;
+        document.getElementById('r-body').innerHTML = r.body;
+        document.getElementById('r-steps').innerHTML = r.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+        var pill = document.getElementById('r-pill'); pill.className = 'pill ' + r.pill[0]; pill.textContent = r.pill[1];
+        document.getElementById('r-offer').textContent = r.offer;
+        document.getElementById('r-offer-body').innerHTML = r.offerBody;
+        var cta = document.getElementById('r-cta'); cta.textContent = r.cta[0] + ' →'; cta.href = r.cta[1];
+        var alt = document.getElementById('r-alt'); alt.textContent = r.alt[0]; alt.href = r.alt[1];
+        document.getElementById('lead-result').value = r.title + ' ' + JSON.stringify(score);
+        document.getElementById('lead-answers').value = answers.map(function (a, i) { return (i + 1) + '. ' + a.label; }).join(' | ');
+        quiz.hidden = true; result.hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.gtag) gtag('event', 'quiz_complete', { quiz: 'sleep_snapshot', result: key });
+      }
+
+      document.getElementById('start').addEventListener('click', function () {
+        intro.hidden = true; quiz.hidden = false; show(0);
+        if (window.gtag) gtag('event', 'quiz_start', { quiz: 'sleep_snapshot' });
+      });
+      qs.forEach(function (q, i) {
+        q.querySelectorAll('.opt').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            answers[i] = { label: btn.textContent.trim(), pts: JSON.parse(btn.dataset.pts) };
+            q.querySelectorAll('.opt').forEach(function (b) { b.style.borderColor = ''; b.style.background = ''; });
+            btn.style.borderColor = 'var(--sage)'; btn.style.background = 'var(--mint-soft)';
+            setTimeout(function () { i + 1 < qs.length ? show(i + 1) : finish(); }, 220);
+          });
+        });
+        var back = q.querySelector('.back');
+        if (back) back.addEventListener('click', function () { show(i - 1); });
+      });
+      document.getElementById('restart').addEventListener('click', function () {
+        answers = []; result.hidden = true; quiz.hidden = false;
+        document.querySelectorAll('.opt').forEach(function (b) { b.style.borderColor = ''; b.style.background = ''; });
+        show(0);
+      });
+
+      document.getElementById('lead').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = document.getElementById('lead-btn');
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(e.target) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (!d.success) throw new Error(d.message);
+            e.target.hidden = true; document.getElementById('lead-ok').hidden = false;
+            if (window.gtag) gtag('event', 'generate_lead', { source: 'sleep_snapshot' });
+          })
+          .catch(function () { btn.disabled = false; btn.textContent = 'Send it to me'; alert('Something went wrong — please try again or email georgia@thyme4sleep.com'); });
+      });
+    })();
+  </script>
+</Layout>

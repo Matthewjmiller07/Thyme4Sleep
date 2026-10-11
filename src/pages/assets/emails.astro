@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+export const prerender = true;
+
+interface Email { day: string; subject: string; preview: string; body: string; cta: string }
+
+const welcome: Email[] = [
+  { day: 'Day 0 · Instantly', subject: 'Your Gentle Sleep Reset is here 🌿', preview: 'Plus the one thing to do tonight.',
+    body: `Hi {first_name},\n\nYour guide is attached — and here it is again in case it hides: [The Gentle Sleep Reset].\n\nBefore you read all of it, do just one thing tonight: decide what time your little one will wake up tomorrow, and set an alarm for it. That's it.\n\nA consistent morning wake-up is the quiet anchor everything else hangs from. It rebuilds sleep pressure and nudges the body clock back on track — even after a terrible night.\n\nTomorrow I'll share why "doing less" is the fastest way back to calmer nights.\n\nWarmly,\nGeorgia\nThyme4Sleep`,
+    cta: 'Download the guide' },
+  { day: 'Day 1', subject: 'Why doing less fixes sleep faster', preview: 'The mistake almost every tired parent makes.',
+    body: `Hi {first_name},\n\nWhen sleep falls apart, our instinct is to change everything: a new bedtime, a new method, a new white-noise machine, all by Thursday.\n\nBut children settle through predictability. Every change — even a good one — is something new for them to figure out.\n\nSo for the next 72 hours, the job is simply to stabilise:\n• Same wake-up time (within 30 minutes)\n• One calm bedtime window\n• One consistent response to wake-ups\n\nNo new strategies. No switching mid-night. Your child's sleep isn't broken, and you haven't failed them. It just needs steadying before it can improve.\n\nNot sure what's really driving the wake-ups? My 2-minute Sleep Snapshot will tell you.\n\nGeorgia`,
+    cta: 'Take the Sleep Snapshot' },
+  { day: 'Day 2', subject: 'The 3am question: go in, or wait?', preview: 'Pause before you problem-solve.',
+    body: `Hi {first_name},\n\nHere's something that surprises most parents: many of the noises you hear overnight aren't full wake-ups. They're your child moving between sleep cycles — something we all do every 45–90 minutes.\n\nIf we rush in at the first sound, we can accidentally turn a two-minute stir into a 45-minute wake-up.\n\nTonight, try a short pause before you respond. Listen. Is it grizzling that rises and falls, or crying that's building? On a scale of 1–10, under 5 is often them working it out.\n\nWhen you do go in, use the same calm response every time. Predictable is what feels safe.\n\nTomorrow: the real reason some children wake at the same time every night.\n\nGeorgia`,
+    cta: 'Read the full reset guide' },
+  { day: 'Day 3', subject: 'Calmer bedtimes… but still waking?', preview: 'This is where most families get stuck.',
+    body: `Hi {first_name},\n\nBy now, a lot of families notice bedtime feels calmer. Fewer false starts. A little more confidence.\n\nBut the night wakings? Often still there.\n\nThat's normal — and it's because stabilising and reducing are two different steps. Once calm is back, wake-ups that persist are usually maintained by one of three things:\n\n1. A habit loop (waking like clockwork)\n2. A timing imbalance (short naps, long wake windows, early rising)\n3. A sleep association (only one exact thing gets them back to sleep)\n\nFrom Reset to Rest is the gentle protocol I created for exactly this moment — a video walkthrough plus a workbook that helps you identify the driver and reduce wakings one small step at a time. No cry-it-out, no rigid schedule.\n\nIt's $37, and you can start tonight.\n\nGeorgia`,
+    cta: 'See From Reset to Rest — $37' },
+  { day: 'Day 5', subject: 'Which kind of support do you need?', preview: 'An honest guide to your next step.',
+    body: `Hi {first_name},\n\nOver the last few days you've steadied the foundations. Thank you for letting me be part of that.\n\nHere's an honest guide to what comes next:\n\n→ Calm is back, but nights are still broken: From Reset to Rest ($37)\n→ You want the full plan — bedtime, nights, naps and schedules — to follow yourself: The Calm Nights Method ($97)\n→ There's a medical or developmental factor, you have multiples, or you simply want me in your corner: 1:1 coaching, from $249, with a 14-day results guarantee.\n\nWhatever you choose, keep the morning anchor. It's the single most powerful habit in all of this.\n\nYou're doing more right than you think.\n\nGeorgia`,
+    cta: 'Find your next step' },
+];
+
+const ascend: Email[] = [
+  { day: 'Purchase · Instantly', subject: 'You’re in — start here', preview: 'How to get the most from your plan in the first 48 hours.',
+    body: `Hi {first_name},\n\nThank you for trusting me with your family's sleep. Your access link: [link].\n\nThree things for the next 48 hours:\n1. Read it all the way through once, ideally with your partner.\n2. Choose one approach and commit to it.\n3. Start the tracker tonight — even before you change anything.\n\nAny question at all, just reply. I read every email.\n\nGeorgia`,
+    cta: 'Open my plan' },
+  { day: 'Purchase + 3 days', subject: 'Night 3 got harder? Read this.', preview: 'It usually means it’s working.',
+    body: `Hi {first_name},\n\nIf the last night or two felt harder, you're not alone — and it's often a good sign. Children commonly test whether new patterns are "real" around night three.\n\nThe families who see the biggest change are the ones who hold steady for two more nights. Keep your response the same, keep the morning anchor, and look at your tracker for the small wins (shorter wake-ups count!).\n\nGeorgia`,
+    cta: 'Revisit the troubleshooting chapter' },
+  { day: 'Purchase + 7 days', subject: 'The piece most families are missing', preview: 'Bedtime, naps and nights work as one system.',
+    body: `Hi {first_name},\n\nOne week in! Many families find the night-waking work goes faster once bedtime, naps and the daily rhythm are all pulling in the same direction.\n\nThat's what the Calm Nights Method is: the same complete 14-night plan I write for my 1:1 families — two gentle methods to choose from, night-by-night scripts, the nap plan, schedules by age and a full troubleshooting library.\n\nAs a Reset to Rest family, you already have the foundations — this is the full map.\n\nGeorgia`,
+    cta: 'See the Calm Nights Method — $97' },
+  { day: 'Purchase + 12 days', subject: 'How are nights looking?', preview: 'Hit reply and tell me — I’d love to know.',
+    body: `Hi {first_name},\n\nI'd love to hear how things are going. Hit reply and tell me one win and one thing that still feels hard.\n\nIf you've had a breakthrough, would you share a sentence I could use as a review? It helps other exhausted parents find gentle support. (And if a friend could use help, my referral programme gives you both $100 off a 1:1 package.)\n\nGeorgia`,
+    cta: 'Reply to Georgia' },
+  { day: 'Purchase + 16 days', subject: 'When a plan isn’t enough', preview: 'Some children need a plan built around them.',
+    body: `Hi {first_name},\n\nIf things are still not shifting, please hear this: it's not you. Some children — because of temperament, a medical or developmental factor, or a family situation — need a plan built specifically around them, and someone to troubleshoot with day by day.\n\nThat's exactly what my 1:1 packages are for: a personalised plan, a consultation call and daily support while you put it into practice, with a 14-day results guarantee.\n\nMention your guide when you book and I'll know exactly where you're starting from.\n\nGeorgia`,
+    cta: 'See 1:1 packages' },
+];
+
+const seqs: [string, string, string, Email[]][] = [
+  ['welcome', 'Sequence 1 · Free → $37', 'Trigger: Gentle Sleep Reset download or Sleep Snapshot opt-in. Goal: deliver real value, build trust, then offer Reset to Rest on day 3.', welcome],
+  ['ascend', 'Sequence 2 · $37 → $97 → 1:1', 'Trigger: Reset to Rest purchase (skip email 3 for Calm Nights buyers). Goal: drive results, collect reviews and referrals, and ascend to Calm Nights or 1:1.', ascend],
+];
+---
+<Layout title="Email Nurture Sequences | Thyme4Sleep" description="The Thyme4Sleep free-to-paid email sequences.">
+  <section class="hero">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill tool">Content studio</span>
+        <h1 style="margin-top:18px;">Email Nurture Sequences</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">Ten emails in Georgia’s voice that turn a free download into a paying family — and a paying family into a review, a referral or a 1:1 client. Paste them into your email platform (Flodesk, Kit, MailerLite…) and set the delays shown.</p>
+      </div>
+    </div>
+  </section>
+
+  {seqs.map(([id, title, note, emails]) => (
+    <section class="band" id={id} style="padding-bottom:20px;">
+      <div class="narrow">
+        <span class="eyebrow">{title}</span>
+        <p class="muted">{note}</p>
+        {emails.map((e) => (
+          <details class="card" style="margin-bottom:14px;border-radius:18px;">
+            <summary style="cursor:pointer;">
+              <span class="small" style="color:var(--sage-deep);font-weight:600;letter-spacing:.08em;">{e.day}</span><br />
+              <span style="font-family:var(--serif);font-size:1.45rem;">{e.subject}</span>
+              <span class="small muted" style="display:block;">Preview: {e.preview}</span>
+            </summary>
+            <p style="white-space:pre-line;margin:16px 0;font-size:.98rem;">{e.body}</p>
+            <span class="btn btn-sm btn-dark" style="pointer-events:none;">{e.cta}</span>
+          </details>
+        ))}
+      </div>
+    </section>
+  ))}
+  <section class="band cream">
+    <div class="narrow">
+      <div class="note"><p><strong>Merge tag:</strong> replace <code>{'{first_name}'}</code> with your platform’s tag. Both the quiz and the Gentle Sleep Reset form currently send leads to Georgia’s inbox via Web3Forms — connect them to your email platform (or forward via Zapier) so Sequence 1 fires automatically.</p></div>
+    </div>
+  </section>
+</Layout>

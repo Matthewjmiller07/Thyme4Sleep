@@ -1,0 +1,366 @@
+---
+// The Calm Nights Method — the paid product. Access requires a verified Stripe session
+// (cookie set by /assets/calm-nights/success) or the owner preview key.
+import Layout from '../../../layouts/AssetsLayout.astro';
+import Leaf from '../../../components/assets/Leaf.astro';
+import { ACCESS_COOKIE, verifySession, isPreview } from '../../../lib/calmNights';
+import { AGE_BANDS, SAMPLE_DAYS, KEY_PHRASES } from '../../../data/sleep';
+export const prerender = false;
+
+const preview = isPreview(Astro.url);
+if (!preview) {
+  const purchase = await verifySession(Astro.cookies.get(ACCESS_COOKIE)?.value);
+  if (!purchase) return Astro.redirect('/assets/calm-nights');
+}
+const welcome = Astro.url.searchParams.get('welcome') === '1';
+
+const toc = [
+  ['start', 'Start here'],
+  ['ready', 'Readiness check'],
+  ['choose', 'Choose your method'],
+  ['prep', 'Prep week'],
+  ['bedtime', 'The bedtime routine'],
+  ['cotside', 'Method A · Cotside Comforting'],
+  ['checks', 'Method B · Quick Checks'],
+  ['nights', 'Night wakings & early rising'],
+  ['naps', 'The nap plan'],
+  ['schedules', 'Schedules by age'],
+  ['trouble', 'Troubleshooting'],
+  ['workbook', 'Printable workbook'],
+  ['next', 'What’s next'],
+];
+
+const cotside = [
+  ['Nights 1–3', 'Beside the crib', 'Sit or kneel right next to the crib. Offer touch — a hand on the tummy, stroking the back or head — and soft shushing. Reduce touch as they calm; stop before they’re asleep if you can. No picking up.'],
+  ['Nights 4–6', 'Beside the crib, voice only', 'Same spot, but hands off. Comfort with your voice and presence. If crying escalates past a 6 out of 10, a brief touch is fine — then back to voice.'],
+  ['Nights 7–9', 'Halfway to the door', 'Move your chair halfway across the room. Calm, low, repetitive reassurance (your key phrase, a gentle “shhh”). Keep eye contact soft and minimal.'],
+  ['Nights 10–12', 'In the doorway', 'Sit in the open doorway where they can see or hear you. Reassure with your key phrase at intervals rather than constantly.'],
+  ['Nights 13–14', 'Just outside the door', 'Out of sight, within earshot. Offer your key phrase from outside if needed. Most children are now falling asleep within 10–20 minutes on their own.'],
+];
+---
+<Layout title="The Calm Nights Method — Your Plan | Thyme4Sleep" description="Your Calm Nights Method 14-night gentle sleep plan.">
+  <style>
+    .plan { display: grid; grid-template-columns: 250px 1fr; gap: 56px; padding: 48px 0 80px; }
+    .toc { position: sticky; top: 90px; align-self: start; font-size: .86rem; }
+    .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: t; }
+    .toc li { counter-increment: t; margin: 0 0 6px; }
+    .toc a { text-decoration: none; color: var(--mink); display: block; padding: 4px 0; }
+    .toc a::before { content: counter(t, decimal-leading-zero) '  '; color: var(--taupe); font-size: .75rem; }
+    .toc a:hover { color: var(--char); }
+    .chapter { padding: 0 0 56px; margin: 0 0 56px; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
+    .chapter:last-child { border: 0; }
+    .chapter > .num { font-family: var(--serif); font-size: 1rem; letter-spacing: .2em; color: var(--taupe); text-transform: uppercase; }
+    .chapter p, .chapter li { font-size: 1.02rem; }
+    .night { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px dashed var(--line); }
+    .night:last-child { border: 0; }
+    .night .when { font-family: var(--serif); font-size: 1.35rem; line-height: 1.1; }
+    .night .where { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sage-deep); font-weight: 600; display: block; margin-top: 4px; }
+    .script-card { background: var(--char); color: var(--cream); border-radius: 22px; padding: 26px 30px; margin: 20px 0; }
+    .script-card p, .script-card li { color: var(--cream); }
+    .script-card h4 { color: var(--peach); font-family: var(--sans); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
+    .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; margin: 12px 0 6px; }
+    .scale span { height: 30px; border-radius: 6px; display: grid; place-items: center; font-size: .75rem; font-weight: 600; }
+    .tracker td { height: 38px; }
+    @media (max-width: 900px) { .plan { grid-template-columns: 1fr; gap: 24px; } .toc { position: static; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px; } .night { grid-template-columns: 1fr; gap: 6px; } }
+    @media print {
+      .plan { display: block; padding: 0 .6in; }
+      .toc, .hero .btn { display: none !important; }
+      .chapter { break-before: page; border: 0; }
+      .chapter:first-of-type { break-before: auto; }
+      .chapter p, .chapter li, .t4s td { font-size: 10.5pt; }
+      .hero { background: #fff; }
+      @page { size: letter; margin: .55in 0; }
+    }
+  </style>
+
+  <section class="hero">
+    <Leaf size={280} class="leaf" style="right:-60px;top:10px;opacity:.35;" />
+    <div class="narrow" style="padding:clamp(48px,8vw,88px) 0;position:relative;">
+      {welcome && <div class="note no-print" style="margin-bottom:24px;"><p><strong>Welcome — you’re in.</strong> This page is saved to this browser, so you can come back any time at this address. Tip: use “Print / save as PDF” to keep a copy on your phone.</p></div>}
+      {preview && <div class="note peach no-print" style="margin-bottom:24px;"><p><strong>Owner preview.</strong> You’re viewing the paid product with the preview key.</p></div>}
+      <span class="pill paid">Your plan</span>
+      <h1 style="margin-top:18px;">The Calm Nights <em class="script">Method</em></h1>
+      <hr class="divider" />
+      <p class="lead">A gentle, structured 14-night plan for independent, connected sleep — without cry-it-out. Read it once all the way through before night one. Then come back to the chapter you need, when you need it.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="no-print">
+        <a class="btn btn-dark" href="#choose">Jump to the Method Chooser</a>
+        <button class="btn btn-ghost" type="button" onclick="window.print()">Print / save as PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap plan">
+    <nav class="toc no-print" aria-label="Plan contents">
+      <span class="eyebrow">Contents</span>
+      <ol>{toc.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
+    </nav>
+
+    <article>
+      <!-- 01 -->
+      <section class="chapter" id="start">
+        <span class="num">Chapter 01</span>
+        <h2>Start here</h2>
+        <p>Hello, and welcome. I’m Georgia — a certified pediatric sleep coach and a parent too, so I know exactly how heavy those 3am wake-ups feel. This plan is the same framework I use with my 1:1 families, written so you can follow it confidently on your own.</p>
+        <p>My approach is simple: I meet your family where you are. I believe every child deserves love, comfort and connection — especially at bedtime — and that independent sleep is a skill children can learn <em>with</em> us, not without us. Children thrive when bedtime feels safe, soothing and predictable.</p>
+        <div class="note"><p><strong>The promise of this plan:</strong> consistency over perfection. Clear, repeated cues. Calm, predictable, less reactive responses from you. No over-intervening, no rushing, no second-guessing — only steady guidance. <em>Comfort is never removed; confusion is.</em></p></div>
+        <h3>How to use it</h3>
+        <ul class="ticks">
+          <li><strong>Read everything once</strong> — ideally with your partner or anyone else who does bedtime.</li>
+          <li><strong>Choose one method</strong> (chapter 03) and commit to it for the full 14 nights.</li>
+          <li><strong>Do the prep week</strong> (chapter 04). Families who skip it struggle more on night one.</li>
+          <li><strong>Track each night</strong> with the workbook (chapter 12). Progress hides on hard nights; the tracker shows it.</li>
+        </ul>
+        <h3>Safety &amp; medical note</h3>
+        <p>This plan is general education for healthy, typically developing children from around 6 months, and it isn’t medical advice. Please check with your pediatrician before you start — especially about night feeds, weight gain, reflux, allergies, snoring or anything that worries you. Pause the plan if your child becomes unwell, and always follow safe sleep guidance: alone, on their back, in a crib with nothing but a fitted sheet. (The free <a href="/assets/safe-sleep">Sleep Tight checklist</a> covers everything.)</p>
+        <div class="note peach"><p><strong>If you ever feel overwhelmed:</strong> lay your child down safely in their crib, step out, and give yourself a few minutes — a shower, music, a cup of tea, a call to a friend. Even the most loving, exhausted parent can reach breaking point. Stepping away is a safe and responsible choice. If nothing soothes your child, contact your doctor.</p></div>
+      </section>
+
+      <!-- 02 -->
+      <section class="chapter" id="ready">
+        <span class="num">Chapter 02</span>
+        <h2>Readiness check</h2>
+        <p>Starting before you’re ready is the number one reason families give up on night three. Tick through these honestly.</p>
+        <div class="grid g2">
+          <div class="card soft"><h4>Your child</h4><ul class="boxes"><li>At least 6 months old (or your pediatrician has given the go-ahead)</li><li>Healthy right now — no illness, ear infection or new teeth cutting through</li><li>Growing well, with your doctor happy about night feeds</li><li>No big change in the next two weeks (travel, new sibling, starting daycare)</li></ul></div>
+          <div class="card soft"><h4>Your family</h4><ul class="boxes"><li>Everyone who does bedtime has read this plan</li><li>You’ve agreed on one method and one key phrase</li><li>You have two weeks with mostly home bedtimes</li><li>You’ve planned something kind for yourselves (early nights, help with the older kids)</li></ul></div>
+        </div>
+        <p>If several boxes are unticked, that’s not failure — it’s information. Use the free <a href="/free-checklist">Gentle Sleep Reset</a> for a few days to stabilise, then begin.</p>
+        <h3>Why sleep training at all?</h3>
+        <p>Sleep is when growth hormone is released, memories are consolidated and little bodies repair. Good sleep habits are linked with better mood, attention, vocabulary, memory and resilience. Helping your child learn to fall asleep on their own is not selfish — it’s one of the most loving, long-lasting gifts you can give them (and yourself).</p>
+      </section>
+
+      <!-- 03 -->
+      <section class="chapter" id="choose">
+        <span class="num">Chapter 03</span>
+        <h2>Choose your method</h2>
+        <p>Both methods build the same skill — falling asleep without a prop — and both keep you present. The difference is <em>how much</em> of you is in the room.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th></th><th>Cotside Comforting</th><th>Quick Checks</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spectrum</strong></td><td>Gentle</td><td>Gentle–intermediate</td></tr>
+              <tr><td><strong>You are…</strong></td><td>In the room, moving gradually further away over 14 nights</td><td>Out of the room, returning for brief, loving checks</td></tr>
+              <tr><td><strong>Best for children who…</strong></td><td>Are sensitive, anxious or slow to warm up; calm with you nearby</td><td>Are strong-willed, social or older; get <em>more</em> worked up when you hover</td></tr>
+              <tr><td><strong>Best for parents who…</strong></td><td>Want to stay close; find leaving the room very hard</td><td>Find sitting through crying in the room harder than stepping out</td></tr>
+              <tr><td><strong>Typical timeline</strong></td><td>10–14 nights</td><td>5–10 nights</td></tr>
+              <tr><td><strong>Watch out for</strong></td><td>Your presence becoming the new prop — keep moving on schedule</td><td>Checking too soon or too often, which can turn it into a game</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:20px;"><p><strong>Still torn?</strong> Ask: <em>“When I stay in the room, does my child calm down or wind up?”</em> Calms down → Cotside Comforting. Winds up → Quick Checks. And whichever you pick: anything too gentle for a determined child often leads to more resistance, not less. Pick the one you can do <em>consistently</em>.</p></div>
+        <h3>Understanding crying</h3>
+        <p>When something familiar changes, most children protest. That’s communication, not harm — imagine someone suddenly took away your favourite pillow. Once you know their needs are met (fed, clean, comfortable, well), use this scale:</p>
+        <div class="scale" aria-hidden="true">
+          {[1,2,3,4,5,6,7,8,9,10].map((n) => <span style={`background:${n <= 5 ? '#E3E9E1' : n <= 7 ? '#F8E8D3' : '#F1D4AE'};`}>{n}</span>)}
+        </div>
+        <p class="small muted"><strong>1–5 · Grizzling, whining, on-off fussing:</strong> they’re working it out — pause and let them. <strong>6–7 · Building, sustained crying:</strong> respond with your method. <strong>8–10 · Distressed, frantic, or a different “something’s wrong” cry:</strong> go in, check, comfort, then restart the method calmly.</p>
+      </section>
+
+      <!-- 04 -->
+      <section class="chapter" id="prep">
+        <span class="num">Chapter 04</span>
+        <h2>Prep week</h2>
+        <p>Do these in the 3–7 days before night one. Many families see improvement from prep alone.</p>
+        <div class="grid g2">
+          <div><h3>The room</h3><ul class="ticks"><li><strong>Dark:</strong> blackout curtains or window film. Move any night light out to the hallway so melatonin isn’t suppressed.</li><li><strong>Calm:</strong> remove mobiles and stimulating décor from the crib area.</li><li><strong>Cool &amp; dressed right:</strong> season-appropriate PJs and a sleep sack.</li><li><strong>Sound:</strong> white noise is fine — steady, all night, not too loud.</li></ul></div>
+          <div><h3>The feed</h3><ul class="ticks"><li>Move the bedtime milk to the <strong>start</strong> of the routine — lights on, ideally outside the bedroom.</li><li>Keep them awake and engaged for the whole feed.</li><li>Follow it with bath or books so the last thing before sleep isn’t sucking.</li><li>Ask your pediatrician about night feeds: which (if any) they want you to keep.</li></ul></div>
+          <div><h3>The day</h3><ul class="ticks"><li>Fix a morning wake-up time (within 30 minutes) and keep it, even after bad nights.</li><li>Check wake windows against chapter 10.</li><li>Lots of daylight, movement and floor play — and practise new motor skills like standing and sitting down.</li><li>Fill their cup: plenty of connected, phone-free time in the evening.</li></ul></div>
+          <div><h3>The team</h3><ul class="ticks"><li>Choose your key phrase (below) — every adult uses the exact same words.</li><li>Decide who does which nights. Tag-teaming helps.</li><li>Agree now how you’ll handle a hard night, so you don’t debate it at 2am.</li><li>Tell your child what’s changing with a simple story (see social stories, chapter 05).</li></ul></div>
+        </div>
+        <div class="script-card">
+          <h4>Choose your key phrase</h4>
+          <ul style="margin:0;padding-left:18px;">{KEY_PHRASES.map((p) => <li style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px;">{p}</li>)}</ul>
+          <p class="small" style="margin:10px 0 0;opacity:.8;">Short, warm, identical every time. Repetition is what makes it reassuring — it tells your child exactly what happens next.</p>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section class="chapter" id="bedtime">
+        <span class="num">Chapter 05</span>
+        <h2>The bedtime routine</h2>
+        <p>20–40 minutes. Same steps, same order, same calm energy, every night. Not long — predictable.</p>
+        <div class="grid g3">
+          {[['1', 'Feed (lights on)', 'Milk at the start, outside the bedroom where possible. Fully awake.'], ['2', 'Bath or wash', 'Lukewarm, a gentle soak — a strong “wind-down” cue.'], ['3', 'PJs, sleep sack, teeth', 'Into the dim bedroom from here on. Screens off.'], ['4', 'Books & song', 'Two books, one song. Dim light. Lots of cuddles.'], ['5', 'Key phrase', 'Into the crib calm and awake. Say your phrase.'], ['6', 'Begin your method', 'Cotside Comforting or Quick Checks — from tonight, the same every time.']].map(([n, t, d]) => (
+            <div class="card soft" style="padding:20px;"><div style="font-family:var(--serif);font-size:2rem;color:var(--taupe);line-height:1;">{n}</div><h4 style="margin:6px 0 4px;">{t}</h4><p class="small muted" style="margin:0;">{d}</p></div>
+          ))}
+        </div>
+        <h3 style="margin-top:28px;">Time it well</h3>
+        <p>Overtired children fight sleep. For most babies and toddlers, lights out between 6:30 and 8:00pm works beautifully — check the age table in chapter 10. If bedtime has been creeping later, bring it earlier by 15 minutes every couple of nights.</p>
+        <h3>Down awake</h3>
+        <p>Lay your child down calm but awake — drowsy is fine, asleep is not. Falling asleep in the place they’ll wake up is what lets them reconnect sleep cycles alone at 2am instead of calling for the feed or the rocking that got them there.</p>
+        <h3>Social stories (12 months +)</h3>
+        <p>In the days before you start, narrate a simple story about bedtime: what happens, what happens if they wake up, and how much you love them and want them to have energy for tomorrow. Toddlers love hearing their own name in it. Use the free <a href="/assets/bedtime-chart">Bedtime Routine Chart</a> to make it visual.</p>
+      </section>
+
+      <!-- 06 -->
+      <section class="chapter" id="cotside">
+        <span class="num">Chapter 06 · Method A</span>
+        <h2>Cotside Comforting</h2>
+        <p>You stay with your child as they learn to fall asleep, offering calm touch and voice — then gradually reduce your presence every three nights until you’re out of the room. Your child is never alone while learning; they just need you a little less each time.</p>
+        <div class="card" style="padding:8px 26px;">
+          {cotside.map(([when, where, what]) => (
+            <div class="night"><div><span class="when">{when}</span><span class="where">{where}</span></div><p style="margin:0;">{what}</p></div>
+          ))}
+        </div>
+        <h3 style="margin-top:28px;">The rules that make it work</h3>
+        <ul class="ticks">
+          <li><strong>Move on schedule</strong>, even if the previous stage was going well. Lingering is how your presence becomes the new prop.</li>
+          <li><strong>No picking up or rocking</strong> — it sends a mixed message and resets progress. If they stand, gently lay them down once, then let them sit or stand while you stay calm.</li>
+          <li><strong>Boring is your friend:</strong> low voice, soft eyes, minimal chat. You’re a calm lighthouse, not entertainment.</li>
+          <li><strong>Wake-ups get the same response</strong> as bedtime, from the stage you’re at that night.</li>
+          <li>Last resort only: if things fall apart, offer a <em>less</em>-relied-on comfort (back rubbing rather than rocking), then return to the plan next sleep.</li>
+        </ul>
+      </section>
+
+      <!-- 07 -->
+      <section class="chapter" id="checks">
+        <span class="num">Chapter 07 · Method B</span>
+        <h2>Quick Checks</h2>
+        <p>You leave the room after your key phrase and return for brief, calm checks if needed. This lets you comfort in an intuitive, loving way while keeping a clear, consistent boundary — perfect for children who get more worked up by a parent hovering.</p>
+        <div class="script-card">
+          <h4>The Quick Checks script</h4>
+          <ol style="margin:0;padding-left:20px;">
+            <li style="margin-bottom:10px;"><strong>Key phrase &amp; leave.</strong> Crib, calm-but-awake, your key phrase, and walk out with warmth and confidence.</li>
+            <li style="margin-bottom:10px;"><strong>Pause — at least 5 minutes.</strong> Check the clock (five minutes at bedtime feels like twenty). If crying is steady or settling, keep pausing. The exact length matters less than doing the same thing every time.</li>
+            <li style="margin-bottom:10px;"><strong>Check briefly.</strong> If crying is building (a 6+), go in. Make sure all is well. A quick stroke on the tummy, back or head. No picking up, no lying down with them.</li>
+            <li style="margin-bottom:10px;"><strong>Key phrase &amp; leave again.</strong> Calm, loving, firm. Walk out slowly. Under a minute in the room.</li>
+            <li><strong>Repeat</strong> until they’re asleep, keeping pauses at least as long as the last one.</li>
+          </ol>
+        </div>
+        <h3>A note on longer pauses</h3>
+        <p>Many children fall asleep around the 15–20 minute mark — and for lots of families that moment becomes the turning point. If you’re comfortable, stretching pauses towards 15–20 minutes gives your child real space to practise. If that feels too long, keep pauses shorter but <em>consistent</em>. Your instincts matter; consistency matters most.</p>
+        <h3>Avoiding the “check game”</h3>
+        <ul class="ticks">
+          <li>If checks seem to make crying louder, lengthen the pause — your visits may be stimulating them.</li>
+          <li>Keep every check identical: same words, same touch, same exit.</li>
+          <li>Don’t reward a quiet moment by going in — you’ll interrupt them just as they’re about to settle.</li>
+        </ul>
+      </section>
+
+      <!-- 08 -->
+      <section class="chapter" id="nights">
+        <span class="num">Chapter 08</span>
+        <h2>Night wakings &amp; early rising</h2>
+        <h3>Pause before you problem-solve</h3>
+        <p>Many night noises aren’t full wake-ups — they’re your child moving between sleep cycles. Rushing in can turn a 2-minute stir into a 45-minute wake. Give them a brief window to reconnect sleep on their own; then, if needed, respond with <strong>exactly the same method</strong> you use at bedtime.</p>
+        <h3>Night feeds</h3>
+        <p>If your pediatrician wants you to keep a night feed, keep it — at a set time, calmly, lights low, fully awake, then straight back into the crib with your key phrase and method. For comfort feeds your doctor is happy to drop, reduce gradually: shorten a breastfeed by a couple of minutes, or a bottle by around 30ml (1oz), every night or two.</p>
+        <h3>The 6am rule</h3>
+        <p>Anything before 6am is treated as night: same pause, same method. Don’t start the day before 6, even if they’ve been up a while. Between 6 and 7am, if they’re content, you can leave them until a more family-friendly hour.</p>
+        <div class="note"><p><strong>Is it morning yet?</strong> If they’ve had 10+ hours since bedtime and it’s after 6am, it’s a reasonable morning. If they’re still asleep 12–12.5 hours after bedtime, gently wake them to protect the day’s rhythm.</p></div>
+        <h3>The boring morning</h3>
+        <p>Make the start of the day a clear contrast to night, and don’t reward the early wake with the best bits first:</p>
+        <ul class="ticks"><li>Open the curtains and use a cheerful “good morning” phrase.</li><li>Do the boring things first: diaper, get dressed, brush teeth.</li><li>Offer the first milk or breakfast <em>outside</em> the bedroom (and not in your bed).</li><li>Then the cuddles, the snuggles, the joy.</li></ul>
+        <p>A toddler clock that changes colour at wake-up time is a game-changer from about two years old.</p>
+      </section>
+
+      <!-- 09 -->
+      <section class="chapter" id="naps">
+        <span class="num">Chapter 09</span>
+        <h2>The nap plan</h2>
+        <p>Naps are harder to learn than nights (sleep pressure is lower in the day), so start nap training alongside bedtime but expect it to lag a few days behind. Naps should <strong>mirror bedtime</strong>:</p>
+        <ul class="ticks"><li>A shorter version of the same routine, in the same order.</li><li>Dim the room (no need for total blackout), screens off, comfortable temperature.</li><li>Any feed early in the routine, not right before sleep.</li><li>Down awake, key phrase, then your chosen method.</li></ul>
+        <h3>The one-hour rule</h3>
+        <p>Your total nap-settling effort shouldn’t exceed an hour. That’s not an hour of crying — it’s the cap on the whole process:</p>
+        <div class="grid g2">
+          <div class="card soft"><h4>Attempt 1 (up to ~30 min)</h4><p class="small" style="margin:0;">Follow your method. If they’re clearly distressed or it isn’t working, trust your instinct: take them out, change the diaper, walk around, a quiet activity or a due feed.</p></div>
+          <div class="card soft"><h4>Attempt 2 (after a 20–30 min break)</h4><p class="small" style="margin:0;">Try again. Many children fall asleep on the second try because they really do need the rest.</p></div>
+        </div>
+        <p style="margin-top:16px;"><strong>Still awake after two attempts?</strong> Help them sleep by a different means than their old prop — a stroller walk, a lovey, stroking their face rather than the bottle — so they rest without reinforcing the old association. If you need a rescue more than a few days running, vary the method so it doesn’t become a new habit.</p>
+        <h3>Short naps</h3>
+        <p>A 30–45 minute nap is one sleep cycle. If they wake content, that’s okay. If they wake crying, wait 10 minutes before going in — they may resettle. Then check wake windows: short naps are very often a timing issue.</p>
+        <p>Daytime noise is fine — it gently lowers sensitivity to sound and gives you more flexibility.</p>
+      </section>
+
+      <!-- 10 -->
+      <section class="chapter" id="schedules">
+        <span class="num">Chapter 10</span>
+        <h2>Schedules by age</h2>
+        <p>Typical ranges — your child’s cues come first. Adjust in 15-minute steps and hold each change for three days.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Age</th><th>Wake window</th><th>Naps</th><th>Night</th><th>Bedtime</th></tr></thead>
+            <tbody>{AGE_BANDS.filter((b) => b.id !== '0-3m').map((b) => <tr><td><strong>{b.age}</strong></td><td>{b.wakeWindow}</td><td>{b.naps}</td><td>{b.night}</td><td>{b.bedtime}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <div class="grid g2" style="margin-top:24px;">
+          {SAMPLE_DAYS.map((d) => (
+            <div class="card soft" style="padding:20px;">
+              <h4>{d.age}</h4>
+              <table><tbody>{d.rows.map(([t, a]) => <tr><td style="width:60px;padding:5px 6px;font-weight:600;color:var(--sage-deep);">{t}</td><td style="padding:5px 6px;">{a}</td></tr>)}</tbody></table>
+            </div>
+          ))}
+        </div>
+        <h3 style="margin-top:24px;">Tiredness cues to watch for</h3>
+        <p>Rubbing eyes, yawning, slight fussiness, staring off, losing interest in play. Aim to start the routine as these first appear — before crying. Make sure days include enough activity, fresh air and food that your child is genuinely, pleasantly tired by bedtime.</p>
+      </section>
+
+      <!-- 11 -->
+      <section class="chapter" id="trouble">
+        <span class="num">Chapter 11</span>
+        <h2>Troubleshooting</h2>
+        {[
+          ['“Night 3 got worse!”', 'Very common, and usually a good sign: your child is testing whether the new rules are real. Hold steady for two more nights. Families who change course here start again from zero.'],
+          ['Illness or teething', 'Pause, comfort as much as they need, and follow medical advice. Keep the routine and wake-up time. When they’re well (usually 2–3 days after symptoms ease), restart at the stage you’d reached — it comes back fast.'],
+          ['They stand up and won’t lie down', 'Practise “up and down” a lot during the day. At night, lay them down once, then leave them to it — they will lie down when tired. Repeatedly laying them down becomes a game.'],
+          ['Vomiting from crying', 'Clean up calmly and quickly with minimal interaction and low light, change the sheet, then continue your method. Keep your reaction low-key so it doesn’t become a strategy.'],
+          ['Early rising (before 6am)', 'Treat it as night. Then look at the day: is bedtime too late (overtired) or is the last nap too long or too late? Is the room light at dawn? Is there a 5am feed you’re still offering?'],
+          ['Travel & time zones', 'Bring the routine, the sleep sack, the white noise and the key phrase. Shift to local time straight away using daylight and mealtimes. Expect a few unsettled nights, then return to your method.'],
+          ['The toddler negotiator', 'Use the bedtime chart and Bedtime Pass cards. Offer choices before bed (“blue PJs or stars?”), not after. Once in bed: key phrase, same response, no new debates.'],
+          ['We disagree as parents', 'Agree the method and the hard-night plan before you start. If one parent finds it harder, they take a different role (bath and books) while the other leads settling. Unity matters more than which method you picked.'],
+          ['Nothing is changing after 7 nights', 'Check the basics: is the feed truly at the start? Is bedtime well-timed? Is everyone responding the same way? Are you following the method every time, including 3am? If all yes, it’s time for tailored support — see chapter 13.'],
+        ].map(([q, a]) => (
+          <details class="card" style="margin-bottom:10px;border-radius:16px;" open>
+            <summary style="cursor:pointer;font-family:var(--serif);font-size:1.3rem;">{q}</summary>
+            <p style="margin:10px 0 0;">{a}</p>
+          </details>
+        ))}
+      </section>
+
+      <!-- 12 -->
+      <section class="chapter" id="workbook">
+        <span class="num">Chapter 12</span>
+        <h2>Printable workbook</h2>
+        <p>Print this chapter (or the whole plan) and keep it by the bed. Any progress, however small, is a win.</p>
+        <div class="card">
+          <h4>My plan at a glance</h4>
+          <table><tbody>
+            <tr><td style="width:40%;"><strong>Method</strong></td><td>☐ Cotside Comforting &nbsp;&nbsp; ☐ Quick Checks</td></tr>
+            <tr><td><strong>Our key phrase</strong></td><td style="height:44px;"></td></tr>
+            <tr><td><strong>Wake-up time</strong> / <strong>Bedtime</strong></td><td></td></tr>
+            <tr><td><strong>Night feed our doctor wants us to keep</strong></td><td></td></tr>
+            <tr><td><strong>Our hard-night plan</strong></td><td style="height:60px;"></td></tr>
+          </tbody></table>
+        </div>
+        <div class="card tracker" style="margin-top:18px;">
+          <h4>14-night tracker</h4>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Night</th><th>Lights out</th><th>Asleep by</th><th>Wake-ups (#)</th><th>Longest stretch</th><th>Morning</th><th>Win of the night</th></tr></thead>
+              <tbody>{Array.from({ length: 14 }, (_, i) => <tr><td><strong>{i + 1}</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>)}</tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 -->
+      <section class="chapter" id="next">
+        <span class="num">Chapter 13</span>
+        <h2>What’s next</h2>
+        <p>Sleep training isn’t about perfection — it’s about consistency, intention and loving boundaries. There will be wobbles: a cold, a new tooth, a holiday. When they come, go back to chapter 04, steady the foundations, and pick your method back up. It returns faster every time.</p>
+        <p>You are doing something truly wonderful for your child — and for yourselves. You’ve got this.</p>
+        <p style="font-family:var(--serif);font-size:1.5rem;">— Georgia</p>
+        <div class="card lift no-print" style="margin-top:28px;">
+          <span class="pill core">For Calm Nights families</span>
+          <h3 style="margin-top:12px;">Want me in your corner?</h3>
+          <p class="muted">If your child has a medical or developmental factor, you have multiples, or things simply aren’t shifting, a personalised plan and daily support will get you there. Mention <em>Calm Nights</em> when you book so I know exactly where you’re starting from.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-dark" href="/pricing">See 1:1 packages</a>
+            <a class="btn btn-ghost" href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20question">Email Georgia</a>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:28px;">Copyright © Thyme4Sleep LLC. All rights reserved. This plan is for your family’s personal use only and may not be reproduced, shared or resold. General education only — not medical advice; Thyme4Sleep LLC cannot accept liability for outcomes arising from the use of this information. Always consult your pediatrician about your child’s health.</p>
+      </section>
+    </article>
+  </div>
+</Layout>

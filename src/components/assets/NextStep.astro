@@ -1,0 +1,41 @@
+---
+// The flywheel "next rung" block placed under every free asset.
+interface Props { variant?: 'quiz' | 'reset' | 'calm' | 'coach' }
+const { variant = 'calm' } = Astro.props;
+
+const blocks = {
+  quiz: {
+    pill: 'Free · 2 minutes', cls: 'free',
+    title: 'Not sure what’s really driving the wake-ups?',
+    body: 'Take the 2-minute Sleep Snapshot. You’ll get your child’s likely “sleep driver” and the exact next step that fits your family.',
+    cta: 'Take the Sleep Snapshot', href: '/assets/quiz',
+  },
+  reset: {
+    pill: '$37 · Instant access', cls: 'paid',
+    title: 'Calm restored — but nights still broken?',
+    body: '<em>From Reset to Rest</em> is Georgia’s gentle night-waking reduction protocol: video walkthrough + workbook to move from stabilised to consolidated sleep.',
+    cta: 'See Reset to Rest', href: '/reset-preview',
+  },
+  calm: {
+    pill: '$97 · The complete DIY plan', cls: 'paid',
+    title: 'Ready for nights that actually connect?',
+    body: 'The <em>Calm Nights Method</em> is the full 14-night plan Georgia builds for 1:1 clients — method chooser, night-by-night scripts, nap plan and troubleshooting — in a format you can start tonight.',
+    cta: 'Explore Calm Nights', href: '/assets/calm-nights',
+  },
+  coach: {
+    pill: 'From $249 · 1:1 coaching', cls: 'core',
+    title: 'Want Georgia in your corner?',
+    body: 'A fully personalised sleep plan, consultation call and daily support while you put it into practice — with a 14-day results guarantee.',
+    cta: 'See 1:1 packages', href: '/pricing',
+  },
+}[variant];
+---
+<section class="band cream no-print">
+  <div class="narrow center">
+    <span class={`pill ${blocks.cls}`}>{blocks.pill}</span>
+    <h2 style="margin-top:18px;">{blocks.title}</h2>
+    <hr class="divider" />
+    <p class="muted" style="font-size:1.08rem;" set:html={blocks.body} />
+    <a class="btn btn-dark" href={blocks.href}>{blocks.cta} →</a>
+  </div>
+</section>

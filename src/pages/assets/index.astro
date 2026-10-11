@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import Leaf from '../../components/assets/Leaf.astro';
+export const prerender = true;
+
+const free = [
+  { href: '/assets/quiz', tag: 'Interactive quiz', title: 'The Sleep Snapshot', body: '8 questions, 2 minutes. Reveals your child’s main sleep driver and routes you to the right next step.', img: 'crib-awake' },
+  { href: '/free-checklist', tag: 'Guide · PDF', title: 'The Gentle Sleep Reset', body: 'Georgia’s 72-hour stabilisation guide for after illness, travel or a regression. No cry-it-out.', img: 'lamp-sleep' },
+  { href: '/assets/wake-windows', tag: 'Printable · 2 pages', title: 'Wake Window & Nap Cheat Sheet', body: 'Newborn to five years on one fridge-ready page, plus four sample daily rhythms.', img: 'newborn' },
+  { href: '/assets/safe-sleep', tag: 'Checklist + wallpaper', title: 'Sleep Tight Safe Sleep Checklist', body: 'AAP & NIH Safe to Sleep guidance in a 2-minute checklist — and a lock-screen wallpaper for 3am.', img: 'empty-crib' },
+  { href: '/assets/sleep-log', tag: 'Printable tracker', title: 'The 7-Day Sleep Log', body: 'The same 24-hour grid Georgia uses with 1:1 families. See the pattern behind the chaos.', img: 'baby-feet' },
+  { href: '/assets/bedtime-chart', tag: 'Printable · toddlers', title: 'Bedtime Routine Chart', body: 'A picture chart and cut-out Bedtime Pass cards for the “one more drink” crowd.', img: 'toddler-bed' },
+];
+
+const ladder = [
+  { price: 'Free', name: 'Lead magnets & quiz', note: 'Attract & build trust', cls: 'free' },
+  { price: '$37', name: 'From Reset to Rest', note: 'Night-waking reduction protocol', cls: 'paid', href: '/reset-preview' },
+  { price: '$97', name: 'The Calm Nights Method', note: 'The complete 14-night DIY plan', cls: 'paid', href: '/assets/calm-nights' },
+  { price: '$117', name: 'Calm Nights + Reset bundle', note: 'Best-value order bump', cls: 'paid', href: '/assets/calm-nights#bundle' },
+  { price: '$249+', name: '1:1 coaching', note: 'Starter · Standard · Specialised', cls: 'core', href: '/pricing' },
+];
+---
+<Layout title="Resource Library | Thyme4Sleep" description="Free and premium gentle sleep resources from Thyme4Sleep — quizzes, printables, guides and the Calm Nights Method.">
+  <section class="hero">
+    <Leaf size={320} class="leaf" style="right:-70px;top:-30px;opacity:.35;" />
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">The Thyme4Sleep resource library</span>
+        <h1>Calmer nights start <em class="script">here.</em></h1>
+        <hr class="divider" />
+        <p class="lead">Gentle, evidence-informed sleep tools from certified pediatric sleep coach Georgia Miller — from free printables you can use tonight, to the complete Calm Nights Method, to fully personalised 1:1 support.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-dark" href="/assets/quiz">Take the free Sleep Snapshot</a>
+          <a class="btn btn-ghost" href="#free">Browse free resources</a>
+        </div>
+      </div>
+      <div class="photo"><img src="/assets/img/dad-play.webp" alt="A dad playing with his baby beside the crib" loading="eager" /></div>
+    </div>
+  </section>
+
+  <section class="band" id="free">
+    <div class="wrap">
+      <div class="center"><span class="pill free">Free</span><h2 style="margin-top:14px;">Start tonight, for free</h2><hr class="divider" /></div>
+      <div class="grid g3">
+        {free.map((f) => (
+          <a href={f.href} class="card" style="padding:0;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;">
+            <img src={`/assets/img/${f.img}.webp`} alt="" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;width:100%;" />
+            <div style="padding:22px 24px 26px;">
+              <span class="eyebrow" style="margin-bottom:6px;">{f.tag}</span>
+              <h3>{f.title}</h3>
+              <p class="small muted" style="margin:0;">{f.body}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark">
+    <div class="wrap grid g2" style="align-items:center;gap:56px;">
+      <div class="photo" style="border-radius:28px;overflow:hidden;aspect-ratio:4/5;max-width:440px;"><img src="/assets/img/mother-hold.webp" alt="" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+      <div>
+        <span class="pill paid">The complete plan · $97</span>
+        <h2 style="margin-top:16px;">The Calm Nights <em class="script" style="color:var(--peach);">Method</em></h2>
+        <hr class="divider" />
+        <p class="muted" style="font-size:1.08rem;">The same 14-night plan Georgia writes for her 1:1 families. Choose between her Cotside Comforting and Quick Checks methods, then follow night-by-night scripts for bedtime, wake-ups, early rising and naps — with schedules by age and a full troubleshooting library.</p>
+        <ul class="ticks" style="color:var(--cream);"><li style="color:var(--cream);">No cry-it-out — you stay present and responsive</li><li style="color:var(--cream);">Instant access, printable workbook</li><li style="color:var(--cream);">Bundle with Reset to Rest for $117</li></ul>
+        <a class="btn btn-peach" href="/assets/calm-nights">See inside Calm Nights →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Find your level of support</span><h2>From a free checklist to Georgia in your corner</h2><hr class="divider" /></div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
+        {ladder.map((l, i) => (
+          <a href={l.href || '#free'} class="card" style={`text-decoration:none;text-align:center;padding:26px 18px;${i === 2 ? 'border:2px solid var(--char);' : ''}`}>
+            <span class={`pill ${l.cls}`}>{l.price}</span>
+            <h3 style="font-size:1.35rem;margin:14px 0 4px;">{l.name}</h3>
+            <p class="small muted" style="margin:0;">{l.note}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="studio">
+    <div class="wrap">
+      <div class="center"><span class="pill tool">For the Thyme4Sleep team</span><h2 style="margin-top:14px;">The content studio</h2><hr class="divider" /><p class="muted narrow" style="margin-inline:auto;">Everything needed to run the flywheel: ready-to-post social graphics, the email sequences that move people from free to paid, and the growth plan.</p></div>
+      <div class="grid g3">
+        <a href="/assets/social" class="card lift" style="text-decoration:none;">
+          <span class="eyebrow">22 graphics + captions</span><h3>Social media kit</h3><p class="small muted" style="margin:0;">Two Instagram carousels, quote cards, stories, Pinterest pins, a phone wallpaper and an Open Graph card — all on-brand, with captions.</p>
+        </a>
+        <a href="/assets/emails" class="card lift" style="text-decoration:none;">
+          <span class="eyebrow">10 emails</span><h3>Nurture sequences</h3><p class="small muted" style="margin:0;">The 5-day free → $37 welcome series, plus the post-purchase ascension sequence to Calm Nights and 1:1.</p>
+        </a>
+        <a href="/assets/flywheel" class="card lift" style="text-decoration:none;">
+          <span class="eyebrow">Strategy</span><h3>The flywheel &amp; launch plan</h3><p class="small muted" style="margin:0;">How every asset feeds the next, the numbers to watch, and the step-by-step launch checklist.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

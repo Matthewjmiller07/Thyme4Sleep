@@ -40,6 +40,8 @@ const PACKAGES: Record<string, { name: string; amountCents: number } > = {
   
   // Digital Products
   'reset-to-rest': { name: 'Reset to Rest - Complete Guide & Video', amountCents: 3700 },
+  'calm-nights': { name: 'The Calm Nights Method - 14-Night Gentle Sleep Plan', amountCents: 9700 },
+  'calm-nights-bundle': { name: 'Calm Nights Method + Reset to Rest Bundle', amountCents: 11700 },
 };
 
 const ADDONS: Record<string, { name: string; amountCents: number }> = {
@@ -120,13 +122,15 @@ export const POST: APIRoute = async ({ request, url }) => {
     let successUrl: string;
     if (packageId === 'reset-to-rest') {
       successUrl = `${origin}/purchase-success?session_id={CHECKOUT_SESSION_ID}`;
+    } else if (packageId === 'calm-nights' || packageId === 'calm-nights-bundle') {
+      successUrl = `${origin}/assets/calm-nights/success?session_id={CHECKOUT_SESSION_ID}`;
     } else if (isAddOnOnly) {
       successUrl = `${origin}/thank-you?addon=${encodeURIComponent(addOnId || '')}`;
     } else {
       successUrl = `${origin}/thank-you?pkg=${encodeURIComponent(packageId || '')}`;
     }
     
-    const cancelUrl = `${origin}/pricing`;
+    const cancelUrl = packageId?.startsWith('calm-nights') ? `${origin}/assets/calm-nights` : `${origin}/pricing`;
 
     // Handle promo codes
     // If promoCode is 'FREE', create a one-time 100% off coupon on the fly.

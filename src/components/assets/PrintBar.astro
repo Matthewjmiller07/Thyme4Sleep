@@ -1,0 +1,44 @@
+---
+// Print / download controls for printable sheets, plus a small script that scales
+// fixed-size letter pages down to fit narrow (phone) screens.
+interface Props { pdf?: string; label?: string }
+const { pdf, label = 'Print or save as PDF' } = Astro.props;
+---
+<div class="print-bar no-print">
+  {pdf && <a class="btn btn-dark" href={pdf} download>Download the PDF</a>}
+  <button class="btn btn-ghost" type="button" onclick="window.print()">{label}</button>
+</div>
+<script is:inline>
+  (function () {
+    function fit() {
+      var avail = Math.min(window.innerWidth - 24, 816);
+      var scale = avail / 816;
+      document.querySelectorAll('.sheet').forEach(function (s) {
+        var holder = s.parentElement;
+        if (!holder || !holder.classList.contains('sheet-scaler')) {
+          holder = document.createElement('div');
+          holder.className = 'sheet-scaler';
+          s.parentNode.insertBefore(holder, s);
+          holder.appendChild(s);
+        }
+        if (scale < 1) {
+          s.style.transformOrigin = 'top left';
+          s.style.transform = 'scale(' + scale + ')';
+          holder.style.width = (816 * scale) + 'px';
+          holder.style.height = (s.offsetHeight * scale + 20) + 'px';
+          holder.style.margin = '0 auto';
+        } else {
+          s.style.transform = '';
+          holder.style.width = '';
+          holder.style.height = '';
+        }
+      });
+    }
+    window.addEventListener('resize', fit);
+    document.addEventListener('DOMContentLoaded', fit);
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('.sheet').forEach(function (s) { s.style.transform = ''; });
+    });
+    window.addEventListener('afterprint', fit);
+  })();
+</script>

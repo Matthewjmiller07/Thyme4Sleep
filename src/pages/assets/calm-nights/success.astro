@@ -1,0 +1,35 @@
+---
+// Stripe redirects here after a Calm Nights purchase. We confirm the session with
+// Stripe before granting access, then send the buyer to their plan.
+import Layout from '../../../layouts/AssetsLayout.astro';
+import { verifySession, setAccessCookie } from '../../../lib/calmNights';
+export const prerender = false;
+
+const sessionId = Astro.url.searchParams.get('session_id');
+const purchase = await verifySession(sessionId);
+
+if (purchase && sessionId) {
+  setAccessCookie(Astro.cookies, sessionId);
+  if (purchase.packageId === 'calm-nights-bundle') {
+    // Bundle includes Reset to Rest, which uses its own access cookie
+    Astro.cookies.set('reset_access', crypto.randomUUID(), {
+      httpOnly: true, secure: import.meta.env.PROD, sameSite: 'lax', maxAge: 60 * 60 * 24 * 365, path: '/',
+    });
+  }
+  return Astro.redirect('/assets/calm-nights/plan?welcome=1');
+}
+---
+<Layout title="Confirming your purchase | Thyme4Sleep">
+  <section class="band">
+    <div class="narrow center">
+      <span class="eyebrow">Almost there</span>
+      <h1>We couldn’t confirm your payment just yet</h1>
+      <hr class="divider" />
+      <p class="muted">If you’ve just paid, Stripe can take a few seconds to finish. Please refresh this page. Still stuck? Email Georgia with your receipt and she’ll get you in straight away.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-dark" href="">Refresh</a>
+        <a class="btn btn-ghost" href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20access">Email georgia@thyme4sleep.com</a>
+      </div>
+    </div>
+  </section>
+</Layout>
