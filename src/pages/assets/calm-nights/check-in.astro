@@ -1,0 +1,75 @@
+---
+// Landing page for the buttons in the Calm Nights check-in emails, e.g.
+// /assets/calm-nights/check-in?n=7&s=support
+// The email platform tags the subscriber on the click (which starts the coaching branch);
+// this page shows the matching next step and records the answer in GA4 for the product review.
+import Layout from '../../../layouts/AssetsLayout.astro';
+import { CHECKPOINTS, SUPPORT_SIGNALS, SPECIALISED_URL } from '../../../data/calmNights';
+export const prerender = false;
+
+const night = Number(Astro.url.searchParams.get('n')) || 0;
+const status = ['on-track', 'adjust', 'support'].includes(Astro.url.searchParams.get('s') || '') ? Astro.url.searchParams.get('s')! : 'on-track';
+const cp = CHECKPOINTS.find((c) => c.night === night);
+
+const heading = !cp
+  ? (status === 'support' ? 'Thank you for telling us' : 'You’re ready to begin')
+  : { 'on-track': `Night ${night}: keep going`, adjust: `Night ${night}: one small adjustment`, support: `Night ${night}: let’s get you the right support` }[status];
+
+const body = !cp
+  ? (status === 'support'
+    ? 'Something on the “get personalised support first” list applies to your family. That doesn’t mean you’ve done anything wrong — it means a plan built around your child will serve you far better than a general one. Here are the options.'
+    : 'Lovely. Work through steps 1–4 of your programme, print the workbook, and choose your night one. Your next email arrives around your night 4 checkpoint.')
+  : { 'on-track': cp.onTrack, adjust: cp.adjust, support: cp.support }[status];
+
+const showCoaching = status === 'support';
+---
+<Layout title="Calm Nights Check-in | Thyme4Sleep" description="Your Calm Nights next step.">
+  <section class="hero">
+    <div class="narrow" style="padding:clamp(48px,8vw,88px) 0;">
+      <span class="pill paid">Calm Nights · Check-in</span>
+      <h1 style="margin-top:18px;">{heading}</h1>
+      <hr class="divider" />
+      <p class="lead">{body}</p>
+      {!showCoaching && (
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-dark" href={status === 'adjust' ? '/assets/calm-nights/plan#trouble' : '/assets/calm-nights/plan#review'}>{status === 'adjust' ? 'Open Troubleshooting' : 'Back to my programme'}</a>
+          <a class="btn btn-ghost" href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20check-in">Share a win with Georgia</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {showCoaching && (
+    <section class="band">
+      <div class="wrap">
+        <div class="grid g3">
+          <div class="card lift" style="display:flex;flex-direction:column;">
+            <span class="pill core">From $249</span>
+            <h3 style="margin-top:12px;">Starter</h3>
+            <p class="small muted" style="flex:1;">A sleep plan written for your child from a detailed intake form — including naps, daily schedule and environment. Best if you’re confident following a plan once it fits your child.</p>
+            <a class="btn btn-ghost btn-sm" href="/packages/starter?from=calm-nights">See Starter</a>
+          </div>
+          <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
+            <span class="pill core">From $549</span>
+            <h3 style="margin-top:12px;">Standard</h3>
+            <p class="small muted" style="flex:1;">Your personalised plan, a 60-minute consultation and two weeks of email and text support while you put it into practice. Best if you’ve tried on your own and want Georgia beside you.</p>
+            <a class="btn btn-dark btn-sm" href="/packages/standard?from=calm-nights">See Standard</a>
+          </div>
+          <div class="card lift" style="display:flex;flex-direction:column;">
+            <span class="pill core">Specialised</span>
+            <h3 style="margin-top:12px;">Specialised Sleep Support</h3>
+            <p class="small muted" style="flex:1;">For children with additional needs, neurodivergence or developmental differences — support shaped around your child.</p>
+            <a class="btn btn-ghost btn-sm" href={SPECIALISED_URL}>See Specialised Support</a>
+          </div>
+        </div>
+        <div class="note" style="margin-top:28px;"><p><strong>You won’t start from scratch.</strong> When you book, mention Calm Nights and share your tracker and checkpoint page. Georgia will see what you’ve already tried and build from there. Not sure which package? <a href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20%E2%80%94%20which%20package%3F">Email Georgia</a> with a line about where you’re stuck.</p></div>
+        <p class="small muted">Common reasons families move to 1:1: {[...SUPPORT_SIGNALS.before, ...SUPPORT_SIGNALS.during].join(' · ')}.</p>
+        <p class="small muted">If anything about your child’s health worries you, speak to your pediatrician first.</p>
+      </div>
+    </section>
+  )}
+
+  <script is:inline define:vars={{ night, status }}>
+    if (window.gtag) gtag('event', 'calm_nights_checkin', { night: night, status: status });
+  </script>
+</Layout>

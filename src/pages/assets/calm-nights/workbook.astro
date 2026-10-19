@@ -1,0 +1,111 @@
+---
+// The Calm Nights printable workbook: four letter-size sheets. Same access rules as the plan.
+import Layout from '../../../layouts/AssetsLayout.astro';
+import PrintBar from '../../../components/assets/PrintBar.astro';
+import SheetHead from '../../../components/assets/SheetHead.astro';
+import { hasAccess, isPreview } from '../../../lib/calmNights';
+import { CHECKPOINTS, SUPPORT_SIGNALS } from '../../../data/calmNights';
+export const prerender = false;
+
+if (!(await hasAccess(Astro.url, Astro.cookies))) return Astro.redirect('/assets/calm-nights');
+const planHref = isPreview(Astro.url) ? `/assets/calm-nights/plan?preview=${Astro.url.searchParams.get('preview')}` : '/assets/calm-nights/plan';
+
+const prep = [
+  ['Readiness', ['Child is healthy right now, and our pediatrician is happy with growth and night feeds', 'No travel, new sibling or daycare start in the next two weeks', 'Nothing on the “get personalised support first” list applies to us', 'Everyone who does bedtime has read steps 1–4']],
+  ['The room', ['Dark: blackout curtains or window film', 'Calm: mobiles and busy décor moved away from the crib', 'Comfortable: season-appropriate PJs and sleep sack', 'Steady white noise (optional)']],
+  ['The feed', ['Bedtime milk moved to the start of the routine, lights on', 'Child stays awake for the whole feed', 'Bath or books come after the feed', 'We know which night feeds (if any) our doctor wants us to keep']],
+  ['The day & the team', ['Morning wake-up time fixed: ________', 'Key phrase chosen and practised', 'Who does which nights is agreed', 'Hard-night plan agreed (write it on page 2)']],
+];
+---
+<Layout title="Calm Nights Workbook | Thyme4Sleep" description="Your printable Calm Nights workbook and 14-night tracker.">
+  <style>
+    .lines td { height: 34px; }
+    .boxlist { list-style: none; padding: 0; margin: 0 0 10px; }
+    .boxlist li { padding-left: 22px; position: relative; margin-bottom: 5px; }
+    .boxlist li::before { content: ''; position: absolute; left: 0; top: 3px; width: 11px; height: 11px; border: 1.5px solid var(--taupe); border-radius: 3px; }
+    .cut { border: 2px dashed var(--taupe); border-radius: 18px; padding: 16px 20px; }
+    .cp { border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; }
+    .cp h3 { margin: 0 0 4px; }
+  </style>
+
+  <section class="hero no-print">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill paid">Calm Nights · Workbook</span>
+        <h1 style="margin-top:18px;">Your Calm Nights Workbook</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">Four pages to print and keep by the bed: prepare, your plan, the 14-night tracker and your checkpoint reviews.</p>
+        <a class="btn btn-ghost" href={planHref}>← Back to the programme</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar label="Print or save the workbook as PDF" />
+
+    <!-- Page 1: Prepare -->
+    <article class="sheet">
+      <SheetHead kicker="Calm Nights · Page 1 of 4" title="Prepare" sub="Work through this in the 3–7 days before night one. Tick as you go." />
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:18px;">
+        {prep.map(([h, items]) => (
+          <div><h3>{h}</h3><ul class="boxlist">{(items as string[]).map((i) => <li>{i}</li>)}</ul></div>
+        ))}
+      </div>
+      <h3 style="margin-top:8px;">Get personalised support first if…</h3>
+      <ul class="boxlist" style="columns:2;column-gap:24px;">{SUPPORT_SIGNALS.before.map((s) => <li style="break-inside:avoid;">{s}</li>)}</ul>
+      <p class="small muted">Ticked any of these? Calm Nights is general guidance — a plan built for your child will serve you better. Email georgia@thyme4sleep.com.</p>
+      <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Night one date: ____________</span></div>
+    </article>
+
+    <!-- Page 2: My plan -->
+    <article class="sheet">
+      <SheetHead kicker="Calm Nights · Page 2 of 4" title="My plan at a glance" sub="Fill this in together. Every adult who does bedtime follows the same page." />
+      <table class="lines"><tbody>
+        <tr><td style="width:38%;"><strong>Our starting point</strong></td><td>☐ Stay Close &nbsp;&nbsp;&nbsp; ☐ Step Out &amp; Check</td></tr>
+        <tr><td><strong>Why we chose it</strong></td><td></td></tr>
+        <tr><td><strong>Our key phrase</strong></td><td></td></tr>
+        <tr><td><strong>Morning wake-up time</strong></td><td></td></tr>
+        <tr><td><strong>Routine starts / lights out</strong></td><td></td></tr>
+        <tr><td><strong>Night feed our doctor wants us to keep</strong></td><td></td></tr>
+        <tr><td><strong>Who does which nights</strong></td><td></td></tr>
+        <tr><td style="height:70px;"><strong>Our hard-night plan</strong><br /><span class="small muted">What we’ll do if it’s 2am and we want to give up</span></td><td></td></tr>
+      </tbody></table>
+      <h3 style="margin-top:18px;">Our bedtime routine</h3>
+      <table class="lines"><tbody>{[1, 2, 3, 4, 5, 6].map((n) => <tr><td style="width:30px;">{n}</td><td></td></tr>)}</tbody></table>
+      <div class="cut" style="margin-top:18px;">
+        <span class="eyebrow" style="margin:0;">✂ Script card · keep by the crib</span>
+        <p style="margin:6px 0 0;"><strong>Key phrase:</strong> ______________________________________________</p>
+        <p style="margin:6px 0 0;"><strong>Wake-up:</strong> pause ~5 min → same response as bedtime → key phrase. <strong>Before 6am</strong> = night. <strong>Crying 1–5</strong> pause · <strong>6–7</strong> respond · <strong>8–10</strong> check &amp; comfort, then restart calmly.</p>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Comfort is never removed. Confusion is.</span></div>
+    </article>
+
+    <!-- Page 3: Tracker -->
+    <article class="sheet">
+      <SheetHead kicker="Calm Nights · Page 3 of 4" title="14-night tracker" sub="Fill it in each morning. Any progress, however small, is a win." />
+      <table class="lines" style="table-layout:fixed;">
+        <thead><tr><th style="width:44px;">Night</th><th>Lights out</th><th>Asleep by</th><th>Wake-ups (#)</th><th>Longest stretch</th><th>Up for the day</th><th style="width:28%;">Win of the night</th></tr></thead>
+        <tbody>{Array.from({ length: 14 }, (_, i) => (
+          <tr style={[3, 6, 13].includes(i) ? 'background:var(--peach-soft);' : ''}><td><strong>{i + 1}</strong>{[3, 6, 13].includes(i) && <span style="font-size:7pt;display:block;color:var(--mink);">review</span>}</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        ))}</tbody>
+      </table>
+      <p class="small muted" style="margin-top:10px;">Shaded rows are your checkpoint nights — turn to page 4 the next morning.</p>
+      <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Consistency over perfection</span></div>
+    </article>
+
+    <!-- Page 4: Checkpoints -->
+    <article class="sheet">
+      <SheetHead kicker="Calm Nights · Page 4 of 4" title="Checkpoint reviews" sub="Tick what you see, then circle the decision." />
+      {CHECKPOINTS.map((c) => (
+        <div class="cp">
+          <h3>{c.title}</h3>
+          <ul class="boxlist" style="margin-bottom:6px;">{c.lookFor.map((l) => <li>{l}</li>)}</ul>
+          <p style="margin:0;"><strong>Decision:</strong> &nbsp; Keep going &nbsp;·&nbsp; Adjust &nbsp;·&nbsp; Get support</p>
+          <p style="margin:2px 0 0;" class="muted">Notes: ________________________________________________________________</p>
+        </div>
+      ))}
+      <p class="small muted">“Get support” is a decision, not a failure. Bring this page and your tracker to a 1:1 package and Georgia will build on what you’ve already done — thyme4sleep.com/pricing</p>
+      <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>© Thyme4Sleep LLC · personal use only</span></div>
+    </article>
+  </div>
+</Layout>

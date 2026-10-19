@@ -1,45 +1,47 @@
 ---
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
+import { PATHWAY, INCLUDED, NOT_INCLUDED, COMPARE, SUPPORT_SIGNALS, COACHING_URL } from '../../../data/calmNights';
 export const prerender = true;
 
-const inside = [
-  ['01', 'Start Here & Readiness Check', 'Is your child ready? The medical, sleep-pressure and family-readiness boxes to tick before night one — so you start from strength, not desperation.'],
-  ['02', 'The Method Chooser', 'Georgia’s two signature approaches — Cotside Comforting (gentle) and Quick Checks (gentle-intermediate) — matched to your child’s temperament and your comfort level.'],
-  ['03', 'Prep Week Playbook', 'Room setup, moving the feed, choosing your key phrase, lining up your support person. The quiet steps that make night one so much easier.'],
-  ['04', '14 Nights, Scripted', 'Exactly where to be, what to say and how long to wait — night by night — for bedtime, wake-ups and those 4:45am starts.'],
-  ['05', 'Troubleshooting Library', 'Illness, teething, standing in the crib, vomiting, travel, the toddler negotiator, partner disagreement and the “night 3 wobble”.'],
-  ['06', 'Printable Workbook', 'A 14-night tracker, your bedtime script card and a fridge-ready summary — print it or save it to your phone.'],
-];
-
 const faqs = [
-  ['Is this cry-it-out?', 'No. Georgia doesn’t use or teach extinction (cry-it-out). Both methods keep you present and responsive — you comfort, you reassure, you come back. Some protest is normal when anything changes, and the plan shows you how to tell protest from distress and how to respond to each.'],
-  ['What age is it for?', 'Babies from 6 months to children around 4 years, who are healthy and growing well. Under 6 months, or with medical or developmental needs? Georgia’s 1:1 packages (including Specialised Sleep Support) are a better fit.'],
-  ['How fast will it work?', 'Most families see meaningful change within the first week and consolidated nights within about two weeks, when the plan is followed consistently. Every child is different — the tracker helps you see progress even on the hard nights.'],
-  ['How is this different from Reset to Rest?', '<em>Reset to Rest</em> ($37) is a gentle night-waking reduction protocol for families who have restored calm but still have wake-ups. <em>Calm Nights</em> is the complete plan: bedtime, night wakings, early rising and troubleshooting — the closest thing to a 1:1 plan without the 1:1 price. The bundle gets you both.'],
-  ['What if I need more help?', 'You can upgrade to 1:1 coaching at any point — Georgia will already know exactly which method you’ve been using, so you won’t be starting from scratch.'],
-  ['How do I access it?', 'Instantly. After checkout you’re taken straight to your plan online. It’s saved to your browser for two years, and you can print or save the whole thing as a PDF.'],
+  ['Is this cry-it-out?', 'No. Georgia doesn’t use or teach extinction (cry-it-out). Both starting points keep you present and responsive — you comfort, you reassure, you come back. Some protest is normal when anything changes, and the programme shows you how to tell protest from distress and how to respond to each.'],
+  ['Is this the same as a 1:1 sleep plan?', 'No — and that’s deliberate. A 1:1 plan is written for your child after Georgia reviews your intake form, and it includes naps and a daily schedule. Calm Nights is general education and a general implementation framework that you apply yourself. It’s a great fit for typical sleep-association challenges; if your situation is more complex, a 1:1 package is the better investment.'],
+  ['How is this different from Reset to Rest?', '<em>From Reset to Rest</em> ($37) is for families whose bedtime is already fairly calm, but who still have night wakings. It gently reduces <strong>one</strong> night-time support, one small step at a time, without changing how your child falls asleep. <em>Calm Nights</em> ($97) changes <strong>how your child falls asleep</strong> — starting at bedtime, then overnight and in the early morning — over a structured 14 nights.'],
+  ['What age is it for?', 'Healthy children from 6 months to around 4 years. Under 6 months, or with medical or developmental needs? Georgia’s 1:1 packages (including Specialised Sleep Support) are the right fit.'],
+  ['Does it include naps or a schedule?', 'No. Naps and daily schedules depend heavily on your individual child, so Georgia keeps them for her 1:1 packages, where she can tailor them properly.'],
+  ['Can I message Georgia while I do it?', 'Calm Nights is self-guided, so there’s no messaging support. You’ll get check-in emails at nights 4, 7 and 14 that point you to the right next step. If you’d like Georgia beside you, the Standard package includes two weeks of email and text support.'],
+  ['What if it isn’t working?', 'The programme has three checkpoints that tell you whether to keep going, adjust, or get personalised support. If you move to 1:1, bring your tracker — Georgia will build on what you’ve already done.'],
+  ['How do I access it?', 'Instantly. After checkout you’re taken straight to your programme online. It’s saved to your browser for two years, and you can print the programme and workbook or save them as PDFs.'],
 ];
 ---
-<Layout title="The Calm Nights Method — 14-Night Gentle Sleep Plan | Thyme4Sleep" description="The complete, gentle 14-night sleep plan Georgia builds for 1:1 clients — method chooser, night-by-night scripts and troubleshooting. No cry-it-out.">
+<Layout title="The Calm Nights Method — A Self-Guided 14-Night Gentle Sleep Programme | Thyme4Sleep" description="A structured, self-guided 14-night programme for families ready to help their child fall asleep independently — without cry-it-out. $97.">
+  <style>
+    .compare th, .compare td { min-width: 150px; }
+    .compare th:first-child, .compare td:first-child { min-width: 120px; }
+    .compare .hl { background: var(--peach-soft); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+  </style>
+
   <section class="hero">
     <Leaf size={300} class="leaf" style="left:-80px;bottom:-60px;opacity:.3;" />
     <div class="wrap">
       <div>
-        <span class="pill paid">The complete DIY plan · $97</span>
+        <span class="pill paid">Self-guided programme · $97</span>
         <h1 style="margin-top:18px;">The Calm Nights <em class="script">Method</em></h1>
         <hr class="divider" />
-        <p class="lead">The same gentle, structured 14-night plan Georgia writes for her 1:1 families — her methods, her scripts, her troubleshooting — in a format you can open tonight and finish in two weeks.</p>
+        <p class="lead">A structured, self-guided 14-night programme for families who are ready to help their child learn to fall asleep on their own — and to follow it independently.</p>
         <ul class="ticks" style="margin:20px 0 28px;">
           <li>No cry-it-out. You stay present, responsive and in charge.</li>
-          <li>Two proven methods, matched to your child’s temperament.</li>
-          <li>Bedtime, night wakings <em>and</em> early rising.</li>
+          <li>A clear six-step path, from understanding sleep to reviewing progress.</li>
+          <li>Bedtime, night wakings <em>and</em> early rising, with a printable workbook.</li>
         </ul>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
           <button class="btn btn-dark buy" data-pkg="calm-nights" type="button">Get instant access — $97</button>
-          <a class="btn btn-ghost" href="#bundle">Or bundle &amp; save</a>
+          <a class="btn btn-ghost" href="#compare">Is this the right option for us?</a>
         </div>
-        <p class="small muted" style="margin-top:12px;">Secure checkout with Stripe · Instant access</p>
+        <p class="small muted" style="margin-top:12px;">Secure checkout with Stripe · Instant access · General guidance, not a personalised plan</p>
       </div>
       <div class="photo"><img src="/assets/img/mother-hold.webp" alt="A parent holding their sleepy child close" loading="eager" /></div>
     </div>
@@ -48,21 +50,22 @@ const faqs = [
   <section class="band">
     <div class="narrow center">
       <span class="eyebrow">Sound familiar?</span>
-      <h2>You’re not doing it wrong. <em class="script">You just need a plan.</em></h2>
+      <h2>You’re not doing it wrong. <em class="script">You just need a clear path.</em></h2>
       <hr class="divider" />
-      <p class="muted" style="font-size:1.1rem;">The feed that used to settle them now buys you forty minutes. You’re rocking for an hour, transferring like a bomb technician, and still up at 1am, 3am, 4:30am. You’ve read the forums, tried three methods in a week, and you and your partner are quietly disagreeing about all of it. Here’s the truth Georgia tells every family: <strong style="color:var(--char);">sleep improves with clarity and consistency, not effort.</strong> Calm Nights gives you the clarity. You bring the consistency.</p>
+      <p class="muted" style="font-size:1.1rem;">The feed that used to settle them now buys you forty minutes. You’re rocking for an hour, transferring like a bomb technician, and still up at 1am, 3am, 4:30am. You’ve read the forums and tried three methods in a week. Here’s what Georgia tells every family: <strong style="color:var(--char);">sleep improves with clarity and consistency, not effort.</strong> Calm Nights gives you the clarity, in order. You bring the consistency.</p>
     </div>
   </section>
 
   <section class="band cream">
     <div class="wrap">
-      <div class="center"><span class="eyebrow">What’s inside</span><h2>Everything a 1:1 plan covers</h2><hr class="divider" /></div>
-      <div class="grid g4">
-        {inside.map(([n, t, d]) => (
+      <div class="center"><span class="eyebrow">Your pathway</span><h2>Six steps, in order</h2><hr class="divider" /></div>
+      <div class="steps">
+        {PATHWAY.map((p) => (
           <div class="card" style="border-radius:20px;">
-            <div style="font-family:var(--serif);font-size:2.4rem;color:var(--taupe);line-height:1;">{n}</div>
-            <h3 style="font-size:1.35rem;margin-top:10px;">{t}</h3>
-            <p class="small muted" style="margin:0;">{d}</p>
+            <div style="font-family:var(--serif);font-size:2.4rem;color:var(--taupe);line-height:1;">{p.n}</div>
+            <h3 style="font-size:1.35rem;margin-top:10px;">{p.title}</h3>
+            <span class="eyebrow" style="margin-bottom:8px;">{p.sub}</span>
+            <p class="small muted" style="margin:0;">{p.body}</p>
           </div>
         ))}
       </div>
@@ -72,74 +75,85 @@ const faqs = [
   <section class="band">
     <div class="wrap grid g2" style="align-items:center;gap:48px;">
       <div>
-        <span class="eyebrow">Two methods, one philosophy</span>
-        <h2>Comfort is never removed. <em class="script">Confusion is.</em></h2>
+        <span class="eyebrow">Step 4 · Choosing a gentle starting point</span>
+        <h2>Two starting points. <em class="script">Three questions.</em></h2>
         <hr class="divider" />
-        <p class="muted">Every child is different. Some settle best with you right beside them; others get more worked up the longer you stay. The Method Chooser helps you pick the one that fits — then you commit to it for 14 nights.</p>
+        <p class="muted">No complicated quizzes. Three short questions help you choose the approach you can repeat, the same way, every night — because the one you can follow consistently will always beat the “perfect” one you can’t.</p>
       </div>
       <div class="grid" style="gap:16px;">
         <div class="card" style="border-left:6px solid var(--mint);">
-          <span class="pill free">Gentle</span>
-          <h3 style="margin-top:10px;">Cotside Comforting</h3>
-          <p class="small muted" style="margin:0;">You stay beside the crib, offering touch and voice, and move a little further away every few nights until you’re out the door. Ideal for sensitive or anxious little ones and parents who want to stay close.</p>
+          <span class="pill free">Starting point A</span>
+          <h3 style="margin-top:10px;">Stay Close</h3>
+          <p class="small muted" style="margin:0;">You stay beside the crib with touch and voice, and move a little further away every few nights until you’re out the door.</p>
         </div>
         <div class="card" style="border-left:6px solid var(--peach);">
-          <span class="pill paid">Gentle–intermediate</span>
-          <h3 style="margin-top:10px;">Quick Checks</h3>
-          <p class="small muted" style="margin:0;">Key phrase, a calm pause, then brief, loving checks. Best for strong-willed or older babies and toddlers who find a parent in the room too stimulating — and often the faster route.</p>
+          <span class="pill paid">Starting point B</span>
+          <h3 style="margin-top:10px;">Step Out &amp; Check</h3>
+          <p class="small muted" style="margin:0;">Key phrase, a calm pause, then brief, loving, identical checks — for children who get more worked up when a parent stays.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band dark">
+  <section class="band cream" id="compare">
     <div class="wrap">
-      <div class="center"><span class="eyebrow" style="color:var(--mint);">From Georgia’s families</span><h2>Real sleep, real families</h2><hr class="divider" /></div>
-      <div class="grid g3">
-        {[
-          ['She got my 20 month old who has NEVER slept through the night sleeping for 12 hours independently.', 'Hannah R., mum of a 20-month-old'],
-          ['We noticed immediate changes even from the preparatory steps she recommended… and for the sleep we are finally getting, we will be forever grateful.', 'Sasha M., mum of a 14-month-old'],
-          ['Everything she suggested felt doable, and most importantly, it worked.', 'Jonny A., dad of 3'],
-        ].map(([q, n]) => (
-          <figure class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);margin:0;">
-            <blockquote style="margin:0;font-family:var(--serif);font-size:1.45rem;line-height:1.3;color:var(--cream);">“{q}”</blockquote>
-            <figcaption class="small" style="margin-top:14px;color:var(--peach);">{n}</figcaption>
-          </figure>
-        ))}
+      <div class="center"><span class="eyebrow">Which option is right for us?</span><h2>Four ways to work with Thyme4Sleep</h2><hr class="divider" /><p class="muted narrow" style="margin-inline:auto;">Each one exists for a different family. Calm Nights is the middle path: more structure than a single protocol, but self-guided and general rather than written for your child.</p></div>
+      <div class="table-scroll card" style="padding:8px 8px 4px;">
+        <table class="compare">
+          <thead><tr><th></th>{COMPARE.cols.map((c, i) => <th class={i === 1 ? 'hl' : ''}>{c}<br /><span style="font-family:var(--serif);font-size:1.6rem;letter-spacing:0;text-transform:none;color:var(--char);">{COMPARE.prices[i]}</span></th>)}</tr></thead>
+          <tbody>{COMPARE.rows.map(([label, ...cells]) => <tr><td><strong>{label}</strong></td>{cells.map((c, i) => <td class={i === 1 ? 'hl' : ''}>{c}</td>)}</tr>)}</tbody>
+        </table>
       </div>
-      <p class="center small muted" style="margin-top:22px;">Testimonials are from Georgia’s 1:1 coaching clients.</p>
+      <p class="center small muted" style="margin-top:14px;"><a href="/reset-preview">See Reset to Rest</a> · <a href={COACHING_URL}>See 1:1 packages</a></p>
     </div>
   </section>
 
-  <section class="band" id="bundle">
+  <section class="band">
+    <div class="wrap grid g2" style="gap:28px;">
+      <div class="card">
+        <span class="pill free">Included</span>
+        <h3 style="margin-top:12px;">What you get</h3>
+        <ul class="ticks small">{INCLUDED.map((i) => <li>{i}</li>)}</ul>
+      </div>
+      <div class="card soft">
+        <span class="pill tool">Not included</span>
+        <h3 style="margin-top:12px;">What Calm Nights doesn’t do</h3>
+        <ul class="small" style="padding-left:18px;">{NOT_INCLUDED.map((i) => <li style="margin-bottom:6px;">{i}</li>)}</ul>
+        <h4 style="margin-top:20px;">Choose 1:1 support instead if…</h4>
+        <ul class="small" style="padding-left:18px;">{SUPPORT_SIGNALS.before.map((i) => <li style="margin-bottom:6px;">{i}</li>)}</ul>
+        <a class="btn btn-sm btn-ghost" href={COACHING_URL}>See 1:1 packages</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream" id="bundle">
     <div class="wrap">
-      <div class="center"><span class="eyebrow">Choose your plan</span><h2>Start tonight</h2><hr class="divider" /></div>
+      <div class="center"><span class="eyebrow">Start tonight</span><h2>Choose your programme</h2><hr class="divider" /></div>
       <div class="grid g2" style="max-width:900px;margin:auto;">
-        <div class="card lift" style="display:flex;flex-direction:column;">
+        <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
           <h3>Calm Nights Method</h3>
           <div style="font-family:var(--serif);font-size:3.2rem;line-height:1;">$97</div>
           <p class="small muted">One-time · instant access</p>
           <ul class="ticks small" style="flex:1;">
-            <li>Readiness check &amp; Method Chooser</li><li>Prep week playbook</li><li>14 nights, fully scripted</li><li>Troubleshooting library</li><li>Printable workbook &amp; tracker</li>
+            <li>Six-step programme</li><li>Choosing a gentle starting point</li><li>14-night implementation framework</li><li>Review checkpoints &amp; troubleshooting</li><li>Printable workbook &amp; tracker</li><li>Check-in emails at nights 4, 7 &amp; 14</li>
           </ul>
-          <button class="btn btn-ghost buy" data-pkg="calm-nights" type="button">Get Calm Nights — $97</button>
+          <button class="btn btn-dark buy" data-pkg="calm-nights" type="button">Get Calm Nights — $97</button>
         </div>
-        <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
-          <span class="pill core" style="position:absolute;top:-13px;left:28px;">Best value</span>
-          <h3>The Complete Bundle</h3>
+        <div class="card lift" style="display:flex;flex-direction:column;">
+          <h3>Calm Nights + Reset to Rest</h3>
           <div style="font-family:var(--serif);font-size:3.2rem;line-height:1;">$117 <span style="font-size:1.4rem;color:var(--mink);text-decoration:line-through;">$134</span></div>
           <p class="small muted">One-time · instant access to both</p>
           <ul class="ticks small" style="flex:1;">
-            <li>Everything in Calm Nights</li><li><strong>+ From Reset to Rest</strong> video &amp; workbook</li><li>Georgia’s gentle night-waking reduction protocol</li><li>Ideal if nights are the main battle</li>
+            <li>Everything in Calm Nights</li><li><strong>+ From Reset to Rest</strong> video &amp; workbook</li><li>For families who want to reduce a remaining night feed or support gradually, after Calm Nights</li>
           </ul>
-          <button class="btn btn-dark buy" data-pkg="calm-nights-bundle" type="button">Get the bundle — $117</button>
+          <button class="btn btn-ghost buy" data-pkg="calm-nights-bundle" type="button">Get both — $117</button>
         </div>
       </div>
-      <p class="center small muted" style="margin-top:20px;">Want a plan written just for your child? <a href="/pricing">1:1 coaching starts at $249</a>.</p>
+      <p class="center small muted" style="margin-top:20px;">Want a plan written for your child, including naps and schedule? <a href={COACHING_URL}>1:1 coaching starts at $249</a>.</p>
     </div>
   </section>
 
-  <section class="band cream">
+  <section class="band">
     <div class="narrow">
       <div class="center"><span class="eyebrow">Questions</span><h2>Good to know</h2><hr class="divider" /></div>
       {faqs.map(([q, a]) => (

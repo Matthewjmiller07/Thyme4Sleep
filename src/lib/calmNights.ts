@@ -43,3 +43,9 @@ export function setAccessCookie(cookies: AstroCookies, sessionId: string) {
     path: '/',
   });
 }
+
+// True when the visitor has bought Calm Nights (verified with Stripe) or is using the owner preview key.
+export async function hasAccess(url: URL, cookies: AstroCookies): Promise<boolean> {
+  if (isPreview(url)) return true;
+  return Boolean(await verifySession(cookies.get(ACCESS_COOKIE)?.value));
+}
