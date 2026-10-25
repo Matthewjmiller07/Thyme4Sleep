@@ -24,6 +24,12 @@ const pageDescription = 'Download your free Gentle Sleep Reset guide - restore r
           submitBtn.textContent = 'Sending...';
           
           const formData = new FormData(form);
+          // Adds them to the Brevo email flow; never blocks the download.
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: formData.get('email'), name: formData.get('name'), source: 'gentle-reset', botcheck: formData.get('botcheck') }),
+          }).catch(() => {});
           
           try {
             const response = await fetch('https://api.web3forms.com/submit', {

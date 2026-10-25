@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
+import { upsertContact, listForPackage, type BrevoList } from '../../lib/brevo';
 
 export const prerender = false;
 
@@ -46,6 +47,19 @@ export const POST: APIRoute = async ({ request }) => {
 async function handleEvent(event: Stripe.Event) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
+    const packageId = session.metadata?.packageId;
+
+    // Add every buyer to the matching Brevo list: this starts the post-purchase flow
+    // and (for 1:1 clients) removes them from the sales emails.
+    const buyer = session.customer_details?.email;
+    const list = listForPackage(packageId);
+    if (buyer && list) {
+      const lists: BrevoList[] = packageId === 'calm-nights-bundle' ? ['calm', 'reset'] : [list];
+      await upsertContact(buyer.toLowerCase(), {
+        FIRSTNAME: (session.customer_details?.name || '').split(' ')[0],
+        LAST_PURCHASE: packageId || '',
+      }, lists);
+    }
     
     // Check if this is a Reset to Rest purchase
     if (session.metadata?.packageId === 'reset-to-rest') {

@@ -152,6 +152,7 @@ const questions = [
       var bar = document.getElementById('bar');
       var answers = [];
       var current = 0;
+      var resultKey = '';
 
       function show(i) {
         qs.forEach(function (q, k) { q.hidden = k !== i; });
@@ -166,6 +167,7 @@ const questions = [
         // Complex needs win once they clearly register; otherwise highest driver wins.
         var key = score.c >= 3 ? 'c' : ['a', 'd', 't'].sort(function (x, y) { return score[y] - score[x]; })[0];
         var r = RESULTS[key];
+        resultKey = key;
         document.getElementById('r-title').innerHTML = r.title;
         document.getElementById('r-body').innerHTML = r.body;
         document.getElementById('r-steps').innerHTML = r.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
@@ -207,7 +209,11 @@ const questions = [
         e.preventDefault();
         var btn = document.getElementById('lead-btn');
         btn.disabled = true; btn.textContent = 'Sending…';
-        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(e.target) })
+        var fd = new FormData(e.target);
+        // Adds them to the Brevo email flow (with their Snapshot result); never blocks the form.
+        fetch('/api/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email: fd.get('email'), name: fd.get('name'), source: 'snapshot', snapshot: resultKey, botcheck: fd.get('botcheck') }) }).catch(function () {});
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
           .then(function (r) { return r.json(); })
           .then(function (d) {
             if (!d.success) throw new Error(d.message);

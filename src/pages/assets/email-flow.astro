@@ -1,0 +1,270 @@
+---
+// Visual map of the Thyme4Sleep email flow: entry points → Brevo lists → sequences → offers,
+// with a live preview of every email, its Brevo-ready HTML, and a simple revenue model.
+import Layout from '../../layouts/AssetsLayout.astro';
+import { welcome, ascend, calm, support, day3BySnapshot, SNAPSHOT_LABELS, SUBJECT_TESTS, renderEmailHtml, type Email } from '../../data/emails';
+export const prerender = true;
+
+interface Item { id: string; group: string; e: Email }
+const items: Item[] = [
+  ...welcome.slice(0, 3).map((e, i) => ({ id: `w${i}`, group: 'Welcome', e })),
+  ...(['a', 'd', 't', 'c'] as const).map((k) => ({ id: `w3-${k}`, group: 'Welcome · Day 3 split', e: { ...day3BySnapshot[k], day: `Day 3 · ${SNAPSHOT_LABELS[k]}${k === 'd' ? ' (also: no quiz)' : ''}` } })),
+  { id: 'w4', group: 'Welcome', e: welcome[4] },
+  ...ascend.map((e, i) => ({ id: `r${i}`, group: 'Reset to Rest buyers', e })),
+  ...calm.map((e, i) => ({ id: `c${i}`, group: 'Calm Nights pathway', e })),
+  ...support.map((e, i) => ({ id: `s${i}`, group: 'Personalised support', e })),
+];
+const groups = [...new Set(items.map((i) => i.group))];
+const payload = Object.fromEntries(items.map(({ id, e }) => [id, {
+  day: e.day, subject: e.subject, preview: e.preview, alt: SUBJECT_TESTS[e.subject] || '', rule: e.rule || '',
+  view: renderEmailHtml(e, { preview: true }), html: renderEmailHtml(e),
+}]));
+
+// Flow map columns. `go` = which email the node opens in the previewer.
+const flow = [
+  { title: 'Find', nodes: [
+    { t: 'Instagram & Pinterest', s: 'Carousels, pins, stories → link in bio' },
+    { t: 'Sleep Snapshot quiz', s: '8 questions → result + email opt-in', tag: 'free' },
+    { t: 'Gentle Sleep Reset', s: 'Free 72-hour guide download', tag: 'free' },
+  ]},
+  { title: 'Join', nodes: [
+    { t: 'Brevo list: Leads', s: 'Saved with SNAPSHOT = d · a · t · c', tag: 'tool' },
+    { t: 'Day 0–2 · Welcome', s: 'Guide, “do less”, the 3am pause', go: 'w0' },
+  ]},
+  { title: 'Match', nodes: [
+    { t: 'Connected (a)', s: 'Calm Nights · $97', go: 'w3-a', tag: 'paid' },
+    { t: 'Disrupted (d) / no quiz', s: 'Reset to Rest · $37', go: 'w3-d', tag: 'paid' },
+    { t: 'Out-of-rhythm (t)', s: 'Troubleshooting call · $99', go: 'w3-t', tag: 'core' },
+    { t: 'Specialist (c)', s: '1:1 packages · from $249', go: 'w3-c', tag: 'core' },
+    { t: 'Day 5 · Your next step', s: 'Everyone: honest guide to all options', go: 'w4' },
+  ]},
+  { title: 'Buy → Results', nodes: [
+    { t: 'Reset to Rest buyers', s: '5 emails: results, reviews, Calm Nights if bedtime is the issue', go: 'r0', tag: 'paid' },
+    { t: 'Calm Nights pathway', s: 'Night 4 · 7 · 14 check-ins with one-tap answers', go: 'c0', tag: 'paid' },
+    { t: 'Personalised support', s: '“Little change” click → honest route to 1:1', go: 's0', tag: 'core' },
+  ]},
+];
+---
+<Layout title="Email Flow | Thyme4Sleep" description="How Thyme4Sleep's emails turn free sign-ups into paying families, with every email previewed and ready for Brevo.">
+  <section class="hero">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:900px;text-align:center;">
+      <div>
+        <span class="pill tool">Content studio · Email</span>
+        <h1 style="margin-top:18px;">The email <em class="script">flow</em></h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">Free sign-up to paying family, on autopilot in Brevo. Each parent gets the offer that matches their Sleep Snapshot, and anyone who needs more is routed gently to Georgia’s 1:1 support.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a class="btn btn-dark" href="#preview">Preview the emails</a>
+          <a class="btn btn-ghost" href="#money">See the numbers</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow map -->
+  <section class="band" id="map">
+    <div class="wrap-wide">
+      <div class="center"><span class="eyebrow">The journey</span><h2>From first click to first sale</h2><hr class="divider" /><p class="muted narrow" style="margin-inline:auto;">Tap any email step to open it in the previewer below.</p></div>
+      <div class="flow">
+        {flow.map((col, ci) => (
+          <div class="flow-col">
+            <span class="flow-head"><b>{String(ci + 1).padStart(2, '0')}</b> {col.title}</span>
+            {col.nodes.map((n: any) => n.go
+              ? <button type="button" class={`flow-node go ${n.tag || ''}`} data-go={n.go}><strong>{n.t}</strong><span>{n.s}</span><em>Preview →</em></button>
+              : <div class={`flow-node ${n.tag || ''}`}><strong>{n.t}</strong><span>{n.s}</span></div>)}
+          </div>
+        ))}
+      </div>
+      <p class="small muted center" style="margin-top:18px;">Exit rule for every sales email: anyone on the <strong>Clients</strong> list (any 1:1 purchase) stops receiving offers.</p>
+    </div>
+  </section>
+
+  <!-- Previewer -->
+  <section class="band cream" id="preview">
+    <div class="wrap-wide">
+      <div class="center"><span class="eyebrow">Every email</span><h2>Preview &amp; copy to Brevo</h2><hr class="divider" /></div>
+      <div class="pv">
+        <nav class="pv-list" aria-label="Emails">
+          {groups.map((g) => (
+            <div>
+              <span class="pv-group">{g}</span>
+              {items.filter((i) => i.group === g).map((i) => (
+                <button type="button" class="pv-item" data-id={i.id}><small>{i.e.day}</small>{i.e.subject}</button>
+              ))}
+            </div>
+          ))}
+        </nav>
+        <div class="pv-main">
+          <div class="pv-inbox">
+            <div class="pv-from"><span class="pv-avatar">G</span><div><strong>Georgia · Thyme4Sleep</strong><small>georgia@thyme4sleep.com</small></div><span class="pv-when" id="pv-day"></span></div>
+            <div class="pv-subject" id="pv-subject"></div>
+            <div class="pv-pre" id="pv-pre"></div>
+            <div class="pv-ab" id="pv-ab" hidden><span class="pill paid">A/B test</span> <span id="pv-alt"></span></div>
+          </div>
+          <iframe id="pv-frame" title="Email preview" loading="lazy"></iframe>
+          <div class="note peach" id="pv-rule" hidden><p class="small" style="margin:0;"><strong>Automation:</strong> <span></span></p></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
+            <button type="button" class="btn btn-dark btn-sm" id="pv-copy">Copy HTML for Brevo</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="pv-copy-subj">Copy subject</button>
+            <span class="small muted" id="pv-copied" style="align-self:center;" hidden>Copied ✓</span>
+          </div>
+          <p class="small muted" style="margin-top:10px;">Paste into Brevo → Campaigns → Templates → <em>Code your own</em>. The name and unsubscribe link fill in automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Revenue model -->
+  <section class="band" id="money">
+    <div class="narrow">
+      <div class="center"><span class="eyebrow">The goal: revenue</span><h2>What the flow could earn</h2><hr class="divider" /><p class="muted">Move the sliders to your own numbers. The defaults are cautious starting guesses: most digital-product email lists convert 1–5% of subscribers.</p></div>
+      <div class="card lift" style="margin-top:24px;">
+        <div class="calc">
+          <label>New subscribers per month <output id="o-subs"></output><input type="range" id="subs" min="20" max="1000" step="10" value="150" /></label>
+          <label>Buy Reset to Rest ($37) <output id="o-reset"></output><input type="range" id="reset" min="0" max="10" step="0.5" value="3" /></label>
+          <label>Buy Calm Nights ($97, or $117 bundle) <output id="o-calm"></output><input type="range" id="calmr" min="0" max="10" step="0.5" value="2" /></label>
+          <label>Book 1:1 or a call (avg $350) <output id="o-oo"></output><input type="range" id="oo" min="0" max="5" step="0.25" value="1" /></label>
+        </div>
+        <div class="calc-out">
+          <div><span class="small muted">Per month</span><strong id="r-month"></strong></div>
+          <div><span class="small muted">Per year</span><strong id="r-year"></strong></div>
+          <div><span class="small muted">Each new subscriber is worth</span><strong id="r-sub"></strong></div>
+        </div>
+        <p class="small muted" style="margin:14px 0 0;">Leaves out Stripe fees (2.9% + 30¢) and Brevo’s plan cost. Brevo’s free plan sends 300 emails a day, which covers roughly the first 150–200 sign-ups a month.</p>
+      </div>
+
+      <h3 style="margin-top:40px;">Five ways to raise those numbers</h3>
+      <ul class="ticks">
+        <li><strong>Lead with the matched offer.</strong> Day 3 already speaks to each Snapshot result. Track clicks per branch in Brevo and rewrite the weakest one first.</li>
+        <li><strong>Make the bundle the obvious pick.</strong> Reset to Rest + Calm Nights is $134 separately and $117 bundled. Show both prices side by side, with the bundle in the middle, to nudge more buyers toward it.</li>
+        <li><strong>Launch price for the first 7–14 days.</strong> 20–30% off Calm Nights for the list (“$69 this week, then $97”) rewards early families and gets your first reviews in.</li>
+        <li><strong>Test two subject lines.</strong> The offer emails each have an A/B alternative (shown above). Keep the winner and test again.</li>
+        <li><strong>Collect reviews by reply.</strong> Night 21 and Day 12 ask for one sentence. Every review strengthens the sales pages and the next Day 3 email.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Brevo setup -->
+  <section class="band cream" id="setup">
+    <div class="narrow">
+      <span class="eyebrow">Going live</span>
+      <h2>Brevo setup checklist</h2>
+      <hr class="divider" />
+      <ol class="setup">
+        <li><strong>Sender.</strong> In Brevo → Senders &amp; IP, add <code>georgia@thyme4sleep.com</code> and authenticate the thyme4sleep.com domain (DKIM + DMARC), so emails land in the inbox rather than spam.</li>
+        <li><strong>Lists.</strong> Create four lists: <em>Leads</em>, <em>Reset to Rest buyers</em>, <em>Calm Nights buyers</em>, <em>Clients</em>. Note each list’s ID number.</li>
+        <li><strong>Attributes.</strong> Contacts → Settings: add text attributes <code>SNAPSHOT</code>, <code>SNAPSHOT_RESULT</code>, <code>LEAD_SOURCE</code>, <code>LAST_PURCHASE</code>.</li>
+        <li><strong>Netlify.</strong> Add <code>BREVO_API_KEY</code> and <code>BREVO_LIST_LEADS</code> / <code>_RESET</code> / <code>_CALM</code> / <code>_CLIENTS</code> (the IDs) as environment variables, then redeploy. The quiz, the Gentle Sleep Reset form and Stripe purchases then add people to Brevo automatically.</li>
+        <li><strong>Stripe webhook.</strong> In Stripe → Developers → Webhooks, point <code>checkout.session.completed</code> at <code>https://thyme4sleep.com/api/stripe-webhook</code> and add its signing secret as <code>STRIPE_WEBHOOK_SECRET</code>.</li>
+        <li><strong>Templates.</strong> Copy each email’s HTML from the previewer into a Brevo template.</li>
+        <li><strong>Automations.</strong> Build four workflows, each triggered by “contact added to list”:
+          <em>Welcome</em> (Leads → Day 0, 1, 2 → condition on <code>SNAPSHOT</code> for Day 3 → Day 5),
+          <em>Reset to Rest</em>, <em>Calm Nights</em> (with “clicked link” conditions for the check-in buttons) and <em>Personalised support</em>. Set “exit if contact is in list Clients” on every workflow.</li>
+        <li><strong>Test.</strong> Take the quiz with your own address, buy with a Stripe test card, and check that each email arrives and every button lands in the right place.</li>
+      </ol>
+      <div class="note"><p class="small" style="margin:0;"><strong>Add a postal address.</strong> Anti-spam law (CAN-SPAM) requires a physical mailing address in every marketing email. Add it in Brevo’s sender settings or to the template footer before sending.</p></div>
+    </div>
+  </section>
+
+  <script type="application/json" id="email-data" set:html={JSON.stringify(payload).replace(/</g, '\\u003c')}></script>
+  <script is:inline>
+    (function () {
+      var data = JSON.parse(document.getElementById('email-data').textContent);
+      var frame = document.getElementById('pv-frame');
+      var current = null;
+      function $(id) { return document.getElementById(id); }
+      function open(id, scroll) {
+        var d = data[id]; if (!d) return;
+        current = d;
+        $('pv-day').textContent = d.day;
+        $('pv-subject').textContent = d.subject;
+        $('pv-pre').textContent = d.preview;
+        $('pv-ab').hidden = !d.alt; $('pv-alt').textContent = d.alt ? 'B: ' + d.alt : '';
+        $('pv-rule').hidden = !d.rule; $('pv-rule').querySelector('span').textContent = d.rule;
+        frame.srcdoc = d.view;
+        document.querySelectorAll('.pv-item').forEach(function (b) { b.classList.toggle('on', b.dataset.id === id); });
+        if (scroll) $('preview').scrollIntoView({ behavior: 'smooth' });
+      }
+      frame.addEventListener('load', function () {
+        try { frame.style.height = (frame.contentDocument.body.scrollHeight + 8) + 'px'; } catch (e) {}
+      });
+      document.querySelectorAll('.pv-item').forEach(function (b) { b.addEventListener('click', function () { open(b.dataset.id); }); });
+      document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { open(b.dataset.go, true); }); });
+      function copy(text) {
+        navigator.clipboard.writeText(text).then(function () { $('pv-copied').hidden = false; setTimeout(function () { $('pv-copied').hidden = true; }, 1600); });
+      }
+      $('pv-copy').addEventListener('click', function () { if (current) copy(current.html); });
+      $('pv-copy-subj').addEventListener('click', function () { if (current) copy(current.subject); });
+      open('w0');
+
+      var money = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+      function calc() {
+        var subs = +$('subs').value, r = +$('reset').value / 100, c = +$('calmr').value / 100, o = +$('oo').value / 100;
+        $('o-subs').textContent = subs; $('o-reset').textContent = $('reset').value + '%';
+        $('o-calm').textContent = $('calmr').value + '%'; $('o-oo').textContent = $('oo').value + '%';
+        var month = subs * (r * 37 + c * 107 + o * 350);
+        $('r-month').textContent = money(month); $('r-year').textContent = money(month * 12);
+        $('r-sub').textContent = '$' + (month / subs).toFixed(2);
+      }
+      ['subs', 'reset', 'calmr', 'oo'].forEach(function (id) { $(id).addEventListener('input', calc); });
+      calc();
+    })();
+  </script>
+
+  <style>
+    .wrap-wide { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; position: relative; }
+    .flow-col { display: flex; flex-direction: column; gap: 10px; position: relative; }
+    .flow-col:not(:last-child)::after { content: '→'; position: absolute; right: -16px; top: 2px; color: var(--taupe); font-size: 1.2rem; }
+    .flow-head { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mink); font-weight: 600; margin-bottom: 4px; }
+    .flow-head b { color: var(--sage-deep); }
+    .flow-node { display: flex; flex-direction: column; gap: 3px; text-align: left; font: inherit; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--char); }
+    .flow-node strong { font-size: .95rem; }
+    .flow-node span { font-size: .8rem; color: var(--mink); line-height: 1.4; }
+    .flow-node em { font-style: normal; font-size: .72rem; font-weight: 600; color: var(--sage-deep); margin-top: 2px; }
+    .flow-node.free { border-left-color: var(--mint); }
+    .flow-node.paid { border-left-color: var(--peach); }
+    .flow-node.core { border-left-color: var(--char); }
+    .flow-node.tool { border-left-color: var(--taupe); background: var(--paper); }
+    .flow-node.go { cursor: pointer; transition: transform .15s, box-shadow .15s; }
+    .flow-node.go:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .pv { display: grid; grid-template-columns: 300px 1fr; gap: 24px; margin-top: 28px; align-items: start; }
+    .pv-list { background: #fff; border-radius: var(--radius); padding: 14px; max-height: 860px; overflow: auto; position: sticky; top: 80px; }
+    .pv-group { display: block; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mink); font-weight: 600; margin: 12px 8px 6px; }
+    .pv-item { display: block; width: 100%; text-align: left; font: inherit; font-size: .88rem; background: none; border: 0; border-radius: 10px; padding: 8px 10px; cursor: pointer; color: var(--char); }
+    .pv-item small { display: block; font-size: .7rem; color: var(--sage-deep); font-weight: 600; }
+    .pv-item:hover { background: var(--paper); }
+    .pv-item.on { background: var(--mint-soft); }
+    .pv-main { min-width: 0; }
+    .pv-inbox { background: #fff; border-radius: var(--radius) var(--radius) 0 0; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+    .pv-from { display: flex; align-items: center; gap: 12px; }
+    .pv-from small { display: block; color: var(--mink); font-size: .75rem; }
+    .pv-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--sage); color: #fff; display: grid; place-items: center; font-weight: 600; }
+    .pv-when { margin-left: auto; font-size: .72rem; color: var(--sage-deep); font-weight: 600; text-align: right; }
+    .pv-subject { font-family: var(--serif); font-size: 1.6rem; margin-top: 12px; line-height: 1.2; }
+    .pv-pre { color: var(--mink); font-size: .9rem; }
+    .pv-ab { margin-top: 10px; font-size: .85rem; }
+    #pv-frame { width: 100%; min-height: 600px; border: 0; display: block; background: #F3EAE3; border-radius: 0 0 var(--radius) var(--radius); }
+    #pv-rule { margin-top: 14px; }
+    .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+    .calc label { display: flex; flex-direction: column; gap: 6px; font-size: .9rem; font-weight: 500; }
+    .calc output { font-family: var(--serif); font-size: 1.5rem; color: var(--sage-deep); }
+    .calc input { accent-color: var(--sage-deep); width: 100%; }
+    .calc-out { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .calc-out div { background: var(--paper); border-radius: 16px; padding: 14px 16px; }
+    .calc-out strong { display: block; font-family: var(--serif); font-size: 2rem; line-height: 1.1; }
+    .setup li { margin-bottom: 12px; }
+    .setup code, .note code { overflow-wrap: anywhere; }
+    @media (max-width: 900px) {
+      .flow { grid-template-columns: 1fr 1fr; }
+      .flow-col:nth-child(2)::after { display: none; }
+      .pv { grid-template-columns: 1fr; }
+      .pv-list { position: static; max-height: 300px; }
+    }
+    @media (max-width: 560px) {
+      .flow { grid-template-columns: 1fr; }
+      .flow-col::after { display: none; }
+      .calc, .calc-out { grid-template-columns: 1fr; }
+    }
+  </style>
+</Layout>
