@@ -17,7 +17,6 @@ await mkdir(socialDir, { recursive: true });
 await mkdir(pdfDir, { recursive: true });
 
 const PDFS = [
-  ['/assets/wake-windows', 'thyme4sleep-wake-window-cheat-sheet.pdf'],
   ['/assets/safe-sleep', 'thyme4sleep-safe-sleep-checklist.pdf'],
   ['/assets/sleep-log', 'thyme4sleep-7-day-sleep-log.pdf'],
   ['/assets/bedtime-chart', 'thyme4sleep-bedtime-routine-chart.pdf'],

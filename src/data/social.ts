@@ -27,7 +27,7 @@ export const QUOTES = [
 
 export const STORIES = [
   { eyebrow: 'Free quiz · 2 minutes', title: 'What’s really behind the 3am wake-ups?', cta: 'Take the Sleep Snapshot', img: 'crib-awake' },
-  { eyebrow: 'Free printable', title: 'The Wake Window & Nap Cheat Sheet', cta: 'Grab it free', img: 'newborn' },
+  { eyebrow: 'Free guide', title: 'The Gentle Sleep Reset', cta: 'Grab it free', img: 'newborn' },
   { eyebrow: 'New · Self-guided programme', title: 'The Calm Nights Method', cta: 'No cry-it-out. 14 nights.', img: 'mother-hold' },
 ];
 
