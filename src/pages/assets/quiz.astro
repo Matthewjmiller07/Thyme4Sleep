@@ -51,7 +51,7 @@ const questions = [
         <hr class="divider" />
         <p class="lead" style="margin-inline:auto;">Every wake-up has a reason. Answer eight quick questions and find out your child’s main <em>sleep driver</em> — plus the gentle next step Georgia would recommend if you were sitting across from her.</p>
         <button class="btn btn-dark" id="start" type="button">Start the Snapshot →</button>
-        <p class="small muted" style="margin-top:14px;">No cry-it-out. No judgement. No email required to see your result.</p>
+        <p class="small muted" style="margin-top:14px;">No cry-it-out. No judgement. Your result is emailed to you, with Georgia’s free Gentle Sleep Reset guide.</p>
       </div>
 
       <form id="quiz" hidden onsubmit="return false;">
@@ -69,6 +69,30 @@ const questions = [
           </fieldset>
         ))}
       </form>
+
+      <div id="gate" hidden>
+        <div class="center">
+          <span class="eyebrow">Your Snapshot is ready</span>
+          <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);">Where should we send it?</h1>
+          <hr class="divider" />
+          <p class="lead" style="margin-inline:auto;">Enter your first name and email to see your child’s sleep driver and Georgia’s recommended next step. We’ll also send you a copy, plus her free 72-hour Gentle Sleep Reset guide.</p>
+        </div>
+        <div class="card lift" style="padding:clamp(22px,4vw,34px);">
+          <form id="lead" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="hidden" name="access_key" value="446b9501-1418-4401-b080-b126515a1304" />
+            <input type="hidden" name="subject" value="New Sleep Snapshot quiz lead" />
+            <input type="hidden" name="from_name" value="Thyme4Sleep Sleep Snapshot" />
+            <input type="hidden" name="result" id="lead-result" value="" />
+            <input type="hidden" name="answers" id="lead-answers" value="" />
+            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+            <input name="name" placeholder="First name" autocomplete="given-name" required style="flex:1 1 160px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+            <input name="email" type="email" placeholder="Email address" autocomplete="email" required style="flex:2 1 220px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+            <button class="btn btn-dark" type="submit" id="lead-btn" style="flex:1 1 100%;">Show my result →</button>
+          </form>
+          <p class="small muted" style="margin:12px 0 0;">Occasional gentle sleep tips from Georgia after that. Unsubscribe any time; we never share your email.</p>
+        </div>
+        <p class="center small" style="margin-top:14px;"><button type="button" class="back-q" style="background:none;border:0;color:var(--mink);cursor:pointer;font:inherit;">← Back to the questions</button></p>
+      </div>
 
       <div id="result" hidden>
         <div class="center">
@@ -91,22 +115,7 @@ const questions = [
           </div>
         </div>
 
-        <div class="card soft" style="margin-top:22px;" id="capture">
-          <h3>Want this saved — plus the free Gentle Sleep Reset guide?</h3>
-          <p class="muted small">We’ll email your Snapshot and Georgia’s 72-hour reset guide. Occasional gentle sleep tips after that; unsubscribe any time.</p>
-          <form id="lead" style="display:flex;gap:10px;flex-wrap:wrap;">
-            <input type="hidden" name="access_key" value="446b9501-1418-4401-b080-b126515a1304" />
-            <input type="hidden" name="subject" value="New Sleep Snapshot quiz lead" />
-            <input type="hidden" name="from_name" value="Thyme4Sleep Sleep Snapshot" />
-            <input type="hidden" name="result" id="lead-result" value="" />
-            <input type="hidden" name="answers" id="lead-answers" value="" />
-            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
-            <input name="name" placeholder="First name" required style="flex:1 1 160px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
-            <input name="email" type="email" placeholder="Email address" required style="flex:2 1 220px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
-            <button class="btn btn-peach" type="submit" id="lead-btn">Send it to me</button>
-          </form>
-          <p id="lead-ok" hidden style="margin:12px 0 0;color:var(--sage-deep);font-weight:600;">Done — check your inbox. You can also grab the guide now: <a href="/essential-checklist.pdf" target="_blank" rel="noopener">The Gentle Sleep Reset (PDF)</a>.</p>
-        </div>
+        <div class="note" style="margin-top:22px;"><p class="small" style="margin:0;">Your Snapshot is on its way to your inbox. You can also grab the guide now: <a href="/essential-checklist.pdf" target="_blank" rel="noopener">The Gentle Sleep Reset (PDF)</a>.</p></div>
         <p class="center small muted" style="margin-top:20px;"><button type="button" id="restart" style="background:none;border:0;color:var(--mink);text-decoration:underline;cursor:pointer;font:inherit;">Retake the Snapshot</button> · General education only, not medical advice.</p>
       </div>
     </div>
@@ -148,11 +157,21 @@ const questions = [
       var intro = document.getElementById('intro');
       var quiz = document.getElementById('quiz');
       var result = document.getElementById('result');
+      var gate = document.getElementById('gate');
+      function reveal() {
+        gate.hidden = true; result.hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      gate.querySelector('.back-q').addEventListener('click', function () { gate.hidden = true; quiz.hidden = false; show(qs.length - 1); });
       var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
       var bar = document.getElementById('bar');
       var answers = [];
       var current = 0;
       var resultKey = '';
+      var LEAD_KEY = 't4s_lead';
+      var lead = null;
+      try { lead = JSON.parse(localStorage.getItem(LEAD_KEY) || 'null'); } catch (e) {}
+      var unlocked = !!(lead && lead.email && lead.email !== 'render');
 
       function show(i) {
         qs.forEach(function (q, k) { q.hidden = k !== i; });
@@ -178,8 +197,14 @@ const questions = [
         var alt = document.getElementById('r-alt'); alt.textContent = r.alt[0]; alt.href = r.alt[1];
         document.getElementById('lead-result').value = r.title + ' ' + JSON.stringify(score);
         document.getElementById('lead-answers').value = answers.map(function (a, i) { return (i + 1) + '. ' + a.label; }).join(' | ');
-        quiz.hidden = true; result.hidden = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        quiz.hidden = true;
+        bar.style.width = '100%';
+        if (unlocked) {
+          // Already signed up from another resource: just save their Snapshot result to Brevo.
+          fetch('/api/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: lead.email, name: lead.name, source: 'snapshot', snapshot: key }) }).catch(function () {});
+          reveal();
+        } else { gate.hidden = false; window.scrollTo({ top: 0, behavior: 'smooth' }); }
         if (window.gtag) gtag('event', 'quiz_complete', { quiz: 'sleep_snapshot', result: key });
       }
 
@@ -200,7 +225,7 @@ const questions = [
         if (back) back.addEventListener('click', function () { show(i - 1); });
       });
       document.getElementById('restart').addEventListener('click', function () {
-        answers = []; result.hidden = true; quiz.hidden = false;
+        answers = []; result.hidden = true; gate.hidden = true; quiz.hidden = false;
         document.querySelectorAll('.opt').forEach(function (b) { b.style.borderColor = ''; b.style.background = ''; });
         show(0);
       });
@@ -208,19 +233,24 @@ const questions = [
       document.getElementById('lead').addEventListener('submit', function (e) {
         e.preventDefault();
         var btn = document.getElementById('lead-btn');
-        btn.disabled = true; btn.textContent = 'Sending…';
+        btn.disabled = true; btn.textContent = 'One moment…';
         var fd = new FormData(e.target);
-        // Adds them to the Brevo email flow (with their Snapshot result); never blocks the form.
-        fetch('/api/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ email: fd.get('email'), name: fd.get('name'), source: 'snapshot', snapshot: resultKey, botcheck: fd.get('botcheck') }) }).catch(function () {});
-        fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
-          .then(function (r) { return r.json(); })
-          .then(function (d) {
-            if (!d.success) throw new Error(d.message);
-            e.target.hidden = true; document.getElementById('lead-ok').hidden = false;
-            if (window.gtag) gtag('event', 'generate_lead', { source: 'sleep_snapshot' });
-          })
-          .catch(function () { btn.disabled = false; btn.textContent = 'Send it to me'; alert('Something went wrong — please try again or email georgia@thyme4sleep.com'); });
+        // Brevo (starts the email flow with their Snapshot result) + Web3Forms (notifies Georgia).
+        // The result is shown once both have been tried, so a slow or failed request never blocks it.
+        var sends = [
+          fetch('/api/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: fd.get('email'), name: fd.get('name'), source: 'snapshot', snapshot: resultKey, botcheck: fd.get('botcheck') }) }),
+          fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd }),
+        ].map(function (p) { return p.catch(function () {}); });
+        var timeout = new Promise(function (r) { setTimeout(r, 4000); });
+        Promise.race([Promise.all(sends), timeout]).then(function () {
+          unlocked = true;
+          lead = { email: fd.get('email'), name: fd.get('name') };
+          try { localStorage.setItem(LEAD_KEY, JSON.stringify(lead)); } catch (err) {}
+          btn.disabled = false; btn.textContent = 'Show my result →';
+          if (window.gtag) gtag('event', 'generate_lead', { source: 'sleep_snapshot' });
+          reveal();
+        });
       });
     })();
   </script>

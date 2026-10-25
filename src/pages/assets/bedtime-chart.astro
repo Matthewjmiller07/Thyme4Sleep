@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/AssetsLayout.astro';
 import PrintBar from '../../components/assets/PrintBar.astro';
+import EmailGate from '../../components/assets/EmailGate.astro';
 import NextStep from '../../components/assets/NextStep.astro';
 export const prerender = true;
 
@@ -23,12 +24,14 @@ const steps = [
         <h1 style="margin-top:18px;">The Bedtime Routine Chart</h1>
         <hr class="divider" />
         <p class="lead">Toddlers resist what they can’t predict. A picture chart turns bedtime from a negotiation into a game they’re in charge of: <em>“What does the chart say comes next?”</em> Includes cut-out “Bedtime Pass” cards for the curtain-call kids.</p>
-        <a class="btn btn-dark" href="/assets/downloads/thyme4sleep-bedtime-routine-chart.pdf" download>Download the chart (PDF)</a>
+        <a class="btn btn-dark" href="#get">Get the free chart</a>
       </div>
       <div class="photo"><img src="/assets/img/lamp-sleep.webp" alt="A toddler asleep in a cosy bedroom lit by a soft lamp" loading="eager" /></div>
     </div>
   </section>
 
+  <div id="get"></div>
+  <EmailGate source="bedtime-chart" title="Get the bedtime chart" blurb="Pop in your name and email and the printable chart, Bedtime Pass cards and PDF download open straight away.">
   <div class="sheet-stage">
     <PrintBar pdf="/assets/downloads/thyme4sleep-bedtime-routine-chart.pdf" />
     <article class="sheet" style="background:var(--paper);">
@@ -76,6 +79,8 @@ const steps = [
       <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>© Thyme4Sleep LLC</span></div>
     </article>
   </div>
+
+  </EmailGate>
 
   <NextStep variant="calm" />
 </Layout>

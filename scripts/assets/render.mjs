@@ -25,6 +25,8 @@ const HIDE_DEV = 'astro-dev-toolbar{display:none!important}';
 
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const page = await browser.newPage({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 1 });
+// Printables sit behind the email gate; mark this browser as already signed up.
+await page.addInitScript(() => localStorage.setItem('t4s_lead', '{"email":"render"}'));
 
 await page.goto(`${base}/assets/social/frames`, { waitUntil: 'networkidle' });
 await page.addStyleTag({ content: HIDE_DEV });

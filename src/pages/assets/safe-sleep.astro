@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/AssetsLayout.astro';
 import PrintBar from '../../components/assets/PrintBar.astro';
+import EmailGate from '../../components/assets/EmailGate.astro';
 import SheetHead from '../../components/assets/SheetHead.astro';
 import NextStep from '../../components/assets/NextStep.astro';
 import Leaf from '../../components/assets/Leaf.astro';
@@ -42,14 +43,15 @@ const groups = [
         <hr class="divider" />
         <p class="lead">Every Thyme4Sleep plan starts with safety. This one-page checklist distils the American Academy of Pediatrics (AAP) and NIH <em>Safe to Sleep</em> guidance into something you can tick through in two minutes — and the matching lock-screen wallpaper keeps it in your pocket for 3am.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-dark" href="/assets/downloads/thyme4sleep-safe-sleep-checklist.pdf" download>Download checklist (PDF)</a>
-          <a class="btn btn-ghost" href="/assets/social/sleep-tight-wallpaper.png" download>Get the phone wallpaper</a>
+          <a class="btn btn-dark" href="#get">Get the free checklist + wallpaper</a>
         </div>
       </div>
       <div class="photo"><img src="/assets/img/empty-crib.webp" alt="A simple, empty wooden crib with a fitted sheet" loading="eager" /></div>
     </div>
   </section>
 
+  <div id="get"></div>
+  <EmailGate source="safe-sleep" title="Get the checklist & wallpaper" blurb="Pop in your name and email and the printable checklist, PDF download and Sleep Tight lock-screen wallpaper open straight away.">
   <div class="sheet-stage">
     <PrintBar pdf="/assets/downloads/thyme4sleep-safe-sleep-checklist.pdf" />
     <article class="sheet">
@@ -82,6 +84,8 @@ const groups = [
       <img src="/assets/social/sleep-tight-wallpaper.png" alt="Sleep Tight phone wallpaper preview" style="max-width:260px;margin:auto;border-radius:34px;box-shadow:var(--shadow);" loading="lazy" />
     </div>
   </section>
+
+  </EmailGate>
 
   <NextStep variant="quiz" />
 </Layout>

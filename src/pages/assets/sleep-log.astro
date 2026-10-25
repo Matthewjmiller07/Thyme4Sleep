@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/AssetsLayout.astro';
 import PrintBar from '../../components/assets/PrintBar.astro';
+import EmailGate from '../../components/assets/EmailGate.astro';
 import SheetHead from '../../components/assets/SheetHead.astro';
 import NextStep from '../../components/assets/NextStep.astro';
 export const prerender = true;
@@ -19,6 +20,8 @@ const hours = ['6p', '7', '8', '9', '10', '11', '12a', '1', '2', '3', '4', '5', 
     </div>
   </section>
 
+  <div id="get"></div>
+  <EmailGate source="sleep-log" title="Get your 7-day sleep log" blurb="Pop in your name and email and the printable log and PDF download open straight away.">
   <div class="sheet-stage">
     <PrintBar pdf="/assets/downloads/thyme4sleep-7-day-sleep-log.pdf" />
     <article class="sheet">
@@ -58,6 +61,8 @@ const hours = ['6p', '7', '8', '9', '10', '11', '12a', '1', '2', '3', '4', '5', 
       <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>© Thyme4Sleep LLC</span></div>
     </article>
   </div>
+
+  </EmailGate>
 
   <NextStep variant="quiz" />
 </Layout>

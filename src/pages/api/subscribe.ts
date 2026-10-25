@@ -4,9 +4,9 @@ import { SNAPSHOT_LABELS } from '../../data/emails';
 
 export const prerender = false;
 
-// Free sign-ups (Sleep Snapshot quiz, Gentle Sleep Reset) → Brevo "leads" list.
+// Free sign-ups (Sleep Snapshot quiz, Gentle Sleep Reset, gated printables) → Brevo "leads" list.
 // The forms still notify Georgia through Web3Forms; this adds the person to the email flow.
-const SOURCES = ['snapshot', 'gentle-reset'];
+const SOURCES = ['snapshot', 'gentle-reset', 'safe-sleep', 'sleep-log', 'bedtime-chart'];
 
 export const POST: APIRoute = async ({ request }) => {
   let data: Record<string, unknown>;

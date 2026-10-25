@@ -1,0 +1,65 @@
+---
+// Email gate for free resources: the slot stays hidden until the visitor gives a first
+// name and email. The sign-up goes to Brevo (/api/subscribe, starts the welcome emails)
+// and to Georgia's inbox (Web3Forms). One sign-up unlocks every resource in this browser
+// (localStorage "t4s_lead"), so returning visitors aren't asked twice.
+interface Props { source: string; title: string; blurb: string; button?: string }
+const { source, title, blurb, button = 'Unlock it free →' } = Astro.props;
+---
+<div class="email-gate" data-source={source}>
+  <section class="band gate-form no-print">
+    <div class="narrow">
+      <div class="card lift" style="padding:clamp(24px,4vw,40px);text-align:center;">
+        <span class="pill free">Free · instant access</span>
+        <h2 style="margin-top:14px;">{title}</h2>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="muted" style="margin-inline:auto;max-width:520px;">{blurb}</p>
+        <form class="gate-lead" style="display:flex;gap:10px;flex-wrap:wrap;max-width:560px;margin:18px auto 0;">
+          <input type="hidden" name="access_key" value="446b9501-1418-4401-b080-b126515a1304" />
+          <input type="hidden" name="subject" value={`New free resource download: ${source}`} />
+          <input type="hidden" name="from_name" value="Thyme4Sleep Resource Library" />
+          <input type="hidden" name="resource" value={source} />
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+          <input name="name" placeholder="First name" autocomplete="given-name" required style="flex:1 1 160px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+          <input name="email" type="email" placeholder="Email address" autocomplete="email" required style="flex:2 1 220px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font:inherit;" />
+          <button class="btn btn-dark" type="submit" style="flex:1 1 100%;">{button}</button>
+        </form>
+        <p class="small muted" style="margin:12px 0 0;">You’ll also get Georgia’s free Gentle Sleep Reset guide and occasional gentle sleep tips. Unsubscribe any time; we never share your email.</p>
+      </div>
+    </div>
+  </section>
+  <div class="gate-content" hidden><slot /></div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 't4s_lead';
+    function stored() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }
+    function unlock(gate) {
+      gate.querySelector('.gate-form').hidden = true;
+      gate.querySelector('.gate-content').hidden = false;
+      window.dispatchEvent(new Event('resize')); // re-fit printable sheets now they're visible
+    }
+    document.querySelectorAll('.email-gate').forEach(function (gate) {
+      if (stored()) return unlock(gate);
+      var form = gate.querySelector('.gate-lead');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button'); var label = btn.textContent;
+        btn.disabled = true; btn.textContent = 'One moment…';
+        var fd = new FormData(form);
+        var sends = [
+          fetch('/api/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: fd.get('email'), name: fd.get('name'), source: gate.dataset.source, botcheck: fd.get('botcheck') }) }),
+          fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd }),
+        ].map(function (p) { return p.catch(function () {}); });
+        Promise.race([Promise.all(sends), new Promise(function (r) { setTimeout(r, 4000); })]).then(function () {
+          try { localStorage.setItem(KEY, JSON.stringify({ email: fd.get('email'), name: fd.get('name') })); } catch (err) {}
+          if (window.gtag) gtag('event', 'generate_lead', { source: gate.dataset.source });
+          btn.disabled = false; btn.textContent = label;
+          unlock(gate);
+        });
+      });
+    });
+  })();
+</script>
