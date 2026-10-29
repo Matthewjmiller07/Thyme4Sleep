@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ReviewComments from '../components/ReviewComments.astro';
 
 interface Props {
   title?: string;
@@ -178,6 +179,8 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
         </div>
       </div>
     </footer>
+
+    <ReviewComments />
 
     <script>
       // Mobile menu toggle

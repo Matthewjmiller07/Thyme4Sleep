@@ -1,5 +1,6 @@
 ---
 import '../styles/assets.css';
+import ReviewComments from '../components/ReviewComments.astro';
 
 interface Props {
   title: string;
@@ -60,5 +61,7 @@ const { title, description = 'Gentle, evidence-informed sleep resources from Thy
         </div>
       </footer>
     )}
+    {/* Review comments for the team while the library is pre-launch; remove before launch. */}
+    {!bare && <ReviewComments alwaysOn />}
   </body>
 </html>

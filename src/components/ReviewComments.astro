@@ -1,0 +1,324 @@
+---
+// Review comments: a floating "Comments" button that lets the team leave feedback on the page
+// they're looking at (green light / change needed / question / note), optionally pinned to a spot.
+// Comments live in Supabase (table public.t4s_review_comments) and are written straight from the
+// browser with the publishable key; RLS only allows insert, read, and flipping open/done.
+// All comments across pages: /assets/review
+//
+// alwaysOn: show on every visit (the unlinked /assets pages). Otherwise the button only appears
+// after visiting a page with ?review=1 (remembered on that browser; ?review=0 turns it off), so
+// customers on the live site never see it.
+
+interface Props {
+  alwaysOn?: boolean;
+}
+const { alwaysOn = false } = Astro.props;
+---
+
+<div id="rc-root" class="rc-root no-print" data-always-on={alwaysOn ? '1' : '0'} hidden>
+  <button type="button" class="rc-fab" aria-expanded="false" aria-controls="rc-panel">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" stroke-linejoin="round" /></svg>
+    <span>Comments</span>
+    <span class="rc-count" data-rc-count>0</span>
+  </button>
+
+  <aside id="rc-panel" class="rc-panel" hidden aria-label="Review comments for this page">
+    <header class="rc-head">
+      <div>
+        <strong>Review comments</strong>
+        <span class="rc-path" data-rc-path></span>
+      </div>
+      <button type="button" class="rc-x" data-rc-close aria-label="Close comments">×</button>
+    </header>
+
+    <div class="rc-list" data-rc-list><p class="rc-empty">Loading…</p></div>
+
+    <form class="rc-form" data-rc-form>
+      <div class="rc-kinds" role="radiogroup" aria-label="Type of comment">
+        <label><input type="radio" name="kind" value="approve" /> <span class="k-approve">✓ Green light</span></label>
+        <label><input type="radio" name="kind" value="change" checked /> <span class="k-change">✎ Change</span></label>
+        <label><input type="radio" name="kind" value="question" /> <span class="k-question">? Question</span></label>
+        <label><input type="radio" name="kind" value="note" /> <span class="k-note">• Note</span></label>
+      </div>
+      <div class="rc-target-row">
+        <input name="target" maxlength="500" placeholder="About (optional) — or pick a spot →" />
+        <button type="button" class="rc-pick" data-rc-pick title="Click anything on the page to attach this comment to it">◎ Pick</button>
+      </div>
+      <textarea name="body" required maxlength="5000" rows="3" placeholder="Your comment…"></textarea>
+      <div class="rc-foot">
+        <input name="author" required maxlength="80" placeholder="Your name" autocomplete="name" />
+        <button type="submit" class="rc-send">Post</button>
+      </div>
+      <p class="rc-msg" data-rc-msg role="status"></p>
+      <a class="rc-all" href="/assets/review">All comments across pages →</a>
+    </form>
+  </aside>
+</div>
+<div class="rc-pickbar no-print" data-rc-pickbar hidden>Click the part of the page this comment is about · <button type="button" data-rc-pick-cancel>Cancel</button></div>
+
+<style is:global>
+  .rc-root, .rc-pickbar { font-family: 'Montserrat', system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.45; color: #3F3B38; }
+  .rc-root[hidden], .rc-panel[hidden], .rc-pickbar[hidden] { display: none !important; }
+  .rc-fab { position: fixed; right: 18px; bottom: 18px; z-index: 9990; display: flex; align-items: center; gap: 8px; padding: 11px 16px; border: 0; border-radius: 999px; background: #3F3B38; color: #FBF7F3; font: 600 13px/1 inherit; font-family: inherit; letter-spacing: .02em; cursor: pointer; box-shadow: 0 10px 30px -10px rgba(63,59,56,.6); }
+  .rc-fab:hover { background: #2c2927; }
+  .rc-count { min-width: 20px; padding: 3px 6px; border-radius: 999px; background: #F1D4AE; color: #3F3B38; font-size: 11px; text-align: center; }
+  .rc-count.has-open { background: #e9a07a; }
+  .rc-panel { position: fixed; right: 18px; bottom: 74px; z-index: 9991; width: min(400px, calc(100vw - 32px)); max-height: min(680px, calc(100vh - 100px)); display: flex; flex-direction: column; background: #FBF7F3; border: 1px solid #E6DAD0; border-radius: 18px; box-shadow: 0 24px 60px -20px rgba(63,59,56,.45); overflow: hidden; }
+  @media (max-width: 480px) { .rc-fab { right: 16px; bottom: 16px; } .rc-panel { right: 16px; left: 16px; width: auto; bottom: 70px; } }
+  .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 14px 16px 10px; border-bottom: 1px solid #E6DAD0; }
+  .rc-head strong { display: block; font-size: 15px; }
+  .rc-path { display: block; font-size: 11px; color: #897E77; word-break: break-all; }
+  .rc-x { border: 0; background: none; font-size: 24px; line-height: 1; color: #897E77; cursor: pointer; padding: 0 4px; }
+  .rc-list { flex: 1; overflow-y: auto; padding: 8px 16px; }
+  .rc-empty { color: #897E77; font-size: 13px; margin: 10px 0; }
+  .rc-item { padding: 10px 0; border-bottom: 1px dashed #E6DAD0; }
+  .rc-item:last-child { border-bottom: 0; }
+  .rc-item.is-done { opacity: .55; }
+  .rc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; color: #897E77; margin-bottom: 4px; }
+  .rc-meta b { color: #3F3B38; font-weight: 600; }
+  .rc-badge { padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 600; letter-spacing: .03em; }
+  .k-approve, .rc-badge.k-approve { color: #3f6b3a; } .rc-badge.k-approve { background: #E3E9E1; }
+  .k-change, .rc-badge.k-change { color: #8a4a22; } .rc-badge.k-change { background: #F8E8D3; }
+  .k-question, .rc-badge.k-question { color: #3c5a7a; } .rc-badge.k-question { background: #e2eaf3; }
+  .k-note, .rc-badge.k-note { color: #5f5853; } .rc-badge.k-note { background: #eee6df; }
+  .rc-target { font-size: 12px; color: #6E7569; font-style: italic; margin-bottom: 3px; cursor: pointer; }
+  .rc-target:hover { text-decoration: underline; }
+  .rc-body { white-space: pre-wrap; word-wrap: break-word; margin: 0; }
+  .rc-toggle { margin-left: auto; border: 1px solid #E6DAD0; background: #fff; border-radius: 999px; padding: 2px 9px; font: inherit; font-size: 11px; color: #3F3B38; cursor: pointer; }
+  .rc-toggle:hover { border-color: #897E77; }
+  .rc-form { padding: 12px 16px 14px; border-top: 1px solid #E6DAD0; background: #F3EAE3; display: grid; gap: 8px; }
+  .rc-kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rc-kinds label { cursor: pointer; }
+  .rc-kinds input { position: absolute; opacity: 0; pointer-events: none; }
+  .rc-kinds span { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #fff; border: 1px solid #E6DAD0; font-size: 12px; font-weight: 600; }
+  .rc-kinds input:checked + span { border-color: currentColor; box-shadow: inset 0 0 0 1px currentColor; }
+  .rc-kinds input:focus-visible + span { outline: 2px solid #8F958C; outline-offset: 2px; }
+  .rc-form input:not([type=radio]), .rc-form textarea { width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid #E6DAD0; border-radius: 10px; background: #fff; font: inherit; color: #3F3B38; }
+  .rc-form textarea { resize: vertical; min-height: 64px; }
+  .rc-form input:focus, .rc-form textarea:focus { outline: 2px solid #BCC8B9; border-color: #8F958C; }
+  .rc-target-row, .rc-foot { display: flex; gap: 8px; }
+  .rc-pick { flex: none; border: 1px solid #E6DAD0; background: #fff; border-radius: 10px; padding: 0 10px; font: inherit; font-size: 12px; font-weight: 600; color: #3F3B38; cursor: pointer; }
+  .rc-send { flex: none; border: 0; border-radius: 10px; padding: 0 18px; background: #3F3B38; color: #FBF7F3; font: inherit; font-weight: 600; cursor: pointer; }
+  .rc-send:disabled { opacity: .5; cursor: wait; }
+  .rc-msg { margin: 0; font-size: 12px; color: #6E7569; min-height: 0; }
+  .rc-msg:empty { display: none; }
+  .rc-msg.err { color: #a0412b; }
+  .rc-all { font-size: 12px; color: #897E77; }
+  .rc-pickbar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 9995; background: #3F3B38; color: #FBF7F3; padding: 10px 16px; border-radius: 999px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); font-size: 13px; }
+  .rc-pickbar button { margin-left: 8px; background: none; border: 1px solid rgba(255,255,255,.4); color: inherit; border-radius: 999px; padding: 2px 10px; font: inherit; cursor: pointer; }
+  .rc-hover { outline: 2px dashed #e9a07a !important; outline-offset: 2px; cursor: crosshair !important; }
+  .rc-flash { outline: 3px solid #e9a07a !important; outline-offset: 4px; transition: outline-color .3s; }
+  @media print { .rc-root, .rc-pickbar { display: none !important; } }
+</style>
+
+<script>
+  import { SUPABASE_URL, SUPABASE_KEY, COMMENTS_TABLE, KIND_LABEL, normalizePath, type ReviewComment } from '../lib/reviewComments';
+
+  const root = document.getElementById('rc-root')!;
+  const REVIEW_KEY = 't4s_review_mode';
+  const NAME_KEY = 't4s_review_name';
+  const store = {
+    get: (k: string) => { try { return localStorage.getItem(k); } catch { return null; } },
+    set: (k: string, v: string) => { try { localStorage.setItem(k, v); } catch {} },
+    del: (k: string) => { try { localStorage.removeItem(k); } catch {} },
+  };
+
+  const qs = new URLSearchParams(location.search).get('review');
+  if (qs === '1') store.set(REVIEW_KEY, '1');
+  if (qs === '0') store.del(REVIEW_KEY);
+  const enabled = qs !== '0' && (root.dataset.alwaysOn === '1' || store.get(REVIEW_KEY) === '1');
+
+  if (enabled) init();
+
+  function init() {
+    root.hidden = false;
+    const path = normalizePath(location.pathname);
+    const $ = <T extends Element>(sel: string) => root.querySelector(sel) as T;
+    const fab = $<HTMLButtonElement>('.rc-fab');
+    const panel = $<HTMLElement>('#rc-panel');
+    const list = $<HTMLElement>('[data-rc-list]');
+    const count = $<HTMLElement>('[data-rc-count]');
+    const form = $<HTMLFormElement>('[data-rc-form]');
+    const msg = $<HTMLElement>('[data-rc-msg]');
+    const send = $<HTMLButtonElement>('.rc-send');
+    const pickbar = document.querySelector('[data-rc-pickbar]') as HTMLElement;
+    const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    $<HTMLElement>('[data-rc-path]').textContent = path;
+    field('author').value = store.get(NAME_KEY) || '';
+
+    const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'content-type': 'application/json' };
+    const api = `${SUPABASE_URL}/rest/v1/${COMMENTS_TABLE}`;
+    let comments: ReviewComment[] = [];
+
+    const setOpen = (open: boolean) => {
+      panel.hidden = !open;
+      fab.setAttribute('aria-expanded', String(open));
+      if (open) {
+        // Prefill "About" with any text the reviewer highlighted before opening the panel.
+        const sel = String(window.getSelection() || '').trim().replace(/\s+/g, ' ');
+        if (sel && !field('target').value) field('target').value = `“${sel.slice(0, 200)}”`;
+      }
+    };
+    fab.addEventListener('click', () => setOpen(panel.hidden));
+    $('[data-rc-close]').addEventListener('click', () => setOpen(false));
+
+    async function load() {
+      try {
+        const res = await fetch(`${api}?page_path=eq.${encodeURIComponent(path)}&order=created_at.asc`, { headers });
+        if (!res.ok) throw new Error(await res.text());
+        comments = await res.json();
+        render();
+      } catch (err) {
+        console.error('[review comments] load failed', err);
+        list.innerHTML = '<p class="rc-empty">Couldn’t load comments right now.</p>';
+      }
+    }
+
+    function render() {
+      const open = comments.filter((c) => c.status === 'open').length;
+      count.textContent = String(comments.length);
+      count.classList.toggle('has-open', open > 0);
+      count.title = `${open} open · ${comments.length - open} done`;
+      if (!comments.length) { list.innerHTML = '<p class="rc-empty">No comments on this page yet. Be the first.</p>'; return; }
+      list.replaceChildren(...comments.map(item));
+      list.scrollTop = list.scrollHeight;
+    }
+
+    function item(c: ReviewComment) {
+      const el = document.createElement('div');
+      el.className = `rc-item${c.status === 'done' ? ' is-done' : ''}`;
+      const meta = document.createElement('div');
+      meta.className = 'rc-meta';
+      const badge = Object.assign(document.createElement('span'), { className: `rc-badge k-${c.kind}`, textContent: KIND_LABEL[c.kind] });
+      const who = Object.assign(document.createElement('b'), { textContent: c.author });
+      const when = Object.assign(document.createElement('span'), { textContent: new Date(c.created_at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) });
+      const toggle = Object.assign(document.createElement('button'), { type: 'button', className: 'rc-toggle', textContent: c.status === 'done' ? 'Reopen' : 'Mark done' });
+      toggle.addEventListener('click', () => setStatus(c, c.status === 'done' ? 'open' : 'done'));
+      meta.append(badge, who, when, toggle);
+      el.append(meta);
+      if (c.target) {
+        const t = Object.assign(document.createElement('div'), { className: 'rc-target', textContent: `↳ ${c.target}`, title: 'Find on page' });
+        t.addEventListener('click', () => locate(c.target!));
+        el.append(t);
+      }
+      el.append(Object.assign(document.createElement('p'), { className: 'rc-body', textContent: c.body }));
+      return el;
+    }
+
+    async function setStatus(c: ReviewComment, status: 'open' | 'done') {
+      const res = await fetch(`${api}?id=eq.${c.id}`, {
+        method: 'PATCH', headers: { ...headers, Prefer: 'return=representation' },
+        body: JSON.stringify({ status, resolved_at: status === 'done' ? new Date().toISOString() : null }),
+      });
+      if (res.ok) { Object.assign(c, (await res.json())[0]); render(); }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const author = field('author').value.trim();
+      const body = (form.elements.namedItem('body') as HTMLTextAreaElement).value.trim();
+      if (!author || !body) return;
+      store.set(NAME_KEY, author);
+      send.disabled = true;
+      msg.className = 'rc-msg';
+      msg.textContent = '';
+      try {
+        const res = await fetch(api, {
+          method: 'POST', headers: { ...headers, Prefer: 'return=representation' },
+          body: JSON.stringify({
+            page_path: path,
+            page_title: document.title.slice(0, 300),
+            target: field('target').value.trim() || null,
+            author,
+            kind: (form.querySelector('input[name=kind]:checked') as HTMLInputElement).value,
+            body,
+          }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        comments.push((await res.json())[0]);
+        render();
+        (form.elements.namedItem('body') as HTMLTextAreaElement).value = '';
+        field('target').value = '';
+        msg.textContent = 'Posted — thank you!';
+      } catch (err) {
+        console.error('[review comments] post failed', err);
+        msg.className = 'rc-msg err';
+        msg.textContent = 'Couldn’t post that. Please try again.';
+      } finally {
+        send.disabled = false;
+      }
+    });
+
+    // "Pick a spot": the next click on the page becomes the comment's "About" text.
+    let hovered: Element | null = null;
+    const inUi = (el: Element) => root.contains(el) || pickbar.contains(el);
+    const onMove = (e: MouseEvent) => {
+      const el = e.target as Element;
+      if (hovered === el) return;
+      hovered?.classList.remove('rc-hover');
+      hovered = inUi(el) ? null : el;
+      hovered?.classList.add('rc-hover');
+    };
+    const onClick = (e: MouseEvent) => {
+      const el = e.target as Element;
+      if (inUi(el)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      field('target').value = describe(el);
+      stopPick();
+    };
+    const stopPick = () => {
+      hovered?.classList.remove('rc-hover');
+      hovered = null;
+      document.removeEventListener('mouseover', onMove, true);
+      document.removeEventListener('click', onClick, true);
+      pickbar.hidden = true;
+      panel.hidden = false;
+    };
+    $('[data-rc-pick]').addEventListener('click', () => {
+      panel.hidden = true;
+      pickbar.hidden = false;
+      document.addEventListener('mouseover', onMove, true);
+      document.addEventListener('click', onClick, true);
+    });
+    pickbar.querySelector('[data-rc-pick-cancel]')!.addEventListener('click', stopPick);
+
+    function describe(picked: Element): string {
+      // Describe the whole heading / paragraph / list item, not an inline fragment of it.
+      const el = picked.closest('h1, h2, h3, h4, h5, h6, p, li, td, th, button, a, label, figcaption, blockquote') || picked;
+      const clip = (s: string, n = 120) => { s = s.replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
+      const img = el.closest('img') || el.querySelector?.('img');
+      if (img && (el === img || !clip((el as HTMLElement).innerText || ''))) {
+        return `Image: ${img.getAttribute('alt') || img.getAttribute('src')?.split('/').pop() || 'image'}`;
+      }
+      const own = clip((el as HTMLElement).innerText || el.textContent || '');
+      const section = el.closest('section, article, .card, .frame, li, form, table');
+      const heading = section?.querySelector('h1, h2, h3, h4');
+      const where = heading && !heading.contains(el) ? clip(heading.textContent || '', 60) : '';
+      return [where && `[${where}]`, own ? `“${own}”` : el.tagName.toLowerCase()].filter(Boolean).join(' ');
+    }
+
+    // Scroll to the text a comment is attached to (best effort: first element whose text matches).
+    function locate(target: string) {
+      const m = target.match(/“([^”]+?)…?”/) || target.match(/^Image: (.+)$/);
+      if (!m) return;
+      const needle = m[1].replace(/…$/, '').slice(0, 60);
+      const has = (n: Element) => !inUi(n) && ((n as HTMLElement).innerText || '').replace(/\s+/g, ' ').includes(needle);
+      let found: Element | undefined;
+      if (target.startsWith('Image:')) {
+        found = [...document.images].find((i) => i.alt === needle || i.src.endsWith(needle));
+      } else {
+        // Walk down from <main> to the innermost element that still contains the text.
+        let node: Element | undefined = document.querySelector('main') || document.body;
+        while (node && has(node)) { found = node; node = [...node.children].find(has); }
+        if (found === (document.querySelector('main') || document.body)) found = undefined;
+      }
+      if (!found) return;
+      found.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      found.classList.add('rc-flash');
+      setTimeout(() => found.classList.remove('rc-flash'), 2200);
+    }
+
+    load();
+  }
+</script>

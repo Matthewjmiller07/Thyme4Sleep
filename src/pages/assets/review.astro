@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/AssetsLayout.astro';
+import { REVIEW_PAGES, normalizePath } from '../../lib/reviewComments';
+export const prerender = true;
+
+// Pages outside /assets only show the comment button in review mode (?review=1).
+const reviewHref = (path: string) => (path.startsWith('/assets') ? path : `${path}?review=1`);
+---
+<Layout title="Review Comments | Thyme4Sleep" description="Every review comment left on the Thyme4Sleep resources and package pages.">
+  <section class="band" style="padding-top:48px;">
+    <div class="wrap">
+      <span class="pill tool">For the Thyme4Sleep team</span>
+      <h1 style="margin-top:14px;font-size:clamp(2.2rem,5vw,3.4rem);">Review comments</h1>
+      <hr class="divider" style="margin-left:0;" />
+      <p class="muted" style="max-width:680px;">Open any page below and use the <b>Comments</b> button in the bottom-right corner to give it a green light, ask for a change, or ask a question. Highlight text first (or use <b>◎ Pick</b>) to attach the comment to a specific part of the page. Everything lands here, and in Supabase so Claude can read it and make the updates.</p>
+
+      <div class="rv-stats" data-stats>
+        <div class="card"><span class="eyebrow">Open</span><strong data-stat="open">–</strong></div>
+        <div class="card"><span class="eyebrow">Green lights</span><strong data-stat="approve">–</strong></div>
+        <div class="card"><span class="eyebrow">Done</span><strong data-stat="done">–</strong></div>
+        <div class="card"><span class="eyebrow">Total</span><strong data-stat="total">–</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream">
+    <div class="wrap rv-cols">
+      <div>
+        <h2 style="font-size:1.8rem;">Pages to review</h2>
+        {REVIEW_PAGES.map((g) => (
+          <div class="rv-group">
+            <span class="eyebrow">{g.group}</span>
+            <ul>
+              {g.pages.map((p) => (
+                <li data-page={normalizePath(p.path)}>
+                  <a href={reviewHref(p.path)}>{p.title}</a>
+                  <span class="rv-page-meta" data-page-meta></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <div class="rv-toolbar">
+          <h2 style="font-size:1.8rem;margin:0;">All comments</h2>
+          <div class="rv-filters" role="group" aria-label="Filter comments">
+            <button type="button" data-filter="open" class="is-on">Open</button>
+            <button type="button" data-filter="done">Done</button>
+            <button type="button" data-filter="all">All</button>
+          </div>
+        </div>
+        <div data-feed><p class="muted small">Loading…</p></div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .rv-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; max-width: 680px; }
+  .rv-stats .card { padding: 16px 18px; }
+  .rv-stats strong { display: block; font-family: var(--sans); font-size: 1.9rem; font-weight: 400; line-height: 1; }
+  @media (max-width: 560px) { .rv-stats { grid-template-columns: repeat(2, 1fr); } }
+  .rv-cols { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 48px; align-items: start; }
+  @media (max-width: 860px) { .rv-cols { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+  .rv-group { margin-bottom: 22px; }
+  .rv-group ul { list-style: none; padding: 0; margin: 6px 0 0; }
+  .rv-group li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+  .rv-group a { color: var(--char); }
+  .rv-page-meta { flex: none; font-size: .75rem; color: var(--mink); }
+  .rv-page-meta .ok { color: #3f6b3a; font-weight: 600; }
+  .rv-page-meta .open { color: #8a4a22; font-weight: 600; }
+  .rv-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .rv-filters { display: flex; gap: 6px; }
+  .rv-filters button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 14px; font: inherit; font-size: .8rem; font-weight: 600; color: var(--char); cursor: pointer; }
+  .rv-filters button.is-on { background: var(--char); border-color: var(--char); color: var(--paper); }
+  :global(.rv-page) { margin-bottom: 18px; padding: 18px 20px; }
+  :global(.rv-page h3) { font-size: 1.25rem; margin: 0 0 2px; }
+  :global(.rv-page h3 a) { text-decoration: none; }
+  :global(.rv-page h3 a:hover) { text-decoration: underline; }
+  :global(.rv-page .rv-path) { font-size: .72rem; color: var(--mink); word-break: break-all; }
+  :global(.rv-page .rc-item) { padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  :global(.rv-page .rc-item:last-child) { border-bottom: 0; padding-bottom: 0; }
+</style>
+
+<script>
+  import { SUPABASE_URL, SUPABASE_KEY, COMMENTS_TABLE, KIND_LABEL, normalizePath, type ReviewComment } from '../../lib/reviewComments';
+
+  const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'content-type': 'application/json' };
+  const api = `${SUPABASE_URL}/rest/v1/${COMMENTS_TABLE}`;
+  const feed = document.querySelector('[data-feed]') as HTMLElement;
+  let comments: ReviewComment[] = [];
+  let filter: 'open' | 'done' | 'all' = 'open';
+
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Partial<HTMLElementTagNameMap[K]> = {}, ...kids: (Node | string)[]) => {
+    const n = Object.assign(document.createElement(tag), props);
+    n.append(...kids);
+    return n;
+  };
+  const hrefFor = (path: string) => (path.startsWith('/assets') ? path : `${path}?review=1`);
+
+  document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((b) => b.addEventListener('click', () => {
+    filter = b.dataset.filter as typeof filter;
+    document.querySelectorAll('[data-filter]').forEach((x) => x.classList.toggle('is-on', x === b));
+    render();
+  }));
+
+  async function load() {
+    try {
+      const res = await fetch(`${api}?order=created_at.desc&limit=1000`, { headers });
+      if (!res.ok) throw new Error(await res.text());
+      comments = await res.json();
+      render();
+    } catch (err) {
+      console.error('[review] load failed', err);
+      feed.innerHTML = '<p class="muted small">Couldn’t load comments right now.</p>';
+    }
+  }
+
+  async function setStatus(c: ReviewComment, status: 'open' | 'done') {
+    const res = await fetch(`${api}?id=eq.${c.id}`, {
+      method: 'PATCH', headers: { ...headers, Prefer: 'return=representation' },
+      body: JSON.stringify({ status, resolved_at: status === 'done' ? new Date().toISOString() : null }),
+    });
+    if (res.ok) { Object.assign(c, (await res.json())[0]); render(); }
+  }
+
+  function render() {
+    const set = (k: string, v: number) => { (document.querySelector(`[data-stat="${k}"]`) as HTMLElement).textContent = String(v); };
+    set('open', comments.filter((c) => c.status === 'open').length);
+    set('approve', comments.filter((c) => c.kind === 'approve').length);
+    set('done', comments.filter((c) => c.status === 'done').length);
+    set('total', comments.length);
+
+    // Per-page summary in the "Pages to review" list.
+    document.querySelectorAll<HTMLElement>('[data-page]').forEach((li) => {
+      const mine = comments.filter((c) => c.page_path === li.dataset.page);
+      const open = mine.filter((c) => c.status === 'open' && c.kind !== 'approve').length;
+      const approved = mine.some((c) => c.kind === 'approve');
+      const meta = li.querySelector('[data-page-meta]') as HTMLElement;
+      meta.replaceChildren(
+        open ? el('span', { className: 'open', textContent: `${open} open` }) : '',
+        open && approved ? ' · ' : '',
+        approved ? el('span', { className: 'ok', textContent: '✓ green light' }) : '',
+        !mine.length ? 'no comments' : '',
+      );
+    });
+
+    const shown = comments.filter((c) => filter === 'all' || c.status === filter);
+    if (!shown.length) {
+      feed.replaceChildren(el('p', { className: 'muted small', textContent: filter === 'open' ? 'Nothing open — all caught up.' : 'No comments here yet.' }));
+      return;
+    }
+    const byPage = new Map<string, ReviewComment[]>();
+    for (const c of shown) byPage.set(c.page_path, [...(byPage.get(c.page_path) || []), c]);
+
+    feed.replaceChildren(...[...byPage].map(([path, list]) => {
+      const title = (list[0].page_title || path).replace(/\s*\|\s*Thyme4Sleep$/, '');
+      return el('div', { className: 'card rv-page' },
+        el('h3', {}, el('a', { href: hrefFor(path), textContent: title })),
+        el('div', { className: 'rv-path', textContent: path }),
+        ...list.slice().reverse().map((c) => {
+          const toggle = el('button', { type: 'button', className: 'rc-toggle', textContent: c.status === 'done' ? 'Reopen' : 'Mark done' });
+          toggle.addEventListener('click', () => setStatus(c, c.status === 'done' ? 'open' : 'done'));
+          return el('div', { className: `rc-item${c.status === 'done' ? ' is-done' : ''}` },
+            el('div', { className: 'rc-meta' },
+              el('span', { className: `rc-badge k-${c.kind}`, textContent: KIND_LABEL[c.kind] }),
+              el('b', { textContent: c.author }),
+              el('span', { textContent: new Date(c.created_at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) }),
+              toggle,
+            ),
+            ...(c.target ? [el('div', { className: 'rc-target', textContent: `↳ ${c.target}` })] : []),
+            el('p', { className: 'rc-body', textContent: c.body }),
+          );
+        }),
+      );
+    }));
+  }
+
+  // Keep page keys in step with the widget's normalisation.
+  document.querySelectorAll<HTMLElement>('[data-page]').forEach((li) => { li.dataset.page = normalizePath(li.dataset.page || ''); });
+  load();
+</script>
