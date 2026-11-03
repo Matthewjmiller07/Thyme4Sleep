@@ -23,7 +23,7 @@ export const INCLUDED = [
   'A 14-night implementation framework for bedtime, night wakings and early rising',
   'Three review checkpoints with clear “keep going / adjust / get support” decisions',
   'A general troubleshooting library',
-  'A printable workbook: prep checklist, plan at a glance, script card and 14-night tracker — plus a baseline log, night-by-night journal and a review page for each checkpoint',
+  'The printable Calm Nights Guide & Workbook: prep checklist, plan at a glance, script card and 14-night tracker — plus a baseline log, night-by-night journal and a review page for each checkpoint',
 ];
 
 export const NOT_INCLUDED = [

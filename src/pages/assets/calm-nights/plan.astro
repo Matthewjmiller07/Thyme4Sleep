@@ -27,7 +27,7 @@ const toc = [
   ['wakings', '· Wake-ups & early mornings'],
   ['review', 'Review checkpoints'],
   ['trouble', 'Troubleshooting'],
-  ['workbook', 'Workbook & tracker'],
+  ['workbook', 'Guide & Workbook'],
   ['next', 'Keeping it going'],
 ];
 
@@ -96,7 +96,7 @@ const toc = [
         <p class="lead">A structured, self-guided programme for helping your child learn to fall asleep — and fall back asleep — without cry-it-out. Six steps, in order. Read steps 1–4 before night one; then come back to the step you’re on.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;" class="no-print">
           <a class="btn btn-dark" href="#understand">Start at step 1</a>
-          <a class="btn btn-ghost" href={workbookHref}>Open the printable workbook</a>
+          <a class="btn btn-ghost" href={workbookHref}>Open the printable Guide &amp; Workbook</a>
         </div>
         <nav class="path no-print" aria-label="Your pathway">
           {PATHWAY.map((p) => <a href={`#${p.id}`}><b>{p.n}</b><span>{p.title}</span><small class="muted">{p.sub}</small></a>)}
@@ -165,7 +165,7 @@ const toc = [
       <section class="chapter" id="prep">
         <span class="num">Step 3 · Prepare</span>
         <h2>Prep week</h2>
-        <p>Do these in the 3–7 days before night one. Many families see improvement from preparation alone. The workbook has a tick-list version.</p>
+        <p>Do these in the 3–7 days before night one. Many families see improvement from preparation alone. The Guide &amp; Workbook has a day-by-day version.</p>
         <div class="grid g2">
           <div><h3>The room</h3><ul class="ticks"><li><strong>Dark:</strong> blackout curtains or window film. If you use a night light, choose a very dim, warm one, or move it to the hallway.</li><li><strong>Calm:</strong> remove mobiles and stimulating décor from the crib area.</li><li><strong>Comfortable:</strong> season-appropriate PJs and a sleep sack.</li><li><strong>Sound:</strong> white noise is fine — steady, all night, not too loud.</li></ul></div>
           <div><h3>The feed</h3><ul class="ticks"><li>Move the bedtime milk to the <strong>start</strong> of the routine — lights on, ideally outside the bedroom.</li><li>Keep them awake and engaged for the whole feed.</li><li>Follow it with bath or books so the last thing before sleep isn’t sucking.</li><li>Ask your pediatrician which night feeds (if any) they want you to keep.</li></ul></div>
@@ -219,7 +219,7 @@ const toc = [
         <div class="note" style="margin-top:12px;"><p><strong>If your answers point different ways, question 2 wins.</strong> The approach you can follow consistently will outperform the “right” one you can’t. Still unsure? Start with Stay Close — it’s the gentlest, and easy to move on from.</p></div>
         <h3>Then commit</h3>
         <ul class="ticks">
-          <li>Write your choice and key phrase in the workbook.</li>
+          <li>Write your choice and key phrase in the Guide &amp; Workbook.</li>
           <li>Give it 7 full nights before considering a switch. Night 7 is the only switch point, and you switch once.</li>
           <li>If neither starting point feels possible for your family, that’s a sign to get personalised support rather than force a fit.</li>
         </ul>
@@ -318,15 +318,15 @@ const toc = [
       <!-- Workbook -->
       <section class="chapter" id="workbook">
         <span class="num">Your tools</span>
-        <h2>Workbook &amp; tracker</h2>
-        <p>The printable workbook (27 pages) is where you make the method yours and see your progress. It follows the same six steps:</p>
+        <h2>The Calm Nights Guide &amp; Workbook</h2>
+        <p>The printable Guide &amp; Workbook (27 pages) is where you make the method yours and see your progress. It follows the same six steps:</p>
         <ul class="ticks">
           <li><strong>Steps 1–2 · Before you begin</strong> — sleep basics and the crying scale, your child’s current sleep associations, the fit and readiness check, and a three-night baseline log.</li>
           <li><strong>Steps 3–4 · Prepare &amp; choose</strong> — a day-by-day prep-week planner, the three-question starting-point worksheet, your plan at a glance, routine builder, key phrase, and team and hard-night plan.</li>
           <li><strong>Step 5 · The 14 nights</strong> — the Stay Close stage map, a Step Out &amp; Check log, a wake-ups and feed-reduction page, a night-by-night journal and the 14-night tracker.</li>
           <li><strong>Step 6 · Review</strong> — one page each for your night 4, 7 and 14 checkpoints, the troubleshooting library with a change log, life after night 14, and cut-out script cards.</li>
         </ul>
-        <a class="btn btn-dark no-print" href={workbookHref}>Open &amp; print the workbook</a>
+        <a class="btn btn-dark no-print" href={workbookHref}>Open &amp; print the Guide &amp; Workbook</a>
       </section>
 
       <!-- Next -->

@@ -59,7 +59,7 @@ for (const [path, file] of PDFS) {
 if (previewKey) {
   await mkdir(paidDir, { recursive: true });
   const PAID = [
-    ['/assets/calm-nights/workbook', 'calm-nights-workbook.pdf'],
+    ['/assets/calm-nights/workbook', 'calm-nights-guide-and-workbook.pdf'],
     ['/assets/calm-nights/plan', 'calm-nights-method-programme.pdf'],
   ];
   for (const [path, file] of PAID) {
