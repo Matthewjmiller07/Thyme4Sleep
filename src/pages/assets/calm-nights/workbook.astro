@@ -88,10 +88,20 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     .night-top .n { font-family: var(--serif); font-size: 22pt; line-height: 1; }
     .kv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px 12px; margin-bottom: 6px; }
     .kv div { font-size: 8pt; color: var(--mink); border-bottom: 1px solid var(--taupe); padding-bottom: 14px; letter-spacing: .04em; }
+    .tbox { border: 1.5px solid var(--taupe); border-radius: 14px; overflow: hidden; background: #fff; }
+    .tbox table { margin: 0; }
+    .tbox th { background: var(--cream); border-bottom: 1.5px solid var(--taupe); }
+    .tbox th + th, .tbox td + td { border-left: 1px solid var(--line); }
+    .tbox tbody tr:last-child td { border-bottom: 0; }
+    .tbox td:first-child { background: var(--paper); }
     .cover { display: flex; flex-direction: column; background: var(--cream); }
+    .cover-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 22px; }
+    .cover-fields div { font-size: 8.5pt; font-weight: 600; border-bottom: 1px solid var(--taupe); padding: 12px 0 3px; }
+    .cover-fields div.full { grid-column: 1 / -1; }
+    .cover-toc { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: .3in; }
+    .cover-toc h4 { color: var(--char) !important; font-size: 9pt !important; border-bottom: 1.5px solid var(--taupe); padding-bottom: 4px; margin-bottom: 6px !important; }
+    .cover-toc p { display: flex; justify-content: space-between; margin: 0 0 3px; border-bottom: 1px dotted var(--taupe); font-size: 11pt !important; padding-bottom: 3px; margin-bottom: 4px; }
     .cover h1 { font-size: 54pt !important; line-height: 1; }
-    .toc-col { break-inside: avoid; margin-bottom: 10px; }
-    .toc-col p { display: flex; justify-content: space-between; margin: 0 0 2px; border-bottom: 1px dotted var(--line); }
     .flow { display: grid; grid-template-columns: 1fr; gap: 6px; }
     .flow div { border-radius: 12px; padding: 8px 12px; font-size: 9.5pt; }
     .arrow { text-align: center; color: var(--taupe); font-size: 11pt; line-height: 1; }
@@ -124,25 +134,23 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         <span class="eyebrow">Thyme4Sleep · Self-guided programme</span>
         <img src="/assets/img/logo.png" alt="Thyme4Sleep" style="height:64px;width:auto;" />
       </div>
-      <div style="margin-top:.6in;">
+      <div style="margin-top:.35in;">
         <h1>The Calm Nights<br /><em class="script">Guide &amp; Workbook</em></h1>
-        <hr class="divider" />
-        <p style="font-size:13pt;max-width:30em;" class="muted">Your companion to the Calm Nights Method — fourteen nights of helping your child learn to fall asleep, and fall back asleep, with you calm and close by.</p>
+        <hr class="divider" style="margin:14px 0 16px;" />
+        <p style="font-size:12.5pt;max-width:30em;margin:0;" class="muted">Your companion to the Calm Nights Method — fourteen nights of helping your child learn to fall asleep, and fall back asleep, with you calm and close by.</p>
       </div>
-      <div class="box" style="background:#fff;margin-top:.35in;padding:16px 20px;">
-        <table class="lines"><tbody>
-          <tr><td style="width:36%;"><strong>This workbook belongs to</strong></td><td></td></tr>
-          <tr><td><strong>Our child’s name</strong></td><td></td></tr>
-          <tr><td><strong>Age on night one</strong></td><td></td></tr>
-          <tr><td><strong>Night one date</strong></td><td></td></tr>
-          <tr><td><strong>Our starting point</strong></td><td>☐ Stay Close &nbsp;&nbsp;&nbsp; ☐ Step Out &amp; Check</td></tr>
-        </tbody></table>
+      <div class="box" style="background:#fff;margin-top:.25in;padding:6px 18px 12px;">
+        <div class="cover-fields">
+          <div>This workbook belongs to</div><div>Our child’s name</div>
+          <div>Age on night one</div><div>Night one date</div>
+          <div class="full">Our starting point &nbsp;&nbsp; <span style="font-weight:400;">☐ Stay Close &nbsp;&nbsp; ☐ Step Out &amp; Check</span></div>
+        </div>
       </div>
-      <div style="columns:2;column-gap:28px;margin-top:.3in;">
+      <div class="cover-toc">
         {contents.map(([section, items]) => (
-          <div class="toc-col">
+          <div>
             <h4>{section}</h4>
-            {items.map(([t, n]) => <p class="small"><span>{t}</span><span>{n}</span></p>)}
+            {items.map(([t, n]) => <p><span>{t}</span><span>{n}</span></p>)}
           </div>
         ))}
       </div>
@@ -239,14 +247,14 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     <!-- 5 · Baseline -->
     <article class="sheet">
       <SheetHead kicker={pg(5, 'Steps 1–2')} title="Where we’re starting" sub="Log three ordinary nights before prep week. Change nothing yet — just watch and write." />
-      <table class="tight" style="table-layout:fixed;">
+      <div class="tbox"><table class="tight" style="table-layout:fixed;">
         <thead><tr><th style="width:24%;"></th><th>Baseline night A</th><th>Baseline night B</th><th>Baseline night C</th></tr></thead>
         <tbody>
           {['Date', 'Morning wake-up', 'Naps (start–end)', 'Routine started', 'Lights out', 'How they fell asleep', 'Time to fall asleep', 'Wake-ups (time · what we did)', 'Up for the day', 'Total night sleep (approx.)'].map((r) => (
             <tr><td class="small"><strong>{r}</strong></td><td style={r.startsWith('Wake-ups') ? 'height:84px;' : r.startsWith('How') ? 'height:38px;' : 'height:24px;'}></td><td></td><td></td></tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
       <div class="three" style="margin-top:14px;">
         <div class="box soft"><h4>Average wake-ups / night</h4><div class="wl"></div></div>
         <div class="box soft"><h4>Average time to fall asleep</h4><div class="wl"></div></div>
@@ -291,11 +299,11 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         <div class="box" style="border-left:6px solid var(--peach);"><h4>Starting point B</h4><h3>Step Out &amp; Check</h3><p class="small" style="margin:0;">Key phrase, then you leave — returning for brief, calm, identical checks if crying builds.</p></div>
       </div>
       <h3 style="margin-top:14px;">Answer three questions — circle one answer each</h3>
-      <table class="tight"><thead><tr><th style="width:44%;">Question</th><th>Points to Stay Close</th><th>Points to Step Out &amp; Check</th></tr></thead><tbody>
+      <div class="tbox"><table class="tight"><thead><tr><th style="width:44%;">Question</th><th>Points to Stay Close</th><th>Points to Step Out &amp; Check</th></tr></thead><tbody>
         <tr><td><strong>1.</strong> When you stay in the room at bedtime, does your child generally calm down or wind up?</td><td>Calms with us nearby · Not sure</td><td>Gets more worked up, plays or chats</td></tr>
         <tr><td><strong>2.</strong> Which could you repeat at 2am, every night for two weeks? <em class="small">(this one wins a tie)</em></td><td>Sitting quietly beside the crib through some protest</td><td>Stepping out and returning for short checks</td></tr>
         <tr><td><strong>3.</strong> Can every adult who does bedtime do it the same way?</td><td colspan="2">Yes → keep your choice. No → choose the one everyone can do. Consistency between adults matters more than fit.</td></tr>
-      </tbody></table>
+      </tbody></table></div>
       <div class="two" style="margin-top:12px;">
         <div class="box soft"><h4>Parent / carer 1 would choose</h4><p class="small" style="margin:0;">☐ Stay Close &nbsp; ☐ Step Out &amp; Check &nbsp; because…</p><div class="wl"></div></div>
         <div class="box soft"><h4>Parent / carer 2 would choose</h4><p class="small" style="margin:0;">☐ Stay Close &nbsp; ☐ Step Out &amp; Check &nbsp; because…</p><div class="wl"></div></div>
@@ -312,7 +320,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     <!-- 8 · My plan -->
     <article class="sheet">
       <SheetHead kicker={pg(8, 'Steps 3–4')} title="My plan at a glance" sub="Fill this in together. Every adult who does bedtime follows the same page." />
-      <table class="lines"><tbody>
+      <div class="tbox"><table class="lines"><thead><tr><th style="width:38%;">Our plan</th><th>Our answer</th></tr></thead><tbody>
         <tr><td style="width:38%;"><strong>Our starting point</strong></td><td>☐ Stay Close &nbsp;&nbsp;&nbsp; ☐ Step Out &amp; Check</td></tr>
         <tr><td><strong>Why we chose it</strong></td><td></td></tr>
         <tr><td><strong>Our key phrase</strong></td><td></td></tr>
@@ -325,7 +333,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         <tr><td><strong>What counts as morning</strong></td><td>Not before 6:00am. Content between 6–7am? We may wait until ______</td></tr>
         <tr><td><strong>Who does which nights</strong><br /><span class="small muted">Full grid on page 10</span></td><td></td></tr>
         <tr><td style="height:60px;"><strong>Our hard-night plan</strong><br /><span class="small muted">What we’ll do at 2am when we want to give up</span></td><td></td></tr>
-      </tbody></table>
+      </tbody></table></div>
       <h3 style="margin-top:14px;">Our three non-negotiables</h3>
       <p class="small muted" style="margin:0 0 4px;">The things we will do the same way every single time (e.g. “down awake”, “no picking up during checks”, “key phrase at every response”).</p>
       <table class="lines"><tbody>{[1, 2, 3].map((n) => <tr><td style="width:30px;">{n}</td><td></td></tr>)}</tbody></table>
@@ -335,14 +343,14 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     <!-- 9 · Routine -->
     <article class="sheet">
       <SheetHead kicker={pg(9, 'Steps 3–4')} title="Our bedtime routine" sub="20–40 minutes. Same steps, same order, same calm energy. Not long — predictable." />
-      <table class="tight" style="table-layout:fixed;">
-        <thead><tr><th style="width:5%;">#</th><th style="width:35%;">The suggested step</th><th>Our version (what, where)</th><th style="width:12%;">Time</th><th style="width:12%;">Who</th></tr></thead>
+      <div class="tbox"><table class="tight" style="table-layout:fixed;">
+        <thead><tr><th style="width:6%;">#</th><th style="width:35%;">The suggested step</th><th>Our version (what, where)</th><th style="width:12%;">Time</th><th style="width:12%;">Who</th></tr></thead>
         <tbody>
           {routineDefaults.map(([t, d], i) => (
             <tr><td style="font-family:var(--serif);font-size:14pt;">{i + 1}</td><td><strong class="small">{t}</strong><br /><span class="tiny muted">{d}</span></td><td style="height:46px;"></td><td></td><td></td></tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
       <h3 style="margin-top:10px;">Our key phrase</h3>
       <p class="small muted" style="margin:0 0 6px;">Short, warm, identical every time. Tick one, or write your own. Every adult uses the exact same words.</p>
       <ul class="boxlist">{KEY_PHRASES.map((p) => <li style="font-family:var(--serif);font-size:12.5pt;">{p}</li>)}<li>Our own: <span class="fill" style="min-width:420px;"></span></li></ul>
@@ -543,10 +551,10 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       <article class="sheet">
         <SheetHead kicker={pg(22 + i, 'Step 6')} title={c.title.replace(' · ', ' — ')} sub={`The morning after night ${c.night}. Ten quiet minutes with your journal and overview in front of you.`} />
         <h3>The numbers</h3>
-        <table class="tight" style="table-layout:fixed;">
+        <div class="tbox"><table class="tight" style="table-layout:fixed;">
           <thead><tr><th style="width:28%;"></th><th>Baseline (page 5)</th><th>Night 1</th><th>{c.night === 4 ? 'Night 3' : `Night ${c.night - 1}`}</th><th>Night {c.night}</th></tr></thead>
           <tbody>{['Minutes to fall asleep', 'Peak crying at bedtime', 'Number of wake-ups', 'Longest stretch', 'Up for the day'].map((r) => <tr><td class="small"><strong>{r}</strong></td><td style="height:26px;"></td><td></td><td></td><td></td></tr>)}</tbody>
-        </table>
+        </table></div>
         <h3 style="margin-top:14px;">What we’re seeing</h3>
         <ul class="boxlist">{c.lookFor.map((l) => <li>{l}</li>)}<li>Something else that’s better: ______________________________________</li></ul>
         <h3 style="margin-top:8px;">How consistent have we been?</h3>
