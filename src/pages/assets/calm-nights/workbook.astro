@@ -439,14 +439,14 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       {[1, 2, 3].map((n) => (
         <div style="margin-bottom:10px;">
           <h4>Night {n} · bedtime · date ________</h4>
-          <table class="tight" style="table-layout:fixed;">
+          <div class="tbox"><table class="tight" style="table-layout:fixed;">
             <thead><tr><th style="width:9%;">Check</th><th>Went in at</th><th>Paused (min)</th><th>Cry 1–10</th><th>Mins in room</th><th style="width:30%;">Notes</th></tr></thead>
             <tbody>{[1, 2, 3, 4].map((c) => <tr><td>{c}</td><td></td><td></td><td></td><td></td><td></td></tr>)}</tbody>
-          </table>
+          </table></div>
           <p class="tiny muted" style="margin:3px 0 0;">Asleep at ________ · total time to fall asleep ________ min</p>
         </div>
       ))}
-      <p class="small muted" style="margin:0;"><strong>Checks making crying louder?</strong> Lengthen the pause and keep every check identical: same words, same touch, same exit. Many children fall asleep around the 15–20 minute mark.</p>
+      <div class="box mint"><p class="small" style="margin:0;"><strong>Checks making crying louder?</strong> Lengthen the pause and keep every check identical: same words, same touch, same exit. Many children fall asleep around the 15–20 minute mark.</p></div>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Five minutes at bedtime feels like twenty. Use the clock.</span></div>
     </article>
 
@@ -583,14 +583,15 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     <!-- 25 · Troubleshooting -->
     <article class="sheet">
       <SheetHead kicker={pg(25, 'Step 6')} title="Troubleshooting &amp; change log" sub="General answers to the most common sticking points. Change one thing at a time; give it three nights." />
-      <table class="tight" style="table-layout:fixed;">
+      <div class="tbox"><table class="tight" style="table-layout:fixed;">
+        <thead><tr><th style="width:26%;">Sticking point</th><th>What to try</th></tr></thead>
         <tbody>{TROUBLESHOOTING.map(([q, a]) => <tr><td style="width:26%;"><strong class="small">{q}</strong></td><td class="tiny" style="line-height:1.45;">{a}</td></tr>)}</tbody>
-      </table>
+      </table></div>
       <h3 style="margin-top:12px;">Our change log</h3>
-      <table class="tight" style="table-layout:fixed;">
+      <div class="tbox"><table class="tight" style="table-layout:fixed;">
         <thead><tr><th style="width:14%;">Date</th><th>The one thing we changed</th><th style="width:30%;">After 3 nights…</th><th style="width:14%;">Keep?</th></tr></thead>
-        <tbody>{[1, 2, 3].map(() => <tr><td style="height:28px;"></td><td></td><td></td><td class="tiny">Y / N</td></tr>)}</tbody>
-      </table>
+        <tbody>{[1, 2, 3, 4, 5].map(() => <tr><td style="height:30px;"></td><td></td><td></td><td class="tiny">Y / N</td></tr>)}</tbody>
+      </table></div>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>One change at a time.</span></div>
     </article>
 
