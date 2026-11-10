@@ -4,6 +4,7 @@
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
 import { hasAccess, isPreview } from '../../../lib/calmNights';
+import { mayHaveReset } from '../../../lib/resetToRest';
 import { KEY_PHRASES } from '../../../data/sleep';
 import { PATHWAY, INCLUDED, NOT_INCLUDED, CHECKPOINTS, SUPPORT_SIGNALS, COACHING_URL, SPECIALISED_URL, STAY_CLOSE as stayClose, TROUBLESHOOTING as trouble } from '../../../data/calmNights';
 export const prerender = false;
@@ -13,7 +14,7 @@ const preview = isPreview(Astro.url);
 const welcome = Astro.url.searchParams.get('welcome') === '1';
 // Keep the preview key on internal links so the owner can click through the whole product
 // Bundle buyers also have Reset to Rest (cookie set on the Calm Nights success page)
-const hasReset = Astro.cookies.has('reset_access');
+const hasReset = mayHaveReset(Astro.cookies);
 const workbookHref = preview ? `/assets/calm-nights/workbook?preview=${Astro.url.searchParams.get('preview')}` : '/assets/calm-nights/workbook';
 
 const toc = [

@@ -3,6 +3,7 @@
 // Stripe before granting access, then send the buyer to their plan.
 import Layout from '../../../layouts/AssetsLayout.astro';
 import { verifySession, setAccessCookie } from '../../../lib/calmNights';
+import { setResetCookie } from '../../../lib/resetToRest';
 export const prerender = false;
 
 const sessionId = Astro.url.searchParams.get('session_id');
@@ -10,12 +11,8 @@ const purchase = await verifySession(sessionId);
 
 if (purchase && sessionId) {
   setAccessCookie(Astro.cookies, sessionId);
-  if (purchase.packageId === 'calm-nights-bundle') {
-    // Bundle includes Reset to Rest, which uses its own access cookie
-    Astro.cookies.set('reset_access', crypto.randomUUID(), {
-      httpOnly: true, secure: import.meta.env.PROD, sameSite: 'lax', maxAge: 60 * 60 * 24 * 365, path: '/',
-    });
-  }
+  // The bundle includes Reset to Rest: the same verified session unlocks it
+  if (purchase.packageId === 'calm-nights-bundle') setResetCookie(Astro.cookies, sessionId);
   return Astro.redirect('/assets/calm-nights/plan?welcome=1');
 }
 ---

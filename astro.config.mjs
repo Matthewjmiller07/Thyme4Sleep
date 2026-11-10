@@ -7,7 +7,8 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  adapter: netlify(),
+  // includeFiles bundles the paid Reset to Rest PDF (private/, never public/) into the server function
+  adapter: netlify({ includeFiles: ['./private/**/*'] }),
   integrations: [react()],
   redirects: {
     '/packages': '/pricing',

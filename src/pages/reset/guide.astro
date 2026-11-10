@@ -1,0 +1,373 @@
+---
+// From Reset to Rest — the printable guide (10 letter pages). Rendered to
+// private/reset-to-rest/from-reset-to-rest.pdf by scripts/assets/render.mjs; buyers download it
+// from /reset/guide.pdf. Same access rules as /reset.
+import Layout from '../../layouts/AssetsLayout.astro';
+import PrintBar from '../../components/assets/PrintBar.astro';
+import SheetHead from '../../components/assets/SheetHead.astro';
+import { hasResetAccess } from '../../lib/resetToRest';
+export const prerender = false;
+
+if (!(await hasResetAccess(Astro.url, Astro.cookies))) return Astro.redirect('/reset-preview');
+
+const TOTAL = 10;
+const pg = (n: number, section: string) => `From Reset to Rest · ${section} · Page ${n} of ${TOTAL}`;
+
+const steps = [
+  ['1', 'Confirm readiness', 'Check your child is ready before you reduce anything.', 3],
+  ['2', 'Identify the driver', 'Work out what is keeping the wake-ups going.', 4],
+  ['3', 'Choose your anchor', 'One consistent overnight response, held for three nights.', 5],
+  ['4', 'Reduce one variable', 'Small, respectful changes, one at a time.', 6],
+] as const;
+
+const drivers = [
+  ['Habit loop', ['Waking at predictable times each night', 'The same sequence every time', 'An immediate expectation of a specific response']],
+  ['Timing imbalance', ['Short naps alongside frequent waking', 'Very long wake windows before bed', 'Early rising before 5:30am']],
+  ['Regulation dependency', ['Can’t fall back asleep without one specific support', 'Strong physical reliance: rocking, feeding, bouncing', 'Escalation when support is reduced suddenly']],
+];
+
+const anchors = [
+  ['Feeding, with gradual duration reduction', 'Shorten the feed a little at a time, rather than stopping it.'],
+  ['Physical presence, with reduced intensity', 'Stay close, with less patting, rocking or holding over time.'],
+  ['Verbal reassurance, with a timed pause', 'A short pause, then your calm phrase from beside the cot.'],
+  ['A combination approach, defined clearly', 'Allowed, as long as every adult does exactly the same thing.'],
+];
+
+const variables = [
+  ['Feeding duration', 'How long each night feed lasts'],
+  ['Rocking intensity', 'How much movement you give, and for how long'],
+  ['Time before responding', 'The short pause before you go in'],
+  ['Physical proximity', 'How close you are while they settle'],
+  ['Length of intervention', 'How long you stay before stepping back'],
+];
+
+const matrix = [
+  ['Wakings every 45–90 minutes', 'Overtiredness or sleep-cycle dependency', 'Total wake windows, nap structure, bedtime timing', 'A slightly earlier bedtime, or a shorter last wake window'],
+  ['Split nights', 'Under-tiredness, or too much daytime sleep', 'Total nap duration, afternoon sleep, bedtime', 'Reduce daytime sleep, or move bedtime later'],
+  ['Early rising before 5:30am', 'Circadian shift or sleep-pressure imbalance', 'First nap timing, bedtime timing, total day sleep', 'Adjust nap distribution and protect the first wake window'],
+  ['Intense escalation when support is reduced', 'Change has moved faster than regulation can manage', 'Amount reduced, pace of change, baseline settling', 'Return to stabilisation, then reduce more gradually'],
+  ['Nap refusal', 'Sleep-pressure mismatch or overtiredness', 'Morning wake time, nap timing, stimulation', 'Rebalance the day before pushing overnight change'],
+  ['Strong sensitivity traits', 'Higher support needs; lower tolerance for abrupt shifts', 'Sensory load, predictability, response consistency', 'Slower reduction, more reassurance, temperament-led pacing'],
+];
+---
+<Layout title="From Reset to Rest — Guide | Thyme4Sleep" description="From Reset to Rest: a gentle night-waking reduction protocol. Printable guide.">
+  <style>
+    .sheet p, .sheet li, .sheet td { font-size: 10.5pt; line-height: 1.55; }
+    .sheet .small, .sheet td.small, .sheet .small li { font-size: 9.8pt; }
+    .sheet .tiny { font-size: 8.5pt; line-height: 1.4; }
+    .sheet h3 { font-size: 14pt; margin-bottom: 6px; }
+    .sheet h4 { font-family: var(--sans); font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--sage-deep); margin: 0 0 6px; }
+    .lead2 { font-size: 11.5pt !important; color: var(--mink); max-width: 36em; }
+    .box { border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; }
+    .box.mint { background: var(--mint-soft); border-color: transparent; }
+    .box.peach { background: var(--peach-soft); border-color: transparent; }
+    .box.cream { background: var(--cream); border-color: transparent; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .boxlist { list-style: none; padding: 0; margin: 0; }
+    .boxlist li { padding-left: 22px; position: relative; margin-bottom: 6px; }
+    .boxlist li::before { content: ''; position: absolute; left: 0; top: 4px; width: 11px; height: 11px; border: 1.5px solid var(--taupe); border-radius: 3px; background: #fff; }
+    .wl { border-bottom: 1px solid var(--taupe); height: 30px; }
+    .stepnum { font-family: var(--serif); font-size: 30pt; line-height: 1; color: var(--taupe); }
+    .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .roadmap div { border-radius: 16px; padding: 14px 14px 16px; background: var(--paper); border: 1px solid var(--line); }
+    .roadmap strong { display: block; font-family: var(--serif); font-size: 14pt; font-weight: 400; margin: 4px 0; }
+    .sheet .quote { font-family: var(--serif); font-size: 16pt; line-height: 1.3; color: var(--char); }
+    .cycle { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 8px; margin: 8px 0 4px; }
+    .cycle .node { border-radius: 14px; padding: 12px 14px; text-align: center; }
+    .cycle .arr { color: var(--taupe); font-size: 16pt; }
+    .tbox { border: 1.5px solid var(--taupe); border-radius: 14px; overflow: hidden; background: #fff; }
+    .tbox table { margin: 0; table-layout: fixed; }
+    .tbox th { background: var(--cream); border-bottom: 1.5px solid var(--taupe); padding: 9px 11px; }
+    .tbox td { padding: 11px 11px; }
+    .tbox th + th, .tbox td + td { border-left: 1px solid var(--line); }
+    .tbox tbody tr:last-child td { border-bottom: 0; }
+    .tbox td:first-child { background: var(--paper); }
+    .cover { display: flex; flex-direction: column; background: var(--cream); }
+    .cover h1 { font-size: 52pt !important; line-height: 1; }
+    .toc p { display: flex; justify-content: space-between; margin: 0 0 4px; border-bottom: 1px dotted var(--taupe); padding-bottom: 3px; font-size: 11pt !important; }
+  </style>
+
+  <section class="hero no-print">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill paid">From Reset to Rest · Guide</span>
+        <h1 style="margin-top:22px;">From Reset to Rest</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">Your printable guide: a gentle night-waking reduction protocol in four steps, with your tracker and troubleshooting.</p>
+        <a class="btn btn-ghost" href="/reset">← Back to your video</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar label="Print or save the guide as PDF" />
+
+    <!-- 1 · Cover -->
+    <article class="sheet cover">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span class="eyebrow">Thyme4Sleep · Gentle sleep guide</span>
+        <img src="/assets/img/logo.png" alt="Thyme4Sleep" style="height:64px;width:auto;" />
+      </div>
+      <div style="margin-top:.7in;">
+        <h1>From Reset<br /><em class="script">to Rest</em></h1>
+        <hr class="divider" style="margin:16px 0 18px;" />
+        <p style="font-family:var(--serif);font-size:19pt;line-height:1.25;margin:0 0 10px;">A gentle night-waking reduction protocol</p>
+        <p class="muted" style="font-size:12.5pt !important;max-width:30em;margin:0;">For families ready to move from stabilised sleep to more consolidated rest, without cry-it-out.</p>
+      </div>
+      <div class="box" style="background:#fff;margin-top:.45in;padding:18px 24px;">
+        <h4>Inside this guide</h4>
+        <div class="toc" style="columns:2;column-gap:30px;">
+          <p><span>How to use this guide</span><span>2</span></p>
+          <p><span>Step 1 · Confirm readiness</span><span>3</span></p>
+          <p><span>Step 2 · Identify the driver</span><span>4</span></p>
+          <p><span>Step 3 · Choose your anchor</span><span>5</span></p>
+          <p><span>Step 4 · Reduce one variable</span><span>6</span></p>
+          <p><span>Night feeds &amp; when to pause</span><span>7</span></p>
+          <p><span>Troubleshooting</span><span>8</span></p>
+          <p><span>Your 7-night tracker</span><span>9</span></p>
+          <p><span>Next steps</span><span>10</span></p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:auto;margin-bottom:.35in;font-size:10pt !important;">By Georgia Miller, certified pediatric sleep coach</p>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>Move slowly. Hold steady. Trust consistency.</span></div>
+    </article>
+
+    <!-- 2 · How to use -->
+    <article class="sheet">
+      <SheetHead kicker={pg(2, 'Start here')} title="How to use this guide" sub="If you’re here, you’ve likely restored some calm to bedtime, but night wakings remain." />
+      <p class="lead2">This guide helps you reduce those wakings gradually and respectfully, while protecting the emotional safety you’ve worked hard to rebuild. It’s a framework, not a rigid programme. By moving slowly and holding steady, your child’s sleep will consolidate.</p>
+      <h3 style="margin-top:22px;">The four steps</h3>
+      <div class="roadmap">
+        {steps.map(([n, t, d, p]) => (
+          <div><span class="stepnum">{n}</span><strong>{t}</strong><p class="small muted" style="margin:0 0 6px;">{d}</p><span class="tiny" style="color:var(--sage-deep);font-weight:600;">PAGE {p}</span></div>
+        ))}
+      </div>
+      <div class="two" style="margin-top:22px;">
+        <div class="box mint">
+          <h4>You’ll learn to</h4>
+          <ul class="ticks small" style="margin:0;">
+            <li>Assess whether your child is ready for reduction</li>
+            <li>Understand what is driving the waking</li>
+            <li>Reduce wakings gradually and respectfully</li>
+            <li>Keep your child feeling safe while encouraging longer stretches</li>
+          </ul>
+        </div>
+        <div class="box cream">
+          <h4>Before you start</h4>
+          <ul class="ticks small" style="margin:0;">
+            <li>Watch the video walkthrough once, ideally with your partner</li>
+            <li>Start the tracker on page 9 tonight, before you change anything</li>
+            <li>Agree that every adult will respond the same way overnight</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note peach" style="margin-top:22px;"><p class="small"><strong>General guidance, not medical advice.</strong> Check with your child’s doctor before reducing night feeds, pause if your child becomes unwell, and always follow safe sleep guidance: alone, always starting on their back, in a cot or crib with only a fitted sheet.</p></div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>A framework, not a rigid programme</span></div>
+    </article>
+
+    <!-- 3 · Step 1 -->
+    <article class="sheet">
+      <SheetHead kicker={pg(3, 'Step 1')} title="Confirm readiness" sub="Reducing wakings before your child is ready often leads to escalation. Use this checklist first." />
+      <div class="two">
+        <div class="box">
+          <h4>Sleep pressure markers</h4>
+          <ul class="boxlist">
+            <li>Bedtime happens within a consistent 30-minute window</li>
+            <li>Daytime sleep is age-appropriate</li>
+            <li>No frequent overtired meltdowns before bed</li>
+            <li>The first stretch of night sleep is at least 2–3 hours</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h4>Regulation markers</h4>
+          <ul class="boxlist">
+            <li>Bedtime is calm more often than chaotic</li>
+            <li>Your child can settle with support, without escalating straight away</li>
+            <li>You’ve kept overnight responses consistent for 3–5 days</li>
+          </ul>
+        </div>
+      </div>
+      <h3 style="margin-top:26px;">What your answers mean</h3>
+      <div class="two">
+        <div class="box mint"><h4>Most boxes ticked</h4><p class="small" style="margin:0;">Your child is ready. Move on to Step 2 and identify what is keeping the wake-ups going.</p></div>
+        <div class="box peach"><h4>Several boxes unticked</h4><p class="small" style="margin:0;">Pause. Return to stabilisation for a few more days with the free Gentle Sleep Reset, then check again. This protects your progress.</p></div>
+      </div>
+      <div class="box cream" style="margin-top:26px;">
+        <h4>Notes</h4>
+        <div class="wl"></div><div class="wl"></div><div class="wl"></div>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Calm comes before consolidation</span></div>
+    </article>
+
+    <!-- 4 · Step 2 -->
+    <article class="sheet">
+      <SheetHead kicker={pg(4, 'Step 2')} title="Identify the driver" sub="Night wakings persist for different reasons. Find the main one before you adjust anything." />
+      <div class="three">
+        {drivers.map(([t, signs]) => (
+          <div class="box" style="display:flex;flex-direction:column;">
+            <h4>Driver</h4>
+            <h3 style="margin-bottom:10px;">{t}</h3>
+            <ul class="ticks small" style="margin:0;">{(signs as string[]).map((s) => <li>{s}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin:12px 0 0;">If more than one fits, choose the one you see on most nights. You can come back to the others later.</p>
+      <div class="box cream" style="margin-top:22px;">
+        <h4>Our primary driver</h4>
+        <p class="small" style="margin:0 0 6px;">☐ Habit loop &nbsp;&nbsp; ☐ Timing imbalance &nbsp;&nbsp; ☐ Regulation dependency</p>
+        <h4 style="margin-top:12px;">What we noticed</h4>
+        <div class="wl"></div><div class="wl"></div><div class="wl"></div>
+      </div>
+      <div class="note" style="margin-top:22px;"><p class="small"><strong>Timing imbalance?</strong> Wake windows and naps are often the quickest place to start. The troubleshooting table on page 8 shows what to check first.</p></div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Understand first, adjust second</span></div>
+    </article>
+
+    <!-- 5 · Step 3 -->
+    <article class="sheet">
+      <SheetHead kicker={pg(5, 'Step 3')} title="Choose your anchor" sub="Children settle when patterns are predictable. Choose one consistent overnight response." />
+      <div class="tbox">
+        <table>
+          <thead><tr><th style="width:8%;"></th><th style="width:44%;">Anchor response</th><th>What it looks like</th></tr></thead>
+          <tbody>{anchors.map(([a, d]) => <tr><td style="text-align:center;">☐</td><td><strong class="small">{a}</strong></td><td class="small muted">{d}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="box mint" style="margin-top:14px;"><p class="small" style="margin:0;"><strong>Commit for three nights before reassessing.</strong> No rotating strategies: changing the response night to night is what keeps children waking to find out which one they’ll get.</p></div>
+      <h3 style="margin-top:26px;">Your overnight phrase</h3>
+      <p class="small muted" style="margin:0 0 10px;">Consistency reduces negotiation. Choose one calming phrase and repeat it every time.</p>
+      <div class="three">
+        <div class="box cream"><p class="quote" style="margin:0;">“You’re safe. It’s still sleep time.”</p></div>
+        <div class="box cream"><p class="quote" style="margin:0;">“It’s night-time. I’m here. It’s time to sleep.”</p></div>
+        <div class="box cream"><p class="quote" style="margin:0;">“Shhh, it’s night-time.”</p></div>
+      </div>
+      <div class="two" style="margin-top:14px;">
+        <div class="box"><h4>Ours, word for word</h4><div class="wl"></div><div class="wl"></div></div>
+        <div class="box peach"><h4>Avoid</h4><ul class="small" style="margin:0;padding-left:18px;"><li>Lengthy explanations</li><li>Negotiating</li><li>New words each night</li></ul><p class="small" style="margin:6px 0 0;"><strong>Your calm tone matters more than your words.</strong></p></div>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Same response, every time</span></div>
+    </article>
+
+    <!-- 6 · Step 4 -->
+    <article class="sheet">
+      <SheetHead kicker={pg(6, 'Step 4')} title="Reduce one variable at a time" sub="Choose one part of your anchor response to reduce, a little at a time. Leave everything else the same." />
+      <div class="tbox">
+        <table>
+          <thead><tr><th style="width:8%;">☐</th><th style="width:38%;">Variable</th><th>What you’re reducing</th></tr></thead>
+          <tbody>{variables.map(([v, d], i) => <tr><td style="font-family:var(--serif);font-size:13pt;text-align:center;">{i + 1}</td><td><strong class="small">{v}</strong></td><td class="small muted">{d}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <h3 style="margin-top:26px;">The four-night rhythm</h3>
+      <div class="cycle">
+        <div class="node" style="background:var(--peach-soft);"><h4 style="margin:0 0 2px;">Nights 1–3</h4><p class="small" style="margin:0;">Make one small adjustment and hold it</p></div>
+        <span class="arr">→</span>
+        <div class="node" style="background:var(--cream);"><h4 style="margin:0 0 2px;">Night 4</h4><p class="small" style="margin:0;">Assess, using your tracker</p></div>
+        <span class="arr">→</span>
+        <div style="display:grid;gap:8px;">
+          <div class="node" style="background:var(--mint-soft);padding:8px 12px;"><p class="small" style="margin:0;"><strong>Progress?</strong> Continue</p></div>
+          <div class="node" style="background:#F6DFC0;padding:8px 12px;"><p class="small" style="margin:0;"><strong>Escalation?</strong> Reassess the driver</p></div>
+        </div>
+      </div>
+      <div class="two" style="margin-top:22px;">
+        <div class="box mint"><h4>Progress looks like</h4><ul class="ticks small" style="margin:0;"><li>Slightly shorter wakes</li><li>Less intensity</li><li>A longer first stretch</li></ul></div>
+        <div class="box cream" style="display:flex;align-items:center;"><p class="quote" style="margin:0;">Not perfection. Any progress, no matter how small, is a win.</p></div>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Small steps, in the right order</span></div>
+    </article>
+
+    <!-- 7 · Feeds & pausing -->
+    <article class="sheet">
+      <SheetHead kicker={pg(7, 'Night feeds & pausing')} title="Night feeds &amp; when to pause" sub="If night feeding is part of the pattern, reduce it gently. Never stop abruptly unless your child’s doctor has cleared it." />
+      <div class="three">
+        <div class="box"><h4>Option A</h4><h3>Shorten</h3><p class="small" style="margin:0;">Reduce feeding duration by 1–2 minutes every 2–3 nights.</p></div>
+        <div class="box"><h4>Option B</h4><h3>Space out</h3><p class="small" style="margin:0;">Gradually increase the interval between feeds.</p></div>
+        <div class="box"><h4>Option C</h4><h3>Earlier first</h3><p class="small" style="margin:0;">Shift toward consolidating the earlier part of the night first.</p></div>
+      </div>
+      <div class="box peach" style="margin-top:14px;"><p class="small" style="margin:0;"><strong>Watch for</strong> genuine hunger cues, illness and growth spurts. <strong>When in doubt, pause reduction.</strong></p></div>
+      <h3 style="margin-top:28px;">When to pause the whole plan</h3>
+      <div class="two">
+        <div class="box">
+          <ul class="ticks small" style="margin:0;">
+            <li>Illness returns</li>
+            <li>Travel</li>
+            <li>A major developmental leap</li>
+            <li>Family stress increases significantly</li>
+          </ul>
+        </div>
+        <div class="box cream" style="display:flex;flex-direction:column;justify-content:center;">
+          <p class="quote" style="margin:0 0 6px;">Return to stabilisation first. Then resume.</p>
+          <p class="small muted" style="margin:0;">Go back to your bedtime window and anchor response for a few days, then pick up at the step you’d reached.</p>
+        </div>
+      </div>
+      <h3 style="margin-top:28px;">Feed reduction log</h3>
+      <div class="tbox">
+        <table>
+          <thead><tr><th style="width:12%;">Night</th><th style="width:18%;">Feed time</th><th style="width:24%;">Minutes or ml / oz</th><th>How they resettled</th></tr></thead>
+          <tbody>{[1, 2, 3, 4, 5].map((n) => <tr><td style="font-family:var(--serif);font-size:13pt;height:30px;">{n}</td><td></td><td></td><td></td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>When in doubt, pause</span></div>
+    </article>
+
+    <!-- 8 · Troubleshooting -->
+    <article class="sheet">
+      <SheetHead kicker={pg(8, 'Troubleshooting')} title="Troubleshooting" sub="After 7–10 nights, if you’re still seeing one of these patterns, other variables may be involved." />
+      <div class="tbox">
+        <table>
+          <thead><tr><th style="width:21%;">Pattern</th><th style="width:25%;">Usually suggests</th><th style="width:26%;">Check first</th><th>Suggested adjustment</th></tr></thead>
+          <tbody>{matrix.map(([a, b, c, d]) => <tr><td><strong class="small">{a}</strong></td><td class="small">{b}</td><td class="small muted">{c}</td><td class="small">{d}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="two" style="margin-top:22px;">
+        <div class="box cream" style="display:flex;align-items:center;"><p class="quote" style="margin:0;">You haven’t failed. You may simply need nuance.</p></div>
+        <div class="box mint"><p class="small" style="margin:0;">Complex sleep patterns benefit from tailored timing adjustments, a feeding review and temperament-informed planning. This is often where a personalised assessment becomes valuable: see page 10.</p></div>
+      </div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>One change at a time</span></div>
+    </article>
+
+    <!-- 9 · Tracker -->
+    <article class="sheet">
+      <SheetHead kicker={pg(9, 'Tracker')} title="Your 7-night tracker" sub="Fill it in each morning. Patterns become visible when written down, and clarity reduces anxiety." />
+      <div class="tbox">
+        <table>
+          <thead><tr><th style="width:9%;">Night</th><th style="width:14%;">Bedtime</th><th style="width:13%;">Wakings (#)</th><th style="width:16%;">Length of waking</th><th>Response used</th><th style="width:15%;">Intensity (1–5)</th></tr></thead>
+          <tbody>{[1, 2, 3, 4, 5, 6, 7].map((n) => (
+            <tr style={n === 4 ? 'background:var(--peach-soft);' : ''}><td style={`font-family:var(--serif);font-size:14pt;height:66px;${n === 4 ? 'background:var(--peach-soft);' : ''}`}>{n}{n === 4 && <span class="tiny" style="display:block;color:var(--mink);font-family:var(--sans);">assess</span>}</td><td></td><td></td><td></td><td></td><td></td></tr>
+          ))}</tbody>
+        </table>
+      </div>
+      <div class="two" style="margin-top:16px;">
+        <div class="box cream"><h4>Night 4 assessment</h4><p class="small" style="margin:0 0 6px;">☐ Progress → continue &nbsp;&nbsp; ☐ Escalation → reassess the driver</p><div class="wl"></div></div>
+        <div class="box"><h4>Our variable &amp; the step we’re on</h4><div class="wl"></div><div class="wl"></div></div>
+      </div>
+      <p class="tiny muted" style="margin-top:10px;">Intensity: 1 = brief stir, settles quickly · 3 = needs your anchor response · 5 = very upset or escalating. Print a fresh copy for each new step.</p>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Clarity reduces anxiety</span></div>
+    </article>
+
+    <!-- 10 · Next steps -->
+    <article class="sheet">
+      <SheetHead kicker={pg(10, 'Next steps')} title="Next steps" sub="If you’re still seeing persistent fragmentation after working this framework, you may simply need a plan built around your child." />
+      <div class="box">
+        <h4>Some children</h4>
+        <ul class="ticks small" style="margin:0;columns:2;column-gap:24px;">
+          <li>Wake because of complex timing imbalances</li>
+          <li>Have layered sleep associations</li>
+          <li>Are highly sensitive or neurodivergent</li>
+          <li>Need their feeding strategy refined</li>
+          <li>Rise early for reasons unrelated to habit</li>
+        </ul>
+        <p class="small" style="margin:10px 0 0;">These children benefit from individualised guidance. Personalised support can help you move forward more efficiently, without undoing the connection you’ve protected.</p>
+      </div>
+      <div class="two" style="margin-top:16px;">
+        <div class="box mint"><h4>Not sure what you need?</h4><p class="small" style="margin:0;">Book a free 15-minute sleep assessment call at thyme4sleep.com. There’s no obligation.</p></div>
+        <div class="box peach"><h4>Personalised 1:1 support</h4><p class="small" style="margin:0;">A plan written for your child, including naps and schedule. See thyme4sleep.com/pricing, and mention this guide.</p></div>
+      </div>
+      <div class="box cream" style="margin-top:28px;text-align:center;padding:26px 24px;">
+        <p class="quote" style="margin:0 0 6px;font-size:20pt;">Move slowly. Hold steady. Trust consistency.</p>
+        <p class="muted" style="margin:0;">Sleep consolidates when safety and structure align.</p>
+        <p style="font-family:var(--serif);font-size:15pt;margin:14px 0 0;">— Georgia</p>
+      </div>
+      <p class="tiny muted" style="margin-top:16px;">© Thyme4Sleep LLC. All rights reserved. For your family’s personal use only; please don’t copy, share or resell. General education only, not medical advice. Always consult your child’s doctor about their health.</p>
+      <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>georgia@thyme4sleep.com</span></div>
+    </article>
+  </div>
+</Layout>

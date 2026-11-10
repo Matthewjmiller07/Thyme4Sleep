@@ -6,6 +6,7 @@ import Layout from '../../../layouts/AssetsLayout.astro';
 import PrintBar from '../../../components/assets/PrintBar.astro';
 import SheetHead from '../../../components/assets/SheetHead.astro';
 import { hasAccess, isPreview } from '../../../lib/calmNights';
+import { mayHaveReset } from '../../../lib/resetToRest';
 import { KEY_PHRASES } from '../../../data/sleep';
 import { CHECKPOINTS, SUPPORT_SIGNALS, STAY_CLOSE, TROUBLESHOOTING } from '../../../data/calmNights';
 export const prerender = false;
@@ -13,7 +14,7 @@ export const prerender = false;
 if (!(await hasAccess(Astro.url, Astro.cookies))) return Astro.redirect('/assets/calm-nights');
 const planHref = isPreview(Astro.url) ? `/assets/calm-nights/plan?preview=${Astro.url.searchParams.get('preview')}` : '/assets/calm-nights/plan';
 // Bundle buyers also have Reset to Rest (its own cookie, set on the Calm Nights success page)
-const hasReset = Astro.cookies.has('reset_access');
+const hasReset = mayHaveReset(Astro.cookies);
 
 const TOTAL = 27;
 const pg = (n: number, section: string) => `Calm Nights Guide & Workbook · ${section} · Page ${n} of ${TOTAL}`;

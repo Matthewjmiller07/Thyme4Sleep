@@ -17,12 +17,13 @@ const previewKey = (import.meta as any).env.ASSETS_PREVIEW_KEY || process.env.AS
 
 export interface VerifiedPurchase { packageId: string; email?: string | null }
 
-export async function verifySession(sessionId: string | undefined | null): Promise<VerifiedPurchase | null> {
+// Confirms with Stripe that a Checkout Session was paid for one of `packages`.
+export async function verifySession(sessionId: string | undefined | null, packages: string[] = CALM_NIGHTS_PACKAGES): Promise<VerifiedPurchase | null> {
   if (!stripe || !sessionId || !/^cs_[A-Za-z0-9_]+$/.test(sessionId)) return null;
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
     const packageId = session.metadata?.packageId || '';
-    if (session.payment_status !== 'paid' || !CALM_NIGHTS_PACKAGES.includes(packageId)) return null;
+    if (session.payment_status !== 'paid' || !packages.includes(packageId)) return null;
     return { packageId, email: session.customer_details?.email };
   } catch (err) {
     console.error('[Calm Nights] Session verification failed:', (err as Error).message);

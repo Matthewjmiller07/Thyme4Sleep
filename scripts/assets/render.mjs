@@ -3,6 +3,8 @@
 //   - each printable page                    -> public/assets/downloads/<file>.pdf
 //
 //   - the paid Calm Nights plan & workbook  -> deliverables/calm-nights/<file>.pdf
+//   - the From Reset to Rest guide          -> deliverables/reset-to-rest/from-reset-to-rest.pdf
+//     (a review copy; once approved, copy it to private/reset-to-rest/, which buyers download)
 //     (only when ASSETS_PREVIEW_KEY is set; kept out of public/ so they aren't served for free)
 //
 // Usage (with the dev server running on :4321):
@@ -61,7 +63,9 @@ if (previewKey) {
   const PAID = [
     ['/assets/calm-nights/workbook', 'calm-nights-guide-and-workbook.pdf'],
     ['/assets/calm-nights/plan', 'calm-nights-method-programme.pdf'],
+    ['/reset/guide', '../reset-to-rest/from-reset-to-rest.pdf'],
   ];
+  await mkdir(resolve(paidDir, '../reset-to-rest'), { recursive: true });
   for (const [path, file] of PAID) {
     await page.goto(`${base}${path}?preview=${encodeURIComponent(previewKey)}`, { waitUntil: 'networkidle' });
     await page.addStyleTag({ content: HIDE_DEV });
@@ -69,7 +73,7 @@ if (previewKey) {
     await page.emulateMedia({ media: 'print' });
     await page.pdf({ path: resolve(paidDir, file), printBackground: true, preferCSSPageSize: true });
     await page.emulateMedia({ media: 'screen' });
-    console.log('pdf', `deliverables/calm-nights/${file}`);
+    console.log('pdf', resolve(paidDir, file).replace(root + '/', ''));
   }
 } else {
   console.log('skip Calm Nights PDFs (set ASSETS_PREVIEW_KEY to render them)');
