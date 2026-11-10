@@ -1,27 +1,31 @@
 ---
 // Landing page for the buttons in the Calm Nights check-in emails, e.g.
-// /assets/calm-nights/check-in?n=7&s=support
+// /assets/calm-nights/check-in?n=7&s=support   (s = on-track | adjust | support | guidance)
 // The email platform tags the subscriber on the click (which starts the coaching branch);
 // this page shows the matching next step and records the answer in GA4 for the product review.
 import Layout from '../../../layouts/AssetsLayout.astro';
-import { CHECKPOINTS, SUPPORT_SIGNALS, SPECIALISED_URL } from '../../../data/calmNights';
+import { CHECKPOINTS, SUPPORT_SIGNALS, SPECIALISED_URL, ONE_TO_ONE_OPEN, FREE_CALL_URL, WAITLIST_URL } from '../../../data/calmNights';
 export const prerender = false;
 
 const night = Number(Astro.url.searchParams.get('n')) || 0;
-const status = ['on-track', 'adjust', 'support'].includes(Astro.url.searchParams.get('s') || '') ? Astro.url.searchParams.get('s')! : 'on-track';
+const status = ['on-track', 'adjust', 'support', 'guidance'].includes(Astro.url.searchParams.get('s') || '') ? Astro.url.searchParams.get('s')! : 'on-track';
 const cp = CHECKPOINTS.find((c) => c.night === night);
 
 const heading = !cp
-  ? (status === 'support' ? 'Thank you for telling us' : 'You’re ready to begin')
-  : { 'on-track': `Night ${night}: keep going`, adjust: `Night ${night}: one small adjustment`, support: `Night ${night}: let’s get you the right support` }[status];
+  ? (status === 'support' ? 'Thank you for telling us' : status === 'guidance' ? 'Let’s find the right support' : 'You’re ready to begin')
+  : { 'on-track': `Night ${night}: keep going`, adjust: `Night ${night}: one small adjustment`, support: `Night ${night}: let’s get you the right support`, guidance: `Night ${night}: you don’t have to do this alone` }[status];
+
+// Shown for “I’d like some guidance”: asking for help never requires reporting that things aren’t working.
+const GUIDANCE = 'Wanting someone beside you is a perfectly good reason to ask. Calm Nights is a general framework; personalised support starts with your child’s age, temperament, development, sleep history and your family’s circumstances. Here are the ways to get it.';
 
 const body = !cp
   ? (status === 'support'
     ? 'Something on the “get personalised support first” list applies to your family. That doesn’t mean you’ve done anything wrong — it means a plan built around your child will serve you far better than a general one. Here are the options.'
-    : 'Lovely. Work through steps 1–4 of your programme, print the workbook, and choose your night one. Your next email arrives around your night 4 checkpoint.')
-  : { 'on-track': cp.onTrack, adjust: cp.adjust, support: cp.support }[status];
+    : status === 'guidance' ? GUIDANCE
+    : 'Lovely. Work through steps 1–4 of your programme, print your Guide & Workbook, and choose your night one. Your next email arrives around your night 4 checkpoint.')
+  : { 'on-track': cp.onTrack, adjust: cp.adjust, support: cp.support, guidance: GUIDANCE }[status];
 
-const showCoaching = status === 'support';
+const showCoaching = status === 'support' || status === 'guidance';
 ---
 <Layout title="Calm Nights Check-in | Thyme4Sleep" description="Your Calm Nights next step.">
   <section class="hero">
@@ -42,6 +46,15 @@ const showCoaching = status === 'support';
   {showCoaching && (
     <section class="band">
       <div class="wrap">
+        {!ONE_TO_ONE_OPEN && (
+          <div class="note peach" style="margin-bottom:28px;">
+            <p><strong>Georgia’s 1:1 books are closed for now while she’s on maternity leave, but the waiting list is open.</strong> Join it and you’ll hear as soon as she’s taking families again. In the meantime, a free 15-minute sleep assessment call is a gentle way to talk through where you are, with no obligation.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
+              <a class="btn btn-dark btn-sm" href={FREE_CALL_URL} target="_blank" rel="noopener">Book a free assessment call</a>
+              <a class="btn btn-ghost btn-sm" href={WAITLIST_URL}>Join the waiting list</a>
+            </div>
+          </div>
+        )}
         <div class="grid g3">
           <div class="card lift" style="display:flex;flex-direction:column;">
             <span class="pill core">From $249</span>
@@ -62,9 +75,9 @@ const showCoaching = status === 'support';
             <a class="btn btn-ghost btn-sm" href={SPECIALISED_URL}>See Specialised Support</a>
           </div>
         </div>
-        <div class="note" style="margin-top:28px;"><p><strong>You won’t start from scratch.</strong> When you book, mention Calm Nights and share your tracker and checkpoint page. Georgia will see what you’ve already tried and build from there. Not sure which package? <a href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20%E2%80%94%20which%20package%3F">Email Georgia</a> with a line about where you’re stuck.</p></div>
+        <div class="note" style="margin-top:28px;"><p><strong>You won’t start from scratch.</strong> When you book, mention Calm Nights and share your tracker and checkpoint page. Georgia will see what you’ve already tried and build from there. Not sure which package? <a href={FREE_CALL_URL} target="_blank" rel="noopener">Book a free 15-minute assessment call</a>, or <a href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20%E2%80%94%20which%20package%3F">email Georgia</a> with a line about where you’re stuck.</p></div>
         <p class="small muted">Common reasons families move to 1:1: {[...SUPPORT_SIGNALS.before, ...SUPPORT_SIGNALS.during].join(' · ')}.</p>
-        <p class="small muted">If anything about your child’s health worries you, speak to your pediatrician first.</p>
+        <p class="small muted">If anything about your child’s health worries you, speak to your child’s doctor first.</p>
       </div>
     </section>
   )}

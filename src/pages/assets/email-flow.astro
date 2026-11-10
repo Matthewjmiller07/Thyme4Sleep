@@ -2,13 +2,14 @@
 // Visual map of the Thyme4Sleep email flow: entry points → Brevo lists → sequences → offers,
 // with a live preview of every email, its Brevo-ready HTML, and a simple revenue model.
 import Layout from '../../layouts/AssetsLayout.astro';
-import { welcome, ascend, calm, support, day3BySnapshot, SNAPSHOT_LABELS, SUBJECT_TESTS, renderEmailHtml, type Email } from '../../data/emails';
+import { welcome, ascend, calm, support, day3BySnapshot, day3NoQuiz, SNAPSHOT_LABELS, SUBJECT_TESTS, renderEmailHtml, type Email } from '../../data/emails';
 export const prerender = true;
 
 interface Item { id: string; group: string; e: Email }
 const items: Item[] = [
   ...welcome.slice(0, 3).map((e, i) => ({ id: `w${i}`, group: 'Welcome', e })),
-  ...(['a', 'd', 't', 'c'] as const).map((k) => ({ id: `w3-${k}`, group: 'Welcome · Day 3 split', e: { ...day3BySnapshot[k], day: `Day 3 · ${SNAPSHOT_LABELS[k]}${k === 'd' ? ' (also: no quiz)' : ''}` } })),
+  ...(['a', 'd', 't', 'c'] as const).map((k) => ({ id: `w3-${k}`, group: 'Welcome · Day 3 split', e: { ...day3BySnapshot[k], day: `Day 3 · ${SNAPSHOT_LABELS[k]}` } })),
+  { id: 'w3-n', group: 'Welcome · Day 3 split', e: { ...day3NoQuiz, day: 'Day 3 · No quiz taken' } },
   { id: 'w4', group: 'Welcome', e: welcome[4] },
   ...ascend.map((e, i) => ({ id: `r${i}`, group: 'Reset to Rest buyers', e })),
   ...calm.map((e, i) => ({ id: `c${i}`, group: 'Calm Nights pathway', e })),
@@ -25,24 +26,25 @@ const flow = [
   { title: 'Find', nodes: [
     { t: 'Instagram & Pinterest', s: 'Carousels, pins, stories → link in bio' },
     { t: 'Sleep Snapshot quiz', s: '8 questions → email to see the result', tag: 'free' },
-    { t: 'Gentle Sleep Reset', s: 'Free 72-hour guide download', tag: 'free' },
+    { t: 'Gentle Sleep Reset', s: 'Free 3–5 day reset guide download', tag: 'free' },
     { t: 'Free printables', s: 'Safe sleep, sleep log, bedtime chart: email to unlock', tag: 'free' },
   ]},
   { title: 'Join', nodes: [
     { t: 'Brevo list: Leads', s: 'Saved with SNAPSHOT = d · a · t · c', tag: 'tool' },
-    { t: 'Day 0–2 · Welcome', s: 'Guide, “do less”, the 3am pause', go: 'w0' },
+    { t: 'Day 0–2 · Welcome', s: 'Guide, a gentle start, understanding night wakes', go: 'w0' },
   ]},
   { title: 'Match', nodes: [
-    { t: 'Connected (a)', s: 'Calm Nights · $97', go: 'w3-a', tag: 'paid' },
-    { t: 'Disrupted (d) / no quiz', s: 'Reset to Rest · $37', go: 'w3-d', tag: 'paid' },
-    { t: 'Out-of-rhythm (t)', s: 'Troubleshooting call · $99', go: 'w3-t', tag: 'core' },
-    { t: 'Specialist (c)', s: '1:1 packages · from $249', go: 'w3-c', tag: 'core' },
-    { t: 'Day 5 · Your next step', s: 'Everyone: honest guide to all options', go: 'w4' },
+    { t: 'Connected (a)', s: 'Calm Nights · $97, or a free call', go: 'w3-a', tag: 'paid' },
+    { t: 'Disrupted (d)', s: 'Reset to Rest · $37, once nights are steady', go: 'w3-d', tag: 'paid' },
+    { t: 'Out-of-rhythm (t)', s: 'Troubleshooting call · $99, or a free call', go: 'w3-t', tag: 'core' },
+    { t: 'Specialist (c)', s: 'Free assessment call + 1:1 waiting list', go: 'w3-c', tag: 'core' },
+    { t: 'No quiz taken', s: 'Invitation to take the Sleep Snapshot', go: 'w3-n', tag: 'free' },
+    { t: 'Day 5 · Finding the right support', s: 'Everyone: honest guide to all options, including the free call', go: 'w4' },
   ]},
   { title: 'Buy → Results', nodes: [
     { t: 'Reset to Rest buyers', s: '5 emails: results, reviews, Calm Nights if bedtime is the issue', go: 'r0', tag: 'paid' },
-    { t: 'Calm Nights pathway', s: 'Night 4 · 7 · 14 check-ins with one-tap answers', go: 'c0', tag: 'paid' },
-    { t: 'Personalised support', s: '“Little change” click → honest route to 1:1', go: 's0', tag: 'core' },
+    { t: 'Calm Nights pathway', s: 'Automated night 4 · 7 · 14 check-ins with one-tap answers', go: 'c0', tag: 'paid' },
+    { t: 'Personalised support', s: '“Little change” or “I’d like some guidance” → free call & 1:1 waiting list', go: 's0', tag: 'core' },
   ]},
 ];
 ---
@@ -53,7 +55,7 @@ const flow = [
         <span class="pill tool">Content studio · Email</span>
         <h1 style="margin-top:18px;">The email <em class="script">flow</em></h1>
         <hr class="divider" style="margin-inline:auto;" />
-        <p class="lead" style="margin-inline:auto;">Free sign-up to paying family, on autopilot in Brevo. Each parent gets the offer that matches their Sleep Snapshot, and anyone who needs more is routed gently to Georgia’s 1:1 support.</p>
+        <p class="lead" style="margin-inline:auto;">Free sign-up to calmer nights, on autopilot in Brevo. Every parent gets real help first, then a starting point suggested by their Sleep Snapshot, an honest overview of every option, and a gentle route to Georgia whenever they’d like more support.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
           <a class="btn btn-dark" href="#preview">Preview the emails</a>
           <a class="btn btn-ghost" href="#money">See the numbers</a>
@@ -76,7 +78,7 @@ const flow = [
           </div>
         ))}
       </div>
-      <p class="small muted center" style="margin-top:18px;">Exit rule for every sales email: anyone on the <strong>Clients</strong> list (any 1:1 purchase) stops receiving offers.</p>
+      <p class="small muted center" style="margin-top:18px;">Exit rule for every sales email: anyone on the <strong>Clients</strong> list (any 1:1 purchase) stops receiving offers. Buyers also skip offers for products they already own: Reset to Rest and bundle buyers skip the Disrupted Day 3; Calm Nights and bundle buyers skip the Connected Day 3 (they get the no-quiz email) and the Reset to Rest +7 days email.</p>
     </div>
   </section>
 
@@ -124,7 +126,7 @@ const flow = [
           <label>New subscribers per month <output id="o-subs"></output><input type="range" id="subs" min="20" max="1000" step="10" value="150" /></label>
           <label>Buy Reset to Rest ($37) <output id="o-reset"></output><input type="range" id="reset" min="0" max="10" step="0.5" value="3" /></label>
           <label>Buy Calm Nights ($97, or $117 bundle) <output id="o-calm"></output><input type="range" id="calmr" min="0" max="10" step="0.5" value="2" /></label>
-          <label>Book 1:1 or a call (avg $350) <output id="o-oo"></output><input type="range" id="oo" min="0" max="5" step="0.25" value="1" /></label>
+          <label>Book a troubleshooting call ($99; 1:1 is waiting-list only for now) <output id="o-oo"></output><input type="range" id="oo" min="0" max="5" step="0.25" value="1" /></label>
         </div>
         <div class="calc-out">
           <div><span class="small muted">Per month</span><strong id="r-month"></strong></div>
@@ -136,9 +138,9 @@ const flow = [
 
       <h3 style="margin-top:40px;">Five ways to raise those numbers</h3>
       <ul class="ticks">
-        <li><strong>Lead with the matched offer.</strong> Day 3 already speaks to each Snapshot result. Track clicks per branch in Brevo and rewrite the weakest one first.</li>
+        <li><strong>Lead with genuine help.</strong> Day 3 suggests a starting point for each Snapshot result, always alongside the free assessment call. Track clicks per branch in Brevo and rewrite the weakest one first.</li>
         <li><strong>Make the bundle the obvious pick.</strong> Reset to Rest + Calm Nights is $134 separately and $117 bundled. Show both prices side by side, with the bundle in the middle, to nudge more buyers toward it.</li>
-        <li><strong>Launch price for the first 7–14 days.</strong> 20–30% off Calm Nights for the list (“$69 this week, then $97”) rewards early families and gets your first reviews in.</li>
+        <li><strong>A genuine launch price, if you want one.</strong> A set launch week at a lower price (for example $69, then $97) can reward early families and bring in first reviews. Only run it if the price really does go back up on the date you say: false urgency isn’t Thyme4Sleep.</li>
         <li><strong>Test two subject lines.</strong> The offer emails each have an A/B alternative (shown above). Keep the winner and test again.</li>
         <li><strong>Collect reviews by reply.</strong> Night 21 and Day 12 ask for one sentence. Every review strengthens the sales pages and the next Day 3 email.</li>
       </ul>
@@ -159,7 +161,7 @@ const flow = [
         <li><strong>Stripe webhook.</strong> In Stripe → Developers → Webhooks, point <code>checkout.session.completed</code> at <code>https://thyme4sleep.com/api/stripe-webhook</code> and add its signing secret as <code>STRIPE_WEBHOOK_SECRET</code>.</li>
         <li><strong>Templates.</strong> Copy each email’s HTML from the previewer into a Brevo template.</li>
         <li><strong>Automations.</strong> Build four workflows, each triggered by “contact added to list”:
-          <em>Welcome</em> (Leads → Day 0, 1, 2 → condition on <code>SNAPSHOT</code> for Day 3 → Day 5),
+          <em>Welcome</em> (Leads → Day 0, 1, 2 → condition on <code>SNAPSHOT</code> for Day 3, with the no-quiz email when it’s empty → Day 5),
           <em>Reset to Rest</em>, <em>Calm Nights</em> (with “clicked link” conditions for the check-in buttons) and <em>Personalised support</em>. Set “exit if contact is in list Clients” on every workflow.</li>
         <li><strong>Test.</strong> Take the quiz with your own address, buy with a Stripe test card, and check that each email arrives and every button lands in the right place.</li>
       </ol>
@@ -203,7 +205,7 @@ const flow = [
         var subs = +$('subs').value, r = +$('reset').value / 100, c = +$('calmr').value / 100, o = +$('oo').value / 100;
         $('o-subs').textContent = subs; $('o-reset').textContent = $('reset').value + '%';
         $('o-calm').textContent = $('calmr').value + '%'; $('o-oo').textContent = $('oo').value + '%';
-        var month = subs * (r * 37 + c * 107 + o * 350);
+        var month = subs * (r * 37 + c * 107 + o * 99);
         $('r-month').textContent = money(month); $('r-year').textContent = money(month * 12);
         $('r-sub').textContent = '$' + (month / subs).toFixed(2);
       }

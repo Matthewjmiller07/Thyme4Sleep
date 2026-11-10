@@ -127,3 +127,9 @@ export const SUPPORT_SIGNALS = {
 // Where coaching links point. The query string lets GA4 show which enquiries came from Calm Nights.
 export const COACHING_URL = '/pricing?from=calm-nights';
 export const SPECIALISED_URL = '/packages/sen?from=calm-nights';
+
+// 1:1 booking is paused while Georgia is on maternity leave. Set to true when intake reopens,
+// and swap the waiting-list lines in src/data/emails.ts for booking lines.
+export const ONE_TO_ONE_OPEN = false;
+export const FREE_CALL_URL = 'https://thyme4sleep.neetocal.com/free-15-minute-assessment-call';
+export const WAITLIST_URL = 'mailto:georgia@thyme4sleep.com?subject=1%3A1%20waiting%20list';
