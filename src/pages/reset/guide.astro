@@ -83,6 +83,8 @@ const matrix = [
     .tbox th + th, .tbox td + td { border-left: 1px solid var(--line); }
     .tbox tbody tr:last-child td { border-bottom: 0; }
     .tbox td:first-child { background: var(--paper); }
+    .ph { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+    .thumb { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto; background: var(--cream); }
     .cover { display: flex; flex-direction: column; background: var(--cream); }
     .cover h1 { font-size: 52pt !important; line-height: 1; }
     .toc p { display: flex; justify-content: space-between; margin: 0 0 4px; border-bottom: 1px dotted var(--taupe); padding-bottom: 3px; font-size: 11pt !important; }
@@ -109,13 +111,16 @@ const matrix = [
         <span class="eyebrow">Thyme4Sleep · Gentle sleep guide</span>
         <img src="/assets/img/logo.png" alt="Thyme4Sleep" style="height:64px;width:auto;" />
       </div>
-      <div style="margin-top:.7in;">
+      <div style="margin-top:.45in;display:grid;grid-template-columns:1fr 2.5in;gap:.3in;align-items:end;">
+        <div>
         <h1>From Reset<br /><em class="script">to Rest</em></h1>
         <hr class="divider" style="margin:16px 0 18px;" />
         <p style="font-family:var(--serif);font-size:19pt;line-height:1.25;margin:0 0 10px;">A gentle night-waking reduction protocol</p>
         <p class="muted" style="font-size:12.5pt !important;max-width:30em;margin:0;">For families ready to move from stabilised sleep to more consolidated rest, without cry-it-out.</p>
+        </div>
+        <div style="height:3.3in;border-radius:1.25in 1.25in 22px 22px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(63,59,56,.45);"><img src="/assets/img/reset-to-rest/crib.jpg" alt="" class="ph" style="border-radius:0;" /></div>
       </div>
-      <div class="box" style="background:#fff;margin-top:.45in;padding:18px 24px;">
+      <div class="box" style="background:#fff;margin-top:.35in;padding:18px 24px;">
         <h4>Inside this guide</h4>
         <div class="toc" style="columns:2;column-gap:30px;">
           <p><span>How to use this guide</span><span>2</span></p>
@@ -197,6 +202,7 @@ const matrix = [
         <h4>Notes</h4>
         <div class="wl"></div><div class="wl"></div><div class="wl"></div>
       </div>
+      <div style="height:1.7in;margin-top:22px;"><img src="/assets/img/reset-to-rest/sleeping.jpg" alt="" class="ph" style="object-position:center 35%;" /></div>
       <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Calm comes before consolidation</span></div>
     </article>
 
@@ -219,7 +225,10 @@ const matrix = [
         <h4 style="margin-top:12px;">What we noticed</h4>
         <div class="wl"></div><div class="wl"></div><div class="wl"></div>
       </div>
-      <div class="note" style="margin-top:22px;"><p class="small"><strong>Timing imbalance?</strong> Wake windows and naps are often the quickest place to start. The troubleshooting table on page 8 shows what to check first.</p></div>
+      <div style="display:grid;grid-template-columns:2.2in 1fr;gap:14px;margin-top:22px;align-items:stretch;">
+        <div style="min-height:1.3in;"><img src="/assets/img/reset-to-rest/yawn.jpg" alt="" class="ph" /></div>
+        <div class="note" style="margin:0;display:flex;align-items:center;"><p class="small"><strong>Timing imbalance?</strong> Wake windows and naps are often the quickest place to start. The troubleshooting table on page 8 shows what to check first.</p></div>
+      </div>
       <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Understand first, adjust second</span></div>
     </article>
 
@@ -252,8 +261,8 @@ const matrix = [
       <SheetHead kicker={pg(6, 'Step 4')} title="Reduce one variable at a time" sub="Choose one part of your anchor response to reduce, a little at a time. Leave everything else the same." />
       <div class="tbox">
         <table>
-          <thead><tr><th style="width:8%;">☐</th><th style="width:38%;">Variable</th><th>What you’re reducing</th></tr></thead>
-          <tbody>{variables.map(([v, d], i) => <tr><td style="font-family:var(--serif);font-size:13pt;text-align:center;">{i + 1}</td><td><strong class="small">{v}</strong></td><td class="small muted">{d}</td></tr>)}</tbody>
+          <thead><tr><th style="width:8%;">☐</th><th style="width:12%;"></th><th style="width:33%;">Variable</th><th>What you’re reducing</th></tr></thead>
+          <tbody>{variables.map(([v, d], i) => <tr><td style="font-family:var(--serif);font-size:13pt;text-align:center;vertical-align:middle;">{i + 1}</td><td style="background:#fff;padding:6px;"><img src={`/assets/img/reset-to-rest/${['bottle.jpg', 'smile.png', 'pout.jpg', 'dad.jpg', 'mum.jpg'][i]}`} alt="" class="thumb" style={i === 1 ? 'object-fit:contain;' : ''} /></td><td style="vertical-align:middle;"><strong class="small">{v}</strong></td><td class="small muted" style="vertical-align:middle;">{d}</td></tr>)}</tbody>
         </table>
       </div>
       <h3 style="margin-top:26px;">The four-night rhythm</h3>
@@ -284,7 +293,7 @@ const matrix = [
       </div>
       <div class="box peach" style="margin-top:14px;"><p class="small" style="margin:0;"><strong>Watch for</strong> genuine hunger cues, illness and growth spurts. <strong>When in doubt, pause reduction.</strong></p></div>
       <h3 style="margin-top:28px;">When to pause the whole plan</h3>
-      <div class="two">
+      <div style="display:grid;grid-template-columns:1fr 1.6in 1fr;gap:14px;">
         <div class="box">
           <ul class="ticks small" style="margin:0;">
             <li>Illness returns</li>
@@ -293,6 +302,7 @@ const matrix = [
             <li>Family stress increases significantly</li>
           </ul>
         </div>
+        <div><img src="/assets/img/reset-to-rest/nap.jpg" alt="" class="ph" /></div>
         <div class="box cream" style="display:flex;flex-direction:column;justify-content:center;">
           <p class="quote" style="margin:0 0 6px;">Return to stabilisation first. Then resume.</p>
           <p class="small muted" style="margin:0;">Go back to your bedtime window and anchor response for a few days, then pick up at the step you’d reached.</p>
@@ -335,9 +345,10 @@ const matrix = [
           ))}</tbody>
         </table>
       </div>
-      <div class="two" style="margin-top:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.55in;gap:14px;margin-top:16px;">
         <div class="box cream"><h4>Night 4 assessment</h4><p class="small" style="margin:0 0 6px;">☐ Progress → continue &nbsp;&nbsp; ☐ Escalation → reassess the driver</p><div class="wl"></div></div>
         <div class="box"><h4>Our variable &amp; the step we’re on</h4><div class="wl"></div><div class="wl"></div></div>
+        <div><img src="/assets/img/reset-to-rest/teddy.jpg" alt="" class="ph" style="object-position:60% center;" /></div>
       </div>
       <p class="tiny muted" style="margin-top:10px;">Intensity: 1 = brief stir, settles quickly · 3 = needs your anchor response · 5 = very upset or escalating. Print a fresh copy for each new step.</p>
       <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>Clarity reduces anxiety</span></div>
@@ -361,10 +372,13 @@ const matrix = [
         <div class="box mint"><h4>Not sure what you need?</h4><p class="small" style="margin:0;">Book a free 15-minute sleep assessment call at thyme4sleep.com. There’s no obligation.</p></div>
         <div class="box peach"><h4>Personalised 1:1 support</h4><p class="small" style="margin:0;">A plan written for your child, including naps and schedule. See thyme4sleep.com/pricing, and mention this guide.</p></div>
       </div>
-      <div class="box cream" style="margin-top:28px;text-align:center;padding:26px 24px;">
-        <p class="quote" style="margin:0 0 6px;font-size:20pt;">Move slowly. Hold steady. Trust consistency.</p>
-        <p class="muted" style="margin:0;">Sleep consolidates when safety and structure align.</p>
-        <p style="font-family:var(--serif);font-size:15pt;margin:14px 0 0;">— Georgia</p>
+      <div style="display:grid;grid-template-columns:2.4in 1fr;gap:14px;margin-top:28px;">
+        <div style="min-height:2in;"><img src="/assets/img/reset-to-rest/giggle.jpg" alt="" class="ph" /></div>
+        <div class="box cream" style="text-align:center;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;">
+          <p class="quote" style="margin:0 0 6px;font-size:19pt;">Move slowly. Hold steady. Trust consistency.</p>
+          <p class="muted" style="margin:0;">Sleep consolidates when safety and structure align.</p>
+          <p style="font-family:var(--serif);font-size:15pt;margin:14px 0 0;">— Georgia</p>
+        </div>
       </div>
       <p class="tiny muted" style="margin-top:16px;">© Thyme4Sleep LLC. All rights reserved. For your family’s personal use only; please don’t copy, share or resell. General education only, not medical advice. Always consult your child’s doctor about their health.</p>
       <div class="sheet-foot"><span>THYME4SLEEP.COM</span><span>georgia@thyme4sleep.com</span></div>
