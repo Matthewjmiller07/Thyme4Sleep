@@ -1,21 +1,16 @@
 ---
 import Layout from '../layouts/LayoutNoConsent.astro';
+import { hasResetAccess } from '../lib/resetToRest';
+import { isPreview } from '../lib/calmNights';
 
 export const prerender = false;
 
 const pageTitle = 'Reset to Rest – Your Guide & Video | Thyme4Sleep';
 const pageDescription = 'Access your Reset to Rest guide and video. Thank you for your purchase!';
 
-// Check if user has valid access cookie
-const accessToken = Astro.cookies.get('reset_access')?.value;
-
-// If no valid access token, redirect to preview/sales page
-if (!accessToken) {
-  return Astro.redirect('/reset-preview');
-}
-
-// In production, verify the token against your database
-// For now, we trust that the cookie was set by our purchase-success page
+// Access requires a verified Reset to Rest or bundle purchase (or the owner preview key)
+if (!(await hasResetAccess(Astro.url, Astro.cookies))) return Astro.redirect('/reset-preview');
+const guidePdf = isPreview(Astro.url) ? `/reset/guide.pdf?preview=${Astro.url.searchParams.get('preview')}` : '/reset/guide.pdf';
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -84,7 +79,7 @@ if (!accessToken) {
             <p class="text-gray-600 mb-6 leading-relaxed">Your complete guide to resetting your little one's sleep — covering schedules, sleep environment, settling strategies, and more. Save it, print it, and refer back whenever you need it.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
               <a
-                href="/reset-to-rest-full.pdf"
+                href={guidePdf}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center px-6 py-3 bg-brandPeach hover:bg-brandTaupe text-brandChar hover:text-white font-medium rounded-full transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
@@ -96,7 +91,7 @@ if (!accessToken) {
                 View Guide
               </a>
               <a
-                href="/reset-to-rest-full.pdf"
+                href={guidePdf}
                 download
                 class="inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-brandMint/20 text-brandSage font-medium rounded-full border border-brandMint transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"
               >

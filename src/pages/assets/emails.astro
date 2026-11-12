@@ -11,7 +11,7 @@ import { SEQUENCES as seqs } from '../../data/emails';
         <span class="pill tool">Content studio</span>
         <h1 style="margin-top:18px;">Email Nurture Sequences</h1>
         <hr class="divider" style="margin-inline:auto;" />
-        <p class="lead" style="margin-inline:auto;">Four sequences in Georgia’s voice: free download → paying family, and Calm Nights family → results, a review, or the right 1:1 package. Paste them into your email platform and set the delays and rules shown. Sequences 3 and 4 need a platform with link-click tagging and conditional automations (Kit or MailerLite both do this).</p>
+        <p class="lead" style="margin-inline:auto;">Four sequences in Georgia’s voice: real help after a free download, support for Reset to Rest and Calm Nights families, and an honest route to the free assessment call or the 1:1 waiting list. Paste them into Brevo and set the delays and rules shown; the Day 3 versions for each Sleep Snapshot result are on the email-flow page.</p>
       </div>
     </div>
   </section>
@@ -47,7 +47,7 @@ import { SEQUENCES as seqs } from '../../data/emails';
       <hr class="divider" />
       <ol>
         <li><strong>Purchase → tag.</strong> Connect Stripe to your email platform (natively, or with a Zapier “Checkout Session completed” trigger). When metadata <code>packageId</code> is <code>calm-nights</code> or <code>calm-nights-bundle</code>, add the subscriber with tag <code>cn-buyer</code>; that starts Sequence 3. Any 1:1 <code>packageId</code> (<code>starter-*</code>, <code>standard-*</code>, …) adds tag <code>client</code>, which exits Sequences 3 and 4.</li>
-        <li><strong>Check-in clicks → tags.</strong> Set a link-click trigger for each check-in URL. <code>s=support</code> adds <code>cn-support</code> (starts Sequence 4). <code>s=adjust</code> adds <code>cn-adjust</code>; a second “adjust” click also adds <code>cn-support</code>. <code>started=1</code> adds <code>cn-started</code> and starts the nights timer. Night 14 <code>s=on-track</code> adds <code>cn-success</code>.</li>
+        <li><strong>Check-in clicks → tags.</strong> Set a link-click trigger for each check-in URL. <code>s=support</code> and <code>s=guidance</code> (“I’d like some guidance”) add <code>cn-support</code> (starts Sequence 4). <code>s=adjust</code> adds <code>cn-adjust</code>; a second “adjust” click also adds <code>cn-support</code>. <code>started=1</code> adds <code>cn-started</code> and starts the nights timer. Night 14 <code>s=on-track</code> adds <code>cn-success</code>.</li>
         <li><strong>One branch at a time.</strong> While a subscriber has <code>cn-support</code>, skip the remaining Sequence 3 check-ins after night 7 so they hear one clear message.</li>
         <li><strong>Measurement is built in.</strong> The check-in page records a GA4 event <code>calm_nights_checkin</code> (night, status), and every coaching link carries <code>?from=calm-nights</code>, so you can see how many Calm Nights families reach the pricing page. These feed the review on the <a href="/assets/flywheel#review">flywheel page</a>.</li>
       </ol>

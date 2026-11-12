@@ -2,17 +2,28 @@
 //   - every .frame on /assets/social/frames  -> public/assets/social/<name>.png
 //   - each printable page                    -> public/assets/downloads/<file>.pdf
 //
+//   - the paid Calm Nights plan & workbook  -> deliverables/calm-nights/<file>.pdf
+//   - the From Reset to Rest guide          -> deliverables/reset-to-rest/from-reset-to-rest.pdf
+//     (a review copy; once approved, copy it to private/reset-to-rest/, which buyers download)
+//     (only when ASSETS_PREVIEW_KEY is set; kept out of public/ so they aren't served for free)
+//
 // Usage (with the dev server running on :4321):
 //   npx -y -p playwright node scripts/assets/render.mjs [baseUrl]
+// For the Calm Nights PDFs, start the dev server and this script with the same key:
+//   ASSETS_PREVIEW_KEY=xyz npm run dev
+//   ASSETS_PREVIEW_KEY=xyz npx -y -p playwright node scripts/assets/render.mjs
 // Set PLAYWRIGHT_MODULE to a path if playwright isn't resolvable from here.
 import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const pw = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = pw.chromium ? pw : pw.default;
 const base = process.argv[2] || 'http://localhost:4321';
 const root = resolve(import.meta.dirname, '../..');
 const socialDir = resolve(root, 'public/assets/social');
 const pdfDir = resolve(root, 'public/assets/downloads');
+const paidDir = resolve(root, 'deliverables/calm-nights');
+const previewKey = process.env.ASSETS_PREVIEW_KEY;
 await mkdir(socialDir, { recursive: true });
 await mkdir(pdfDir, { recursive: true });
 
@@ -45,6 +56,27 @@ for (const [path, file] of PDFS) {
   await page.pdf({ path: resolve(pdfDir, file), printBackground: true, preferCSSPageSize: true });
   await page.emulateMedia({ media: 'screen' });
   console.log('pdf', file);
+}
+
+if (previewKey) {
+  await mkdir(paidDir, { recursive: true });
+  const PAID = [
+    ['/assets/calm-nights/workbook', 'calm-nights-guide-and-workbook.pdf'],
+    ['/assets/calm-nights/plan', 'calm-nights-method-programme.pdf'],
+    ['/reset/guide', '../reset-to-rest/from-reset-to-rest.pdf'],
+  ];
+  await mkdir(resolve(paidDir, '../reset-to-rest'), { recursive: true });
+  for (const [path, file] of PAID) {
+    await page.goto(`${base}${path}?preview=${encodeURIComponent(previewKey)}`, { waitUntil: 'networkidle' });
+    await page.addStyleTag({ content: HIDE_DEV });
+    await page.evaluate(() => document.fonts.ready);
+    await page.emulateMedia({ media: 'print' });
+    await page.pdf({ path: resolve(paidDir, file), printBackground: true, preferCSSPageSize: true });
+    await page.emulateMedia({ media: 'screen' });
+    console.log('pdf', resolve(paidDir, file).replace(root + '/', ''));
+  }
+} else {
+  console.log('skip Calm Nights PDFs (set ASSETS_PREVIEW_KEY to render them)');
 }
 
 await browser.close();

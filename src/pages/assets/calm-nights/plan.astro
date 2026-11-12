@@ -4,14 +4,17 @@
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
 import { hasAccess, isPreview } from '../../../lib/calmNights';
+import { mayHaveReset } from '../../../lib/resetToRest';
 import { KEY_PHRASES } from '../../../data/sleep';
-import { PATHWAY, INCLUDED, NOT_INCLUDED, CHECKPOINTS, SUPPORT_SIGNALS, COACHING_URL, SPECIALISED_URL } from '../../../data/calmNights';
+import { PATHWAY, INCLUDED, NOT_INCLUDED, CHECKPOINTS, SUPPORT_SIGNALS, COACHING_URL, SPECIALISED_URL, STAY_CLOSE as stayClose, TROUBLESHOOTING as trouble } from '../../../data/calmNights';
 export const prerender = false;
 
 if (!(await hasAccess(Astro.url, Astro.cookies))) return Astro.redirect('/assets/calm-nights');
 const preview = isPreview(Astro.url);
 const welcome = Astro.url.searchParams.get('welcome') === '1';
 // Keep the preview key on internal links so the owner can click through the whole product
+// Bundle buyers also have Reset to Rest (cookie set on the Calm Nights success page)
+const hasReset = mayHaveReset(Astro.cookies);
 const workbookHref = preview ? `/assets/calm-nights/workbook?preview=${Astro.url.searchParams.get('preview')}` : '/assets/calm-nights/workbook';
 
 const toc = [
@@ -25,30 +28,10 @@ const toc = [
   ['wakings', '· Wake-ups & early mornings'],
   ['review', 'Review checkpoints'],
   ['trouble', 'Troubleshooting'],
-  ['workbook', 'Workbook & tracker'],
+  ['workbook', 'Guide & Workbook'],
   ['next', 'Keeping it going'],
 ];
 
-const stayClose = [
-  ['Nights 1–3', 'Beside the crib', 'Sit or kneel right next to the crib. Offer touch — a hand on the tummy, stroking the back or head — and soft shushing. Reduce touch as they calm; stop before they’re asleep if you can. No picking up.'],
-  ['Nights 4–6', 'Beside the crib, voice only', 'Same spot, but hands off. Comfort with your voice and presence. If crying builds past a 6 out of 10, a brief touch is fine — then back to voice.'],
-  ['Nights 7–9', 'Halfway to the door', 'Move your chair halfway across the room. Calm, low, repetitive reassurance (your key phrase, a gentle “shhh”). Keep eye contact soft and minimal.'],
-  ['Nights 10–12', 'In the doorway', 'Sit in the open doorway where they can see or hear you. Reassure with your key phrase at intervals rather than constantly.'],
-  ['Nights 13–14', 'Just outside the door', 'Out of sight, within earshot. Offer your key phrase from outside if needed.'],
-];
-
-const trouble = [
-  ['Check the basics (do this first)', 'Is the milk feed truly at the start of the routine, with books or bath after it? Is bedtime well-timed (not overtired)? Is the morning wake-up time consistent? Is every adult using the same starting point and key phrase — including at 3am? Most stalls come from one of these.'],
-  ['“Night 3 got worse!”', 'Very common, and usually a sign your child is testing whether the new pattern is real. Hold steady to your night 4 checkpoint. Families who change course here start again from zero.'],
-  ['Illness or teething', 'Pause, comfort as much as they need, and follow medical advice. Keep the routine and wake-up time. When they’re well (usually 2–3 days after symptoms ease), restart at the stage you’d reached — it comes back quickly.'],
-  ['They stand up and won’t lie down', 'Practise “up and down” lots during the day. At night, lay them down once, then leave them to it — they will lie down when tired. Repeatedly laying them down becomes a game.'],
-  ['Vomiting from crying', 'Clean up calmly and quickly with low light and little interaction, change the sheet, then continue your starting point. If it happens repeatedly, pause and speak to your pediatrician.'],
-  ['Early rising (before 6am)', 'Treat it as night: same pause, same response. Then look at the day: is bedtime too late? Is the room light at dawn? Is there an early-morning feed still being offered?'],
-  ['Travel & time zones', 'Bring the routine, sleep sack, white noise and key phrase. Shift to local time straight away with daylight and mealtimes. Expect a few unsettled nights, then return to your starting point.'],
-  ['The toddler negotiator', 'Use the bedtime chart and Bedtime Pass cards. Offer choices before bed (“blue PJs or stars?”), not after. Once in bed: key phrase, same response, no new debates.'],
-  ['We disagree as parents', 'Agree the starting point and the hard-night plan before night one. If one parent finds settling harder, they take a different role (bath and books) while the other leads. Unity matters more than which starting point you chose.'],
-  ['Our checkpoint says “get support”', 'Then that’s the right next step, not a failure. See “Keeping it going” below — Georgia will build on what you’ve already done.'],
-];
 ---
 <Layout title="The Calm Nights Method — Your Programme | Thyme4Sleep" description="Your Calm Nights Method: a structured, self-guided 14-night gentle sleep programme.">
   <style>
@@ -114,7 +97,7 @@ const trouble = [
         <p class="lead">A structured, self-guided programme for helping your child learn to fall asleep — and fall back asleep — without cry-it-out. Six steps, in order. Read steps 1–4 before night one; then come back to the step you’re on.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;" class="no-print">
           <a class="btn btn-dark" href="#understand">Start at step 1</a>
-          <a class="btn btn-ghost" href={workbookHref}>Open the printable workbook</a>
+          <a class="btn btn-ghost" href={workbookHref}>Open the printable Guide &amp; Workbook</a>
         </div>
         <nav class="path no-print" aria-label="Your pathway">
           {PATHWAY.map((p) => <a href={`#${p.id}`}><b>{p.n}</b><span>{p.title}</span><small class="muted">{p.sub}</small></a>)}
@@ -183,7 +166,7 @@ const trouble = [
       <section class="chapter" id="prep">
         <span class="num">Step 3 · Prepare</span>
         <h2>Prep week</h2>
-        <p>Do these in the 3–7 days before night one. Many families see improvement from preparation alone. The workbook has a tick-list version.</p>
+        <p>Do these in the 3–7 days before night one. Many families see improvement from preparation alone. The Guide &amp; Workbook has a day-by-day version.</p>
         <div class="grid g2">
           <div><h3>The room</h3><ul class="ticks"><li><strong>Dark:</strong> blackout curtains or window film. If you use a night light, choose a very dim, warm one, or move it to the hallway.</li><li><strong>Calm:</strong> remove mobiles and stimulating décor from the crib area.</li><li><strong>Comfortable:</strong> season-appropriate PJs and a sleep sack.</li><li><strong>Sound:</strong> white noise is fine — steady, all night, not too loud.</li></ul></div>
           <div><h3>The feed</h3><ul class="ticks"><li>Move the bedtime milk to the <strong>start</strong> of the routine — lights on, ideally outside the bedroom.</li><li>Keep them awake and engaged for the whole feed.</li><li>Follow it with bath or books so the last thing before sleep isn’t sucking.</li><li>Ask your pediatrician which night feeds (if any) they want you to keep.</li></ul></div>
@@ -237,7 +220,7 @@ const trouble = [
         <div class="note" style="margin-top:12px;"><p><strong>If your answers point different ways, question 2 wins.</strong> The approach you can follow consistently will outperform the “right” one you can’t. Still unsure? Start with Stay Close — it’s the gentlest, and easy to move on from.</p></div>
         <h3>Then commit</h3>
         <ul class="ticks">
-          <li>Write your choice and key phrase in the workbook.</li>
+          <li>Write your choice and key phrase in the Guide &amp; Workbook.</li>
           <li>Give it 7 full nights before considering a switch. Night 7 is the only switch point, and you switch once.</li>
           <li>If neither starting point feels possible for your family, that’s a sign to get personalised support rather than force a fit.</li>
         </ul>
@@ -336,15 +319,15 @@ const trouble = [
       <!-- Workbook -->
       <section class="chapter" id="workbook">
         <span class="num">Your tools</span>
-        <h2>Workbook &amp; tracker</h2>
-        <p>The printable workbook keeps everything you need by the bed, in four pages:</p>
+        <h2>The Calm Nights Guide &amp; Workbook</h2>
+        <p>The printable Guide &amp; Workbook (27 pages) is where you make the method yours and see your progress. It follows the same six steps:</p>
         <ul class="ticks">
-          <li><strong>Prepare</strong> — the readiness and prep-week checklist.</li>
-          <li><strong>My plan</strong> — your starting point, key phrase, times, hard-night plan and a cut-out script card.</li>
-          <li><strong>14-night tracker</strong> — lights out, asleep by, wake-ups, longest stretch, morning, win of the night.</li>
-          <li><strong>Checkpoints</strong> — your night 4, 7 and 14 reviews in one place.</li>
+          <li><strong>Steps 1–2 · Before you begin</strong> — sleep basics and the crying scale, your child’s current sleep associations, the fit and readiness check, and a three-night baseline log.</li>
+          <li><strong>Steps 3–4 · Prepare &amp; choose</strong> — a day-by-day prep-week planner, the three-question starting-point worksheet, your plan at a glance, routine builder, key phrase, and team and hard-night plan.</li>
+          <li><strong>Step 5 · The 14 nights</strong> — the Stay Close stage map, a Step Out &amp; Check log, a wake-ups and feed-reduction page, a night-by-night journal and the 14-night tracker.</li>
+          <li><strong>Step 6 · Review</strong> — one page each for your night 4, 7 and 14 checkpoints, the troubleshooting library with a change log, life after night 14, and cut-out script cards.</li>
         </ul>
-        <a class="btn btn-dark no-print" href={workbookHref}>Open &amp; print the workbook</a>
+        <a class="btn btn-dark no-print" href={workbookHref}>Open &amp; print the Guide &amp; Workbook</a>
       </section>
 
       <!-- Next -->
@@ -352,7 +335,7 @@ const trouble = [
         <span class="num">After night 14</span>
         <h2>Keeping it going</h2>
         <p>Sleep isn’t about perfection — it’s about consistency, intention and loving boundaries. There will be wobbles: a cold, a new tooth, a holiday. When they come, steady the foundations with the free <a href="/free-checklist">Gentle Sleep Reset</a>, then pick your starting point back up. It returns faster every time.</p>
-        <p>If sleep is calm but one night-time habit lingers — a single feed, say — <a href="/reset-preview">From Reset to Rest</a> is my protocol for reducing one support gradually.</p>
+        <p>If sleep is calm but one night-time habit lingers — a single feed, say — <a href={hasReset ? '/reset' : '/reset-preview'}>From Reset to Rest</a> is my protocol for reducing one support gradually.{hasReset && <> It’s included in your bundle — <a href="/reset">open your Reset to Rest video &amp; workbook</a>.</>}</p>
         <p>You are doing something truly wonderful for your child — and for yourselves. You’ve got this.</p>
         <p style="font-family:var(--serif);font-size:1.5rem;">— Georgia</p>
         <div class="card lift no-print" style="margin-top:28px;">
