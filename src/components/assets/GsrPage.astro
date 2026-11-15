@@ -8,12 +8,13 @@ interface Props {
   bg: { band: string; photo: 'sleeping' | 'teal'; icon: string };
   photoTop?: boolean; // photo above the band (closing page) instead of below it
   tight?: boolean;    // slightly smaller body text for the longest pages
+  roomy?: boolean;    // larger text for the shortest pages, so the card isn't left half-empty
 }
-const { bg, photoTop = false, tight = false } = Astro.props;
+const { bg, photoTop = false, tight = false, roomy = false } = Astro.props;
 const photo = `/assets/img/gentle-sleep-reset/${bg.photo}.jpg`;
 const split = photoTop ? '6.4in' : '4.6in';
 ---
-<article class={`sheet g${tight ? ' tight' : ''}`}>
+<article class={`sheet g${tight ? ' tight' : ''}${roomy ? ' roomy' : ''}`}>
   {photoTop ? (
     <>
       <div class="photo" style={`top:0;height:${split};background-image:url(${photo});background-position:center 35%;`}></div>
