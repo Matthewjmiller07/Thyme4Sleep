@@ -216,7 +216,7 @@ export function renderEmailHtml(e: Email, opts: { preview?: boolean } = {}): str
 <tr><td align="center" style="padding:28px 28px 8px;"><img src="${opts.preview ? '' : SITE}/assets/img/logo.png" width="84" alt="Thyme4Sleep" style="display:block;border:0;"></td></tr>
 <tr><td style="padding:16px 32px 8px;">${paras}<table role="presentation" cellpadding="0" cellspacing="0">${buttons}</table></td></tr>
 <tr><td style="padding:24px 32px 28px;border-top:1px solid #E6DAD0;font-family:Arial,sans-serif;font-size:12px;line-height:1.5;color:#897E77;">
-Thyme4Sleep LLC · Gentle pediatric sleep coaching by Georgia Miller<br>General education only, not medical advice.<br>
+Thyme4Sleep LLC · Gentle pediatric sleep coaching by Georgia Miller<br>907 Rollingwood Road, Highland Park, Illinois 60035<br>General education only, not medical advice.<br>
 <a href="${unsub}" style="color:#897E77;">Unsubscribe</a></td></tr>
 </table></td></tr></table></body></html>`;
 }

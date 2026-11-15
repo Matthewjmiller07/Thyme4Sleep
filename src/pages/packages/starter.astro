@@ -1,11 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { localPricing } from '../../lib/currency';
+export const prerender = false;
+
+// Prices in the visitor's currency at the day's exchange rate; checkout charges the same
+const { currency, P } = await localPricing(Astro);
 
 const pageTitle = 'Starter Sleep Package - Thyme4Sleep';
 const pageDescription = 'Get started with a personalized sleep plan for your child. Ideal for families who need a plan and some guidance to get on track.';
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} referral={P('referral')}>
   <!-- Hero Section -->
   <section class="relative py-20 bg-brandCream overflow-hidden">
     <div class="container mx-auto px-6 relative z-10">
@@ -73,7 +78,7 @@ const pageDescription = 'Get started with a personalized sleep plan for your chi
                 <div class="mb-4">
                   <span class="text-sm font-semibold text-brandMink uppercase tracking-wider">Single Child</span>
                   <div class="flex items-baseline gap-2 mt-2">
-                    <span class="text-3xl font-bold text-brandChar">$249</span>
+                    <span class="text-3xl font-bold text-brandChar">{P('starter-1')}</span>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-1 rounded-full">Promo</span>
                   </div>
                 </div>
@@ -93,7 +98,7 @@ const pageDescription = 'Get started with a personalized sleep plan for your chi
                 <div class="mb-4">
                   <span class="text-sm font-semibold text-brandMink uppercase tracking-wider">Multiple Children</span>
                   <div class="flex items-baseline gap-2 mt-2">
-                    <span class="text-3xl font-bold text-brandChar">$449</span>
+                    <span class="text-3xl font-bold text-brandChar">{P('starter-2')}</span>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-1 rounded-full">Promo</span>
                   </div>
                 </div>
@@ -120,5 +125,6 @@ const pageDescription = 'Get started with a personalized sleep plan for your chi
       </div>
     </div>
   </section>
+  <script is:inline define:vars={{ currency }}>window.T4S_CURRENCY = currency;</script>
   <script is:inline src="/scripts/checkout.js"></script>
 </Layout>

@@ -1,11 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { CURRENCIES, CURRENCY_INFO } from '../data/prices';
+import { localPricing } from '../lib/currency';
+export const prerender = false;
+
+// Prices follow the visitor's country (or the currency they pick below), converted from USD at
+// the day's exchange rate and rounded up; checkout charges the same.
+const { currency, P } = await localPricing(Astro);
 
 const pageTitle = 'Pricing & Packages - Thyme4Sleep';
 const pageDescription = 'Explore our sleep coaching packages and find the perfect fit for your family\'s needs.';
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} referral={P('referral')}>
   <!-- Hero Section -->
   <section class="relative py-24 bg-brandCream overflow-hidden">
     <!-- Decorative elements -->
@@ -42,6 +49,14 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
           </svg> 14-day satisfaction guarantee
         </div>
+        <p class="mt-4 text-sm text-gray-500" id="currency-switch">
+          Prices in {CURRENCY_INFO[currency].label} · Show prices in:
+          {CURRENCIES.map((c) => (
+            c === currency
+              ? <strong class="mx-1 text-brandChar">{CURRENCY_INFO[c].symbol}</strong>
+              : <a class="mx-1 underline hover:text-brandChar" href={`?currency=${c}#currency-switch`} rel="nofollow">{CURRENCY_INFO[c].symbol}</a>
+          ))}
+        </p>
         <!-- Discount Code Input -->
         
       </div>
@@ -80,7 +95,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="border-r border-gray-200 pr-4">
                 <div class="text-sm text-brandMink mb-1">Single Child</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$249</span>
+                  <span class="text-xl font-bold text-brandChar">{P('starter-1')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a
@@ -95,7 +110,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$449</span>
+                  <span class="text-xl font-bold text-brandChar">{P('starter-2')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a
@@ -177,7 +192,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="border-r border-gray-200 pr-4">
                 <div class="text-sm text-brandMink mb-1">Single Child</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$549</span>
+                  <span class="text-xl font-bold text-brandChar">{P('standard-1')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a
@@ -192,7 +207,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$749</span>
+                  <span class="text-xl font-bold text-brandChar">{P('standard-2')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a
@@ -243,10 +258,10 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <p class="text-xs text-brandMink mt-1 mb-3">Extend your Standard package with extra Mon–Fri check-ins.</p>
               <select id="standard-addon-card" data-addon-group="standard" class="js-addon-select w-full border border-brandCream rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60 bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
                 <option value="">Temporarily Unavailable</option>
-                <option value="support-1w" disabled>1 Week Additional Support — $100</option>
-                <option value="support-2w" disabled>2 Weeks Additional Support — $200</option>
-                <option value="support-3w" disabled>3 Weeks Additional Support — $300</option>
-                <option value="support-4w" disabled>4 Weeks Additional Support — $400</option>
+                <option value="support-1w" data-price={P('support-1w')} disabled>1 Week Additional Support — {P('support-1w')}</option>
+                <option value="support-2w" data-price={P('support-2w')} disabled>2 Weeks Additional Support — {P('support-2w')}</option>
+                <option value="support-3w" data-price={P('support-3w')} disabled>3 Weeks Additional Support — {P('support-3w')}</option>
+                <option value="support-4w" data-price={P('support-4w')} disabled>4 Weeks Additional Support — {P('support-4w')}</option>
               </select>
               
               <!-- Add-on only purchase option -->
@@ -300,7 +315,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="border-r border-gray-200 pr-4">
                 <div class="text-sm text-brandMink mb-1">Single Child</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$1,229</span>
+                  <span class="text-xl font-bold text-brandChar">{P('specialized-1')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a 
@@ -316,7 +331,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <div class="pl-4">
                 <div class="text-sm text-brandMink mb-1">Multiple</div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-xl font-bold text-brandChar">$1,429</span>
+                  <span class="text-xl font-bold text-brandChar">{P('specialized-2')}</span>
                   <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full">Promo</span>
                 </div>
                 <a 
@@ -380,10 +395,10 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <p class="text-xs text-brandMink mt-1 mb-3">Mon–Fri message support extension.</p>
               <select id="sen-addon-card" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60 bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
                 <option value="">Temporarily Unavailable</option>
-                <option value="support-1w" disabled>1 Week Additional Support — $100</option>
-                <option value="support-2w" disabled>2 Weeks Additional Support — $200</option>
-                <option value="support-3w" disabled>3 Weeks Additional Support — $300</option>
-                <option value="support-4w" disabled>4 Weeks Additional Support — $400</option>
+                <option value="support-1w" data-price={P('support-1w')} disabled>1 Week Additional Support — {P('support-1w')}</option>
+                <option value="support-2w" data-price={P('support-2w')} disabled>2 Weeks Additional Support — {P('support-2w')}</option>
+                <option value="support-3w" data-price={P('support-3w')} disabled>3 Weeks Additional Support — {P('support-3w')}</option>
+                <option value="support-4w" data-price={P('support-4w')} disabled>4 Weeks Additional Support — {P('support-4w')}</option>
               </select>
               
               <!-- Add-on only purchase option -->
@@ -477,7 +492,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
   <td class="px-4 py-4 whitespace-nowrap text-center align-top">
     <div class="flex flex-col items-center h-full">
       <div class="flex-grow flex flex-col justify-center">
-        <div class="text-2xl font-bold text-brandChar">$249</div>
+        <div class="text-2xl font-bold text-brandChar">{P('starter-1')}</div>
         <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
       </div>
       <a href="#" data-package="starter-1" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
@@ -488,7 +503,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
   <td class="px-4 py-4 whitespace-nowrap text-center align-top">
     <div class="flex flex-col items-center h-full">
       <div class="flex-grow flex flex-col justify-center">
-        <div class="text-2xl font-bold text-brandChar">$449</div>
+        <div class="text-2xl font-bold text-brandChar">{P('starter-2')}</div>
         <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
       </div>
       <a href="#" data-package="starter-2" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
@@ -552,10 +567,10 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <p class="text-[0.7rem] text-brandMink mb-2">Mon–Fri message support extension.</p>
                   <select id="standard-addon-table" data-addon-group="standard" class="js-addon-select w-full border border-brandCream rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60 bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
                     <option value="">Temporarily Unavailable</option>
-                    <option value="support-1w" disabled>1 Week Additional Support — $100</option>
-                    <option value="support-2w" disabled>2 Weeks Additional Support — $200</option>
-                    <option value="support-3w" disabled>3 Weeks Additional Support — $300</option>
-                    <option value="support-4w" disabled>4 Weeks Additional Support — $400</option>
+                    <option value="support-1w" data-price={P('support-1w')} disabled>1 Week Additional Support — {P('support-1w')}</option>
+                    <option value="support-2w" data-price={P('support-2w')} disabled>2 Weeks Additional Support — {P('support-2w')}</option>
+                    <option value="support-3w" data-price={P('support-3w')} disabled>3 Weeks Additional Support — {P('support-3w')}</option>
+                    <option value="support-4w" data-price={P('support-4w')} disabled>4 Weeks Additional Support — {P('support-4w')}</option>
                   </select>
                   
                   <!-- Add-on only purchase option -->
@@ -570,7 +585,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
                   <div class="flex-grow flex flex-col justify-center">
-                    <div class="text-2xl font-bold text-brandChar">$549</div>
+                    <div class="text-2xl font-bold text-brandChar">{P('standard-1')}</div>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
                     <a href="#" data-package="standard-1" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
                       Temporarily Unavailable
@@ -581,7 +596,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
                   <div class="flex-grow flex flex-col justify-center">
-                    <div class="text-2xl font-bold text-brandChar">$749</div>
+                    <div class="text-2xl font-bold text-brandChar">{P('standard-2')}</div>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
                     <a href="#" data-package="standard-2" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
                       Temporarily Unavailable
@@ -655,10 +670,10 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   <p class="text-[0.7rem] text-brandMink mb-2">Mon–Fri message support extension.</p>
                   <select id="sen-addon-table" data-addon-group="sen" class="js-addon-select w-full border border-brandCream rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brandPeach/60 bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
                     <option value="">Temporarily Unavailable</option>
-                    <option value="support-1w" disabled>1 Week Additional Support — $100</option>
-                    <option value="support-2w" disabled>2 Weeks Additional Support — $200</option>
-                    <option value="support-3w" disabled>3 Weeks Additional Support — $300</option>
-                    <option value="support-4w" disabled>4 Weeks Additional Support — $400</option>
+                    <option value="support-1w" data-price={P('support-1w')} disabled>1 Week Additional Support — {P('support-1w')}</option>
+                    <option value="support-2w" data-price={P('support-2w')} disabled>2 Weeks Additional Support — {P('support-2w')}</option>
+                    <option value="support-3w" data-price={P('support-3w')} disabled>3 Weeks Additional Support — {P('support-3w')}</option>
+                    <option value="support-4w" data-price={P('support-4w')} disabled>4 Weeks Additional Support — {P('support-4w')}</option>
                   </select>
                   
                   <!-- Add-on only purchase option -->
@@ -673,7 +688,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
                   <div class="flex-grow flex flex-col justify-center">
-                    <div class="text-2xl font-bold text-brandChar">$1,229</div>
+                    <div class="text-2xl font-bold text-brandChar">{P('specialized-1')}</div>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
                   </div>
                   <a href="#" data-package="specialized-1" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
@@ -684,7 +699,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               <td class="px-4 py-4 whitespace-nowrap text-center align-top">
                 <div class="flex flex-col items-center h-full">
                   <div class="flex-grow flex flex-col justify-center">
-                    <div class="text-2xl font-bold text-brandChar">$1,429</div>
+                    <div class="text-2xl font-bold text-brandChar">{P('specialized-2')}</div>
                     <span class="text-xs bg-brandMint/20 text-brandChar px-2 py-0.5 rounded-full mt-1">Promo</span>
                   </div>
                   <a href="#" data-package="specialized-2" class="js-checkout mt-4 block w-full bg-gray-300 text-gray-500 text-center py-2 px-4 rounded-full font-bold cursor-not-allowed" aria-disabled="true">
@@ -722,7 +737,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 </div>
                 <p class="text-gray-600 mb-6">Get expert advice without a full package. Perfect for singular questions or concerns.</p>
                 <div class="flex items-center mb-4">
-                  <span class="text-3xl font-bold text-brandChar">$99</span>
+                  <span class="text-3xl font-bold text-brandChar">{P('troubleshooting')}</span>
                 </div>
                 <div class="text-sm text-gray-500 mb-6">Excludes sleep plan and ongoing support, which packages provide</div>
                 <div class="mt-auto pt-4">
@@ -759,7 +774,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                 </div>
                 <p class="text-gray-600 mb-6">Need help outside of regular business hours? We're here when you need us most.</p>
                 <div class="flex items-center mb-10">
-                  <span class="text-3xl font-bold text-brandChar">$199</span>
+                  <span class="text-3xl font-bold text-brandChar">{P('weekend')}</span>
                 </div>
                 <div class="mt-auto pt-4">
                   <a href="#" data-package="weekend"
@@ -777,7 +792,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
           <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-brandChar mb-6">FSA/HSA Eligible</h2>
             <p class="text-lg text-brandMink mb-6">
-              Love your experience with Thyme4Sleep? Refer a friend and you'll both receive $100 off the next service!
+              Love your experience with Thyme4Sleep? Refer a friend and you'll both receive {P('referral')} off the next service!
             </p>
             <div class="flex flex-col md:flex-row justify-center items-center gap-6">
               <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/2">
@@ -793,7 +808,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
                   </li>
                   <li class="flex items-start">
                     <span class="bg-brandPeach text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-2">3</span>
-                    <span>You both receive a $100 credit towards the next service!</span>
+                    <span>You both receive a {P('referral')} credit towards the next service!</span>
                   </li>
                 </ol>
               </div>
@@ -855,7 +870,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
         
         <div class="relative z-10">
           <div class="inline-block bg-brandPeach/30 text-brandTaupe text-sm font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
-            Digital Product • $37
+            Digital Product • {P('reset-to-rest')}
           </div>
           
           <h2 class="text-3xl md:text-4xl font-light text-brandChar mb-4">
@@ -914,7 +929,7 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
               href="/reset-preview"
               class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-brandSage hover:bg-brandMink text-white rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
             >
-              Get Instant Access - $37
+              Get Instant Access - {P('reset-to-rest')}
               <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -978,5 +993,6 @@ const pageDescription = 'Explore our sleep coaching packages and find the perfec
   </section>
 
   <!-- Stripe Checkout Script -->
+  <script is:inline define:vars={{ currency }}>window.T4S_CURRENCY = currency;</script>
   <script is:inline src="/scripts/checkout.js"></script>
 </Layout>

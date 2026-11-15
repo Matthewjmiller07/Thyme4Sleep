@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
+import { priceOf, isCurrency, type Currency } from '../../data/prices';
 
 // This endpoint must run on the server (POST not supported for prerendered routes)
 export const prerender = false;
@@ -76,7 +77,13 @@ export const POST: APIRoute = async ({ request, url }) => {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { packageId, promoCode, addOnId } = body as { packageId?: string; promoCode?: string; addOnId?: string };
+    const { packageId, promoCode, addOnId, currency: asked } = body as { packageId?: string; promoCode?: string; addOnId?: string; currency?: string };
+    // The currency the pricing page showed. Amounts always come from src/data/prices.ts, never the browser.
+    const currency: Currency = isCurrency(asked) ? asked : 'usd';
+    const amountFor = (id: string, fallbackCents: number) => {
+      const units = priceOf(id, currency);
+      return units === undefined ? (currency === 'usd' ? fallbackCents : null) : Math.round(units * 100);
+    };
 
     // Allow add-on-only purchases for existing customers
     const isAddOnOnly = !packageId && addOnId;
@@ -144,11 +151,20 @@ export const POST: APIRoute = async ({ request, url }) => {
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
     // Add package line item if this isn't an add-on-only purchase
+    const pkgAmount = pkg && packageId ? amountFor(packageId, pkg.amountCents) : null;
+    const addOnAmount = addOn && addOnId ? amountFor(addOnId, addOn.amountCents) : null;
+    if ((pkg && pkgAmount === null) || (addOn && addOnAmount === null)) {
+      return new Response(JSON.stringify({ error: `This item isn't available in ${currency.toUpperCase()}.` }), {
+        status: 400,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
+
     if (pkg) {
       lineItems.push({
         price_data: {
-          currency: 'usd',
-          unit_amount: pkg.amountCents,
+          currency,
+          unit_amount: pkgAmount!,
           product_data: { name: pkg.name },
         },
         quantity: 1,
@@ -158,15 +174,15 @@ export const POST: APIRoute = async ({ request, url }) => {
     if (addOn) {
       lineItems.push({
         price_data: {
-          currency: 'usd',
-          unit_amount: addOn.amountCents,
+          currency,
+          unit_amount: addOnAmount!,
           product_data: { name: addOn.name },
         },
         quantity: 1,
       });
     }
 
-    const metadata: Record<string, string> = {};
+    const metadata: Record<string, string> = { currency };
     if (packageId) {
       metadata.packageId = packageId;
     }
