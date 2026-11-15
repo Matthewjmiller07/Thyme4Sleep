@@ -1,6 +1,5 @@
 import type { AstroCookies } from 'astro';
 import { currencyForCountry, isCurrency, pricer, type Currency } from '../data/prices';
-import { getRates } from './fxRates';
 
 // Picks the currency for a visitor, in this order:
 //   1. ?currency=gbp in the address (the page's currency switcher), remembered in a cookie
@@ -35,12 +34,11 @@ export function resolveCurrency(ctx: Ctx): { currency: Currency; country: string
   return { currency: currencyForCountry(country), country, chosen: false };
 }
 
-// Everything a page needs to show localised prices: the visitor's currency, a formatter
-// (P('starter-1') -> "£197") and the rates used. Also stops the page being cached and shared,
-// since it differs by visitor.
+// Everything a page needs to show localised prices: the visitor's currency and a formatter
+// (P('starter-1') -> "£189"). Also stops the page being cached and shared, since it differs
+// by visitor.
 export async function localPricing(ctx: Ctx & { response: ResponseInit & { headers: Headers } }) {
   const { currency } = resolveCurrency(ctx);
-  const { rates } = await getRates();
   ctx.response.headers.set('Cache-Control', 'private, no-store');
-  return { currency, P: pricer(currency, rates), rates };
+  return { currency, P: pricer(currency) };
 }

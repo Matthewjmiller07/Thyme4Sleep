@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { priceOf, isCurrency, type Currency } from '../../data/prices';
-import { getRates } from '../../lib/fxRates';
 
 // This endpoint must run on the server (POST not supported for prerendered routes)
 export const prerender = false;
@@ -81,9 +80,8 @@ export const POST: APIRoute = async ({ request, url }) => {
     const { packageId, promoCode, addOnId, currency: asked } = body as { packageId?: string; promoCode?: string; addOnId?: string; currency?: string };
     // The currency the pricing page showed. Amounts always come from src/data/prices.ts, never the browser.
     const currency: Currency = isCurrency(asked) ? asked : 'usd';
-    const { rates } = await getRates(); // the same daily rates the page used
     const amountFor = (id: string, fallbackCents: number) => {
-      const units = priceOf(id, currency, rates);
+      const units = priceOf(id, currency);
       return units === undefined ? (currency === 'usd' ? fallbackCents : null) : Math.round(units * 100);
     };
 
