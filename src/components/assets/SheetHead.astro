@@ -1,6 +1,6 @@
 ---
-interface Props { kicker: string; title: string; sub?: string }
-const { kicker, title, sub } = Astro.props;
+interface Props { kicker: string; title: string; sub?: string; logo?: string }
+const { kicker, title, sub, logo = '/assets/img/logo.png' } = Astro.props;
 ---
 <div class="sheet-head">
   <div>
@@ -8,5 +8,5 @@ const { kicker, title, sub } = Astro.props;
     <h1 set:html={title} />
     {sub && <p class="muted" style="font-size:11pt;margin:0;">{sub}</p>}
   </div>
-  <img src="/assets/img/logo.png" alt="Thyme4Sleep" />
+  <img src={logo} alt="Thyme4Sleep" />
 </div>
