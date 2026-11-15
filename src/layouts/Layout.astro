@@ -1,14 +1,19 @@
 ---
 import '../styles/global.css';
 import ReviewComments from '../components/ReviewComments.astro';
+import { priceLabel, type Currency } from '../data/prices';
 
 interface Props {
   title?: string;
   description?: string;
+  // Pages that localise prices (pricing, Reset to Rest) pass the visitor's currency
+  currency?: Currency;
 }
 
 const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
-        description = 'Helping babies and children get the rest they need to thrive with personalized sleep coaching.' } = Astro.props;
+        description = 'Helping babies and children get the rest they need to thrive with personalized sleep coaching.',
+        currency = 'usd' } = Astro.props;
+const referral = priceLabel('referral', currency);
 ---
 
 <!DOCTYPE html>
@@ -96,8 +101,8 @@ const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
                 </div>
               </div>
               <div>
-                <h4 class="font-medium text-brandChar">$100 Referral Bonus</h4>
-                <p class="text-sm text-gray-600">Refer a friend and you both receive $100 off your next service!</p>
+                <h4 class="font-medium text-brandChar">{referral} Referral Bonus</h4>
+                <p class="text-sm text-gray-600">Refer a friend and you both receive {referral} off your next service!</p>
               </div>
             </div>
           </div>

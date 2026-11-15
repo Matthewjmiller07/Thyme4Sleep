@@ -27,12 +27,12 @@
     if (value) {
       const option = document.querySelector(`option[value="${value}"]`);
       if (option) {
-        const text = option.textContent;
-        const match = text.match(/(\d+) Weeks? Additional Support — \$(\d+)/);
-        if (match) {
-          const weeks = match[1];
-          const price = match[2];
-          buttonText = `Purchase ${weeks} Week${weeks > 1 ? 's' : ''} Add-On <strong>Only</strong> — $${price}`;
+        // The price comes from the option's data-price (already in the page's currency),
+        // falling back to the text after the dash on pages that don't set it.
+        const weeks = (value.match(/support-(\d+)w/) || [])[1];
+        const price = option.dataset.price || (option.textContent.split('— ')[1] || '').trim();
+        if (weeks && price) {
+          buttonText = `Purchase ${weeks} Week${weeks > 1 ? 's' : ''} Add-On <strong>Only</strong> — ${price}`;
           addonId = value;
         }
       }
@@ -72,7 +72,8 @@
     const res = await fetch('/api/create-checkout-session', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ packageId, addOnId: addOnId || undefined })
+      // Pages that show localised prices set window.T4S_CURRENCY; everything else is charged in USD
+      body: JSON.stringify({ packageId, addOnId: addOnId || undefined, currency: window.T4S_CURRENCY || undefined })
     });
     if (!res.ok) {
       const text = await res.text().catch(() => '');

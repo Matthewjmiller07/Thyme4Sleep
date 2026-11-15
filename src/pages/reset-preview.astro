@@ -1,11 +1,19 @@
 ---
 import Layout from '../layouts/LayoutNoConsent.astro';
+import { priceLabel } from '../data/prices';
+import { resolveCurrency } from '../lib/currency';
+export const prerender = false;
+
+// Same currency as the pricing page (visitor's country, or the currency they picked)
+const { currency } = resolveCurrency(Astro);
+const price = priceLabel('reset-to-rest', currency);
+Astro.response.headers.set('Cache-Control', 'private, no-store');
 
 const pageTitle = 'Reset to Rest – Complete Sleep Guide & Video | Thyme4Sleep';
-const pageDescription = 'Get the complete Reset to Rest guide with video walkthrough for just $37. Everything you need to transform your little one\'s sleep tonight.';
+const pageDescription = `Get the complete Reset to Rest guide with video walkthrough for just ${price}. Everything you need to transform your little one's sleep tonight.`;
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} currency={currency}>
   <script>
     // Handle Stripe checkout
     async function handlePurchase() {
@@ -19,7 +27,7 @@ const pageDescription = 'Get the complete Reset to Rest guide with video walkthr
         const response = await fetch('/api/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ packageId: 'reset-to-rest' })
+          body: JSON.stringify({ packageId: 'reset-to-rest', currency: button.dataset.currency })
         });
         
         const data = await response.json();
@@ -33,7 +41,7 @@ const pageDescription = 'Get the complete Reset to Rest guide with video walkthr
         console.error('Checkout error:', error);
         alert('Something went wrong. Please try again or contact georgia@thyme4sleep.com');
         button.disabled = false;
-        button.textContent = 'Get Instant Access - $37';
+        button.textContent = `Get Instant Access - ${button.dataset.price}`;
       }
     }
     
@@ -156,7 +164,7 @@ const pageDescription = 'Get the complete Reset to Rest guide with video walkthr
           <div class="h-1 w-16 bg-brandPeach mx-auto mb-6"></div>
           
           <div class="mb-8">
-            <div class="text-5xl font-bold mb-2">$37</div>
+            <div class="text-5xl font-bold mb-2">{price}</div>
             <p class="text-white/90">One-time payment • Lifetime access</p>
           </div>
 
@@ -189,9 +197,11 @@ const pageDescription = 'Get the complete Reset to Rest guide with video walkthr
 
           <button
             id="purchase-btn"
+            data-currency={currency}
+            data-price={price}
             class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold bg-brandPeach hover:bg-brandPeach/90 text-brandChar rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl"
           >
-            Get Instant Access - $37
+            Get Instant Access - {price}
             <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
