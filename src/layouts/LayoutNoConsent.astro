@@ -1,19 +1,17 @@
 ---
 import '../styles/global.css';
 import ReviewComments from '../components/ReviewComments.astro';
-import { priceLabel, type Currency } from '../data/prices';
 
 interface Props {
   title?: string;
   description?: string;
-  // Pages that localise prices (pricing, Reset to Rest) pass the visitor's currency
-  currency?: Currency;
+  // Pages that localise prices pass the referral credit in the visitor's currency
+  referral?: string;
 }
 
 const { title = 'Thyme4Sleep - Pediatric Sleep Coaching',
         description = 'Helping babies and children get the rest they need to thrive with personalized sleep coaching.',
-        currency = 'usd' } = Astro.props;
-const referral = priceLabel('referral', currency);
+        referral = '$100' } = Astro.props;
 ---
 
 <!DOCTYPE html>

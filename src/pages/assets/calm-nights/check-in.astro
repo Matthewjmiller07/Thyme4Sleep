@@ -5,7 +5,9 @@
 // this page shows the matching next step and records the answer in GA4 for the product review.
 import Layout from '../../../layouts/AssetsLayout.astro';
 import { CHECKPOINTS, SUPPORT_SIGNALS, SPECIALISED_URL, ONE_TO_ONE_OPEN, FREE_CALL_URL, WAITLIST_URL } from '../../../data/calmNights';
+import { localPricing } from '../../../lib/currency';
 export const prerender = false;
+const { P } = await localPricing(Astro);
 
 const night = Number(Astro.url.searchParams.get('n')) || 0;
 const status = ['on-track', 'adjust', 'support', 'guidance'].includes(Astro.url.searchParams.get('s') || '') ? Astro.url.searchParams.get('s')! : 'on-track';
@@ -57,13 +59,13 @@ const showCoaching = status === 'support' || status === 'guidance';
         )}
         <div class="grid g3">
           <div class="card lift" style="display:flex;flex-direction:column;">
-            <span class="pill core">From $249</span>
+            <span class="pill core">From {P('starter-1')}</span>
             <h3 style="margin-top:12px;">Starter</h3>
             <p class="small muted" style="flex:1;">A sleep plan written for your child from a detailed intake form — including naps, daily schedule and environment. Best if you’re confident following a plan once it fits your child.</p>
             <a class="btn btn-ghost btn-sm" href="/packages/starter?from=calm-nights">See Starter</a>
           </div>
           <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
-            <span class="pill core">From $549</span>
+            <span class="pill core">From {P('standard-1')}</span>
             <h3 style="margin-top:12px;">Standard</h3>
             <p class="small muted" style="flex:1;">Your personalised plan, a 60-minute consultation and two weeks of email and text support while you put it into practice. Best if you’ve tried on your own and want Georgia beside you.</p>
             <a class="btn btn-dark btn-sm" href="/packages/standard?from=calm-nights">See Standard</a>

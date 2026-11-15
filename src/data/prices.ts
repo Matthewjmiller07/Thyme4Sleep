@@ -1,10 +1,9 @@
-// Localised prices for thyme4sleep.com/pricing and checkout.
+// Localised prices across the site and checkout.
 //
-// One table, used by both the pricing page and /api/create-checkout-session, so what a
-// family sees is exactly what Stripe charges. Amounts are in whole units of each currency.
-// USD figures are the existing prices. GBP / EUR / ILS figures are proposals for Georgia to
-// approve: converted at roughly £0.79, €0.92 and ₪3.70 to the dollar, then rounded to clean
-// price points. Change any figure here and both the page and checkout follow.
+// Every price is set once, in US dollars, below. Other currencies are worked out from the
+// day's exchange rate (src/lib/fxRates.ts) and rounded UP to the next whole pound, euro or
+// shekel, so a family never pays less than the dollar price at that day's rate.
+// Pages and checkout use the same functions, so what a family sees is what Stripe charges.
 
 export type Currency = 'usd' | 'gbp' | 'eur' | 'ils';
 export const CURRENCIES: Currency[] = ['usd', 'gbp', 'eur', 'ils'];
@@ -16,47 +15,58 @@ export const CURRENCY_INFO: Record<Currency, { symbol: string; label: string }> 
   ils: { symbol: '₪', label: 'Israeli shekels (₪)' },
 };
 
-type Row = Record<Currency, number>;
-export const PRICES: Record<string, Row> = {
+// How many of each currency one US dollar buys
+export type Rates = Record<Exclude<Currency, 'usd'>, number>;
+
+export const USD_PRICES: Record<string, number> = {
   // 1:1 packages
-  'starter-1':          { usd: 249,  gbp: 199,  eur: 229,  ils: 899 },
-  'starter-2':          { usd: 449,  gbp: 359,  eur: 409,  ils: 1649 },
-  'standard-1':         { usd: 549,  gbp: 439,  eur: 499,  ils: 1999 },
-  'standard-2':         { usd: 749,  gbp: 599,  eur: 689,  ils: 2749 },
-  'specialized-1':      { usd: 1229, gbp: 979,  eur: 1129, ils: 4499 },
-  'specialized-2':      { usd: 1429, gbp: 1139, eur: 1309, ils: 5249 },
+  'starter-1': 249,
+  'starter-2': 449,
+  'standard-1': 549,
+  'standard-2': 749,
+  'specialized-1': 1229,
+  'specialized-2': 1429,
   // À la carte calls
-  troubleshooting:      { usd: 99,   gbp: 79,   eur: 89,   ils: 359 },
-  weekend:              { usd: 199,  gbp: 159,  eur: 185,  ils: 729 },
+  troubleshooting: 99,
+  weekend: 199,
   // Digital products
-  'reset-to-rest':      { usd: 37,   gbp: 29,   eur: 35,   ils: 129 },
-  'calm-nights':        { usd: 97,   gbp: 75,   eur: 89,   ils: 349 },
-  'calm-nights-bundle': { usd: 117,  gbp: 89,   eur: 105,  ils: 429 },
+  'reset-to-rest': 37,
+  'calm-nights': 97,
+  'calm-nights-bundle': 117,
   // Support add-ons (Mon–Fri check-ins)
-  'support-1w':         { usd: 100,  gbp: 80,   eur: 90,   ils: 370 },
-  'support-2w':         { usd: 200,  gbp: 160,  eur: 180,  ils: 740 },
-  'support-3w':         { usd: 300,  gbp: 240,  eur: 270,  ils: 1110 },
-  'support-4w':         { usd: 400,  gbp: 320,  eur: 360,  ils: 1480 },
-  // Display only: the referral credit each family receives
-  referral:             { usd: 100,  gbp: 80,   eur: 90,   ils: 370 },
+  'support-1w': 100,
+  'support-2w': 200,
+  'support-3w': 300,
+  'support-4w': 400,
+  // Display only
+  referral: 100, // the credit each family receives
+  'bundle-separately': 134, // Reset to Rest + Calm Nights bought separately (the bundle's "was" price)
 };
 
 // Legacy package ids still accepted by checkout
 const ALIASES: Record<string, string> = { starter: 'starter-1', standard: 'standard-1', specialized: 'specialized-1' };
 
-export function priceOf(id: string, cur: Currency): number | undefined {
-  return PRICES[ALIASES[id] || id]?.[cur];
+// Whole units of `cur` for a product, or undefined if the product is unknown
+export function priceOf(id: string, cur: Currency, rates: Rates): number | undefined {
+  const usd = USD_PRICES[ALIASES[id] || id];
+  if (usd === undefined) return undefined;
+  if (cur === 'usd') return usd;
+  // Round to 6 decimals first so float noise (e.g. 196.00000001) never bumps a price up a unit
+  return Math.ceil(Number((usd * rates[cur]).toFixed(6)));
 }
 
-// "$1,229", "£199", "€1,129", "₪4,499"
+// "$1,229", "£972", "€1,056", "₪4,474"
 export function formatPrice(amount: number, cur: Currency): string {
   return CURRENCY_INFO[cur].symbol + amount.toLocaleString('en-US');
 }
 
-export function priceLabel(id: string, cur: Currency): string {
-  const amount = priceOf(id, cur);
-  if (amount === undefined) throw new Error(`No ${cur} price for ${id}`);
-  return formatPrice(amount, cur);
+// A formatter bound to one visitor's currency and the day's rates, for use in pages
+export function pricer(cur: Currency, rates: Rates) {
+  return (id: string): string => {
+    const amount = priceOf(id, cur, rates);
+    if (amount === undefined) throw new Error(`No price for ${id}`);
+    return formatPrice(amount, cur);
+  };
 }
 
 export function isCurrency(v: unknown): v is Currency {

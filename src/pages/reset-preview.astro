@@ -1,19 +1,17 @@
 ---
 import Layout from '../layouts/LayoutNoConsent.astro';
-import { priceLabel } from '../data/prices';
-import { resolveCurrency } from '../lib/currency';
+import { localPricing } from '../lib/currency';
 export const prerender = false;
 
 // Same currency as the pricing page (visitor's country, or the currency they picked)
-const { currency } = resolveCurrency(Astro);
-const price = priceLabel('reset-to-rest', currency);
-Astro.response.headers.set('Cache-Control', 'private, no-store');
+const { currency, P } = await localPricing(Astro);
+const price = P('reset-to-rest');
 
 const pageTitle = 'Reset to Rest – Complete Sleep Guide & Video | Thyme4Sleep';
 const pageDescription = `Get the complete Reset to Rest guide with video walkthrough for just ${price}. Everything you need to transform your little one's sleep tonight.`;
 ---
 
-<Layout title={pageTitle} description={pageDescription} currency={currency}>
+<Layout title={pageTitle} description={pageDescription} referral={P('referral')}>
   <script>
     // Handle Stripe checkout
     async function handlePurchase() {

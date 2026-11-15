@@ -1,20 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { priceLabel, CURRENCIES, CURRENCY_INFO } from '../data/prices';
-import { resolveCurrency } from '../lib/currency';
+import { CURRENCIES, CURRENCY_INFO } from '../data/prices';
+import { localPricing } from '../lib/currency';
 export const prerender = false;
 
-// Prices follow the visitor's country (or the currency they pick below); checkout charges the same.
-const { currency } = resolveCurrency(Astro);
-const P = (id: string) => priceLabel(id, currency);
-// The page differs by visitor, so it must never be cached and shared
-Astro.response.headers.set('Cache-Control', 'private, no-store');
+// Prices follow the visitor's country (or the currency they pick below), converted from USD at
+// the day's exchange rate and rounded up; checkout charges the same.
+const { currency, P } = await localPricing(Astro);
 
 const pageTitle = 'Pricing & Packages - Thyme4Sleep';
 const pageDescription = 'Explore our sleep coaching packages and find the perfect fit for your family\'s needs.';
 ---
 
-<Layout title={pageTitle} description={pageDescription} currency={currency}>
+<Layout title={pageTitle} description={pageDescription} referral={P('referral')}>
   <!-- Hero Section -->
   <section class="relative py-24 bg-brandCream overflow-hidden">
     <!-- Decorative elements -->

@@ -2,7 +2,6 @@
 // and the signals that a family needs personalised support rather than a self-guided plan.
 // Used by the sales page, the plan, the workbook and the email check-in page so they never drift apart.
 
-export const PRICE = '$97';
 
 // The six-step pathway every family follows, in order.
 export const PATHWAY = [
@@ -36,7 +35,8 @@ export const NOT_INCLUDED = [
 // The product ladder, so customers can see why each option exists.
 export const COMPARE = {
   cols: ['From Reset to Rest', 'Calm Nights Method', 'Starter 1:1', 'Standard 1:1'],
-  prices: ['$37', '$97', '$249', '$549'],
+  // Product ids, shown in the visitor's currency; the 1:1 columns read "From …"
+  priceIds: ['reset-to-rest', 'calm-nights', 'starter-1', 'standard-1'],
   rows: [
     ['Best for', 'Bedtime is fine; you want fewer night wakings without changing how your child falls asleep', 'Your child needs a feed, rocking or you to fall asleep, and you’re ready to change that over two weeks', 'You want a plan written for your child, and you’re confident following it yourself', 'You want a plan for your child plus Georgia beside you while you follow it'],
     ['What it changes', 'One night-time support, reduced gradually', 'How your child falls asleep — at bedtime, then overnight and early morning', 'Whatever your child’s plan needs, including naps and schedule', 'Whatever your child’s plan needs, including naps and schedule'],
