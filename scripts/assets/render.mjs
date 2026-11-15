@@ -79,4 +79,15 @@ if (previewKey) {
   console.log('skip Calm Nights PDFs (set ASSETS_PREVIEW_KEY to render them)');
 }
 
+// The free Gentle Sleep Reset guide: a review copy. Once approved, copy it over
+// public/essential-checklist.pdf (the file the sign-up page and emails link to).
+await mkdir(resolve(root, 'deliverables/gentle-sleep-reset'), { recursive: true });
+await page.goto(`${base}/assets/gentle-sleep-reset-guide`, { waitUntil: 'networkidle' });
+await page.addStyleTag({ content: HIDE_DEV });
+await page.evaluate(() => document.fonts.ready);
+await page.emulateMedia({ media: 'print' });
+await page.pdf({ path: resolve(root, 'deliverables/gentle-sleep-reset/gentle-sleep-reset.pdf'), printBackground: true, preferCSSPageSize: true });
+await page.emulateMedia({ media: 'screen' });
+console.log('pdf deliverables/gentle-sleep-reset/gentle-sleep-reset.pdf');
+
 await browser.close();

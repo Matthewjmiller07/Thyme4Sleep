@@ -1,0 +1,224 @@
+---
+// The Gentle Sleep Reset (free lead magnet), rebuilt from Georgia's Canva design with the same
+// photos, colours, type and wording, laid out on a consistent grid so every page is balanced.
+// Rendered to deliverables/gentle-sleep-reset/ for review by scripts/assets/render.mjs; once
+// approved it replaces public/essential-checklist.pdf (the file the sign-up page and emails link to).
+import Layout from '../../layouts/AssetsLayout.astro';
+import PrintBar from '../../components/assets/PrintBar.astro';
+import Page from '../../components/assets/GsrPage.astro';
+import GsrIcon from '../../components/assets/GsrIcon.astro';
+export const prerender = true;
+
+const IMG = '/assets/img/gentle-sleep-reset/';
+const URL = 'www.thyme4sleep.com';
+
+// [band colour, photo, icon colour] for the standard card pages
+type Bg = { band: string; photo: 'sleeping' | 'teal'; icon: string };
+const peach: Bg = { band: '#F1D4AE', photo: 'sleeping', icon: '#BCC8B9' };
+const sage: Bg = { band: '#BCC8B9', photo: 'teal', icon: '#F1D4AE' };
+
+const isList = ['Gentle and responsive', 'Rooted in child development', 'Focused on emotional safety', 'Designed to create calm within days', 'A stabilising first step before bigger changes'];
+const notList = ['Cry-it-out', 'A rigid schedule', 'A full sleep training plan', 'About ignoring your child’s needs', 'A quick-fix promise'];
+---
+<Layout title="The Gentle Sleep Reset | Thyme4Sleep" description="The Gentle Sleep Reset: how to restore calm and consistency after illness, travel or regressions, without cry-it-out.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" />
+  <style is:global>
+    .sheet.g { --ink: #897E77; --sage: #BCC8B9; --peach: #F1D4AE; --blush: #F3EAE3; --gold: #EBDAA8; padding: 0 !important; font-family: 'Cormorant Garamond', Georgia, serif; color: var(--ink); }
+    .sheet.g * { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .sheet.g .band { position: absolute; left: 0; right: 0; }
+    .sheet.g .photo { position: absolute; left: 0; right: 0; background-size: cover; }
+    .sheet.g .card { position: absolute; left: 1.15in; right: 1.15in; top: 0.95in; bottom: 0.7in; background: #fff; padding: 0.7in 0.55in 0.75in; display: flex; flex-direction: column; justify-content: center; }
+    .sheet.g .icon { position: absolute; left: 50%; top: 0.5in; width: 0.9in; height: 0.9in; margin-left: -0.45in; border-radius: 50%; display: grid; place-items: center; z-index: 2; }
+    .sheet.g .icon svg { width: 0.5in; height: 0.5in; }
+    .sheet.g h2 { font-size: 27pt; font-weight: 600; line-height: 1.12; text-align: center; color: var(--ink); margin: 0 0 0.16in; letter-spacing: 0; }
+    .sheet.g h3 { font-size: 16.5pt; font-weight: 600; text-align: center; color: var(--ink); margin: 0.12in 0 0.06in; }
+    .sheet.g .lead { font-size: 16pt !important; font-weight: 600; text-align: center; line-height: 1.3 !important; margin: 0 0 0.16in; }
+    .sheet.g p, .sheet.g li { font-size: 14pt; line-height: 1.38; margin: 0 0 0.09in; color: var(--ink); }
+    .sheet.g ul { margin: 0 0 0.12in; padding-left: 0.32in; }
+    .sheet.g li { margin-bottom: 0.02in; }
+    .sheet.g .center { text-align: center; }
+    .sheet.g .strong { font-weight: 600; font-size: 14.5pt !important; text-align: center; margin: 0.08in 0 0.12in; }
+    .sheet.g .body { display: flex; flex-direction: column; }
+    .sheet.g .url { position: absolute; left: 0; right: 0; bottom: 0.3in; text-align: center; font-size: 11pt; font-weight: 600; letter-spacing: 0.16em; color: #3F3B38; }
+    .sheet.g.tight p, .sheet.g.tight li { font-size: 12.5pt; line-height: 1.33; margin-bottom: 0.06in; }
+    .sheet.g.tight ul { margin-bottom: 0.08in; }
+    .sheet.g.tight h3 { margin-top: 0.08in; }
+    /* Cover */
+    .sheet.g.cover .card { top: 4.6in; bottom: 1.35in; left: 0.7in; right: 0.7in; padding: 0.7in 0.5in 0.4in; justify-content: center; text-align: center; }
+    .sheet.g.cover .icon { top: 4.15in; }
+    .sheet.g.cover h1 { font-size: 38pt !important; font-weight: 600; color: var(--ink); margin: 0 0 0.22in; line-height: 1.05; }
+    .sheet.g.cover .sub { font-size: 19pt !important; line-height: 1.3 !important; font-weight: 500; margin: 0 0 0.24in; text-align: center; }
+    .sheet.g.cover .tag { font-size: 14.5pt !important; text-align: center; margin: 0; }
+    .sheet.g.cover .url-out { position: absolute; left: 0; right: 0; bottom: 0.5in; text-align: center; font-size: 11pt; font-weight: 600; letter-spacing: 0.16em; color: #3F3B38; }
+    /* Is / isn't page */
+    .sheet.g.list { background: var(--blush); }
+    .sheet.g.list .inner { position: absolute; left: 0.85in; right: 0.85in; top: 0.55in; bottom: 0.5in; display: flex; flex-direction: column; }
+    .sheet.g.list .rule { border-top: 1.5px solid var(--sage); position: relative; }
+    .sheet.g.list .rule .icon { top: -0.42in; width: 0.84in; height: 0.84in; margin-left: -0.42in; }
+    .sheet.g.list h2 { margin-top: 0.55in; }
+    .sheet.g.list h4 { font-size: 17pt; font-weight: 400; text-align: center; margin: 0.1in 0 0.1in; color: var(--ink); }
+    .sheet.g.list .bar { display: flex; align-items: center; justify-content: space-between; height: 0.42in; margin-bottom: 0.11in; padding: 0 0 0 0.18in; }
+    .sheet.g.list .bar span { font-size: 14pt; }
+    .sheet.g.list .bar i { width: 0.42in; height: 0.42in; background: #fff; border-left: 0.06in solid var(--blush); display: block; position: relative; }
+    .sheet.g.list .bar i::after { content: ''; position: absolute; inset: 0.1in; border: 1px solid #E6E2E9; background: #F4F6FB; }
+    .sheet.g.list .note { font-size: 14pt; text-align: center; margin: 0.12in 0.2in 0.16in; }
+  </style>
+
+  <section class="hero no-print">
+    <div class="wrap" style="grid-template-columns:1fr;max-width:860px;text-align:center;">
+      <div>
+        <span class="pill free">Free guide · 9 pages</span>
+        <h1 style="margin-top:18px;">The Gentle Sleep Reset</h1>
+        <hr class="divider" style="margin-inline:auto;" />
+        <p class="lead" style="margin-inline:auto;">How to restore calm and consistency after illness, travel or regressions — without cry-it-out.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-stage">
+    <PrintBar label="Print or save as PDF" />
+
+    <!-- 1 · Cover -->
+    <article class="sheet g cover">
+      <div class="photo" style={`top:0;height:5.6in;background-image:url(${IMG}sleeping.jpg);background-position:center 30%;`}></div>
+      <div class="band" style="top:5.6in;bottom:0;background:#BCC8B9;"></div>
+      <div class="icon" style="background:#EBDAA8;"><GsrIcon /></div>
+      <div class="card">
+        <h1>The Gentle Sleep Reset</h1>
+        <p class="sub">How to Restore Calm &amp; Consistency After Illness, Travel or Regressions — Without Cry-It-Out</p>
+        <p class="tag">A gentle, evidence-informed reset for families who want calmer nights without distress.</p>
+      </div>
+      <div class="url-out">{URL}</div>
+    </article>
+
+    <!-- 2 · You're not alone -->
+    <Page bg={peach}>
+      <h2>If Sleep Has Felt Harder Lately, You’re Not Alone</h2>
+      <div class="body">
+        <p class="lead">If your child’s sleep used to feel manageable — and now feels messy or unpredictable — this guide is for you.</p>
+        <ul><li>Illness.</li><li>Travel.</li><li>A regression.</li><li>A developmental leap.</li></ul>
+        <p>These disruptions often unsettle sleep in ways that linger longer than expected.</p>
+        <p>This doesn’t mean anything is wrong. It means your child’s sleep needs stabilising before it can improve.</p>
+        <p class="strong">Your child’s sleep is unsettled.</p>
+        <p>And unsettled sleep responds best to calm, consistency, and emotional safety.</p>
+        <p>This guide will show you how to restore those foundations gently, without cry-it-out, rigid schedules, or forcing independence before your child is ready.</p>
+      </div>
+    </Page>
+
+    <!-- 3 · Is / isn't -->
+    <article class="sheet g list">
+      <div class="inner">
+        <div class="rule"><div class="icon" style="background:#BCC8B9;"><GsrIcon /></div></div>
+        <h2 style="margin-bottom:0.04in;">What This Reset Is (and Isn’t)</h2>
+        <h4>This guide IS:</h4>
+        {isList.map((t, i) => <div class="bar" style="background:#BCC8B9;"><span>{i + 1}. {t}</span><i></i></div>)}
+        <h4 style="margin-top:0.16in;">This guide is NOT:</h4>
+        {notList.map((t, i) => <div class="bar" style="background:#F1D4AE;"><span>{i + 1}. {t}</span><i></i></div>)}
+        <p class="note">Think of this reset as restoring steady ground beneath your child’s feet, before asking them to take bigger steps.</p>
+        <div class="rule"></div>
+        <div class="url" style="padding-top:0.14in;">{URL}</div>
+      </div>
+    </article>
+
+    <!-- 4 · Step 1 -->
+    <Page bg={peach}>
+      <h2>Step 1: Stabilise Before You Change Anything</h2>
+      <div class="body">
+        <p class="lead">When sleep has unravelled, the instinct is often to “fix” it quickly. But the most effective first step is stabilisation.</p>
+        <p>For 3–5 days, focus only on:</p>
+        <ul>
+          <li>A <b>consistent</b> bedtime window (within 30 minutes)</li>
+          <li>A <b>predictable</b>, calming wind-down routine</li>
+          <li>Responding in the <b>same way</b> overnight</li>
+          <li>Avoiding new strategies or sudden <b>withdrawals</b></li>
+        </ul>
+        <p>Consistency lowers nervous system activation. And a regulated child settles more easily.</p>
+        <h3>Stabilisation Checklist</h3>
+        <ul>
+          <li>Bedtime occurs within the same 30-minute window</li>
+          <li>The pre-bed routine is predictable and unhurried</li>
+          <li>Overnight responses are consistent</li>
+          <li>No new sleep methods introduced</li>
+          <li>Daytime sleep is age-appropriate and not overtired</li>
+        </ul>
+        <p class="center">If you do nothing else, start here. Many families notice calmer bedtimes within days simply by restoring predictability.</p>
+      </div>
+    </Page>
+
+    <!-- 5 · Step 2 -->
+    <Page bg={sage}>
+      <h2>Step 2: Protect Sleep Pressure</h2>
+      <div class="body">
+        <p class="lead">After illness or disruption, sleep pressure is often off balance.</p>
+        <p>Overtiredness can look like:</p>
+        <ul><li>Hyperactivity at bedtime</li><li>Short naps</li><li>Frequent early waking</li></ul>
+        <p>Aim for:</p>
+        <ul><li>Age-appropriate wake windows</li><li>A slightly earlier bedtime for a few nights if needed</li><li>Avoiding very late naps</li></ul>
+        <p class="strong">You are rebuilding rhythm, not enforcing perfection.</p>
+      </div>
+    </Page>
+
+    <!-- 6 · Step 3 -->
+    <Page bg={sage}>
+      <h2>Step 3: Reduce Emotional Intensity at Bedtime</h2>
+      <div class="body">
+        <p class="lead">If bedtime has become tense, focus on lowering the emotional temperature.</p>
+        <p>This might mean:</p>
+        <ul><li>Slowing the routine</li><li>Sitting closer for reassurance</li><li>Using a calm, consistent phrase</li><li>Avoiding long negotiations or sudden exits</li></ul>
+        <p class="strong">Progress here looks like calmer, not necessarily quicker.</p>
+        <p class="strong">Calm precedes consolidation.</p>
+      </div>
+    </Page>
+
+    <!-- 7 · Step 4 -->
+    <Page bg={peach} tight>
+      <h2>Step 4: Hold Steady</h2>
+      <div class="body">
+        <p class="lead">After disruption, consistency is the repair mechanism. Once you choose your approach: Hold it.</p>
+        <p>Avoid:</p>
+        <ul><li>Changing strategies nightly</li><li>Responding differently out of exhaustion</li><li>Introducing new sleep habits mid-reset</li></ul>
+        <p>Children settle when they know what to expect.</p>
+        <h3>What Happens Next?</h3>
+        <p>For some families, this reset is enough to restore settled nights. For others, sleep becomes calmer — but remains fragmented.</p>
+        <p>If you find yourself thinking: “Things feel steadier… but we’re still waking.” That’s often the point where clarity — not more effort — is needed.</p>
+        <p>The next stage is knowing:</p>
+        <ul><li>Why your child is waking</li><li>Whether it’s habit, hunger, or regulation</li><li>What to gently adjust</li><li>What to confidently leave alone</li></ul>
+        <p>If you’d like guided support for that next step, keep an eye on your inbox.</p>
+        <p class="center">For now, focus on calm.<br />You’re doing more right than you think.</p>
+      </div>
+    </Page>
+
+    <!-- 8 · Calmer but broken -->
+    <Page bg={peach} tight>
+      <h2>When Things Feel Calmer… But Nights Are Still Broken</h2>
+      <div class="body">
+        <p>After 3–5 days of stabilising, many families notice:</p>
+        <ul><li>Bedtime feels less charged</li><li>Their child settles more easily</li><li>Night wakes feel shorter or less intense</li><li>There is less panic — for everyone</li></ul>
+        <p class="strong">That is real progress. But sometimes, sleep is still fragmented.</p>
+        <p>You may find yourself thinking:</p>
+        <p style="padding-left:0.2in;font-style:italic;">“Things feel better… but we’re still waking a lot.”<br />“I don’t want to undo this progress.”<br />“I’m not sure what to adjust next.”</p>
+        <p>This is a very common stage. And it’s where many parents either:</p>
+        <ul><li>change too much too quickly</li><li>wait too long and stay stuck</li><li>or begin second-guessing themselves again</li></ul>
+        <h3>Calm is the foundation</h3>
+        <p class="center">Now comes clarity. Restoring stability is step one.</p>
+        <p class="center">Knowing how to gently reduce night wakings — without distress, without cry-it-out, and without undoing your child’s sense of safety — is step two.</p>
+      </div>
+    </Page>
+
+    <!-- 9 · Reset to Rest -->
+    <Page bg={{ band: '#BCC8B9', photo: 'sleeping', icon: '#EBDAA8' }} photoTop tight>
+      <h2>If You’re Ready to Move From Reset → Rest</h2>
+      <div class="body">
+        <p class="lead">If this guide has helped you restore calm, you may be ready for the next stage: a clear, step-by-step plan to reduce night wakings gently — while protecting the emotional safety you’ve worked hard to rebuild.</p>
+        <p>That next stage requires:</p>
+        <ul><li>Knowing whether your child is truly ready</li><li>Understanding what is driving the waking (habit, regulation, timing, feeding, reassurance)</li><li>Making small, respectful adjustments — in the right order</li></ul>
+        <p class="center">Not more guesswork. Not more conflicting advice.<br />Just thoughtful, developmentally aligned guidance.</p>
+        <h3>A Gentle Next Step</h3>
+        <p>I’ve created a short, practical resource designed specifically for this in-between stage. It walks you through:</p>
+        <ul><li>How to assess readiness</li><li>How to respond overnight with confidence</li><li>How to reduce waking gradually</li><li>How to protect connection while encouraging progress</li></ul>
+        <p class="center">It’s designed to feel supportive — not overwhelming.<br />You can learn more about it here:<br /><a href="https://thyme4sleep.com/reset-preview" style="color:#3F3B38;font-weight:600;">thyme4sleep.com/reset-preview</a></p>
+      </div>
+    </Page>
+  </div>
+</Layout>
+
