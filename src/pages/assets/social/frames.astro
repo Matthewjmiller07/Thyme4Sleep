@@ -80,7 +80,7 @@ const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET
             <p style="font-size:40px;margin:36px 0 0;color:#F1D4AE;">{s.body}</p>
           </div>
         </>)}
-        <img class="logo" src="/assets/img/logo.png" alt="" style={s.kind === 'cta' ? 'right:70px;top:60px;filter:brightness(0) invert(1);opacity:.9;' : s.kind === 'cover' ? 'left:90px;bottom:780px;display:none;' : 'right:80px;top:80px;'} />
+        <img class="logo" src="/images/logos/latestlogo.png" alt="Thyme4Sleep" style={s.kind === 'cta' ? 'right:70px;top:60px;height:165px;filter:brightness(0) invert(1);opacity:.95;' : s.kind === 'cover' ? 'right:70px;bottom:150px;height:150px;padding:20px 30px;box-sizing:content-box;background:rgba(251,247,243,.94);border-radius:26px;' : 'right:70px;top:60px;height:170px;'} />
         <div class="dots">{slides.map((_, k) => <span class={k === i ? 'on' : ''} style={s.kind === 'cta' ? 'background:rgba(243,234,227,.4)' : ''}></span>)}</div>
         <div class="handle" style={`right:90px;bottom:52px;color:${s.kind === 'cta' ? '#F3EAE3' : '#897E77'};`}>@thyme4sleep</div>
       </div>

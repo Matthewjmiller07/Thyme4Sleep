@@ -1,0 +1,33 @@
+---
+// One standard page of the Gentle Sleep Reset: a colour band and a photo behind a white card,
+// with the checklist icon on the card's top edge and the web address in the card's footer.
+// Every page shares the same card position and size, so the guide reads as one balanced set.
+import GsrIcon from './GsrIcon.astro';
+
+interface Props {
+  bg: { band: string; photo: 'sleeping' | 'teal'; icon: string };
+  photoTop?: boolean; // photo above the band (closing page) instead of below it
+  tight?: boolean;    // slightly smaller body text for the longest pages
+}
+const { bg, photoTop = false, tight = false } = Astro.props;
+const photo = `/assets/img/gentle-sleep-reset/${bg.photo}.jpg`;
+const split = photoTop ? '6.4in' : '4.6in';
+---
+<article class={`sheet g${tight ? ' tight' : ''}`}>
+  {photoTop ? (
+    <>
+      <div class="photo" style={`top:0;height:${split};background-image:url(${photo});background-position:center 35%;`}></div>
+      <div class="band" style={`top:${split};bottom:0;background:${bg.band};`}></div>
+    </>
+  ) : (
+    <>
+      <div class="band" style={`top:0;height:${split};background:${bg.band};`}></div>
+      <div class="photo" style={`top:${split};bottom:0;background-image:url(${photo});background-position:center ${bg.photo === 'teal' ? '60%' : '35%'};`}></div>
+    </>
+  )}
+  <div class="icon" style={`background:${bg.icon};`}><GsrIcon /></div>
+  <div class="card">
+    <slot />
+    <div class="url">www.thyme4sleep.com</div>
+  </div>
+</article>
