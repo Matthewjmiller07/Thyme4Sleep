@@ -20,7 +20,7 @@ const checklist = [
   ['Before launch', [
     'Georgia reviews all copy for voice and clinical accuracy (wake windows, method steps, feed guidance)',
     'Set ASSETS_PREVIEW_KEY in Netlify, then review the paid plan at /assets/calm-nights/plan?preview=…',
-    'Run one live $97 test purchase in Stripe, confirm access to the programme and workbook, then refund it',
+    'Run one live $97 test purchase in Stripe, confirm access to the program and workbook, then refund it',
     'Set up the Calm Nights tags and link-click rules for Sequences 3 and 4 (see the emails page), and click every check-in link once',
     'Connect quiz + Gentle Sleep Reset form leads to the email platform; load Sequences 1 and 2',
     'Decide whether to show Calm Nights on /pricing and the homepage (it’s unlinked today)',
@@ -34,7 +34,7 @@ const checklist = [
   ]],
   ['Every month', [
     'Check GA4 events: quiz_start → quiz_complete → generate_lead → begin_checkout → calm_nights_checkin',
-    'Add each Calm Nights sale, refund, check-in answer and coaching enquiry to the review log below',
+    'Add each Calm Nights sale, refund, check-in answer and coaching inquiry to the review log below',
     'Ask every Calm Nights and 1:1 family for a one-line review (night 21 email of Sequence 3; email 4 of Sequence 2)',
     'Turn the best new review into a quote card',
     'Remove the noindex tag on pages you want found in Google once they’re linked from the site',
@@ -43,9 +43,9 @@ const checklist = [
 // Measures for the Calm Nights $97 test review (see #review)
 const reviewRows = [
   ['Will families pay $97?', 'Sales-page visitors → purchases', 'GA4 begin_checkout, Stripe', '2%+ of sales-page visitors buy', 'Under 1%'],
-  ['Is the scope clear?', 'Refunds, and emails expecting a personalised plan', 'Stripe, Georgia’s inbox', 'Under 5% refunds; little or no confusion', 'Over 10%, or the same confusion repeating'],
+  ['Is the scope clear?', 'Refunds, and emails expecting a personalized plan', 'Stripe, Georgia’s inbox', 'Under 5% refunds; little or no confusion', 'Over 10%, or the same confusion repeating'],
   ['Does it work for families who fit?', 'Night 14 “things are moving” share', 'GA4 calm_nights_checkin', '60%+ of those who answer', 'Under 40%'],
-  ['Does it route the right families to coaching?', 'cn-support tags → /pricing?from=calm-nights visits → enquiries → bookings', 'Email platform, GA4, Stripe', 'Families in the support branch enquire, and some book', 'Many tagged, no enquiries; or Starter bookings fall overall'],
+  ['Does it route the right families to coaching?', 'cn-support tags → /pricing?from=calm-nights visits → inquiries → bookings', 'Email platform, GA4, Stripe', 'Families in the support branch inquire, and some book', 'Many tagged, no inquiries; or Starter bookings fall overall'],
   ['What does it cost Georgia?', 'Minutes spent replying per buyer', 'Review log', 'Under 10 minutes', 'Over 20 minutes (it’s becoming unpaid 1:1)'],
   ['Are we earning proof?', 'Reviews collected from Calm Nights families', 'Night 21 email replies', '1 in 5 successful families', 'None'],
 ];
@@ -106,8 +106,8 @@ const reviewRows = [
             <tr><td>2</td><td>Sleep Snapshot quiz</td><td>Free</td><td>Diagnose &amp; segment; capture email</td><td>Tailored offer by result</td></tr>
             <tr><td>3</td><td>Gentle Sleep Reset, safe sleep, sleep log, bedtime chart</td><td>Free</td><td>Quick win, trust, list growth</td><td>5-day email sequence</td></tr>
             <tr><td>4</td><td>From Reset to Rest</td><td>$37</td><td>Reduce night wakings when bedtime is already calm</td><td>Calm Nights if bedtime is the real issue (email 3, Seq. 2)</td></tr>
-            <tr><td>5</td><td>The Calm Nights Method (+ $117 bundle)</td><td>$97 (test price)</td><td>Structured self-guided programme for families ready to implement independently</td><td>1:1 via check-in emails when a family needs it (Seq. 3 → 4)</td></tr>
-            <tr><td>6</td><td>1:1 coaching</td><td>$249–$1,429</td><td>Premium, personalised outcome</td><td>Reviews, $100 referrals → rung 1</td></tr>
+            <tr><td>5</td><td>The Calm Nights Method (+ $117 bundle)</td><td>$97 (test price)</td><td>Structured self-guided program for families ready to implement independently</td><td>1:1 via check-in emails when a family needs it (Seq. 3 → 4)</td></tr>
+            <tr><td>6</td><td>1:1 coaching</td><td>$249–$1,429</td><td>Premium, personalized outcome</td><td>Reviews, $100 referrals → rung 1</td></tr>
           </tbody>
         </table>
       </div>
@@ -142,7 +142,7 @@ const reviewRows = [
       <p class="small muted">Keep this as a simple spreadsheet. One row per Calm Nights buyer.</p>
       <div class="table-scroll card" style="padding:8px 16px;">
         <table>
-          <thead><tr><th>Date</th><th>Bought</th><th>Fit check</th><th>Night 4</th><th>Night 7</th><th>Night 14</th><th>Coaching enquiry?</th><th>Booked?</th><th>Refund?</th><th>Georgia’s minutes</th></tr></thead>
+          <thead><tr><th>Date</th><th>Bought</th><th>Fit check</th><th>Night 4</th><th>Night 7</th><th>Night 14</th><th>Coaching inquiry?</th><th>Booked?</th><th>Refund?</th><th>Georgia’s minutes</th></tr></thead>
           <tbody><tr><td class="muted small">e.g. 2 Nov</td><td class="muted small">Calm Nights</td><td class="muted small">fit</td><td class="muted small">moving</td><td class="muted small">stuck</td><td class="muted small">support</td><td class="muted small">yes</td><td class="muted small">Starter</td><td class="muted small">no</td><td class="muted small">10</td></tr></tbody>
         </table>
       </div>

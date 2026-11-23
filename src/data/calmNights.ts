@@ -1,19 +1,19 @@
-// Shared content for the Calm Nights Method programme: the pathway, scope, checkpoints
-// and the signals that a family needs personalised support rather than a self-guided plan.
+// Shared content for the Calm Nights Method program: the pathway, scope, checkpoints
+// and the signals that a family needs personalized support rather than a self-guided plan.
 // Used by the sales page, the plan, the workbook and the email check-in page so they never drift apart.
 
 
 // The six-step pathway every family follows, in order.
 export const PATHWAY = [
-  { n: '1', id: 'understand', title: 'Understand', sub: 'How sleep works', body: 'The general education behind the programme: sleep pressure, sleep cycles, why wake-ups happen and what crying is telling you.' },
-  { n: '2', id: 'ready', title: 'Check fit & readiness', sub: 'Is this right for us, right now?', body: 'Who Calm Nights is for, who it isn’t for, and the boxes to tick before night one.' },
+  { n: '1', id: 'understand', title: 'Understand', sub: 'How sleep works', body: 'The general education behind the program: sleep pressure, sleep cycles, why wake-ups happen and what crying is telling you.' },
+  { n: '2', id: 'ready', title: 'Check fit & readiness', sub: 'Is this right for us, right now?', body: 'Who Calm Nights is for, who it isn’t for, and the boxes to check before night one.' },
   { n: '3', id: 'prep', title: 'Prepare', sub: '3–7 days', body: 'Room, feed, routine, key phrase and team plan — the quiet changes that make night one easier.' },
   { n: '4', id: 'start', title: 'Choose a gentle starting point', sub: 'Two options, three questions', body: 'Pick “Stay Close” or “Step Out & Check” in a few minutes, then commit to it for 14 nights.' },
   { n: '5', id: 'nights', title: 'Implement', sub: '14 nights', body: 'The bedtime routine, your starting point night by night, and the same calm response for wake-ups and early mornings.' },
-  { n: '6', id: 'review', title: 'Review & troubleshoot', sub: 'Nights 4, 7 and 14', body: 'Three short checkpoints tell you whether to keep going, adjust, or bring in personalised support.' },
+  { n: '6', id: 'review', title: 'Review & troubleshoot', sub: 'Nights 4, 7 and 14', body: 'Three short checkpoints tell you whether to keep going, adjust, or bring in personalized support.' },
 ];
 
-// What the programme does and doesn't include. Shown on the sales page and inside the plan.
+// What the program does and doesn't include. Shown on the sales page and inside the plan.
 export const INCLUDED = [
   'General education on how sleep, sleep pressure and sleep cycles work',
   'A readiness and fit check before you begin',
@@ -39,9 +39,9 @@ export const COMPARE = {
   priceIds: ['reset-to-rest', 'calm-nights', 'starter-1', 'standard-1'],
   rows: [
     ['Best for', 'Bedtime is fine; you want fewer night wakings without changing how your child falls asleep', 'Your child needs a feed, rocking or you to fall asleep, and you’re ready to change that over two weeks', 'You want a plan written for your child, and you’re confident following it yourself', 'You want a plan for your child plus Georgia beside you while you follow it'],
-    ['What it changes', 'One night-time support, reduced gradually', 'How your child falls asleep — at bedtime, then overnight and early morning', 'Whatever your child’s plan needs, including naps and schedule', 'Whatever your child’s plan needs, including naps and schedule'],
-    ['Format', 'Video + workbook', 'Structured self-guided programme + workbook', 'Written personalised plan from your intake form', 'Personalised plan + 60-minute consult + 2 weeks of support'],
-    ['Personalised to your child', '—', '—', '✓', '✓'],
+    ['What it changes', 'One nighttime support, reduced gradually', 'How your child falls asleep — at bedtime, then overnight and early morning', 'Whatever your child’s plan needs, including naps and schedule', 'Whatever your child’s plan needs, including naps and schedule'],
+    ['Format', 'Video + workbook', 'Structured self-guided program + workbook', 'Written personalized plan from your intake form', 'Personalized plan + 60-minute consult + 2 weeks of support'],
+    ['Personalized to your child', '—', '—', '✓', '✓'],
     ['Naps & daily schedule', '—', '—', '✓', '✓'],
     ['Georgia’s support while you implement', '—', '—', '—', '✓ Email/text, 2 weeks'],
   ],
@@ -64,7 +64,7 @@ export const CHECKPOINTS: Checkpoint[] = [
     lookFor: ['Lay-down is a little calmer', 'Falling asleep takes less time than night 1', 'At least one wake-up was shorter or quieter'],
     onTrack: 'Any one of these is progress. Keep going exactly as you are — no changes.',
     adjust: 'None yet, or night 3 felt worse? That’s common. Run the “Check the basics” list in Troubleshooting, change nothing else, and hold steady to night 7.',
-    support: 'Crying is escalating to distress (8–10) for long stretches every night, or your child seems unwell: pause, speak to your pediatrician, and consider personalised support.',
+    support: 'Crying is escalating to distress (8–10) for long stretches every night, or your child seems unwell: pause, speak to your pediatrician, and consider personalized support.',
   },
   {
     night: 7,
@@ -80,7 +80,7 @@ export const CHECKPOINTS: Checkpoint[] = [
     lookFor: ['They fall asleep on their own most nights', 'Wake-ups resettle with a brief, calm response — or don’t happen', 'Mornings start at 6am or later'],
     onTrack: 'Wonderful. Move to “Keeping it going” in the plan.',
     adjust: 'Mostly there? Hold the same plan for another 7 nights before changing anything. Progress often finishes quietly.',
-    support: 'Still waking frequently, splitting nights, early rising before 5:30am, or nap problems undoing nights? This is where personalised assessment adds what a general plan can’t.',
+    support: 'Still waking frequently, splitting nights, early rising before 5:30am, or nap problems undoing nights? This is where personalized assessment adds what a general plan can’t.',
   },
 ];
 
@@ -95,19 +95,20 @@ export const STAY_CLOSE: [string, string, string][] = [
 
 // The general troubleshooting library. [sticking point, answer]
 export const TROUBLESHOOTING: [string, string][] = [
-  ['Check the basics (do this first)', 'Is the milk feed truly at the start of the routine, with books or bath after it? Is bedtime well-timed (not overtired)? Is the morning wake-up time consistent? Is every adult using the same starting point and key phrase — including at 3am? Most stalls come from one of these.'],
+  ['Check the basics (do this first)', 'Is the milk feed truly at the start of the routine, with books or bath after it? Is bedtime well-timed (not overtired)? Is the morning wake-up time consistent? Is every adult who goes in — you and a partner or co-parent, or just you — using the same starting point and key phrase — including at 3am? Most stalls come from one of these.'],
   ['“Night 3 got worse!”', 'Very common, and usually a sign your child is testing whether the new pattern is real. Hold steady to your night 4 checkpoint. Families who change course here start again from zero.'],
   ['Illness or teething', 'Pause, comfort as much as they need, and follow medical advice. Keep the routine and wake-up time. When they’re well (usually 2–3 days after symptoms ease), restart at the stage you’d reached — it comes back quickly.'],
-  ['They stand up and won’t lie down', 'Practise “up and down” lots during the day. At night, lay them down once, then leave them to it — they will lie down when tired. Repeatedly laying them down becomes a game.'],
+  ['They stand up and won’t lie down', 'Practice “up and down” lots during the day. At night, lay them down once, then leave them to it — they will lie down when tired. Repeatedly laying them down becomes a game.'],
   ['Vomiting from crying', 'Clean up calmly and quickly with low light and little interaction, change the sheet, then continue your starting point. If it happens repeatedly, pause and speak to your pediatrician.'],
   ['Early rising (before 6am)', 'Treat it as night: same pause, same response. Then look at the day: is bedtime too late? Is the room light at dawn? Is there an early-morning feed still being offered?'],
   ['Travel & time zones', 'Bring the routine, sleep sack, white noise and key phrase. Shift to local time straight away with daylight and mealtimes. Expect a few unsettled nights, then return to your starting point.'],
   ['The toddler negotiator', 'Use the bedtime chart and Bedtime Pass cards. Offer choices before bed (“blue PJs or stars?”), not after. Once in bed: key phrase, same response, no new debates.'],
-  ['We disagree as parents', 'Agree the starting point and the hard-night plan before night one. If one parent finds settling harder, they take a different role (bath and books) while the other leads. Unity matters more than which starting point you chose.'],
+  ['Doing this on your own', 'You don’t need a second adult: consistency matters more than numbers. Choose the starting point you can repeat when tired, and plan small breaks — an earlier night, rest when they nap, help if anyone offers it. If you need to, lay your child down safely and step out for a few minutes to steady yourself.'],
+  ['Sharing it with a partner or co-parent', 'Agree the starting point and the hard-night plan together before night one, and take turns so you both rest. If one of you finds settling harder, they take a different role (bath and books) while the other leads. Consistency matters more than which starting point you chose.'],
   ['Our checkpoint says “get support”', 'Then that’s the right next step, not a failure. See “Keeping it going” below — Georgia will build on what you’ve already done.'],
 ];
 
-// Signals that a family should get personalised support instead of, or alongside, the programme.
+// Signals that a family should get personalized support instead of, or alongside, the program.
 export const SUPPORT_SIGNALS = {
   before: [
     'Your baby is under 6 months (or under 6 months adjusted age if born early)',
@@ -120,11 +121,11 @@ export const SUPPORT_SIGNALS = {
     'No meaningful change by night 7, despite following the plan every time',
     'Crying escalates night after night instead of easing',
     'Still waking frequently, splitting nights or rising before 5:30am at night 14',
-    'You and your partner can’t agree on or sustain an approach',
+    'You can’t sustain an approach on your own, or you and a partner or co-parent can’t agree on one',
   ],
 };
 
-// Where coaching links point. The query string lets GA4 show which enquiries came from Calm Nights.
+// Where coaching links point. The query string lets GA4 show which inquiries came from Calm Nights.
 export const COACHING_URL = '/pricing?from=calm-nights';
 export const SPECIALISED_URL = '/packages/sen?from=calm-nights';
 

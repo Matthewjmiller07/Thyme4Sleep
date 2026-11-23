@@ -31,8 +31,8 @@ const drivers = [
 const anchors = [
   ['Feeding, with gradual duration reduction', 'Shorten the feed a little at a time, rather than stopping it.'],
   ['Physical presence, with reduced intensity', 'Stay close, with less patting, rocking or holding over time.'],
-  ['Verbal reassurance, with a timed pause', 'A short pause, then your calm phrase from beside the cot.'],
-  ['A combination approach, defined clearly', 'Allowed, as long as every adult does exactly the same thing.'],
+  ['Verbal reassurance, with a timed pause', 'A short pause, then your calm phrase from beside the crib.'],
+  ['A combination approach, defined clearly', 'Allowed, as long as whoever goes in — you, your partner or co-parent — does exactly the same thing.'],
 ];
 
 // [variable, what's reduced, icon]: simple line icons drawn in the guide's palette (48×48 viewBox)
@@ -49,7 +49,7 @@ const matrix = [
   ['Wakings every 45–90 minutes', 'Overtiredness or sleep-cycle dependency', 'Total wake windows, nap structure, bedtime timing', 'A slightly earlier bedtime, or a shorter last wake window'],
   ['Split nights', 'Under-tiredness, or too much daytime sleep', 'Total nap duration, afternoon sleep, bedtime', 'Reduce daytime sleep, or move bedtime later'],
   ['Early rising before 5:30am', 'Circadian shift or sleep-pressure imbalance', 'First nap timing, bedtime timing, total day sleep', 'Adjust nap distribution and protect the first wake window'],
-  ['Intense escalation when support is reduced', 'Change has moved faster than regulation can manage', 'Amount reduced, pace of change, baseline settling', 'Return to stabilisation, then reduce more gradually'],
+  ['Intense escalation when support is reduced', 'Change has moved faster than regulation can manage', 'Amount reduced, pace of change, baseline settling', 'Return to stabilization, then reduce more gradually'],
   ['Nap refusal', 'Sleep-pressure mismatch or overtiredness', 'Morning wake time, nap timing, stimulation', 'Rebalance the day before pushing overnight change'],
   ['Strong sensitivity traits', 'Higher support needs; lower tolerance for abrupt shifts', 'Sensory load, predictability, response consistency', 'Slower reduction, more reassurance, temperament-led pacing'],
 ];
@@ -121,7 +121,7 @@ const matrix = [
         <h1>From Reset<br /><em class="script">to Rest</em></h1>
         <hr class="divider" style="margin:16px 0 18px;" />
         <p style="font-family:var(--serif);font-size:19pt;line-height:1.25;margin:0 0 10px;">A gentle night-waking reduction protocol</p>
-        <p class="muted" style="font-size:12.5pt !important;max-width:30em;margin:0;">For families ready to move from stabilised sleep to more consolidated rest, without cry-it-out.</p>
+        <p class="muted" style="font-size:12.5pt !important;max-width:30em;margin:0;">For families ready to move from stabilized sleep to more consolidated rest, without cry-it-out.</p>
         </div>
         <div style="height:3.3in;border-radius:1.25in 1.25in 22px 22px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(63,59,56,.45);"><img src="/assets/img/reset-to-rest/crib.jpg" alt="" class="ph" style="border-radius:0;" /></div>
       </div>
@@ -146,7 +146,7 @@ const matrix = [
     <!-- 2 · How to use -->
     <article class="sheet">
       <SheetHead logo={LOGO} kicker={pg(2, 'Start here')} title="How to use this guide" sub="If you’re here, you’ve likely restored some calm to bedtime, but night wakings remain." />
-      <p class="lead2">This guide helps you reduce those wakings gradually, whilst protecting the emotional safety you’ve worked hard to rebuild. It’s a framework, not a rigid programme. By moving slowly and holding steady, your child’s sleep will consolidate.</p>
+      <p class="lead2">This guide helps you reduce those wakings gradually, while protecting the emotional safety you’ve worked hard to rebuild. It’s a framework, not a rigid program. By moving slowly and holding steady, your child’s sleep will consolidate.</p>
       <h3 style="margin-top:22px;">The four steps</h3>
       <div class="roadmap">
         {steps.map(([n, t, d, p]) => (
@@ -166,14 +166,14 @@ const matrix = [
         <div class="box cream">
           <h4>Before you start</h4>
           <ul class="ticks small" style="margin:0;">
-            <li>Watch the video walkthrough once, ideally with your partner</li>
+            <li>Watch the video walkthrough once (together, if you share nights with a partner or co-parent)</li>
             <li>Start the tracker on page 9 tonight, before you change anything</li>
-            <li>Agree that every adult will respond the same way overnight</li>
+            <li>Settle on one overnight response — used by every adult who goes in, or by you every time if you’re on your own</li>
           </ul>
         </div>
       </div>
-      <div class="note peach" style="margin-top:22px;"><p class="small"><strong>General guidance, not medical advice.</strong> Check with your child’s doctor before reducing night feeds, pause if your child becomes unwell, and always follow safe sleep guidance: alone, always starting on their back, in a cot or crib with only a fitted sheet.</p></div>
-      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>A framework, not a rigid programme</span></div>
+      <div class="note peach" style="margin-top:22px;"><p class="small"><strong>General guidance, not medical advice.</strong> Check with your child’s doctor before reducing night feeds, pause if your child becomes unwell, and always follow safe sleep guidance: alone, always starting on their back, in a crib or crib with only a fitted sheet.</p></div>
+      <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>A framework, not a rigid program</span></div>
     </article>
 
     <!-- 3 · Step 1 -->
@@ -200,8 +200,8 @@ const matrix = [
       </div>
       <h3 style="margin-top:26px;">What your answers mean</h3>
       <div class="two">
-        <div class="box mint"><h4>Most boxes ticked</h4><p class="small" style="margin:0;">Your child is ready. Move on to Step 2 and identify what is keeping the wake-ups going.</p></div>
-        <div class="box peach"><h4>Several boxes unticked</h4><p class="small" style="margin:0;">Pause. Return to stabilisation for a few more days with the free Gentle Sleep Reset, then check again. This protects your progress.</p></div>
+        <div class="box mint"><h4>Most boxes checked</h4><p class="small" style="margin:0;">Your child is ready. Move on to Step 2 and identify what is keeping the wake-ups going.</p></div>
+        <div class="box peach"><h4>Several boxes unchecked</h4><p class="small" style="margin:0;">Pause. Return to stabilization for a few more days with the free Gentle Sleep Reset, then check again. This protects your progress.</p></div>
       </div>
       <div class="box cream" style="margin-top:26px;">
         <h4>Notes</h4>
@@ -251,8 +251,8 @@ const matrix = [
       <p class="small muted" style="margin:0 0 10px;">Consistency reduces negotiation. Choose one calming phrase and repeat it every time.</p>
       <div class="three">
         <div class="box cream"><p class="quote" style="margin:0;">“You’re safe. It’s still sleep time.”</p></div>
-        <div class="box cream"><p class="quote" style="margin:0;">“It’s night-time. I’m here. It’s time to sleep.”</p></div>
-        <div class="box cream"><p class="quote" style="margin:0;">“Shhh, it’s night-time.”</p></div>
+        <div class="box cream"><p class="quote" style="margin:0;">“It’s nighttime. I’m here. It’s time to sleep.”</p></div>
+        <div class="box cream"><p class="quote" style="margin:0;">“Shhh, it’s nighttime.”</p></div>
       </div>
       <div class="two" style="margin-top:14px;">
         <div class="box"><h4>Ours, word for word</h4><div class="wl"></div><div class="wl"></div></div>
@@ -309,7 +309,7 @@ const matrix = [
         </div>
         <div><img src="/assets/img/reset-to-rest/nap.jpg" alt="" class="ph" /></div>
         <div class="box cream" style="display:flex;flex-direction:column;justify-content:center;">
-          <p class="quote" style="margin:0 0 6px;">Return to stabilisation first. Then resume.</p>
+          <p class="quote" style="margin:0 0 6px;">Return to stabilization first. Then resume.</p>
           <p class="small muted" style="margin:0;">Go back to your bedtime window and anchor response for a few days, then pick up at the step you’d reached.</p>
         </div>
       </div>
@@ -334,7 +334,7 @@ const matrix = [
       </div>
       <div class="two" style="margin-top:22px;">
         <div class="box cream" style="display:flex;align-items:center;"><p class="quote" style="margin:0;">You haven’t failed. You may simply need nuance.</p></div>
-        <div class="box mint"><p class="small" style="margin:0;">Complex sleep patterns benefit from tailored timing adjustments, a feeding review and temperament-informed planning. This is often where a personalised assessment becomes valuable: see page 10.</p></div>
+        <div class="box mint"><p class="small" style="margin:0;">Complex sleep patterns benefit from tailored timing adjustments, a feeding review and temperament-informed planning. This is often where a personalized assessment becomes valuable: see page 10.</p></div>
       </div>
       <div class="sheet-foot"><span>THYME4SLEEP · FROM RESET TO REST</span><span>One change at a time</span></div>
     </article>
@@ -371,11 +371,11 @@ const matrix = [
           <li>Need their feeding strategy refined</li>
           <li>Rise early for reasons unrelated to habit</li>
         </ul>
-        <p class="small" style="margin:10px 0 0;">These children benefit from individualised guidance. Personalised support can help you move forward more efficiently, without undoing the connection you’ve protected.</p>
+        <p class="small" style="margin:10px 0 0;">These children benefit from individualized guidance. Personalized support can help you move forward more efficiently, without undoing the connection you’ve protected.</p>
       </div>
       <div class="two" style="margin-top:16px;">
         <div class="box mint"><h4>Not sure what you need?</h4><p class="small" style="margin:0;">Book a free 15-minute sleep assessment call at thyme4sleep.com. There’s no obligation.</p></div>
-        <div class="box peach"><h4>Personalised 1:1 support</h4><p class="small" style="margin:0;">A plan written for your child, including naps and schedule. See thyme4sleep.com/pricing, and mention this guide.</p></div>
+        <div class="box peach"><h4>Personalized 1:1 support</h4><p class="small" style="margin:0;">A plan written for your child, including naps and schedule. See thyme4sleep.com/pricing, and mention this guide.</p></div>
       </div>
       <div style="display:grid;grid-template-columns:2.4in 1fr;gap:14px;margin-top:28px;">
         <div style="min-height:2in;"><img src="/assets/img/reset-to-rest/giggle.jpg" alt="" class="ph" /></div>

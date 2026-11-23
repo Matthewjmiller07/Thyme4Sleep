@@ -178,7 +178,7 @@ const reviewHref = (path: string) => (path.startsWith('/assets') ? path : `${pat
     }));
   }
 
-  // Keep page keys in step with the widget's normalisation.
+  // Keep page keys in step with the widget's normalization.
   document.querySelectorAll<HTMLElement>('[data-page]').forEach((li) => { li.dataset.page = normalizePath(li.dataset.page || ''); });
   load();
 </script>

@@ -8,17 +8,17 @@ export const prerender = false;
 const { currency, P } = await localPricing(Astro);
 
 const faqs = [
-  ['Is this cry-it-out?', 'No. Georgia doesn’t use or teach extinction (cry-it-out). Both starting points keep you present and responsive — you comfort, you reassure, you come back. Some protest is normal when anything changes, and the programme shows you how to tell protest from distress and how to respond to each.'],
+  ['Is this cry-it-out?', 'No. Georgia doesn’t use or teach extinction (cry-it-out). Both starting points keep you present and responsive — you comfort, you reassure, you come back. Some protest is normal when anything changes, and the program shows you how to tell protest from distress and how to respond to each.'],
   ['Is this the same as a 1:1 sleep plan?', 'No — and that’s deliberate. A 1:1 plan is written for your child after Georgia reviews your intake form, and it includes naps and a daily schedule. Calm Nights is general education and a general implementation framework that you apply yourself. It’s a great fit for typical sleep-association challenges; if your situation is more complex, a 1:1 package is the better investment.'],
-  ['How is this different from Reset to Rest?', `<em>From Reset to Rest</em> (${P('reset-to-rest')}) is for families whose bedtime is already fairly calm, but who still have night wakings. It gently reduces <strong>one</strong> night-time support, one small step at a time, without changing how your child falls asleep. <em>Calm Nights</em> (${P('calm-nights')}) changes <strong>how your child falls asleep</strong> — starting at bedtime, then overnight and in the early morning — over a structured 14 nights.`],
-  ['What age is it for?', 'Healthy children from 6 months to around 4 years. Under 6 months, or with medical or developmental needs? Georgia’s 1:1 packages (including Specialised Sleep Support) are the right fit.'],
+  ['How is this different from Reset to Rest?', `<em>From Reset to Rest</em> (${P('reset-to-rest')}) is for families whose bedtime is already fairly calm, but who still have night wakings. It gently reduces <strong>one</strong> nighttime support, one small step at a time, without changing how your child falls asleep. <em>Calm Nights</em> (${P('calm-nights')}) changes <strong>how your child falls asleep</strong> — starting at bedtime, then overnight and in the early morning — over a structured 14 nights.`],
+  ['What age is it for?', 'Healthy children from 6 months to around 4 years. Under 6 months, or with medical or developmental needs? Georgia’s 1:1 packages (including Specialized Sleep Support) are the right fit.'],
   ['Does it include naps or a schedule?', 'No. Naps and daily schedules depend heavily on your individual child, so Georgia keeps them for her 1:1 packages, where she can tailor them properly.'],
   ['Can I message Georgia while I do it?', 'Calm Nights is self-guided, so there’s no messaging support. You’ll get check-in emails at nights 4, 7 and 14 that point you to the right next step. If you’d like Georgia beside you, the Standard package includes two weeks of email and text support.'],
-  ['What if it isn’t working?', 'The programme has three checkpoints that tell you whether to keep going, adjust, or get personalised support. If you move to 1:1, bring your tracker — Georgia will build on what you’ve already done.'],
-  ['How do I access it?', 'Instantly. After checkout you’re taken straight to your programme online. It’s saved to your browser for two years, and you can print the programme and workbook or save them as PDFs.'],
+  ['What if it isn’t working?', 'The program has three checkpoints that tell you whether to keep going, adjust, or get personalized support. If you move to 1:1, bring your tracker — Georgia will build on what you’ve already done.'],
+  ['How do I access it?', 'Instantly. After checkout you’re taken straight to your program online. It’s saved to your browser for two years, and you can print the program and workbook or save them as PDFs.'],
 ];
 ---
-<Layout title="The Calm Nights Method — A Self-Guided 14-Night Gentle Sleep Programme | Thyme4Sleep" description={`A structured, self-guided 14-night programme for families ready to help their child fall asleep independently — without cry-it-out. ${P('calm-nights')}.`}>
+<Layout title="The Calm Nights Method — A Self-Guided 14-Night Gentle Sleep Program | Thyme4Sleep" description={`A structured, self-guided 14-night program for families ready to help their child fall asleep independently — without cry-it-out. ${P('calm-nights')}.`}>
   <style>
     .compare th, .compare td { min-width: 150px; }
     .compare th:first-child, .compare td:first-child { min-width: 120px; }
@@ -31,10 +31,10 @@ const faqs = [
     <Leaf size={300} class="leaf" style="left:-80px;bottom:-60px;opacity:.3;" />
     <div class="wrap">
       <div>
-        <span class="pill paid">Self-guided programme · {P('calm-nights')}</span>
+        <span class="pill paid">Self-guided program · {P('calm-nights')}</span>
         <h1 style="margin-top:18px;">The Calm Nights <em class="script">Method</em></h1>
         <hr class="divider" />
-        <p class="lead">A structured, self-guided 14-night programme for families who are ready to help their child learn to fall asleep on their own — and to follow it independently.</p>
+        <p class="lead">A structured, self-guided 14-night program for families who are ready to help their child learn to fall asleep on their own — and to follow it independently.</p>
         <ul class="ticks" style="margin:20px 0 28px;">
           <li>No cry-it-out. You stay present, responsive and in charge.</li>
           <li>A clear six-step path, from understanding sleep to reviewing progress.</li>
@@ -44,7 +44,7 @@ const faqs = [
           <button class="btn btn-dark buy" data-pkg="calm-nights" type="button">Get instant access — {P('calm-nights')}</button>
           <a class="btn btn-ghost" href="#compare">Is this the right option for us?</a>
         </div>
-        <p class="small muted" style="margin-top:12px;">Secure checkout with Stripe · Instant access · General guidance, not a personalised plan</p>
+        <p class="small muted" style="margin-top:12px;">Secure checkout with Stripe · Instant access · General guidance, not a personalized plan</p>
       </div>
       <div class="photo"><img src="/assets/img/mother-hold.webp" alt="A parent holding their sleepy child close" loading="eager" /></div>
     </div>
@@ -131,14 +131,14 @@ const faqs = [
 
   <section class="band cream" id="bundle">
     <div class="wrap">
-      <div class="center"><span class="eyebrow">Start tonight</span><h2>Choose your programme</h2><hr class="divider" /></div>
+      <div class="center"><span class="eyebrow">Start tonight</span><h2>Choose your program</h2><hr class="divider" /></div>
       <div class="grid g2" style="max-width:900px;margin:auto;">
         <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
           <h3>Calm Nights Method</h3>
           <div style="font-family:var(--serif);font-size:3.2rem;line-height:1;">{P('calm-nights')}</div>
           <p class="small muted">One-time · instant access</p>
           <ul class="ticks small" style="flex:1;">
-            <li>Six-step programme</li><li>Choosing a gentle starting point</li><li>14-night implementation framework</li><li>Review checkpoints &amp; troubleshooting</li><li>Printable workbook &amp; tracker</li><li>Check-in emails at nights 4, 7 &amp; 14</li>
+            <li>Six-step program</li><li>Choosing a gentle starting point</li><li>14-night implementation framework</li><li>Review checkpoints &amp; troubleshooting</li><li>Printable workbook &amp; tracker</li><li>Check-in emails at nights 4, 7 &amp; 14</li>
           </ul>
           <button class="btn btn-dark buy" data-pkg="calm-nights" type="button">Get Calm Nights — {P('calm-nights')}</button>
         </div>

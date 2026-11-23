@@ -62,7 +62,7 @@ if (previewKey) {
   await mkdir(paidDir, { recursive: true });
   const PAID = [
     ['/assets/calm-nights/workbook', 'calm-nights-guide-and-workbook.pdf'],
-    ['/assets/calm-nights/plan', 'calm-nights-method-programme.pdf'],
+    ['/assets/calm-nights/plan', 'calm-nights-method-program.pdf'],
     ['/reset/guide', '../reset-to-rest/from-reset-to-rest.pdf'],
   ];
   await mkdir(resolve(paidDir, '../reset-to-rest'), { recursive: true });

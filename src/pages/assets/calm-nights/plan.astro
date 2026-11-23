@@ -1,5 +1,5 @@
 ---
-// The Calm Nights Method — the paid programme. Access requires a verified Stripe session
+// The Calm Nights Method — the paid program. Access requires a verified Stripe session
 // (cookie set by /assets/calm-nights/success) or the owner preview key.
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
@@ -33,7 +33,7 @@ const toc = [
 ];
 
 ---
-<Layout title="The Calm Nights Method — Your Programme | Thyme4Sleep" description="Your Calm Nights Method: a structured, self-guided 14-night gentle sleep programme.">
+<Layout title="The Calm Nights Method — Your Program | Thyme4Sleep" description="Your Calm Nights Method: a structured, self-guided 14-night gentle sleep program.">
   <style>
     .plan { display: grid; grid-template-columns: 250px 1fr; gap: 56px; padding: 48px 0 80px; }
     .toc { position: sticky; top: 90px; align-self: start; font-size: .86rem; }
@@ -91,10 +91,10 @@ const toc = [
       <div>
         {welcome && <div class="note no-print" style="margin-bottom:24px;max-width:760px;"><p><strong>Welcome — you’re in.</strong> This page is saved to this browser, so you can come back any time at this address. Start with step 1, and print the workbook before night one.</p></div>}
         {preview && <div class="note peach no-print" style="margin-bottom:24px;max-width:760px;"><p><strong>Owner preview.</strong> You’re viewing the paid product with the preview key.</p></div>}
-        <span class="pill paid">Your programme</span>
+        <span class="pill paid">Your program</span>
         <h1 style="margin-top:18px;">The Calm Nights <em class="script">Method</em></h1>
         <hr class="divider" />
-        <p class="lead">A structured, self-guided programme for helping your child learn to fall asleep — and fall back asleep — without cry-it-out. Six steps, in order. Read steps 1–4 before night one; then come back to the step you’re on.</p>
+        <p class="lead">A structured, self-guided program for helping your child learn to fall asleep — and fall back asleep — without cry-it-out. Six steps, in order. Read steps 1–4 before night one; then come back to the step you’re on.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;" class="no-print">
           <a class="btn btn-dark" href="#understand">Start at step 1</a>
           <a class="btn btn-ghost" href={workbookHref}>Open the printable Guide &amp; Workbook</a>
@@ -107,7 +107,7 @@ const toc = [
   </section>
 
   <div class="wrap plan">
-    <nav class="toc no-print" aria-label="Programme contents">
+    <nav class="toc no-print" aria-label="Program contents">
       <span class="eyebrow">Contents</span>
       <ol>{toc.map(([id, label]) => <li><a href={`#${id}`} style={label.startsWith('·') ? 'padding-left:14px;' : ''}>{label}</a></li>)}</ol>
     </nav>
@@ -119,16 +119,16 @@ const toc = [
         <h2>How sleep works</h2>
         <p>Hello, and welcome. I’m Georgia — a certified pediatric sleep coach and a parent too, so I know how heavy those 3am wake-ups feel. Calm Nights brings together the general principles I teach every family, set out as a clear path you can follow on your own.</p>
         <div class="note"><p><strong>What this is — and isn’t.</strong> Calm Nights is general education and a general implementation framework. It isn’t a plan written for your child: I haven’t seen your child’s history, and it doesn’t cover naps or daily schedules. If you’d like that, my 1:1 packages are built for it. Everything here works best for healthy children from 6 months to around 4 years whose main challenge is falling and staying asleep.</p></div>
-        <h3>Four ideas the whole programme rests on</h3>
+        <h3>Four ideas the whole program rests on</h3>
         <ul class="ticks">
           <li><strong>Sleep pressure.</strong> The longer we’re awake, the stronger the body’s drive to sleep. A consistent wake-up time and a well-timed bedtime mean that drive peaks when you need it to.</li>
           <li><strong>Sleep cycles.</strong> Every 45–90 minutes we all surface briefly between cycles. Adults roll over. Children who fell asleep being fed, rocked or held often look for that same help again — and that’s the wake-up.</li>
           <li><strong>Sleep associations.</strong> Whatever your child needs to <em>fall</em> asleep is usually what they’ll need to fall <em>back</em> asleep. Change how bedtime ends, and nights follow.</li>
           <li><strong>Predictability feels safe.</strong> Children settle when they know what happens next. The same routine, the same words and the same response — every time — matter more than any single technique.</li>
         </ul>
-        <div class="note"><p><strong>The promise of this programme:</strong> consistency over perfection. Clear, repeated cues. Calm, predictable responses from you. <em>Comfort is never removed; confusion is.</em></p></div>
+        <div class="note"><p><strong>The promise of this program:</strong> consistency over perfection. Clear, repeated cues. Calm, predictable responses from you. <em>Comfort is never removed; confusion is.</em></p></div>
         <h3>Understanding crying</h3>
-        <p>When something familiar changes, most children protest. That’s communication, not harm — imagine someone suddenly took away your favourite pillow. I don’t use or teach cry-it-out: you stay present and responsive throughout. Once you know their needs are met (fed, clean, comfortable, well), use this scale:</p>
+        <p>When something familiar changes, most children protest. That’s communication, not harm — imagine someone suddenly took away your favorite pillow. I don’t use or teach cry-it-out: you stay present and responsive throughout. Once you know their needs are met (fed, clean, comfortable, well), use this scale:</p>
         <div class="scale" aria-hidden="true">
           {[1,2,3,4,5,6,7,8,9,10].map((n) => <span style={`background:${n <= 5 ? '#E3E9E1' : n <= 7 ? '#F8E8D3' : '#F1D4AE'};`}>{n}</span>)}
         </div>
@@ -147,18 +147,18 @@ const toc = [
           <li>They usually need a feed, rocking, being held or you lying beside them to fall asleep — and wake looking for it.</li>
           <li>You’re ready to follow one approach consistently for 14 nights, without day-to-day support.</li>
         </ul>
-        <h3>Get personalised support first if…</h3>
+        <h3>Get personalized support first if…</h3>
         <ul class="boxes">{SUPPORT_SIGNALS.before.map((s) => <li>{s}</li>)}</ul>
-        <p>Any of these means a general framework is likely to frustrate you. That’s not a judgement — it’s why my <a href={COACHING_URL}>1:1 packages</a> and <a href={SPECIALISED_URL}>Specialised Sleep Support</a> exist.</p>
+        <p>Any of these means a general framework is likely to frustrate you. That’s not a judgment — it’s why my <a href={COACHING_URL}>1:1 packages</a> and <a href={SPECIALISED_URL}>Specialized Sleep Support</a> exist.</p>
         <h3>Readiness check</h3>
-        <p>Starting before you’re ready is the number one reason families give up on night three. Tick through these honestly.</p>
+        <p>Starting before you’re ready is the number one reason families give up on night three. Check through these honestly.</p>
         <div class="grid g2">
           <div class="card soft"><h4>Your child</h4><ul class="boxes"><li>Healthy right now — no illness, ear infection or new teeth cutting through</li><li>Your pediatrician is happy with growth and with any changes to night feeds</li><li>No big change in the next two weeks (travel, new sibling, starting daycare)</li></ul></div>
-          <div class="card soft"><h4>Your family</h4><ul class="boxes"><li>Everyone who does bedtime has read steps 1–4</li><li>You have two weeks with mostly home bedtimes</li><li>You’ve planned something kind for yourselves (early nights, help with the older kids)</li></ul></div>
+          <div class="card soft"><h4>Your family</h4><ul class="boxes"><li>Everyone who does bedtime has read steps 1–4</li><li>You have two weeks with mostly home bedtimes</li><li>You’ve planned something kind for yourself (early nights, turns with your partner or co-parent, help with the older kids if anyone can offer it)</li></ul></div>
         </div>
-        <p>If several boxes are unticked, that’s information, not failure. Use the free <a href="/free-checklist">Gentle Sleep Reset</a> for a few days to stabilise, then begin.</p>
+        <p>If several boxes are unchecked, that’s information, not failure. Use the free <a href="/free-checklist">Gentle Sleep Reset</a> for a few days to stabilize, then begin.</p>
         <h3>Safety</h3>
-        <p>This programme isn’t medical advice. Please check with your pediatrician before you start, pause if your child becomes unwell, and always follow safe sleep guidance: alone, on their back, in a crib with nothing but a fitted sheet (the free <a href="/assets/safe-sleep">Sleep Tight checklist</a> covers everything).</p>
+        <p>This program isn’t medical advice. Please check with your pediatrician before you start, pause if your child becomes unwell, and always follow safe sleep guidance: alone, on their back, in a crib with nothing but a fitted sheet (the free <a href="/assets/safe-sleep">Sleep Tight checklist</a> covers everything).</p>
         <div class="note peach"><p><strong>If you ever feel overwhelmed:</strong> lay your child down safely in their crib, step out, and give yourself a few minutes — a shower, music, a cup of tea, a call to a friend. Even the most loving, exhausted parent can reach breaking point; stepping away is a safe and responsible choice. If nothing soothes your child, contact your doctor. And if you’ve been feeling low or anxious for a while, please tell your own doctor too.</p></div>
       </section>
 
@@ -170,8 +170,8 @@ const toc = [
         <div class="grid g2">
           <div><h3>The room</h3><ul class="ticks"><li><strong>Dark:</strong> blackout curtains or window film. If you use a night light, choose a very dim, warm one, or move it to the hallway.</li><li><strong>Calm:</strong> remove mobiles and stimulating décor from the crib area.</li><li><strong>Comfortable:</strong> season-appropriate PJs and a sleep sack.</li><li><strong>Sound:</strong> white noise is fine — steady, all night, not too loud.</li></ul></div>
           <div><h3>The feed</h3><ul class="ticks"><li>Move the bedtime milk to the <strong>start</strong> of the routine — lights on, ideally outside the bedroom.</li><li>Keep them awake and engaged for the whole feed.</li><li>Follow it with bath or books so the last thing before sleep isn’t sucking.</li><li>Ask your pediatrician which night feeds (if any) they want you to keep.</li></ul></div>
-          <div><h3>The day</h3><ul class="ticks"><li>Fix a morning wake-up time (within 30 minutes) and keep it, even after bad nights.</li><li>Lots of daylight, movement and floor play — and practise new skills like standing and sitting down.</li><li>Fill their cup: plenty of connected, phone-free time in the evening.</li></ul></div>
-          <div><h3>The team</h3><ul class="ticks"><li>Choose your key phrase (below) — every adult uses the exact same words.</li><li>Decide who does which nights. Tag-teaming helps.</li><li>Agree now how you’ll handle a hard night, so you don’t debate it at 2am.</li><li>From 12 months, tell your child what’s changing with a simple bedtime story about them.</li></ul></div>
+          <div><h3>The day</h3><ul class="ticks"><li>Fix a morning wake-up time (within 30 minutes) and keep it, even after bad nights.</li><li>Lots of daylight, movement and floor play — and practice new skills like standing and sitting down.</li><li>Fill their cup: plenty of connected, phone-free time in the evening.</li></ul></div>
+          <div><h3>The team</h3><ul class="ticks"><li>Choose your key phrase (below) — you, and your partner or co-parent or anyone else who does bedtime, use the exact same words.</li><li>Sharing bedtimes with a partner or co-parent? Decide who does which nights; tag-teaming helps. Doing this on your own? Plan small breaks for yourself, and line up anyone who could give you an hour off — if there’s no one, that’s okay too.</li><li>Agree now how you’ll handle a hard night, so you don’t debate it at 2am.</li><li>From 12 months, tell your child what’s changing with a simple bedtime story about them.</li></ul></div>
         </div>
         <div class="script-card">
           <h4>Choose your key phrase</h4>
@@ -213,8 +213,8 @@ const toc = [
         </div>
         <div class="q">
           <span class="n">3</span>
-          <div><strong>Can every adult who does bedtime do it the same way?</strong>
-            <ul><li>Yes → keep your choice.</li><li>No → choose the one everyone can do. Consistency between adults matters more than fit.</li></ul>
+          <div><strong>Can everyone who does bedtime do it the same way — whether that’s you alone, or you and a partner or co-parent?</strong>
+            <ul><li>Doing this on your own? Choose the one you can keep up, night after night.</li><li>Sharing bedtimes with a partner or co-parent or another caregiver? If you can all do it the same way, keep your choice; if not, choose the one everyone can do. Consistency between adults matters more than fit.</li></ul>
           </div>
         </div>
         <div class="note" style="margin-top:12px;"><p><strong>If your answers point different ways, question 2 wins.</strong> The approach you can follow consistently will outperform the “right” one you can’t. Still unsure? Start with Stay Close — it’s the gentlest, and easy to move on from.</p></div>
@@ -222,7 +222,7 @@ const toc = [
         <ul class="ticks">
           <li>Write your choice and key phrase in the Guide &amp; Workbook.</li>
           <li>Give it 7 full nights before considering a switch. Night 7 is the only switch point, and you switch once.</li>
-          <li>If neither starting point feels possible for your family, that’s a sign to get personalised support rather than force a fit.</li>
+          <li>If neither starting point feels possible for your family, that’s a sign to get personalized support rather than force a fit.</li>
         </ul>
         <p class="small muted">In 1:1 coaching, I choose the approach with you after reviewing your child’s history, temperament and current sleep supports. This section is a general guide, not a personal recommendation.</p>
       </section>
@@ -272,7 +272,7 @@ const toc = [
               <li><strong>Repeat</strong> until they’re asleep, keeping pauses at least as long as the last one.</li>
             </ol>
           </div>
-          <p>Many children fall asleep around the 15–20 minute mark. If you’re comfortable, letting pauses stretch towards that gives your child real space to practise. If it feels too long, keep pauses shorter but <em>consistent</em>. If checks seem to make crying louder, lengthen the pause — and keep every check identical: same words, same touch, same exit.</p>
+          <p>Many children fall asleep around the 15–20 minute mark. If you’re comfortable, letting pauses stretch toward that gives your child real space to practice. If it feels too long, keep pauses shorter but <em>consistent</em>. If checks seem to make crying louder, lengthen the pause — and keep every check identical: same words, same touch, same exit.</p>
         </div>
 
         <div class="sub" id="wakings" style="margin-top:40px;">
@@ -334,15 +334,15 @@ const toc = [
       <section class="chapter" id="next">
         <span class="num">After night 14</span>
         <h2>Keeping it going</h2>
-        <p>Sleep isn’t about perfection — it’s about consistency, intention and loving boundaries. There will be wobbles: a cold, a new tooth, a holiday. When they come, steady the foundations with the free <a href="/free-checklist">Gentle Sleep Reset</a>, then pick your starting point back up. It returns faster every time.</p>
-        <p>If sleep is calm but one night-time habit lingers — a single feed, say — <a href={hasReset ? '/reset' : '/reset-preview'}>From Reset to Rest</a> is my protocol for reducing one support gradually.{hasReset && <> It’s included in your bundle — <a href="/reset">open your Reset to Rest video &amp; workbook</a>.</>}</p>
+        <p>Sleep isn’t about perfection — it’s about consistency, intention and loving boundaries. There will be wobbles: a cold, a new tooth, a vacation. When they come, steady the foundations with the free <a href="/free-checklist">Gentle Sleep Reset</a>, then pick your starting point back up. It returns faster every time.</p>
+        <p>If sleep is calm but one nighttime habit lingers — a single feed, say — <a href={hasReset ? '/reset' : '/reset-preview'}>From Reset to Rest</a> is my protocol for reducing one support gradually.{hasReset && <> It’s included in your bundle — <a href="/reset">open your Reset to Rest video &amp; workbook</a>.</>}</p>
         <p>You are doing something truly wonderful for your child — and for yourselves. You’ve got this.</p>
         <p style="font-family:var(--serif);font-size:1.5rem;">— Georgia</p>
         <div class="card lift no-print" style="margin-top:28px;">
           <span class="pill core">When a general plan isn’t enough</span>
-          <h3 style="margin-top:12px;">Personalised support</h3>
+          <h3 style="margin-top:12px;">Personalized support</h3>
           <p class="muted">Get support if any of these apply:</p>
-          <ul class="ticks small">{[...SUPPORT_SIGNALS.during, 'Anything from the “get personalised support first” list in step 2'].map((s) => <li>{s}</li>)}</ul>
+          <ul class="ticks small">{[...SUPPORT_SIGNALS.during, 'Anything from the “get personalized support first” list in step 2'].map((s) => <li>{s}</li>)}</ul>
           <p class="muted">A <strong>Starter</strong> package gives you a plan written for your child, including naps and schedule. <strong>Standard</strong> adds a consultation call and two weeks of support while you put it into practice. Tell me you’ve done Calm Nights and share your tracker — we’ll build on what you’ve learned rather than start from scratch.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a class="btn btn-dark" href={COACHING_URL}>See 1:1 packages</a>
@@ -356,7 +356,7 @@ const toc = [
             <div><h4>Not included</h4><ul class="small" style="padding-left:18px;">{NOT_INCLUDED.map((i) => <li>{i}</li>)}</ul></div>
           </div>
         </details>
-        <p class="small muted" style="margin-top:28px;">Copyright © Thyme4Sleep LLC. All rights reserved. This programme is for your family’s personal use only and may not be reproduced, shared or resold. General education only — not medical advice; Thyme4Sleep LLC cannot accept liability for outcomes arising from the use of this information. Always consult your pediatrician about your child’s health.</p>
+        <p class="small muted" style="margin-top:28px;">Copyright © Thyme4Sleep LLC. All rights reserved. This program is for your family’s personal use only and may not be reproduced, shared or resold. General education only — not medical advice; Thyme4Sleep LLC cannot accept liability for outcomes arising from the use of this information. Always consult your pediatrician about your child’s health.</p>
       </section>
     </article>
   </div>

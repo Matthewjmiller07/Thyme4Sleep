@@ -11,7 +11,7 @@ export const CAROUSEL_REGRESSION = [
 ];
 
 export const CAROUSEL_RESET = [
-  // Follows Step 1 of the published Gentle Sleep Reset: stabilise for 3–5 days before changing anything
+  // Follows Step 1 of the published Gentle Sleep Reset: stabilize for 3–5 days before changing anything
   { kind: 'cover', title: 'The 3–5 day', accent: 'Gentle Sleep Reset', sub: 'After illness, travel or a rough patch', img: 'lamp-sleep' },
   { kind: 'point', n: '01', title: 'Keep one bedtime window', body: 'Bedtime within the same 30 minutes, every night. Consistency calms the nervous system, and a regulated child settles more easily.' },
   { kind: 'point', n: '02', title: 'Keep the wind-down predictable', body: 'Same steps, same order, same calm energy. Slower is fine: calmer, not necessarily quicker.' },
@@ -29,12 +29,12 @@ export const QUOTES = [
 export const STORIES = [
   { eyebrow: 'Free quiz · 2 minutes', title: 'What’s really behind the 3am wake-ups?', cta: 'Take the Sleep Snapshot', img: 'crib-awake' },
   { eyebrow: 'Free guide', title: 'The Gentle Sleep Reset', cta: 'Grab it free', img: 'newborn' },
-  { eyebrow: 'New · Self-guided programme', title: 'The Calm Nights Method', cta: 'No cry-it-out. 14 nights.', img: 'mother-hold' },
+  { eyebrow: 'New · Self-guided program', title: 'The Calm Nights Method', cta: 'No cry-it-out. 14 nights.', img: 'mother-hold' },
 ];
 
 export const CAPTIONS = [
   { for: 'Carousel · Regression or habit?', text: 'Is it a regression… or has it become a habit? 🌙\n\nRegressions are real — and they end. But when the cold has cleared, the tooth is through and the trip is over, the patterns we leaned on to get through it often stay behind.\n\nSwipe for the 5 signs, then take my free 2-minute Sleep Snapshot (link in bio) to find out what’s really driving your little one’s wake-ups. 💛\n\n#babysleep #sleepregression #gentlesleep #toddlersleep #pediatricsleepcoach #nocryitout #thyme4sleep' },
   { for: 'Carousel · 3–5 day reset', text: 'Sleep fell apart after a rough patch? Before you change everything, do less — more consistently. 🌿\n\nFor the next 3–5 days: keep bedtime within the same 30-minute window, keep the wind-down predictable, and respond to wake-ups the same calm way every time. That’s it.\n\nMy free Gentle Sleep Reset guide walks you through it step by step — link in bio.\n\n#gentlesleep #babysleeptips #sleeptraining #newmom #toddlermom #thyme4sleep' },
   { for: 'Quote card', text: 'Comfort is never removed. Confusion is. 🤍\n\nGentle sleep coaching isn’t about stepping away from your child. It’s about responding in a way that’s calm, clear and the same every time — so they always know what comes next.\n\n#gentleparenting #babysleep #nocryitout #thyme4sleep' },
-  { for: 'Story · Calm Nights launch', text: 'It’s here 🌙 The Calm Nights Method — a structured, self-guided 14-night programme for families ready to do it themselves. Six clear steps, two gentle starting points and check-ins at nights 4, 7 and 14. Tap the link to see if it’s right for you.' },
+  { for: 'Story · Calm Nights launch', text: 'It’s here 🌙 The Calm Nights Method — a structured, self-guided 14-night program for families ready to do it themselves. Six clear steps, two gentle starting points and check-ins at nights 4, 7 and 14. Tap the link to see if it’s right for you.' },
 ];
