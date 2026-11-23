@@ -95,7 +95,7 @@ export const STAY_CLOSE: [string, string, string][] = [
 
 // The general troubleshooting library. [sticking point, answer]
 export const TROUBLESHOOTING: [string, string][] = [
-  ['Check the basics (do this first)', 'Is the milk feed truly at the start of the routine, with books or bath after it? Is bedtime well-timed (not overtired)? Is the morning wake-up time consistent? Is whoever goes in (even if that’s always you) using the same starting point and key phrase — including at 3am? Most stalls come from one of these.'],
+  ['Check the basics (do this first)', 'Is the milk feed truly at the start of the routine, with books or bath after it? Is bedtime well-timed (not overtired)? Is the morning wake-up time consistent? Is every adult who goes in — you and a partner or co-parent, or just you — using the same starting point and key phrase — including at 3am? Most stalls come from one of these.'],
   ['“Night 3 got worse!”', 'Very common, and usually a sign your child is testing whether the new pattern is real. Hold steady to your night 4 checkpoint. Families who change course here start again from zero.'],
   ['Illness or teething', 'Pause, comfort as much as they need, and follow medical advice. Keep the routine and wake-up time. When they’re well (usually 2–3 days after symptoms ease), restart at the stage you’d reached — it comes back quickly.'],
   ['They stand up and won’t lie down', 'Practice “up and down” lots during the day. At night, lay them down once, then leave them to it — they will lie down when tired. Repeatedly laying them down becomes a game.'],
@@ -104,7 +104,7 @@ export const TROUBLESHOOTING: [string, string][] = [
   ['Travel & time zones', 'Bring the routine, sleep sack, white noise and key phrase. Shift to local time straight away with daylight and mealtimes. Expect a few unsettled nights, then return to your starting point.'],
   ['The toddler negotiator', 'Use the bedtime chart and Bedtime Pass cards. Offer choices before bed (“blue PJs or stars?”), not after. Once in bed: key phrase, same response, no new debates.'],
   ['Doing this on your own', 'You don’t need a second adult: consistency matters more than numbers. Choose the starting point you can repeat when tired, and plan small breaks — an earlier night, rest when they nap, help if anyone offers it. If you need to, lay your child down safely and step out for a few minutes to steady yourself.'],
-  ['We disagree as parents', 'Agree the starting point and the hard-night plan before night one. If one parent finds settling harder, they take a different role (bath and books) while the other leads. Consistency matters more than which starting point you chose.'],
+  ['Sharing it with a partner or co-parent', 'Agree the starting point and the hard-night plan together before night one, and take turns so you both rest. If one of you finds settling harder, they take a different role (bath and books) while the other leads. Consistency matters more than which starting point you chose.'],
   ['Our checkpoint says “get support”', 'Then that’s the right next step, not a failure. See “Keeping it going” below — Georgia will build on what you’ve already done.'],
 ];
 
@@ -121,7 +121,7 @@ export const SUPPORT_SIGNALS = {
     'No meaningful change by night 7, despite following the plan every time',
     'Crying escalates night after night instead of easing',
     'Still waking frequently, splitting nights or rising before 5:30am at night 14',
-    'You can’t sustain an approach — on your own, or agree on one with anyone who shares bedtimes',
+    'You can’t sustain an approach on your own, or you and a partner or co-parent can’t agree on one',
   ],
 };
 

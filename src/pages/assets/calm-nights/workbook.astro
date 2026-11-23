@@ -188,7 +188,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
 
       <h3 style="margin-top:10px;">Five rules that make the difference</h3>
       <div class="two">
-        <div class="box mint"><h4>1 · Consistency over perfection</h4><p class="small" style="margin:0;">The same routine, the same words, the same response — every time, whoever goes in, including at 3am. A good-enough plan done consistently beats a perfect plan done sometimes.</p></div>
+        <div class="box mint"><h4>1 · Consistency over perfection</h4><p class="small" style="margin:0;">The same routine, the same words, the same response — every time, whether it’s you or a co-parent, including at 3am. A good-enough plan done consistently beats a perfect plan done sometimes.</p></div>
         <div class="box mint"><h4>2 · Down calm and awake</h4><p class="small" style="margin:0;">Drowsy is fine; asleep is not. Falling asleep where they’ll wake up is what lets your child reconnect sleep cycles alone.</p></div>
         <div class="box mint"><h4>3 · Pause before you respond</h4><p class="small" style="margin:0;">Many night noises are your child moving between cycles. Wait around five minutes, then use your starting point.</p></div>
         <div class="box mint"><h4>4 · One change at a time</h4><p class="small" style="margin:0;">If you adjust anything, change one thing and give it three nights before judging it. Use the change log on page 25.</p></div>
@@ -319,11 +319,11 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       <div class="tbox"><table class="tight"><thead><tr><th style="width:44%;">Question</th><th>Points to Stay Close</th><th>Points to Step Out &amp; Check</th></tr></thead><tbody>
         <tr><td><strong>1.</strong> When you stay in the room at bedtime, does your child generally calm down or wind up?</td><td>Calms with us nearby · Not sure</td><td>Gets more worked up, plays or chats</td></tr>
         <tr><td><strong>2.</strong> Which could you repeat at 2am, every night for two weeks? <em class="small">(this one wins a tie)</em></td><td>Sitting quietly beside the crib through some protest</td><td>Stepping out and returning for short checks</td></tr>
-        <tr><td><strong>3.</strong> Can everyone who does bedtime do it the same way, whether that’s you alone or several adults?</td><td colspan="2">Doing this on your own, or leading most nights? Choose the one you can keep up, night after night. Sharing bedtimes? Choose the one everyone can do: consistency between adults matters more than fit.</td></tr>
+        <tr><td><strong>3.</strong> Can everyone who does bedtime do it the same way, whether that’s you alone, or you and a partner or co-parent?</td><td colspan="2">Doing this on your own, or leading most nights? Choose the one you can keep up, night after night. Sharing bedtimes with a partner or co-parent? Choose the one you can both do: consistency between adults matters more than fit.</td></tr>
       </tbody></table></div>
       <div class="two" style="margin-top:12px;">
         <div class="box soft"><h4>Lead parent would choose</h4><p class="small" style="margin:0;">☐ Stay Close &nbsp; ☐ Step Out &amp; Check &nbsp; because…</p><div class="wl"></div></div>
-        <div class="box soft"><h4>Other caregiver would choose <span style="text-transform:none;letter-spacing:0;font-weight:400;">(if sharing bedtimes)</span></h4><p class="small" style="margin:0;">☐ Stay Close &nbsp; ☐ Step Out &amp; Check &nbsp; because…</p><div class="wl"></div></div>
+        <div class="box soft"><h4>Partner / co-parent would choose <span style="text-transform:none;letter-spacing:0;font-weight:400;">(if sharing bedtimes)</span></h4><p class="small" style="margin:0;">☐ Stay Close &nbsp; ☐ Step Out &amp; Check &nbsp; because…</p><div class="wl"></div></div>
       </div>
       <div class="note peach" style="margin-top:12px;"><p class="small"><strong>Still unsure?</strong> Start with Stay Close — it’s the gentlest, and easy to move on from. If neither feels possible for your family, that’s a sign to get personalized support rather than force a fit.</p></div>
       <div class="cut" style="margin-top:12px;">
@@ -336,7 +336,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
 
     <!-- 8 · My plan -->
     <article class="sheet">
-      <SheetHead kicker={pg(8, 'Steps 3–4')} title="My plan at a glance" sub="Fill this in together, or on your own if you’re leading. Everyone who does bedtime follows the same page." />
+      <SheetHead kicker={pg(8, 'Steps 3–4')} title="My plan at a glance" sub="Fill this in together with your partner or co-parent, or on your own if you’re leading. Everyone who does bedtime follows the same page." />
       <div class="tbox"><table class="lines"><thead><tr><th style="width:38%;">Our plan</th><th>Our answer</th></tr></thead><tbody>
         <tr><td style="width:38%;"><strong>Our starting point</strong></td><td>☐ Stay Close &nbsp;&nbsp;&nbsp; ☐ Step Out &amp; Check</td></tr>
         <tr><td><strong>Why we chose it</strong></td><td></td></tr>
@@ -369,7 +369,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         </tbody>
       </table></div>
       <h3 style="margin-top:10px;">Our key phrase</h3>
-      <p class="small muted" style="margin:0 0 6px;">Short, warm, identical every time. Check one, or write your own. Everyone who does bedtime uses the exact same words.</p>
+      <p class="small muted" style="margin:0 0 6px;">Short, warm, identical every time. Check one, or write your own. You and any co-parent use the exact same words.</p>
       <ul class="boxlist">{KEY_PHRASES.map((p) => <li style="font-family:var(--serif);font-size:12.5pt;">{p}</li>)}<li>Our own: <span class="fill" style="min-width:420px;"></span></li></ul>
       <div class="two" style="margin-top:10px;">
         <div class="box soft">
@@ -403,11 +403,11 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
           {['Bedtime', 'Wake-ups', 'Morning'].map((r) => <tr><td class="small" style="text-align:left;"><strong>{r}</strong></td>{nights.map(() => <td style="height:30px;border:1px solid var(--line);"></td>)}</tr>)}
         </tbody>
       </table>
-      <p class="tiny muted" style="margin:4px 0 12px;">Write initials. Leading on your own or most nights? Use the grid to plan backup if anyone can help — a bath, a morning or a nap so you can rest. No backup at all? That’s okay: plan small breaks for yourself instead, like an earlier night or resting when they nap. Sharing nights? If one adult finds settling harder, they can take a different role (bath and books) while the other leads.</p>
+      <p class="tiny muted" style="margin:4px 0 12px;">Write initials. Sharing nights with a partner or co-parent? Split them so you both rest; if one of you finds settling harder, they take a different role (bath and books). Leading on your own or most nights? Plan backup if anyone can help — a bath, a morning or a nap. No backup at all? That’s okay: plan small breaks for yourself instead, like an earlier night or resting when they nap.</p>
       <h3>If… then…</h3>
       <table class="lines"><tbody>
         {[
-          ['If it’s 2am and I / we want to give up…', 'Lay them down safely, step out for 5 minutes, re-read the script card. No one to hand over to? Your child is safe in their crib: take those minutes to breathe, then go back in. The plan doesn’t change at night.'],
+          ['If it’s 2am and I / we want to give up…', 'Lay them down safely, step out for 5 minutes, re-read the script card. Partner or co-parent there? Hand over. On your own? Your child is safe in their crib: take those minutes to breathe, then go back in. The plan doesn’t change at night.'],
           ['If crying reaches 8–10…', 'Go in, check, comfort until calm, then restart our starting point.'],
           ['If my / our child seems unwell…', 'Pause the plan, comfort fully, follow medical advice. Restart at the same stage once well.'],
           ['If the adults involved disagree in the moment…', 'Follow this page now; talk it through the next morning with the journal in front of you.'],
@@ -416,7 +416,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         ].map(([q, a]) => <tr><td style="width:40%;"><strong class="small">{q}</strong></td><td class="small muted">{a}</td></tr>)}
       </tbody></table>
       <div class="two" style="margin-top:12px;">
-        <div class="box mint"><h4>Looking after yourself these two weeks</h4><p class="tiny muted" style="margin:0 0 4px;">Early nights, rest when they nap, meals kept simple — and help from a friend or family member if anyone can offer it…</p><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+        <div class="box mint"><h4>Looking after yourself these two weeks</h4><p class="tiny muted" style="margin:0 0 4px;">Early nights, rest when they nap, meals kept simple — and turns with your partner or co-parent, or help from a friend or family member, if you have it…</p><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
         <div class="box peach"><h4>Your people</h4><p class="tiny muted" style="margin:0 0 4px;">Someone to text — or call over — on a hard night</p><div class="wl"></div><p class="tiny muted" style="margin:6px 0 4px;">Pediatrician phone</p><div class="wl"></div></div>
       </div>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Consistency matters more than which starting point you chose.</span></div>
@@ -683,7 +683,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
           <p class="small" style="margin:4px 0 0;"><strong>Pause ~5 min.</strong> &nbsp; <strong>Before 6am = night.</strong></p>
           <p class="small" style="margin:6px 0 0;"><strong>1–5</strong> pause · <strong>6–7</strong> respond with our starting point · <strong>8–10</strong> check &amp; comfort, then restart calmly.</p>
           <p class="small" style="margin:6px 0 0;">Feed we’re keeping: ______________ — lights low, straight back down.</p>
-          <p class="small" style="margin:6px 0 0;">Overwhelmed? Lay them down safely, step out, breathe. No one to hand over to? They’re safe in their crib — come back when you feel steadier.</p>
+          <p class="small" style="margin:6px 0 0;">Overwhelmed? Lay them down safely, step out, breathe. Hand over if someone else is there; if not, they’re safe in their crib — come back when you feel steadier.</p>
           <p style="font-family:var(--serif);font-size:13pt;margin:10px 0 0;">Comfort is never removed. Confusion is.</p>
         </div>
       </div>
