@@ -2,7 +2,7 @@
 import Layout from '../../layouts/AssetsLayout.astro';
 export const prerender = true;
 
-import { SEQUENCES as seqs } from '../../data/emails';
+import { SEQUENCES as seqs, accessHref } from '../../data/emails';
 ---
 <Layout title="Email Nurture Sequences | Thyme4Sleep" description="The Thyme4Sleep free-to-paid email sequences.">
   <section class="hero">
@@ -31,7 +31,7 @@ import { SEQUENCES as seqs } from '../../data/emails';
             <p style="white-space:pre-line;margin:16px 0;font-size:.98rem;">{e.body}</p>
             {e.buttons ? (
               <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-                {e.buttons.map(([label, href]) => <span class="btn btn-sm btn-ghost" style="pointer-events:none;">{label}</span><code class="small muted" style="word-break:break-all;">{href}</code>)}
+                {e.buttons.map(([label, href]) => <span class="btn btn-sm btn-ghost" style="pointer-events:none;">{label}</span><code class="small muted" style="word-break:break-all;">{accessHref(href)}</code>)}
               </div>
             ) : <span class="btn btn-sm btn-dark" style="pointer-events:none;">{e.cta}</span>}
             {e.rule && <div class="note peach" style="margin:16px 0 0;"><p class="small"><strong>Automation:</strong> {e.rule}</p></div>}

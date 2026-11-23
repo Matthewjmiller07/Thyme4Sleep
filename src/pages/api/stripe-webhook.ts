@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { upsertContact, listForPackage, type BrevoList } from '../../lib/brevo';
+import { CALM_NIGHTS_PACKAGES } from '../../lib/calmNights';
+import { RESET_PACKAGES } from '../../lib/resetToRest';
+
+const SITE = 'https://thyme4sleep.com';
 
 export const prerender = false;
 
@@ -55,9 +59,15 @@ async function handleEvent(event: Stripe.Event) {
     const list = listForPackage(packageId);
     if (buyer && list) {
       const lists: BrevoList[] = packageId === 'calm-nights-bundle' ? ['calm', 'reset'] : [list];
+      // Personal access links for the purchase emails: they open the product on any device
+      // (see src/pages/access.astro). Only the links this purchase includes are set, so an
+      // earlier purchase's link is kept.
+      const link = `${SITE}/access?s=${session.id}`;
       await upsertContact(buyer.toLowerCase(), {
         FIRSTNAME: (session.customer_details?.name || '').split(' ')[0],
         LAST_PURCHASE: packageId || '',
+        RESET_LINK: packageId && RESET_PACKAGES.includes(packageId) ? link : '',
+        CALM_LINK: packageId && CALM_NIGHTS_PACKAGES.includes(packageId) ? link : '',
       }, lists);
     }
     

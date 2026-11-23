@@ -1,0 +1,47 @@
+---
+// Personal access links from the purchase emails, e.g. /access?s=cs_live_...&to=prep
+// The Stripe webhook saves each buyer's link on their Brevo contact (RESET_LINK / CALM_LINK).
+// We re-check the session with Stripe, unlock this browser for whatever the purchase includes,
+// then send the buyer on. Works on any device, so a parent who bought on a laptop can open
+// their program from the email on their phone.
+import Layout from '../layouts/AssetsLayout.astro';
+import { verifySession, setAccessCookie, CALM_NIGHTS_PACKAGES } from '../lib/calmNights';
+import { RESET_PACKAGES, setResetCookie } from '../lib/resetToRest';
+export const prerender = false;
+
+const CALM_DEST: Record<string, string> = {
+  program: '/assets/calm-nights/plan',
+  prep: '/assets/calm-nights/plan#prep',
+  review: '/assets/calm-nights/plan#review',
+  next: '/assets/calm-nights/plan#next',
+};
+
+Astro.response.headers.set('Cache-Control', 'private, no-store');
+Astro.response.headers.set('X-Robots-Tag', 'noindex');
+
+const sessionId = Astro.url.searchParams.get('s');
+const to = Astro.url.searchParams.get('to') || '';
+const purchase = await verifySession(sessionId, [...new Set([...CALM_NIGHTS_PACKAGES, ...RESET_PACKAGES])]);
+
+if (purchase && sessionId) {
+  const calm = CALM_NIGHTS_PACKAGES.includes(purchase.packageId);
+  const reset = RESET_PACKAGES.includes(purchase.packageId);
+  if (calm) setAccessCookie(Astro.cookies, sessionId);
+  if (reset) setResetCookie(Astro.cookies, sessionId);
+  const dest = to === 'reset' && reset ? '/reset' : calm ? (CALM_DEST[to] || CALM_DEST.program) : '/reset';
+  return Astro.redirect(dest);
+}
+---
+<Layout title="Opening your purchase | Thyme4Sleep" description="Your Thyme4Sleep purchase.">
+  <section class="band">
+    <div class="narrow center">
+      <span class="eyebrow">Almost there</span>
+      <h1>We couldn’t open your purchase from this link</h1>
+      <hr class="divider" />
+      <p class="muted">Please use the button in your purchase email from Georgia. If that doesn’t work either, email Georgia with your receipt and she’ll send you a fresh link straight away.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-dark" href="mailto:georgia@thyme4sleep.com?subject=Help%20opening%20my%20purchase">Email georgia@thyme4sleep.com</a>
+      </div>
+    </div>
+  </section>
+</Layout>

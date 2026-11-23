@@ -8,7 +8,8 @@
 //   BREVO_LIST_CALM      — Calm Nights / bundle buyers
 //   BREVO_LIST_CLIENTS   — any 1:1 purchase (use as the exit list for the nurture flows)
 // Contact attributes to create in Brevo (Contacts → Settings → Attributes, type Text):
-//   SNAPSHOT (d|a|t|c), SNAPSHOT_RESULT, LEAD_SOURCE, LAST_PURCHASE
+//   SNAPSHOT (d|a|t|c), SNAPSHOT_RESULT, LEAD_SOURCE, LAST_PURCHASE,
+//   RESET_LINK, CALM_LINK (each buyer's personal access link, used by the purchase emails' buttons)
 // FIRSTNAME already exists in every Brevo account.
 
 const env = (k: string): string | undefined => (import.meta as any).env?.[k] || process.env[k];
