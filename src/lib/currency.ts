@@ -34,7 +34,7 @@ export function resolveCurrency(ctx: Ctx): { currency: Currency; country: string
   return { currency: currencyForCountry(country), country, chosen: false };
 }
 
-// Everything a page needs to show localised prices: the visitor's currency and a formatter
+// Everything a page needs to show localized prices: the visitor's currency and a formatter
 // (P('starter-1') -> "£189"). Also stops the page being cached and shared, since it differs
 // by visitor.
 export async function localPricing(ctx: Ctx & { response: ResponseInit & { headers: Headers } }) {

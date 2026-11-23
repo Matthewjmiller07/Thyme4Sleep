@@ -1,4 +1,4 @@
-// Localised prices across the site and checkout: one fixed price per currency, set by Georgia.
+// Localized prices across the site and checkout: one fixed price per currency, set by Georgia.
 //
 // Pages and checkout read this same table, so what a family sees is exactly what Stripe charges.
 // GBP / EUR / ILS figures were worked out from BASIS_RATES below, then rounded to clean price

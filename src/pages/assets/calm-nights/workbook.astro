@@ -1,5 +1,5 @@
 ---
-// The Calm Nights printable workbook: a full companion to the programme, from fit check and
+// The Calm Nights printable workbook: a full companion to the program, from fit check and
 // baseline through prep week, the 14-night journal, the three checkpoints and life after night 14.
 // Same access rules as the plan. All method content comes from src/data/calmNights.ts.
 import Layout from '../../../layouts/AssetsLayout.astro';
@@ -182,13 +182,13 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         <tr><td><strong>Before prep week</strong><br /><span class="small muted">Steps 1–2 · Understand, check fit</span></td><td>Read steps 1–2 of the program. Check fit and readiness. Log 3 ordinary nights so you know where you’re starting from.</td><td>3, 4, 5</td></tr>
         <tr><td><strong>Prep week</strong><br /><span class="small muted">Steps 3–4 · Prepare, choose · 3–7 days</span></td><td>Room, feed, day, routine and team — one small job a day. Choose your starting point and fill in your plan.</td><td>6, 7, 8, 9, 10</td></tr>
         <tr><td><strong>Nights 1–14</strong><br /><span class="small muted">Step 5 · Implement</span></td><td>Follow your starting point at bedtime, and the same response for every wake-up. Write up the night each morning — five minutes, over breakfast.</td><td>11–13, journal 14–20</td></tr>
-        <tr><td><strong>Mornings after nights 4, 7, 14</strong><br /><span class="small muted">Step 6 · Review</span></td><td>Checkpoint review: look at the numbers, tick what you see, decide: keep going, adjust, or get support.</td><td>21, 22–24</td></tr>
+        <tr><td><strong>Mornings after nights 4, 7, 14</strong><br /><span class="small muted">Step 6 · Review</span></td><td>Checkpoint review: look at the numbers, check what you see, decide: keep going, adjust, or get support.</td><td>21, 22–24</td></tr>
         <tr><td><strong>After night 14</strong></td><td>Keep the foundations, plan for wobbles, and — if you need it — hand your notes to a 1:1 coach.</td><td>25, 26</td></tr>
       </tbody></table>
 
       <h3 style="margin-top:10px;">Five rules that make the difference</h3>
       <div class="two">
-        <div class="box mint"><h4>1 · Consistency over perfection</h4><p class="small" style="margin:0;">The same routine, the same words, the same response — every time, every adult, including at 3am. A good-enough plan done consistently beats a perfect plan done sometimes.</p></div>
+        <div class="box mint"><h4>1 · Consistency over perfection</h4><p class="small" style="margin:0;">The same routine, the same words, the same response — every time, whoever goes in, including at 3am. A good-enough plan done consistently beats a perfect plan done sometimes.</p></div>
         <div class="box mint"><h4>2 · Down calm and awake</h4><p class="small" style="margin:0;">Drowsy is fine; asleep is not. Falling asleep where they’ll wake up is what lets your child reconnect sleep cycles alone.</p></div>
         <div class="box mint"><h4>3 · Pause before you respond</h4><p class="small" style="margin:0;">Many night noises are your child moving between cycles. Wait around five minutes, then use your starting point.</p></div>
         <div class="box mint"><h4>4 · One change at a time</h4><p class="small" style="margin:0;">If you adjust anything, change one thing and give it three nights before judging it. Use the change log on page 25.</p></div>
@@ -196,7 +196,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       </div>
 
       <h3 style="margin-top:10px;">Symbols you’ll use</h3>
-      <p class="small" style="margin:0;"><strong>✕</strong> a wake-up you responded to &nbsp;·&nbsp; <strong>○</strong> a stir that settled on its own during your pause &nbsp;·&nbsp; <strong>F</strong> a feed (ml/oz or minutes) &nbsp;·&nbsp; <strong>★</strong> a win, however small &nbsp;·&nbsp; <strong>1–10</strong> peak crying level (scale on page 3) &nbsp;·&nbsp; <strong>☐</strong> tick when done</p>
+      <p class="small" style="margin:0;"><strong>✕</strong> a wake-up you responded to &nbsp;·&nbsp; <strong>○</strong> a stir that settled on its own during your pause &nbsp;·&nbsp; <strong>F</strong> a feed (ml/oz or minutes) &nbsp;·&nbsp; <strong>★</strong> a win, however small &nbsp;·&nbsp; <strong>1–10</strong> peak crying level (scale on page 3) &nbsp;·&nbsp; <strong>☐</strong> check when done</p>
       <p class="tiny muted" style="margin:8px 0 0;"><strong>General guidance, not medical advice.</strong> Check with your pediatrician before you start, pause if your child becomes unwell, and always follow safe sleep guidance.</p>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>© Thyme4Sleep LLC · personal use only</span></div>
     </article>
@@ -246,7 +246,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       </ul>
       <h3 style="margin-top:10px;">Get personalized support first if…</h3>
       <ul class="boxlist">{SUPPORT_SIGNALS.before.map((s) => <li>{s}</li>)}</ul>
-      <p class="small muted" style="margin:0 0 10px;">Ticked any of these? That’s not a judgment — it means a general framework is likely to frustrate you. A plan built for your child will serve you better: thyme4sleep.com/pricing</p>
+      <p class="small muted" style="margin:0 0 10px;">Checked any of these? That’s not a judgment — it means a general framework is likely to frustrate you. A plan built for your child will serve you better: thyme4sleep.com/pricing</p>
       <div class="two">
         <div class="box"><h4>Readiness · our child</h4><ul class="boxlist small" style="margin:0;"><li>Healthy right now — no illness, ear infection or new teeth cutting through</li><li>Our pediatrician is happy with growth and with any changes to night feeds</li><li>No big change in the next two weeks (travel, new sibling, daycare start)</li><li>Sleeping in a safe space: alone, always starting on their back, in a crib with only a fitted sheet</li></ul></div>
         <div class="box"><h4>Readiness · our family</h4><ul class="boxlist small" style="margin:0;"><li>Everyone who does bedtime has read steps 1–4</li><li>We have two weeks of mostly home bedtimes</li><li>Everyone involved agrees on one approach — or I’m leading this myself</li><li>We’ve planned something kind for ourselves (early nights, help with the older kids)</li></ul></div>
@@ -289,7 +289,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
     <article class="sheet">
       <SheetHead kicker={pg(6, 'Steps 3–4')} title="Prep-week planner" sub="One small job a day. Have a shorter run-up? Combine days — but do them all before night one." />
       <table class="tight" style="table-layout:fixed;">
-        <thead><tr><th style="width:17%;">Day · focus</th><th>Tick as you go</th><th style="width:14%;">Date done</th></tr></thead>
+        <thead><tr><th style="width:17%;">Day · focus</th><th>Check as you go</th><th style="width:14%;">Date done</th></tr></thead>
         <tbody>
           {prepDays.map(([d, f, items]) => (
             <tr>
@@ -369,7 +369,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         </tbody>
       </table></div>
       <h3 style="margin-top:10px;">Our key phrase</h3>
-      <p class="small muted" style="margin:0 0 6px;">Short, warm, identical every time. Tick one, or write your own. Every adult uses the exact same words.</p>
+      <p class="small muted" style="margin:0 0 6px;">Short, warm, identical every time. Check one, or write your own. Everyone who does bedtime uses the exact same words.</p>
       <ul class="boxlist">{KEY_PHRASES.map((p) => <li style="font-family:var(--serif);font-size:12.5pt;">{p}</li>)}<li>Our own: <span class="fill" style="min-width:420px;"></span></li></ul>
       <div class="two" style="margin-top:10px;">
         <div class="box soft">
@@ -403,11 +403,11 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
           {['Bedtime', 'Wake-ups', 'Morning'].map((r) => <tr><td class="small" style="text-align:left;"><strong>{r}</strong></td>{nights.map(() => <td style="height:30px;border:1px solid var(--line);"></td>)}</tr>)}
         </tbody>
       </table>
-      <p class="tiny muted" style="margin:4px 0 12px;">Write initials. Leading on your own or most nights? Use the grid to plan backup too: someone who could cover a bath, a morning or a nap so you can rest. Sharing nights? If one adult finds settling harder, they can take a different role (bath and books) while the other leads.</p>
+      <p class="tiny muted" style="margin:4px 0 12px;">Write initials. Leading on your own or most nights? Use the grid to plan backup if anyone can help — a bath, a morning or a nap so you can rest. No backup at all? That’s okay: plan small breaks for yourself instead, like an earlier night or resting when they nap. Sharing nights? If one adult finds settling harder, they can take a different role (bath and books) while the other leads.</p>
       <h3>If… then…</h3>
       <table class="lines"><tbody>
         {[
-          ['If it’s 2am and I / we want to give up…', 'Lay them down safely, step out for 5 minutes, re-read the script card. Hand over if someone else is there. The plan doesn’t change at night.'],
+          ['If it’s 2am and I / we want to give up…', 'Lay them down safely, step out for 5 minutes, re-read the script card. No one to hand over to? Your child is safe in their crib: take those minutes to breathe, then go back in. The plan doesn’t change at night.'],
           ['If crying reaches 8–10…', 'Go in, check, comfort until calm, then restart our starting point.'],
           ['If my / our child seems unwell…', 'Pause the plan, comfort fully, follow medical advice. Restart at the same stage once well.'],
           ['If the adults involved disagree in the moment…', 'Follow this page now; talk it through the next morning with the journal in front of you.'],
@@ -416,7 +416,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         ].map(([q, a]) => <tr><td style="width:40%;"><strong class="small">{q}</strong></td><td class="small muted">{a}</td></tr>)}
       </tbody></table>
       <div class="two" style="margin-top:12px;">
-        <div class="box mint"><h4>Looking after yourself these two weeks</h4><p class="tiny muted" style="margin:0 0 4px;">Early nights, a friend or family member to cover a morning, meals sorted, help with older children…</p><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+        <div class="box mint"><h4>Looking after yourself these two weeks</h4><p class="tiny muted" style="margin:0 0 4px;">Early nights, rest when they nap, meals kept simple — and help from a friend or family member if anyone can offer it…</p><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
         <div class="box peach"><h4>Your people</h4><p class="tiny muted" style="margin:0 0 4px;">Someone to text — or call over — on a hard night</p><div class="wl"></div><p class="tiny muted" style="margin:6px 0 4px;">Pediatrician phone</p><div class="wl"></div></div>
       </div>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>Consistency matters more than which starting point you chose.</span></div>
@@ -606,8 +606,8 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
       </table></div>
       <h3 style="margin-top:12px;">Our change log</h3>
       <div class="tbox"><table class="tight" style="table-layout:fixed;">
-        <thead><tr><th style="width:14%;">Date</th><th>The one thing we changed</th><th style="width:30%;">After 3 nights…</th><th style="width:14%;">Keep?</th></tr></thead>
-        <tbody>{[1, 2, 3, 4, 5].map(() => <tr><td style="height:30px;"></td><td></td><td></td><td class="tiny">Y / N</td></tr>)}</tbody>
+        <thead><tr><th style="width:14%;">Date</th><th>The one thing I / we changed</th><th style="width:30%;">After 3 nights…</th><th style="width:14%;">Keep?</th></tr></thead>
+        <tbody>{[1, 2, 3, 4].map(() => <tr><td style="height:30px;"></td><td></td><td></td><td class="tiny">Y / N</td></tr>)}</tbody>
       </table></div>
       <div class="sheet-foot"><span>THYME4SLEEP · CALM NIGHTS</span><span>One change at a time.</span></div>
     </article>
@@ -658,7 +658,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
         <div class="cut">
           <h4>✂ Our key phrase</h4>
           <div class="wl"></div><div class="wl"></div><div class="wl"></div>
-          <p class="small" style="margin:10px 0 0;">Short, warm, identical every time. Every adult. Every response.</p>
+          <p class="small" style="margin:10px 0 0;">Short, warm, identical every time. Whoever goes in. Every response.</p>
           <p class="small" style="margin:8px 0 0;"><strong>Wake-up:</strong> ______ : ______ am &nbsp; <strong>Lights out:</strong> ______ : ______ pm</p>
           <p class="small" style="margin:8px 0 0;"><strong>Hard-night plan:</strong></p><div class="wl"></div>
         </div>
@@ -683,7 +683,7 @@ const stageForNight = (n: number) => STAY_CLOSE.find(([when]) => {
           <p class="small" style="margin:4px 0 0;"><strong>Pause ~5 min.</strong> &nbsp; <strong>Before 6am = night.</strong></p>
           <p class="small" style="margin:6px 0 0;"><strong>1–5</strong> pause · <strong>6–7</strong> respond with our starting point · <strong>8–10</strong> check &amp; comfort, then restart calmly.</p>
           <p class="small" style="margin:6px 0 0;">Feed we’re keeping: ______________ — lights low, straight back down.</p>
-          <p class="small" style="margin:6px 0 0;">Overwhelmed? Lay them down safely, step out, breathe. Hand over if someone else is there.</p>
+          <p class="small" style="margin:6px 0 0;">Overwhelmed? Lay them down safely, step out, breathe. No one to hand over to? They’re safe in their crib — come back when you feel steadier.</p>
           <p style="font-family:var(--serif);font-size:13pt;margin:10px 0 0;">Comfort is never removed. Confusion is.</p>
         </div>
       </div>

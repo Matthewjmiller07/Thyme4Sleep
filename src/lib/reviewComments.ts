@@ -49,7 +49,7 @@ export const REVIEW_PAGES: { group: string; pages: { path: string; title: string
     group: 'Calm Nights Method',
     pages: [
       { path: '/assets/calm-nights', title: 'Sales page' },
-      { path: '/assets/calm-nights/plan', title: 'Programme (gated)' },
+      { path: '/assets/calm-nights/plan', title: 'Program (gated)' },
       { path: '/assets/calm-nights/workbook', title: 'Workbook & tracker (gated)' },
       { path: '/assets/calm-nights/check-in', title: 'Check-in' },
       { path: '/assets/calm-nights/success', title: 'Purchase confirmation' },

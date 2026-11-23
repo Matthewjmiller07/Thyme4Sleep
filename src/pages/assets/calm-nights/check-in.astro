@@ -18,13 +18,13 @@ const heading = !cp
   : { 'on-track': `Night ${night}: keep going`, adjust: `Night ${night}: one small adjustment`, support: `Night ${night}: let’s get you the right support`, guidance: `Night ${night}: you don’t have to do this alone` }[status];
 
 // Shown for “I’d like some guidance”: asking for help never requires reporting that things aren’t working.
-const GUIDANCE = 'Wanting someone beside you is a perfectly good reason to ask. Calm Nights is a general framework; personalised support starts with your child’s age, temperament, development, sleep history and your family’s circumstances. Here are the ways to get it.';
+const GUIDANCE = 'Wanting someone beside you is a perfectly good reason to ask. Calm Nights is a general framework; personalized support starts with your child’s age, temperament, development, sleep history and your family’s circumstances. Here are the ways to get it.';
 
 const body = !cp
   ? (status === 'support'
-    ? 'Something on the “get personalised support first” list applies to your family. That doesn’t mean you’ve done anything wrong — it means a plan built around your child will serve you far better than a general one. Here are the options.'
+    ? 'Something on the “get personalized support first” list applies to your family. That doesn’t mean you’ve done anything wrong — it means a plan built around your child will serve you far better than a general one. Here are the options.'
     : status === 'guidance' ? GUIDANCE
-    : 'Lovely. Work through steps 1–4 of your programme, print your Guide & Workbook, and choose your night one. Your next email arrives around your night 4 checkpoint.')
+    : 'Lovely. Work through steps 1–4 of your program, print your Guide & Workbook, and choose your night one. Your next email arrives around your night 4 checkpoint.')
   : { 'on-track': cp.onTrack, adjust: cp.adjust, support: cp.support, guidance: GUIDANCE }[status];
 
 const showCoaching = status === 'support' || status === 'guidance';
@@ -38,7 +38,7 @@ const showCoaching = status === 'support' || status === 'guidance';
       <p class="lead">{body}</p>
       {!showCoaching && (
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-dark" href={status === 'adjust' ? '/assets/calm-nights/plan#trouble' : '/assets/calm-nights/plan#review'}>{status === 'adjust' ? 'Open Troubleshooting' : 'Back to my programme'}</a>
+          <a class="btn btn-dark" href={status === 'adjust' ? '/assets/calm-nights/plan#trouble' : '/assets/calm-nights/plan#review'}>{status === 'adjust' ? 'Open Troubleshooting' : 'Back to my program'}</a>
           <a class="btn btn-ghost" href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20check-in">Share a win with Georgia</a>
         </div>
       )}
@@ -67,14 +67,14 @@ const showCoaching = status === 'support' || status === 'guidance';
           <div class="card lift" style="display:flex;flex-direction:column;border:2px solid var(--char);">
             <span class="pill core">From {P('standard-1')}</span>
             <h3 style="margin-top:12px;">Standard</h3>
-            <p class="small muted" style="flex:1;">Your personalised plan, a 60-minute consultation and two weeks of email and text support while you put it into practice. Best if you’ve tried on your own and want Georgia beside you.</p>
+            <p class="small muted" style="flex:1;">Your personalized plan, a 60-minute consultation and two weeks of email and text support while you put it into practice. Best if you’ve tried on your own and want Georgia beside you.</p>
             <a class="btn btn-dark btn-sm" href="/packages/standard?from=calm-nights">See Standard</a>
           </div>
           <div class="card lift" style="display:flex;flex-direction:column;">
-            <span class="pill core">Specialised</span>
-            <h3 style="margin-top:12px;">Specialised Sleep Support</h3>
+            <span class="pill core">Specialized</span>
+            <h3 style="margin-top:12px;">Specialized Sleep Support</h3>
             <p class="small muted" style="flex:1;">For children with additional needs, neurodivergence or developmental differences — support shaped around your child.</p>
-            <a class="btn btn-ghost btn-sm" href={SPECIALISED_URL}>See Specialised Support</a>
+            <a class="btn btn-ghost btn-sm" href={SPECIALISED_URL}>See Specialized Support</a>
           </div>
         </div>
         <div class="note" style="margin-top:28px;"><p><strong>You won’t start from scratch.</strong> When you book, mention Calm Nights and share your tracker and checkpoint page. Georgia will see what you’ve already tried and build from there. Not sure which package? <a href={FREE_CALL_URL} target="_blank" rel="noopener">Book a free 15-minute assessment call</a>, or <a href="mailto:georgia@thyme4sleep.com?subject=Calm%20Nights%20%E2%80%94%20which%20package%3F">email Georgia</a> with a line about where you’re stuck.</p></div>

@@ -13,7 +13,7 @@ const items: Item[] = [
   { id: 'w4', group: 'Welcome', e: welcome[4] },
   ...ascend.map((e, i) => ({ id: `r${i}`, group: 'Reset to Rest buyers', e })),
   ...calm.map((e, i) => ({ id: `c${i}`, group: 'Calm Nights pathway', e })),
-  ...support.map((e, i) => ({ id: `s${i}`, group: 'Personalised support', e })),
+  ...support.map((e, i) => ({ id: `s${i}`, group: 'Personalized support', e })),
 ];
 const groups = [...new Set(items.map((i) => i.group))];
 const payload = Object.fromEntries(items.map(({ id, e }) => [id, {
@@ -44,7 +44,7 @@ const flow = [
   { title: 'Buy → Results', nodes: [
     { t: 'Reset to Rest buyers', s: '5 emails: results, reviews, Calm Nights if bedtime is the issue', go: 'r0', tag: 'paid' },
     { t: 'Calm Nights pathway', s: 'Automated night 4 · 7 · 14 check-ins with one-tap answers', go: 'c0', tag: 'paid' },
-    { t: 'Personalised support', s: '“Little change” or “I’d like some guidance” → free call & 1:1 waiting list', go: 's0', tag: 'core' },
+    { t: 'Personalized support', s: '“Little change” or “I’d like some guidance” → free call & 1:1 waiting list', go: 's0', tag: 'core' },
   ]},
 ];
 ---
@@ -162,7 +162,7 @@ const flow = [
         <li><strong>Templates.</strong> Copy each email’s HTML from the previewer into a Brevo template.</li>
         <li><strong>Automations.</strong> Build four workflows, each triggered by “contact added to list”:
           <em>Welcome</em> (Leads → Day 0, 1, 2 → condition on <code>SNAPSHOT</code> for Day 3, with the no-quiz email when it’s empty → Day 5),
-          <em>Reset to Rest</em>, <em>Calm Nights</em> (with “clicked link” conditions for the check-in buttons) and <em>Personalised support</em>. Set “exit if contact is in list Clients” on every workflow.</li>
+          <em>Reset to Rest</em>, <em>Calm Nights</em> (with “clicked link” conditions for the check-in buttons) and <em>Personalized support</em>. Set “exit if contact is in list Clients” on every workflow.</li>
         <li><strong>Test.</strong> Take the quiz with your own address, buy with a Stripe test card, and check that each email arrives and every button lands in the right place.</li>
       </ol>
       <div class="note"><p class="small" style="margin:0;"><strong>Postal address: done.</strong> Anti-spam law (CAN-SPAM) requires a physical mailing address in every marketing email. It’s already in every template’s footer (907 Rollingwood Road, Highland Park, Illinois 60035). If you also set one in Brevo’s sender settings, use the same address.</p></div>

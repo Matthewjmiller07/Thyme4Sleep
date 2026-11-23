@@ -9,7 +9,7 @@ export const RESET_PACKAGES = ['reset-to-rest', 'calm-nights-bundle'];
 export const RESET_COOKIE = 'reset_session';
 
 // Buyers from before verified access carry an unverifiable random `reset_access` cookie.
-// They are honoured so nobody who paid loses access; set this to false once those
+// They are honored so nobody who paid loses access; set this to false once those
 // buyers have been sent a fresh link (or after a year, when the old cookies expire).
 const ACCEPT_LEGACY_COOKIE = true;
 const LEGACY_COOKIE = 'reset_access';
