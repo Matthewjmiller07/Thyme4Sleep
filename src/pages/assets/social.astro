@@ -1,11 +1,14 @@
 ---
 import Layout from '../../layouts/AssetsLayout.astro';
-import { CAROUSEL_REGRESSION, CAROUSEL_RESET, QUOTES, STORIES, CAPTIONS } from '../../data/social';
+import { CAROUSEL_REGRESSION, CAROUSEL_RESET, CAROUSEL_BACK, CAROUSEL_REST, CAROUSEL_CALM, QUOTES, STORIES, CAPTIONS } from '../../data/social';
 export const prerender = true;
 
 const groups = [
   { title: 'Carousel · Regression or habit?', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_REGRESSION.map((_, i) => `carousel-regression-${i + 1}`), w: 216 },
   { title: 'Carousel · The 3–5 day reset', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_RESET.map((_, i) => `carousel-reset-${i + 1}`), w: 216 },
+  { title: 'Carousel · I’m back (relaunch post 2)', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_BACK.map((_, i) => `carousel-back-${i + 1}`), w: 216 },
+  { title: 'Carousel · From Reset to Rest (relaunch post 3)', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_REST.map((_, i) => `carousel-rest-${i + 1}`), w: 216 },
+  { title: 'Carousel · The Calm Nights Method (relaunch post 4)', size: '1080 × 1350 · Instagram / Facebook', files: CAROUSEL_CALM.map((_, i) => `carousel-calm-${i + 1}`), w: 216 },
   { title: 'Quote cards', size: '1080 × 1080 · feed, Facebook, WhatsApp status', files: QUOTES.map((_, i) => `quote-${i + 1}`), w: 250 },
   { title: 'Stories', size: '1080 × 1920 · Instagram / Facebook / WhatsApp', files: STORIES.map((_, i) => `story-${i + 1}`), w: 200 },
   { title: 'Pinterest pins', size: '1000 × 1500 · Pinterest', files: ['pin-calm-nights'], w: 230 },

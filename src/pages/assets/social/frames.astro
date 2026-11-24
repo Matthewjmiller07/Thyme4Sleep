@@ -3,7 +3,7 @@
 // /public/assets/social/<data-name>.png by scripts/assets/render.mjs.
 import Layout from '../../../layouts/AssetsLayout.astro';
 import Leaf from '../../../components/assets/Leaf.astro';
-import { CAROUSEL_REGRESSION, CAROUSEL_RESET, QUOTES, STORIES } from '../../../data/social';
+import { CAROUSEL_REGRESSION, CAROUSEL_RESET, CAROUSEL_BACK, CAROUSEL_REST, CAROUSEL_CALM, QUOTES, STORIES } from '../../../data/social';
 export const prerender = true;
 
 const BG: Record<string, [string, string, string]> = {
@@ -12,7 +12,8 @@ const BG: Record<string, [string, string, string]> = {
   sage: ['#8F958C', '#FBF7F3', '#F3EAE3'],
   peach: ['#F1D4AE', '#3F3B38', '#6E7569'],
 };
-const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET]] as const;
+const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET], ['back', CAROUSEL_BACK], ['rest', CAROUSEL_REST], ['calm', CAROUSEL_CALM]] as const;
+const imgUrl = (img: string) => (img.includes('/') ? `/assets/img/${img}` : `/assets/img/${img}.webp`);
 ---
 <Layout title="Social frames | Thyme4Sleep" bare>
   <style>
@@ -56,7 +57,7 @@ const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET
     {carousels.map(([name, slides]) => slides.map((s, i) => (
       <div class="frame" data-name={`carousel-${name}-${i + 1}`} style={`width:1080px;height:1350px;background:${s.kind === 'point' ? (i % 2 ? '#FBF7F3' : '#F3EAE3') : '#F3EAE3'};`}>
         {s.kind === 'cover' && (<>
-          <div class="ph" style={`top:auto;height:720px;background-image:url(/assets/img/${s.img}.webp);border-radius:540px 540px 0 0;left:60px;right:60px;`}></div>
+          <div class="ph" style={`top:auto;height:720px;background-image:url(${imgUrl(s.img)});border-radius:540px 540px 0 0;left:60px;right:60px;`}></div>
           <div style="position:absolute;left:90px;right:90px;top:120px;">
             <span class="eb" style="color:#6E7569;">{s.sub}</span>
             <h2 style="font-size:118px;line-height:1;margin-top:28px;">{s.title}<br /><em style="color:#897E77;">{s.accent}</em></h2>
@@ -72,7 +73,7 @@ const carousels = [['regression', CAROUSEL_REGRESSION], ['reset', CAROUSEL_RESET
           </div>
         </>)}
         {s.kind === 'cta' && (<>
-          <div class="ph" style={`background-image:url(/assets/img/${s.img}.webp);`}></div>
+          <div class="ph" style={`background-image:url(${imgUrl(s.img)});`}></div>
           <div class="ph" style="background:linear-gradient(180deg,rgba(63,59,56,.15) 0%,rgba(63,59,56,.88) 62%);"></div>
           <div style="position:absolute;left:90px;right:90px;bottom:170px;color:#F3EAE3;">
             <h2 style="font-size:96px;line-height:1.02;color:#F3EAE3;">{s.title}</h2>
