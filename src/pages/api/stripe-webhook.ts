@@ -31,7 +31,13 @@ export const POST: APIRoute = async ({ request }) => {
     const webhookSecret = (import.meta as any).env.STRIPE_WEBHOOK_SECRET || process.env.STRIPE_WEBHOOK_SECRET;
     
     if (!webhookSecret) {
-      console.warn('[Stripe Webhook] STRIPE_WEBHOOK_SECRET not set - skipping signature verification');
+      // On the live site, never trust an unsigned event: anyone could post a fake purchase.
+      // Stripe retries failed deliveries for up to 3 days, so nothing is lost once the secret is set.
+      if (import.meta.env.PROD) {
+        console.error('[Stripe Webhook] STRIPE_WEBHOOK_SECRET is not set: refusing unverified event');
+        return new Response('Webhook signing secret not configured', { status: 500 });
+      }
+      console.warn('[Stripe Webhook] STRIPE_WEBHOOK_SECRET not set - skipping signature verification (dev only)');
       // For development, parse the event without verification
       const event = JSON.parse(body);
       await handleEvent(event);
