@@ -7,7 +7,7 @@
 //   From Reset to Rest ($37) is the next step: a gentle night-waking reduction protocol for families
 //   whose sleep has already stabilized. Calm Nights ($97) is a general self-guided framework.
 //   1:1 coaching is a plan built around the child.
-// - 1:1 booking is paused (Georgia's maternity leave): offers point to the waiting list, the free
+// - 1:1 booking reopens soon after Georgia's maternity leave: offers point to the waiting list, the free
 //   15-minute assessment call and the standalone $99 troubleshooting call. When booking reopens,
 //   swap the waiting-list lines for booking lines (the review doc has the open-booking wording).
 // - Check-ins are automated; nothing implies Georgia is watching answers in real time.
@@ -35,7 +35,7 @@ const checkIn = (n: number, open: [string, string] = ['Open my program', 'access
 // Closing lines reused across emails.
 const CALL_LINE = 'A quiz can only tell me so much. If you’d rather talk it through, book a free 15-minute sleep assessment call. You don’t need to buy anything first.';
 const CN_FOOTER = 'Would you rather have someone guide you through it? Book a free 15-minute sleep assessment call. Calm Nights is a general framework; my 1:1 coaching is a plan built around your child’s age, temperament, development, sleep history and family.';
-const WAITLIST_LINE = 'My 1:1 books are closed for now while I’m on maternity leave, but my waiting list is open. Reply “waitlist” and I’ll save your place and let you know as soon as I’m taking families again.';
+const WAITLIST_LINE = 'My 1:1 spots reopen very soon, and my waiting list hears first. Reply “waitlist” and I’ll save your place and let you know the moment I’m taking families again.';
 
 export const welcome: Email[] = [
   { day: 'Day 0 · Instantly', subject: 'Your Gentle Sleep Reset is here 🌿', preview: 'Plus the one thing to do tonight.',

@@ -129,7 +129,7 @@ export const SUPPORT_SIGNALS = {
 export const COACHING_URL = '/pricing?from=calm-nights';
 export const SPECIALISED_URL = '/packages/sen?from=calm-nights';
 
-// 1:1 booking is paused while Georgia is on maternity leave. Set to true when intake reopens,
+// 1:1 booking reopens soon after Georgia's maternity leave. Set to true when intake reopens,
 // and swap the waiting-list lines in src/data/emails.ts for booking lines.
 export const ONE_TO_ONE_OPEN = false;
 export const FREE_CALL_URL = 'https://thyme4sleep.neetocal.com/free-15-minute-assessment-call';
