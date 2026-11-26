@@ -17,7 +17,7 @@ const heading = !cp
   ? (status === 'support' ? 'Thank you for telling us' : status === 'guidance' ? 'Let’s find the right support' : 'You’re ready to begin')
   : { 'on-track': `Night ${night}: keep going`, adjust: `Night ${night}: one small adjustment`, support: `Night ${night}: let’s get you the right support`, guidance: `Night ${night}: you don’t have to do this alone` }[status];
 
-// Shown for “I’d like some guidance”: asking for help never requires reporting that things aren’t working.
+// Shown for “I’d like someone to guide me”: asking for help never requires reporting that things aren’t working.
 const GUIDANCE = 'Wanting someone beside you is a perfectly good reason to ask. Calm Nights is a general framework; personalized support starts with your child’s age, temperament, development, sleep history and your family’s circumstances. Here are the ways to get it.';
 
 const body = !cp
